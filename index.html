@@ -1,0 +1,899 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FHI API Query Builder</title>
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        /* shadcn/ui compatible styles */
+        * {
+            border-color: hsl(var(--border));
+        }
+        :root {
+            --background: 0 0% 100%;
+            --foreground: 222.2 84% 4.9%;
+            --card: 0 0% 100%;
+            --card-foreground: 222.2 84% 4.9%;
+            --popover: 0 0% 100%;
+            --popover-foreground: 222.2 84% 4.9%;
+            --primary: 221.2 83.2% 53.3%;
+            --primary-foreground: 210 40% 98%;
+            --secondary: 210 40% 96.1%;
+            --secondary-foreground: 222.2 47.4% 11.2%;
+            --muted: 210 40% 96.1%;
+            --muted-foreground: 215.4 16.3% 46.9%;
+            --accent: 210 40% 96.1%;
+            --accent-foreground: 222.2 47.4% 11.2%;
+            --destructive: 0 84.2% 60.2%;
+            --destructive-foreground: 210 40% 98%;
+            --border: 214.3 31.8% 91.4%;
+            --input: 214.3 31.8% 91.4%;
+            --ring: 221.2 83.2% 53.3%;
+            --radius: 0.5rem;
+        }
+        
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: var(--radius);
+            font-size: 0.875rem;
+            font-weight: 500;
+            transition: all 0.2s;
+            padding: 0.5rem 1rem;
+            cursor: pointer;
+            border: 1px solid transparent;
+        }
+        
+        .btn-primary {
+            background-color: hsl(var(--primary));
+            color: hsl(var(--primary-foreground));
+        }
+        
+        .btn-primary:hover {
+            opacity: 0.9;
+        }
+        
+        .btn-outline {
+            border: 1px solid hsl(var(--border));
+            background-color: transparent;
+        }
+        
+        .btn-outline:hover {
+            background-color: hsl(var(--accent));
+        }
+        
+        .btn-ghost {
+            background-color: transparent;
+        }
+        
+        .btn-ghost:hover {
+            background-color: hsl(var(--accent));
+        }
+        
+        .card {
+            border-radius: var(--radius);
+            border: 1px solid hsl(var(--border));
+            background-color: hsl(var(--card));
+            color: hsl(var(--card-foreground));
+        }
+        
+        .input {
+            flex: 1;
+            border-radius: var(--radius);
+            border: 1px solid hsl(var(--input));
+            background-color: transparent;
+            padding: 0.5rem 0.75rem;
+            font-size: 0.875rem;
+        }
+        
+        .input:focus {
+            outline: 2px solid hsl(var(--ring));
+            outline-offset: 2px;
+        }
+        
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            border-radius: 9999px;
+            padding: 0.25rem 0.625rem;
+            font-size: 0.75rem;
+            font-weight: 600;
+            border: 1px solid transparent;
+        }
+        
+        .badge-secondary {
+            background-color: hsl(var(--secondary));
+            color: hsl(var(--secondary-foreground));
+        }
+        
+        .alert {
+            border-radius: var(--radius);
+            border: 1px solid hsl(var(--border));
+            padding: 1rem;
+        }
+        
+        .alert-destructive {
+            border-color: hsl(var(--destructive));
+            color: hsl(var(--destructive));
+            background-color: hsl(var(--destructive) / 0.1);
+        }
+        
+        .select-trigger {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-radius: var(--radius);
+            border: 1px solid hsl(var(--input));
+            background-color: transparent;
+            padding: 0.5rem 0.75rem;
+            font-size: 0.875rem;
+            cursor: pointer;
+        }
+        
+        .tabs-list {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: var(--radius);
+            background-color: hsl(var(--muted));
+            padding: 0.25rem;
+        }
+        
+        .tabs-trigger {
+            padding: 0.375rem 0.75rem;
+            font-size: 0.875rem;
+            font-weight: 500;
+            border-radius: calc(var(--radius) - 0.25rem);
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        
+        .tabs-trigger:hover {
+            background-color: hsl(var(--background));
+        }
+        
+        .tabs-trigger[data-state="active"] {
+            background-color: hsl(var(--background));
+            box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1);
+        }
+        
+        .checkbox {
+            width: 1rem;
+            height: 1rem;
+            border-radius: 0.25rem;
+            border: 1px solid hsl(var(--primary));
+            cursor: pointer;
+        }
+        
+        .radio {
+            width: 1rem;
+            height: 1rem;
+            border-radius: 9999px;
+            border: 1px solid hsl(var(--primary));
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div id="root"></div>
+
+    <script type="text/babel">
+        const { useState, useEffect } = React;
+        const { ChevronRight, Copy, Download, RefreshCw, CheckCircle2, Database, Filter, Eye } = lucide;
+
+        const API_BASE = 'https://statistikk-data.fhi.no/api/open/v1';
+
+        const FHIQueryBuilder = () => {
+          const [step, setStep] = useState(1);
+          const [sources, setSources] = useState([]);
+          const [selectedSource, setSelectedSource] = useState(null);
+          const [tables, setTables] = useState([]);
+          const [selectedTable, setSelectedTable] = useState(null);
+          const [dimensions, setDimensions] = useState([]);
+          const [queryConfig, setQueryConfig] = useState({});
+          const [finalQuery, setFinalQuery] = useState(null);
+          const [previewData, setPreviewData] = useState(null);
+          const [responseFormat, setResponseFormat] = useState('json-stat2');
+          const [maxRowCount, setMaxRowCount] = useState('');
+          const [loading, setLoading] = useState(false);
+          const [error, setError] = useState(null);
+          const [activeTab, setActiveTab] = useState({});
+
+          useEffect(() => {
+            fetchSources();
+          }, []);
+
+          const fetchSources = async () => {
+            setLoading(true);
+            setError(null);
+            try {
+              const response = await fetch(`${API_BASE}/Common/source`);
+              if (!response.ok) throw new Error('Kunne ikke hente kilder');
+              const data = await response.json();
+              setSources(data);
+            } catch (err) {
+              setError(err.message);
+            } finally {
+              setLoading(false);
+            }
+          };
+
+          const fetchTables = async (sourceId) => {
+            setLoading(true);
+            setError(null);
+            try {
+              const response = await fetch(`${API_BASE}/${sourceId}/table`);
+              if (!response.ok) throw new Error('Kunne ikke hente tabeller');
+              const data = await response.json();
+              setTables(data);
+            } catch (err) {
+              setError(err.message);
+            } finally {
+              setLoading(false);
+            }
+          };
+
+          const fetchDimensions = async (sourceId, tableId) => {
+            setLoading(true);
+            setError(null);
+            try {
+              const response = await fetch(`${API_BASE}/${sourceId}/Table/${tableId}/dimension`);
+              if (!response.ok) throw new Error('Kunne ikke hente dimensjoner');
+              const data = await response.json();
+              setDimensions(data);
+              
+              const initialConfig = {};
+              data.forEach(dim => {
+                initialConfig[dim.code] = {
+                  filter: 'all',
+                  values: ['*'],
+                  selectedCategories: []
+                };
+              });
+              setQueryConfig(initialConfig);
+            } catch (err) {
+              setError(err.message);
+            } finally {
+              setLoading(false);
+            }
+          };
+
+          const selectSource = (source) => {
+            setSelectedSource(source);
+            setSelectedTable(null);
+            setDimensions([]);
+            setQueryConfig({});
+            setFinalQuery(null);
+            setPreviewData(null);
+            fetchTables(source.id);
+            setStep(2);
+          };
+
+          const selectTable = (table) => {
+            setSelectedTable(table);
+            setDimensions([]);
+            setQueryConfig({});
+            setFinalQuery(null);
+            setPreviewData(null);
+            fetchDimensions(selectedSource.id, table.tableId);
+            setStep(3);
+          };
+
+          const updateDimensionConfig = (dimCode, updates) => {
+            setQueryConfig(prev => ({
+              ...prev,
+              [dimCode]: { ...prev[dimCode], ...updates }
+            }));
+          };
+
+          const getGeographyGroups = (dimension) => {
+            if (dimension.code !== 'GEO') return null;
+            
+            const categories = dimension.category.index;
+            const labels = dimension.category.label;
+            
+            const municipalities = [];
+            const counties = [];
+            const districts = [];
+            const others = [];
+            
+            categories.forEach(code => {
+              if (code.length === 6) {
+                districts.push({ code, label: labels[code] });
+              } else if (code.length === 2) {
+                counties.push({ code, label: labels[code] });
+              } else if (code.length === 4) {
+                municipalities.push({ code, label: labels[code] });
+              } else {
+                others.push({ code, label: labels[code] });
+              }
+            });
+            
+            return { municipalities, counties, districts, others };
+          };
+
+          const buildFinalQuery = () => {
+            const query = {
+              dimensions: dimensions.map(dim => {
+                const config = queryConfig[dim.code];
+                
+                if (config.filter === 'item') {
+                  return {
+                    code: dim.code,
+                    filter: 'item',
+                    values: config.selectedCategories
+                  };
+                } else if (config.filter === 'top') {
+                  return {
+                    code: dim.code,
+                    filter: 'top',
+                    values: [config.topCount || '5']
+                  };
+                } else {
+                  return {
+                    code: dim.code,
+                    filter: 'all',
+                    values: config.values
+                  };
+                }
+              }),
+              response: {
+                format: responseFormat
+              }
+            };
+            
+            if (maxRowCount && maxRowCount !== '') {
+              query.response.maxRowCount = parseInt(maxRowCount);
+            }
+            
+            setFinalQuery(query);
+            setStep(4);
+          };
+
+          const fetchPreview = async () => {
+            if (!finalQuery) return;
+            
+            setLoading(true);
+            setError(null);
+            try {
+              const response = await fetch(
+                `${API_BASE}/${selectedSource.id}/Table/${selectedTable.tableId}/data`,
+                {
+                  method: 'POST',
+                  headers: { 'Content-Type': 'application/json' },
+                  body: JSON.stringify(finalQuery)
+                }
+              );
+              
+              if (!response.ok) {
+                const errorData = await response.json();
+                throw new Error(errorData.message || 'Kunne ikke hente data');
+              }
+              
+              const data = await response.json();
+              setPreviewData(data);
+            } catch (err) {
+              setError(err.message);
+            } finally {
+              setLoading(false);
+            }
+          };
+
+          const copyToClipboard = (text) => {
+            navigator.clipboard.writeText(text);
+            alert('Kopiert til utklippstavle!');
+          };
+
+          const Icon = ({ icon, className = "w-5 h-5" }) => {
+            return React.createElement(icon, { className, size: 20 });
+          };
+
+          return (
+            <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 p-4 md:p-8">
+              <div className="max-w-6xl mx-auto">
+                <div className="text-center mb-8">
+                  <h1 className="text-4xl font-bold text-gray-900 mb-2">
+                    FHI API Query Builder
+                  </h1>
+                  <p className="text-gray-600">
+                    Bygg spørringer mot FHIs åpne statistikk-API
+                  </p>
+                </div>
+
+                <div className="flex items-center justify-center gap-2 mb-8">
+                  {[1, 2, 3, 4].map((num) => (
+                    <React.Fragment key={num}>
+                      <div className={`flex items-center justify-center w-10 h-10 rounded-full ${
+                        step >= num ? 'bg-blue-600 text-white' : 'bg-gray-200 text-gray-600'
+                      }`}>
+                        {step > num ? <Icon icon={CheckCircle2} className="w-5 h-5" /> : num}
+                      </div>
+                      {num < 4 && <Icon icon={ChevronRight} className="w-5 h-5 text-gray-400" />}
+                    </React.Fragment>
+                  ))}
+                </div>
+
+                <div className="bg-white rounded-lg shadow-lg p-6">
+                  {step === 1 && (
+                    <div className="card p-6">
+                      <div className="mb-4">
+                        <h2 className="text-2xl font-bold flex items-center gap-2">
+                          <Icon icon={Database} />
+                          Velg datakilde
+                        </h2>
+                        <p className="text-gray-600 mt-1">
+                          Velg hvilken kilde du vil hente data fra
+                        </p>
+                      </div>
+                      {loading && <p className="text-gray-500">Laster kilder...</p>}
+                      {error && (
+                        <div className="alert alert-destructive mb-4">
+                          {error}
+                        </div>
+                      )}
+                      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                        {sources.map((source) => (
+                          <div
+                            key={source.id}
+                            className="card p-4 cursor-pointer hover:border-blue-500 transition-colors"
+                            onClick={() => selectSource(source)}
+                          >
+                            <h3 className="text-lg font-semibold">{source.name}</h3>
+                            <p className="text-sm text-gray-600">ID: {source.id}</p>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+
+                  {step === 2 && (
+                    <div className="card p-6">
+                      <div className="mb-4">
+                        <h2 className="text-2xl font-bold">Velg tabell fra {selectedSource?.name}</h2>
+                        <p className="text-gray-600 mt-1">
+                          Velg hvilken tabell du vil bygge en spørring for
+                        </p>
+                      </div>
+                      {loading && <p className="text-gray-500">Laster tabeller...</p>}
+                      {error && (
+                        <div className="alert alert-destructive mb-4">
+                          {error}
+                        </div>
+                      )}
+                      <div className="space-y-2 max-h-96 overflow-y-auto mb-4">
+                        {tables.map((table) => (
+                          <div
+                            key={table.tableId}
+                            className="card p-4 cursor-pointer hover:border-blue-500 transition-colors"
+                            onClick={() => selectTable(table)}
+                          >
+                            <h3 className="font-semibold">{table.name}</h3>
+                            <p className="text-sm text-gray-600">Tabell ID: {table.tableId}</p>
+                            {table.updated && (
+                              <p className="text-xs text-gray-500 mt-1">
+                                Oppdatert: {new Date(table.updated).toLocaleDateString('nb-NO')}
+                              </p>
+                            )}
+                          </div>
+                        ))}
+                      </div>
+                      <button className="btn btn-outline" onClick={() => setStep(1)}>
+                        Tilbake til kilder
+                      </button>
+                    </div>
+                  )}
+
+                  {step === 3 && (
+                    <div className="space-y-4">
+                      <div className="card p-6">
+                        <div className="mb-4">
+                          <h2 className="text-2xl font-bold flex items-center gap-2">
+                            <Icon icon={Filter} />
+                            Konfigurer dimensjoner
+                          </h2>
+                          <p className="text-gray-600 mt-1">
+                            Velg verdier for hver dimensjon i tabellen
+                          </p>
+                        </div>
+                        <div className="space-y-4 mb-4">
+                          <div>
+                            <label className="block text-sm font-medium mb-1">Response format</label>
+                            <select
+                              className="select-trigger w-full"
+                              value={responseFormat}
+                              onChange={(e) => setResponseFormat(e.target.value)}
+                            >
+                              <option value="json-stat2">JSON-stat2 (anbefalt)</option>
+                              <option value="csv2">CSV med labels</option>
+                              <option value="csv3">CSV med koder</option>
+                            </select>
+                          </div>
+                          <div>
+                            <label className="block text-sm font-medium mb-1">Max antall rader (blank = ubegrenset)</label>
+                            <input
+                              type="number"
+                              className="input w-full"
+                              value={maxRowCount}
+                              onChange={(e) => setMaxRowCount(e.target.value)}
+                              placeholder="La stå tom for ubegrenset"
+                            />
+                          </div>
+                        </div>
+                      </div>
+
+                      {dimensions.map(dimension => {
+                        const config = queryConfig[dimension.code] || { filter: 'all', values: ['*'], selectedCategories: [] };
+                        const isTimeVariable = dimension.code === 'AAR' || dimension.label?.toLowerCase().includes('år');
+                        const isGeography = dimension.code === 'GEO';
+                        const dimTabKey = `tab-${dimension.code}`;
+                        const currentTab = activeTab[dimTabKey] || 'all';
+                        
+                        return (
+                          <div key={dimension.code} className="card p-6">
+                            <h3 className="text-lg font-bold mb-1">{dimension.label || dimension.code}</h3>
+                            <p className="text-sm text-gray-600 mb-4">
+                              Dimensjon: {dimension.code} ({dimension.category.index.length} kategorier)
+                            </p>
+                            
+                            <div className="space-y-4">
+                              <div>
+                                <label className="block text-sm font-medium mb-2">Filtertype</label>
+                                <div className="space-y-2">
+                                  <label className="flex items-center gap-2">
+                                    <input
+                                      type="radio"
+                                      className="radio"
+                                      checked={config.filter === 'item'}
+                                      onChange={() => updateDimensionConfig(dimension.code, { filter: 'item' })}
+                                    />
+                                    <span className="text-sm">Velg spesifikke verdier</span>
+                                  </label>
+                                  {isTimeVariable && (
+                                    <label className="flex items-center gap-2">
+                                      <input
+                                        type="radio"
+                                        className="radio"
+                                        checked={config.filter === 'top'}
+                                        onChange={() => updateDimensionConfig(dimension.code, { filter: 'top' })}
+                                      />
+                                      <span className="text-sm">Siste X år</span>
+                                    </label>
+                                  )}
+                                  <label className="flex items-center gap-2">
+                                    <input
+                                      type="radio"
+                                      className="radio"
+                                      checked={config.filter === 'all'}
+                                      onChange={() => updateDimensionConfig(dimension.code, { filter: 'all' })}
+                                    />
+                                    <span className="text-sm">Alle (med wildcard)</span>
+                                  </label>
+                                </div>
+                              </div>
+
+                              {config.filter === 'item' && (
+                                <div className="space-y-2">
+                                  <label className="block text-sm font-medium">Velg verdier</label>
+                                  {isGeography ? (
+                                    <div>
+                                      <div className="tabs-list mb-4">
+                                        {['all', 'counties', 'municipalities', 'districts'].map(tab => (
+                                          <button
+                                            key={tab}
+                                            className="tabs-trigger"
+                                            data-state={currentTab === tab ? 'active' : 'inactive'}
+                                            onClick={() => setActiveTab({...activeTab, [dimTabKey]: tab})}
+                                          >
+                                            {tab === 'all' ? 'Alle' : tab === 'counties' ? 'Fylker' : tab === 'municipalities' ? 'Kommuner' : 'Bydeler'}
+                                          </button>
+                                        ))}
+                                      </div>
+                                      
+                                      {currentTab === 'all' && (
+                                        <div className="space-y-2">
+                                          <button
+                                            className="btn btn-outline btn-sm"
+                                            onClick={() => {
+                                              const allCats = dimension.category.index;
+                                              updateDimensionConfig(dimension.code, { 
+                                                selectedCategories: config.selectedCategories.length === allCats.length ? [] : allCats 
+                                              });
+                                            }}
+                                          >
+                                            {config.selectedCategories.length === dimension.category.index.length ? 'Fjern alle' : 'Velg alle'}
+                                          </button>
+                                          <div className="text-sm text-gray-600">
+                                            {config.selectedCategories.length} av {dimension.category.index.length} valgt
+                                          </div>
+                                        </div>
+                                      )}
+                                      
+                                      {currentTab === 'counties' && (() => {
+                                        const groups = getGeographyGroups(dimension);
+                                        return (
+                                          <div className="max-h-60 overflow-y-auto border rounded p-2 space-y-2">
+                                            {groups.counties.map(county => (
+                                              <div key={county.code} className="space-y-1">
+                                                <label className="flex items-center gap-2 font-semibold">
+                                                  <input
+                                                    type="checkbox"
+                                                    className="checkbox"
+                                                    checked={config.selectedCategories.includes(county.code)}
+                                                    onChange={(e) => {
+                                                      const updated = e.target.checked
+                                                        ? [...config.selectedCategories, county.code]
+                                                        : config.selectedCategories.filter(c => c !== county.code);
+                                                      updateDimensionConfig(dimension.code, { selectedCategories: updated });
+                                                    }}
+                                                  />
+                                                  <span className="text-sm">{county.label} ({county.code})</span>
+                                                </label>
+                                              </div>
+                                            ))}
+                                          </div>
+                                        );
+                                      })()}
+                                      
+                                      {currentTab === 'municipalities' && (() => {
+                                        const groups = getGeographyGroups(dimension);
+                                        return (
+                                          <div className="max-h-60 overflow-y-auto border rounded p-2 space-y-1">
+                                            {groups.municipalities.map(mun => (
+                                              <label key={mun.code} className="flex items-center gap-2">
+                                                <input
+                                                  type="checkbox"
+                                                  className="checkbox"
+                                                  checked={config.selectedCategories.includes(mun.code)}
+                                                  onChange={(e) => {
+                                                    const updated = e.target.checked
+                                                      ? [...config.selectedCategories, mun.code]
+                                                      : config.selectedCategories.filter(c => c !== mun.code);
+                                                    updateDimensionConfig(dimension.code, { selectedCategories: updated });
+                                                  }}
+                                                />
+                                                <span className="text-sm">{mun.label} ({mun.code})</span>
+                                              </label>
+                                            ))}
+                                          </div>
+                                        );
+                                      })()}
+                                      
+                                      {currentTab === 'districts' && (() => {
+                                        const groups = getGeographyGroups(dimension);
+                                        return groups.districts.length > 0 ? (
+                                          <div className="max-h-60 overflow-y-auto border rounded p-2 space-y-1">
+                                            {groups.districts.map(dist => (
+                                              <label key={dist.code} className="flex items-center gap-2">
+                                                <input
+                                                  type="checkbox"
+                                                  className="checkbox"
+                                                  checked={config.selectedCategories.includes(dist.code)}
+                                                  onChange={(e) => {
+                                                    const updated = e.target.checked
+                                                      ? [...config.selectedCategories, dist.code]
+                                                      : config.selectedCategories.filter(c => c !== dist.code);
+                                                    updateDimensionConfig(dimension.code, { selectedCategories: updated });
+                                                  }}
+                                                />
+                                                <span className="text-sm">{dist.label} ({dist.code})</span>
+                                              </label>
+                                            ))}
+                                          </div>
+                                        ) : (
+                                          <p className="text-gray-500">Ingen bydeler i denne tabellen</p>
+                                        );
+                                      })()}
+                                    </div>
+                                  ) : (
+                                    <>
+                                      <div className="max-h-60 overflow-y-auto border rounded p-2 space-y-1">
+                                        {dimension.category.index.map(cat => (
+                                          <label key={cat} className="flex items-center gap-2">
+                                            <input
+                                              type="checkbox"
+                                              className="checkbox"
+                                              checked={config.selectedCategories.includes(cat)}
+                                              onChange={(e) => {
+                                                const updated = e.target.checked
+                                                  ? [...config.selectedCategories, cat]
+                                                  : config.selectedCategories.filter(c => c !== cat);
+                                                updateDimensionConfig(dimension.code, { selectedCategories: updated });
+                                              }}
+                                            />
+                                            <span className="text-sm">{dimension.category.label[cat]} ({cat})</span>
+                                          </label>
+                                        ))}
+                                      </div>
+                                      <button
+                                        className="btn btn-outline btn-sm"
+                                        onClick={() => {
+                                          const allCats = dimension.category.index;
+                                          updateDimensionConfig(dimension.code, { 
+                                            selectedCategories: config.selectedCategories.length === allCats.length ? [] : allCats 
+                                          });
+                                        }}
+                                      >
+                                        {config.selectedCategories.length === dimension.category.index.length ? 'Fjern alle' : 'Velg alle'}
+                                      </button>
+                                    </>
+                                  )}
+                                </div>
+                              )}
+
+                              {config.filter === 'top' && (
+                                <div>
+                                  <label className="block text-sm font-medium mb-1">Antall</label>
+                                  <input
+                                    type="number"
+                                    min="1"
+                                    className="input w-full"
+                                    value={config.topCount || '5'}
+                                    onChange={(e) => updateDimensionConfig(dimension.code, { topCount: e.target.value })}
+                                  />
+                                </div>
+                              )}
+
+                              {config.filter === 'all' && (
+                                <div>
+                                  <label className="block text-sm font-medium mb-1">Wildcard-verdier (kommaseparert)</label>
+                                  <input
+                                    className="input w-full"
+                                    value={config.values.join(', ')}
+                                    onChange={(e) => {
+                                      const values = e.target.value.split(',').map(v => v.trim()).filter(v => v);
+                                      updateDimensionConfig(dimension.code, { values: values.length > 0 ? values : ['*'] });
+                                    }}
+                                    placeholder="*, 03*, 30*"
+                                  />
+                                  <p className="text-xs text-gray-500 mt-1">
+                                    Bruk * for å matche alle, eller f.eks. "03*" for å matche alle som starter med 03
+                                  </p>
+                                </div>
+                              )}
+
+                              <div className="flex items-center gap-2 text-sm text-gray-600">
+                                <span className="badge badge-secondary">
+                                  {config.selectedCategories.length > 0 
+                                    ? `${config.selectedCategories.length} valgt`
+                                    : config.filter === 'all' 
+                                      ? `Alle (${dimension.category.index.length})`
+                                      : config.filter === 'top'
+                                        ? `Topp ${config.topCount || 5}`
+                                        : 'Ingen valgt'}
+                                </span>
+                              </div>
+                            </div>
+                          </div>
+                        );
+                      })}
+
+                      <div className="flex gap-2">
+                        <button className="btn btn-outline" onClick={() => setStep(2)}>
+                          Tilbake til tabeller
+                        </button>
+                        <button className="btn btn-primary flex-1" onClick={buildFinalQuery}>
+                          Generer spørring
+                        </button>
+                      </div>
+                    </div>
+                  )}
+
+                  {step === 4 && (
+                    <div className="space-y-4">
+                      <div className="card p-6">
+                        <div className="mb-4">
+                          <h2 className="text-2xl font-bold flex items-center gap-2">
+                            <Icon icon={Eye} />
+                            Din ferdig spørring
+                          </h2>
+                          <p className="text-gray-600 mt-1">
+                            Denne spørringen kan brukes mot FHI API
+                          </p>
+                        </div>
+                        
+                        <div className="bg-gray-900 text-gray-100 p-4 rounded-lg overflow-x-auto mb-4">
+                          <pre className="text-sm">{JSON.stringify(finalQuery, null, 2)}</pre>
+                        </div>
+                        
+                        <div className="flex gap-2 mb-4">
+                          <button
+                            className="btn btn-outline flex items-center gap-2"
+                            onClick={() => copyToClipboard(JSON.stringify(finalQuery, null, 2))}
+                          >
+                            <Icon icon={Copy} className="w-4 h-4" />
+                            Kopier spørring
+                          </button>
+                          <button
+                            className="btn btn-primary flex items-center gap-2"
+                            onClick={fetchPreview}
+                            disabled={loading}
+                          >
+                            {loading ? (
+                              <Icon icon={RefreshCw} className="w-4 h-4 animate-spin" />
+                            ) : (
+                              <Icon icon={Download} className="w-4 h-4" />
+                            )}
+                            Hent preview av data
+                          </button>
+                        </div>
+
+                        <div className="text-sm text-gray-600 p-4 bg-blue-50 rounded border border-blue-200">
+                          <p className="font-semibold mb-2">API endpoint:</p>
+                          <code className="text-xs">
+                            POST {API_BASE}/{selectedSource?.id}/Table/{selectedTable?.tableId}/data
+                          </code>
+                        </div>
+                      </div>
+
+                      {error && (
+                        <div className="alert alert-destructive">
+                          {error}
+                        </div>
+                      )}
+
+                      {previewData && (
+                        <div className="card p-6">
+                          <h3 className="text-xl font-bold mb-2">Forhåndsvisning av data</h3>
+                          <p className="text-gray-600 mb-4">
+                            {responseFormat === 'json-stat2' 
+                              ? `${previewData.value?.length || 0} verdier returnert`
+                              : 'Data hentet'}
+                          </p>
+                          
+                          {responseFormat === 'json-stat2' && previewData.dimension && (
+                            <div className="mb-4">
+                              <span className="font-semibold text-sm">Dimensjoner: </span>
+                              {previewData.id?.map(dimId => (
+                                <span key={dimId} className="badge badge-secondary mr-1">
+                                  {previewData.dimension[dimId]?.label || dimId}
+                                </span>
+                              ))}
+                            </div>
+                          )}
+                          
+                          <div className="bg-gray-900 text-gray-100 p-4 rounded-lg overflow-x-auto max-h-96">
+                            <pre className="text-xs">{JSON.stringify(previewData, null, 2)}</pre>
+                          </div>
+                        </div>
+                      )}
+
+                      <div className="flex gap-2">
+                        <button className="btn btn-outline" onClick={() => setStep(3)}>
+                          Tilbake til konfigurasjon
+                        </button>
+                        <button className="btn btn-outline" onClick={() => {
+                          setStep(1);
+                          setSelectedSource(null);
+                          setSelectedTable(null);
+                          setDimensions([]);
+                          setQueryConfig({});
+                          setFinalQuery(null);
+                          setPreviewData(null);
+                        }}>
+                          Start på nytt
+                        </button>
+                      </div>
+                    </div>
+                  )}
+                </div>
+
+                <div className="mt-6 text-center text-sm text-gray-600">
+                  <p>
+                    Data fra <a href="https://statistikk-data.fhi.no" className="text-blue-600 hover:underline" target="_blank" rel="noopener noreferrer">FHI Statistikk</a>
+                  </p>
+                </div>
+              </div>
+            </div>
+          );
+        };
+
+        ReactDOM.render(<FHIQueryBuilder />, document.getElementById('root'));
+    </script>
+</body>
+</html>
