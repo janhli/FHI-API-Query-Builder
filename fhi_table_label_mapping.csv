@@ -1,314 +1,314 @@
-source_id,tableId,name,title,label,status,error
-abr,253,,A5: Nemndbehandla svangerskapsavbrot fordelt pÃ¥ bustadsfylke,,error,429 Client Error: Too Many Requests for url: https://statistikk-data.fhi.no/api/open/v1/abr/Table/253/query
-abr,260,,A7: Nemndbehandla svangerskapsavbrot fordelt pÃ¥ vedtaksgrunnlag og svangerskapslengde,,error,429 Client Error: Too Many Requests for url: https://statistikk-data.fhi.no/api/open/v1/abr/Table/260/query
-abr,261,,"A8: Nemndbehandla begjÃ¦ringar om svangerskapsavbrot fordelt pÃ¥ type nemnd, vedtak og utfÃ¸rtstatus",,error,429 Client Error: Too Many Requests for url: https://statistikk-data.fhi.no/api/open/v1/abr/Table/261/query
-abr,262,,A10: Nemndbehandla begjÃ¦ringar om svangerskapsavbrot med vedtak fordelt pÃ¥ vedtak og svangerskapslengde,,error,429 Client Error: Too Many Requests for url: https://statistikk-data.fhi.no/api/open/v1/abr/Table/262/query
-abr,263,,A11: BegjÃ¦ringar om svangerskapsavbrot fordelt pÃ¥ institusjon og utfÃ¸rtstatus  ,,error,429 Client Error: Too Many Requests for url: https://statistikk-data.fhi.no/api/open/v1/abr/Table/263/query
-abr,264,,A9: Nemndbehandla begjÃ¦ringar om svangerskapsavbrot fordelt pÃ¥ vedtak og svangerskapslengde,,error,429 Client Error: Too Many Requests for url: https://statistikk-data.fhi.no/api/open/v1/abr/Table/264/query
-abr,280,,A1: Svangerskapsavbrot fordelt pÃ¥ type begjÃ¦ring og utfÃ¸rtstatus,,error,429 Client Error: Too Many Requests for url: https://statistikk-data.fhi.no/api/open/v1/abr/Table/280/query
-abr,283,,A2: Svangerskapsavbrot fordelt pÃ¥ bustadsfylke og alder,,error,429 Client Error: Too Many Requests for url: https://statistikk-data.fhi.no/api/open/v1/abr/Table/283/query
-abr,285,,A3: Svangerskapsavbrot fordelt pÃ¥ alder og type begjÃ¦ring,,error,429 Client Error: Too Many Requests for url: https://statistikk-data.fhi.no/api/open/v1/abr/Table/285/query
-abr,286,,"A4: Svangerskapsavbrot fordelt pÃ¥ metode, type begjÃ¦ring og svangerskapslengde",,error,429 Client Error: Too Many Requests for url: https://statistikk-data.fhi.no/api/open/v1/abr/Table/286/query
-abr,287,,A6: Nemndbehandla svangerskapsavbrot fordelt pÃ¥ vedtaksgrunnlag,,error,429 Client Error: Too Many Requests for url: https://statistikk-data.fhi.no/api/open/v1/abr/Table/287/query
-daar,268,,D3a_flagg,,error,429 Client Error: Too Many Requests for url: https://statistikk-data.fhi.no/api/open/v1/daar/Table/268/query
-daar,269,,D5b_hjertekar,,error,429 Client Error: Too Many Requests for url: https://statistikk-data.fhi.no/api/open/v1/daar/Table/269/query
-daar,270,,D10b_selvmord,,error,429 Client Error: Too Many Requests for url: https://statistikk-data.fhi.no/api/open/v1/daar/Table/270/query
-daar,277,,D8b_ulykker,,error,429 Client Error: Too Many Requests for url: https://statistikk-data.fhi.no/api/open/v1/daar/Table/277/query
-daar,290,,D13_obduksjoner,,error,429 Client Error: Too Many Requests for url: https://statistikk-data.fhi.no/api/open/v1/daar/Table/290/query
-daar,310,,D10a_selvmord,,error,429 Client Error: Too Many Requests for url: https://statistikk-data.fhi.no/api/open/v1/daar/Table/310/query
-daar,312,,D5a_hjertekar,,error,429 Client Error: Too Many Requests for url: https://statistikk-data.fhi.no/api/open/v1/daar/Table/312/query
-daar,314,,D8a_ulykker,,error,429 Client Error: Too Many Requests for url: https://statistikk-data.fhi.no/api/open/v1/daar/Table/314/query
-daar,325,,D7a_narkotika_antall,,error,429 Client Error: Too Many Requests for url: https://statistikk-data.fhi.no/api/open/v1/daar/Table/325/query
-daar,327,,D7_alkohol_antall,,error,429 Client Error: Too Many Requests for url: https://statistikk-data.fhi.no/api/open/v1/daar/Table/327/query
-daar,329,,D6a_kreft,,error,429 Client Error: Too Many Requests for url: https://statistikk-data.fhi.no/api/open/v1/daar/Table/329/query
-daar,330,,D6b_kreft,,error,429 Client Error: Too Many Requests for url: https://statistikk-data.fhi.no/api/open/v1/daar/Table/330/query
-daar,642,,D3b_ny,,error,429 Client Error: Too Many Requests for url: https://statistikk-data.fhi.no/api/open/v1/daar/Table/642/query
-daar,643,,D1_ny,,error,429 Client Error: Too Many Requests for url: https://statistikk-data.fhi.no/api/open/v1/daar/Table/643/query
-daar,644,,D2_ny,,error,429 Client Error: Too Many Requests for url: https://statistikk-data.fhi.no/api/open/v1/daar/Table/644/query
-daar,645,,D4_ny,,error,429 Client Error: Too Many Requests for url: https://statistikk-data.fhi.no/api/open/v1/daar/Table/645/query
-daar,647,,D12_ny,,error,429 Client Error: Too Many Requests for url: https://statistikk-data.fhi.no/api/open/v1/daar/Table/647/query
-daar,742,,D11_rater,,error,429 Client Error: Too Many Requests for url: https://statistikk-data.fhi.no/api/open/v1/daar/Table/742/query
-daar,746,,D7b_narkotika_rater,,error,429 Client Error: Too Many Requests for url: https://statistikk-data.fhi.no/api/open/v1/daar/Table/746/query
-daar,747,,D7d_alkohol_rater,,error,429 Client Error: Too Many Requests for url: https://statistikk-data.fhi.no/api/open/v1/daar/Table/747/query
-daar,754,,D5c_hjertekar_rater,,error,429 Client Error: Too Many Requests for url: https://statistikk-data.fhi.no/api/open/v1/daar/Table/754/query
-daar,755,,D6c_kreft_rater,,error,429 Client Error: Too Many Requests for url: https://statistikk-data.fhi.no/api/open/v1/daar/Table/755/query
-daar,756,,D8c_ulykker_rater,,error,429 Client Error: Too Many Requests for url: https://statistikk-data.fhi.no/api/open/v1/daar/Table/756/query
-gs,657,,Grossistbasert legemiddelstatistikk 1999-2024,,error,429 Client Error: Too Many Requests for url: https://statistikk-data.fhi.no/api/open/v1/gs/Table/657/query
-hkr,410,,"Total forekomst: Utvalgte diagnoser, antall",,error,429 Client Error: Too Many Requests for url: https://statistikk-data.fhi.no/api/open/v1/hkr/Table/410/query
-hkr,462,,"Total forekomst: Utvalgte diagnoser, rater",,error,429 Client Error: Too Many Requests for url: https://statistikk-data.fhi.no/api/open/v1/hkr/Table/462/query
-hkr,668,,"Insidens (nye pasienter): Utvalgte diagnoser, antall",,error,429 Client Error: Too Many Requests for url: https://statistikk-data.fhi.no/api/open/v1/hkr/Table/668/query
-hkr,669,,"Insidens (nye pasienter): Utvalgte diagnoser, rater",,error,429 Client Error: Too Many Requests for url: https://statistikk-data.fhi.no/api/open/v1/hkr/Table/669/query
-hkr,676,,"Utvalgte prosedyrer, antall pasienter",,error,429 Client Error: Too Many Requests for url: https://statistikk-data.fhi.no/api/open/v1/hkr/Table/676/query
-kpr,522,,KPR LEGEVAKT alkohol og rus - kjÃ¸nn,,error,429 Client Error: Too Many Requests for url: https://statistikk-data.fhi.no/api/open/v1/kpr/Table/522/query
-kpr,523,,KPR LEGEVAKT alkohol og rus - alder,,error,429 Client Error: Too Many Requests for url: https://statistikk-data.fhi.no/api/open/v1/kpr/Table/523/query
-kpr,634,,KPR HOM. Antall brukere per tjeneste,,error,429 Client Error: Too Many Requests for url: https://statistikk-data.fhi.no/api/open/v1/kpr/Table/634/query
-lmr,615,,"Per ATC-kode, 2004-2024. [Oppdatert 12.03.2025] ",,error,429 Client Error: Too Many Requests for url: https://statistikk-data.fhi.no/api/open/v1/lmr/Table/615/query
-lmr,616,,Legemiddelgruppe - ADHD-midler. 2004-2024. [Oppdatert 12.03.2025] ,,error,429 Client Error: Too Many Requests for url: https://statistikk-data.fhi.no/api/open/v1/lmr/Table/616/query
-lmr,617,,Legemiddelgruppe - Hormontilskudd. 2004 - 2024. [Oppdatert 12.03.2025] ,,error,429 Client Error: Too Many Requests for url: https://statistikk-data.fhi.no/api/open/v1/lmr/Table/617/query
-lmr,618,,Legemiddelgruppe - Prevensjonsmidler. 2004 - 2024. [Oppdatert 12.03.2025] ,,error,429 Client Error: Too Many Requests for url: https://statistikk-data.fhi.no/api/open/v1/lmr/Table/618/query
-lmr,620,,Legemiddelgruppe â€“ Potensmidler. 2004-2024. [Oppdatert 12.03.2025] ,,error,429 Client Error: Too Many Requests for url: https://statistikk-data.fhi.no/api/open/v1/lmr/Table/620/query
-lmr,621,,Legemiddelgruppe - Vektreduserende . 2004 - 2024. [Oppdatert 12.03.2025] ,,error,429 Client Error: Too Many Requests for url: https://statistikk-data.fhi.no/api/open/v1/lmr/Table/621/query
-lmr,622,,Legemiddelgruppe - Ã˜vrige legemiddelgrupper. 2004 - 2024. [Oppdatert 12.03.2025] ,,error,429 Client Error: Too Many Requests for url: https://statistikk-data.fhi.no/api/open/v1/lmr/Table/622/query
-mfr,411,,F0: FÃ¸dte og fÃ¸dsler per Ã¥r og mÃ¥ned,F0: FÃ¸dte og fÃ¸dsler per Ã¥r og mÃ¥ned,ok,
-mfr,412,,"F1a: FÃ¸dte per Ã¥r, mors bosted og kjÃ¸nn",,error,429 Client Error: Too Many Requests for url: https://statistikk-data.fhi.no/api/open/v1/mfr/Table/412/query
-mfr,413,,"F1b: FÃ¸dsler per Ã¥r, mors bosted og enkelt-/flerfÃ¸dsel","F1b: FÃ¸dsler per Ã¥r, mors bosted og enkelt-/flerfÃ¸dsel",ok,
-mfr,414,,"F2b-5: FÃ¸dte iht. MFR per Ã¥r, mors bosted og perinatal levestatus",,error,429 Client Error: Too Many Requests for url: https://statistikk-data.fhi.no/api/open/v1/mfr/Table/414/data
-mfr,415,,F2b-6: FÃ¸dte iht. Euro-Peristat (f.o.m. 22 uker) per Ã¥r og perinatal levestatus ,F2b-6: FÃ¸dte iht. Euro-Peristat (f.o.m. 22 uker) per Ã¥r og perinatal levestatus ,ok,
-mfr,416,,F2b-7: FÃ¸dte iht. WHO (f.o.m. 500 g) per Ã¥r og perinatal levestatus ,F2b-7: FÃ¸dte iht. WHO (f.o.m. 500 g) per Ã¥r og perinatal levestatus ,ok,
-mfr,417,,F2b-8: FÃ¸dte iht. WHO (f.o.m. 1000 g) per Ã¥r og perinatal levestatus,F2b-8: FÃ¸dte iht. WHO (f.o.m. 1000 g) per Ã¥r og perinatal levestatus,ok,
-mfr,418,,"F2c: LevendefÃ¸dte per Ã¥r, mors bosted og levestatus i spedbarnsperioden","F2c: LevendefÃ¸dte per Ã¥r, mors bosted og levestatus i spedbarnsperioden",ok,
-mfr,420,,"F3a: FÃ¸dsler per Ã¥r, mors bosted og mors alder","F3a: FÃ¸dsler per Ã¥r, mors bosted og mors alder",ok,
-mfr,421,,"F3b: Mors gjennomsnittsalder per Ã¥r, mors bosted og tidligere fÃ¸dte","F3b: Mors gjennomsnittsalder per Ã¥r, mors bosted og tidligere fÃ¸dte",ok,
-mfr,422,,"F3c: FÃ¸dsler per Ã¥r, mors bosted og fars alder","F3c: FÃ¸dsler per Ã¥r, mors bosted og fars alder",ok,
-mfr,423,,F3d: Fars gjennomsnittsalder per Ã¥r og mors bosted,F3d: Fars gjennomsnittsalder per Ã¥r og mors bosted,ok,
-mfr,424,,"F4a: FÃ¸dsler per Ã¥r, mors bosted og tidligere fÃ¸dte","F4a: FÃ¸dsler per Ã¥r, mors bosted og tidligere fÃ¸dte",ok,
-mfr,425,,"F4b: FÃ¸dsler per Ã¥r, mors bosted og mors sivilstatus","F4b: FÃ¸dsler per Ã¥r, mors bosted og mors sivilstatus",ok,
-mfr,426,,"F5a: FÃ¸dte med fÃ¸dselsvekt per Ã¥r, mors bosted og fÃ¸dselsvekt","F5a: FÃ¸dte med fÃ¸dselsvekt per Ã¥r, mors bosted og fÃ¸dselsvekt",ok,
-mfr,427,,F5b: Gjennomsnittlig fÃ¸dselsvekt per Ã¥r og mors bosted,F5b: Gjennomsnittlig fÃ¸dselsvekt per Ã¥r og mors bosted,ok,
-mfr,428,,"Is1: FÃ¸dsler per Ã¥r, fÃ¸deinstitusjon, fÃ¸destedtype og enkelt-/flerfÃ¸dsel",,error,429 Client Error: Too Many Requests for url: https://statistikk-data.fhi.no/api/open/v1/mfr/Table/428/query
-mfr,429,,"Is2: FÃ¸dte ved institusjon per Ã¥r, fÃ¸deinstitusjon og levestatus ved fÃ¸dsel",,error,429 Client Error: Too Many Requests for url: https://statistikk-data.fhi.no/api/open/v1/mfr/Table/429/query
-mfr,430,,"F6a: FÃ¸dsler med svangerskapsvarighet per Ã¥r, mors bosted og svangerskapsvarighet","F6a: FÃ¸dsler med svangerskapsvarighet per Ã¥r, mors bosted og svangerskapsvarighet",ok,
-mfr,431,,F6b: Gjennomsnittlig svangerskapsvarighet per Ã¥r og mors bosted,F6b: Gjennomsnittlig svangerskapsvarighet per Ã¥r og mors bosted,ok,
-mfr,432,,"F7a: FÃ¸dsler per Ã¥r, mors bosted og sykdom hos mor fÃ¸r svangerskapet",,error,429 Client Error: Too Many Requests for url: https://statistikk-data.fhi.no/api/open/v1/mfr/Table/432/query
-mfr,433,,"F7c: FÃ¸dsler per Ã¥r, mors bosted og hypertensive tilstander hos mor i svangerskapet",,error,429 Client Error: Too Many Requests for url: https://statistikk-data.fhi.no/api/open/v1/mfr/Table/433/query
-mfr,434,,"F7d: FÃ¸dsler per Ã¥r, mors bosted og diabetes hos mor",,error,429 Client Error: Too Many Requests for url: https://statistikk-data.fhi.no/api/open/v1/mfr/Table/434/query
-mfr,435,,"F8a: FÃ¸dsler per Ã¥r, mors bosted og fÃ¸dselsstart","F8a: FÃ¸dsler per Ã¥r, mors bosted og fÃ¸dselsstart",ok,
-mfr,436,,"F8b: Induserte fÃ¸dsler per Ã¥r, mors bosted og induksjonsmetode","F8b: Induserte fÃ¸dsler per Ã¥r, mors bosted og induksjonsmetode",ok,
-mfr,437,,"F9a: FÃ¸dsler per Ã¥r, mors bosted og komplikasjoner under fÃ¸dselen","F9a: FÃ¸dsler per Ã¥r, mors bosted og komplikasjoner under fÃ¸dselen",ok,
-mfr,438,,"F9b: FÃ¸dte per Ã¥r, mors bosted og leie ved fÃ¸dsel","F9b: FÃ¸dte per Ã¥r, mors bosted og leie ved fÃ¸dsel",ok,
-mfr,440,,"F10a: Vaginalt fÃ¸dte per Ã¥r, mors bosted og inngrep og tiltak under fÃ¸dselen","F10a: Vaginalt fÃ¸dte per Ã¥r, mors bosted og inngrep og tiltak under fÃ¸dselen",ok,
-mfr,441,,"F10b: FÃ¸dte i seteleie per Ã¥r, mors bosted og inngrep og tiltak under fÃ¸dselen","F10b: FÃ¸dte i seteleie per Ã¥r, mors bosted og inngrep og tiltak under fÃ¸dselen",ok,
-mfr,442,,"F10c-1: FÃ¸dsler per Ã¥r, mors bosted og forlÃ¸sningstype","F10c-1: FÃ¸dsler per Ã¥r, mors bosted og forlÃ¸sningstype",ok,
-mfr,443,,"F10c-3: KeisersnittfÃ¸dsler per Ã¥r, mors bosted og keisersnittype","F10c-3: KeisersnittfÃ¸dsler per Ã¥r, mors bosted og keisersnittype",ok,
-mfr,444,,"F10d: FÃ¸dsler per Ã¥r, mors bosted, forlÃ¸sningstype og anestesi/analgesi brukt under fÃ¸dselen","F10d: FÃ¸dsler per Ã¥r, mors bosted, forlÃ¸sningstype og anestesi/analgesi brukt under fÃ¸dselen",ok,
-mfr,445,,"Is3a: FÃ¸dsler ved institusjon per Ã¥r, fÃ¸deinstitusjon og sykdom hos mor i svangerskapet","Is3a: FÃ¸dsler ved institusjon per Ã¥r, fÃ¸deinstitusjon og sykdom hos mor i svangerskapet",ok,
-mfr,446,,"Is3b: FÃ¸dsler ved institusjon per Ã¥r, fÃ¸deinstitusjon og komplikasjoner under fÃ¸dselen",,error,429 Client Error: Too Many Requests for url: https://statistikk-data.fhi.no/api/open/v1/mfr/Table/446/data
-mfr,447,,"Is3c: FÃ¸dsler ved institusjon per Ã¥r, fÃ¸deinstitusjon og fÃ¸dselsstart",,error,429 Client Error: Too Many Requests for url: https://statistikk-data.fhi.no/api/open/v1/mfr/Table/447/query
-mfr,448,,"Is3d: FÃ¸dsler ved institusjon per Ã¥r, fÃ¸deinstitusjon og anestesi/analgesi brukt under fÃ¸dselen",,error,429 Client Error: Too Many Requests for url: https://statistikk-data.fhi.no/api/open/v1/mfr/Table/448/query
-mfr,449,,"Is4a-1: Vaginalt fÃ¸dte ved institusjon per Ã¥r, fÃ¸deinstitusjon og inngrep og tiltak under fÃ¸dselen",,error,429 Client Error: Too Many Requests for url: https://statistikk-data.fhi.no/api/open/v1/mfr/Table/449/query
-mfr,450,,"Is4a-2: FÃ¸dsler ved institusjon per Ã¥r, fÃ¸deinstitusjon og forlÃ¸sningstype",,error,429 Client Error: Too Many Requests for url: https://statistikk-data.fhi.no/api/open/v1/mfr/Table/450/query
-mfr,451,,"F11: FÃ¸dte per Ã¥r, mors bosted og fÃ¸destedtype","F11: FÃ¸dte per Ã¥r, mors bosted og fÃ¸destedtype",ok,
-mfr,452,,"F12a: FÃ¸dte per Ã¥r, mors bosted og neonatale tilstander",,error,429 Client Error: Too Many Requests for url: https://statistikk-data.fhi.no/api/open/v1/mfr/Table/452/query
-mfr,453,,"F12b: FÃ¸dte per Ã¥r, mors bosted og behandling av barnet",,error,429 Client Error: Too Many Requests for url: https://statistikk-data.fhi.no/api/open/v1/mfr/Table/453/query
-mfr,454,,"F13: FÃ¸dsler per Ã¥r, mors bosted og spesielle forhold ved fostervann","F13: FÃ¸dsler per Ã¥r, mors bosted og spesielle forhold ved fostervann",ok,
-mfr,455,,"M1: FÃ¸dte og aborterte per Ã¥r, dÃ¸dstidspunkt og medfÃ¸dte misdannelser",,error,429 Client Error: Too Many Requests for url: https://statistikk-data.fhi.no/api/open/v1/mfr/Table/455/query
-mfr,456,,"A1: FÃ¸dte etter assistert befruktning i Norge per Ã¥r, institusjon og enkelt-/flerfÃ¸dt",,error,429 Client Error: Too Many Requests for url: https://statistikk-data.fhi.no/api/open/v1/mfr/Table/456/query
-mfr,457,,"A2: FÃ¸dte etter assistert befruktning i Norge per Ã¥r, metode og enkelt-/flerfÃ¸dt",,error,429 Client Error: Too Many Requests for url: https://statistikk-data.fhi.no/api/open/v1/mfr/Table/457/query
-mfr,458,,"Is5a: Vaginale fÃ¸dsler ved institusjon per Ã¥r, fÃ¸deinstitusjon, inngrep og tiltak under fÃ¸dselen og sphincterruptur (grad 3-4)",,error,429 Client Error: Too Many Requests for url: https://statistikk-data.fhi.no/api/open/v1/mfr/Table/458/query
-mfr,459,,"Is6: FÃ¸dte ved institusjon per Ã¥r, fÃ¸deinstitusjon og barnets tilstand ved fÃ¸dsel",,error,429 Client Error: Too Many Requests for url: https://statistikk-data.fhi.no/api/open/v1/mfr/Table/459/query
-mfr,468,,"F16a-2: FÃ¸dsler med opplysning om mors rÃ¸ykevaner i 1. trimester per Ã¥r, mors bosted og mors rÃ¸ykevaner i 1. trimester","F16a-2: FÃ¸dsler med opplysning om mors rÃ¸ykevaner i 1. trimester per Ã¥r, mors bosted og mors rÃ¸ykevaner i 1. trimester",ok,
-mfr,469,,"F16a-3: FÃ¸dsler med opplysning om mors rÃ¸ykevaner i siste trimester per Ã¥r, mors bosted og mors rÃ¸ykevaner i siste trimester","F16a-3: FÃ¸dsler med opplysning om mors rÃ¸ykevaner i siste trimester per Ã¥r, mors bosted og mors rÃ¸ykevaner i siste trimester",ok,
-mfr,470,,"F16b-2: FÃ¸dsler med opplysning om mors rÃ¸ykevaner i 1. trimester per Ã¥r, mors alder og mors rÃ¸ykevaner i 1. trimester",,error,429 Client Error: Too Many Requests for url: https://statistikk-data.fhi.no/api/open/v1/mfr/Table/470/query
-mfr,471,,"F16b-3: FÃ¸dsler med opplysning om mors rÃ¸ykevaner i siste trimester per Ã¥r, mors alder og mors rÃ¸ykevaner i siste trimester",,error,429 Client Error: Too Many Requests for url: https://statistikk-data.fhi.no/api/open/v1/mfr/Table/471/query
-mfr,472,,"F16a-1: FÃ¸dsler per Ã¥r, mors bosted og om det finnes opplysninger om mors rÃ¸ykevaner","F16a-1: FÃ¸dsler per Ã¥r, mors bosted og om det finnes opplysninger om mors rÃ¸ykevaner",ok,
-mfr,473,,"F16b-1: FÃ¸dsler per Ã¥r, mors alder og om det finnes opplysninger om mors rÃ¸ykevaner","F16b-1: FÃ¸dsler per Ã¥r, mors alder og om det finnes opplysninger om mors rÃ¸ykevaner",ok,
-mfr,474,,"F16e-1: Elektronisk (f.o.m. versjon 1.2) meldte fÃ¸dsler per Ã¥r, mors alder og om det finnes opplysninger om mors snusvaner",,error,429 Client Error: Too Many Requests for url: https://statistikk-data.fhi.no/api/open/v1/mfr/Table/474/query
-mfr,475,,"F16e-2: FÃ¸dsler med opplysning om mors snusvaner i 1. trimester per Ã¥r, mors alder og mors snusvaner i 1. trimester",,error,429 Client Error: Too Many Requests for url: https://statistikk-data.fhi.no/api/open/v1/mfr/Table/475/query
-mfr,476,,"F16e-3: FÃ¸dsler med opplysning om mors snusvaner i siste trimester per Ã¥r, mors alder og mors snusvaner i siste trimester",,error,429 Client Error: Too Many Requests for url: https://statistikk-data.fhi.no/api/open/v1/mfr/Table/476/query
-mfr,477,,"F17a: FÃ¸dsler per Ã¥r, mors bosted og mors bruk av kosttilskudd",,error,429 Client Error: Too Many Requests for url: https://statistikk-data.fhi.no/api/open/v1/mfr/Table/477/query
-mfr,478,,"F17b: FÃ¸dsler per Ã¥r, mors alder og mors bruk av folsyre fÃ¸r svangerskapet",,error,429 Client Error: Too Many Requests for url: https://statistikk-data.fhi.no/api/open/v1/mfr/Table/478/query
-mfr,479,,"F17c: FÃ¸dsler per Ã¥r, mors alder og mors bruk av folsyre i svangerskapet",,error,429 Client Error: Too Many Requests for url: https://statistikk-data.fhi.no/api/open/v1/mfr/Table/479/query
-mfr,480,,"F18a-1: FÃ¸dsler per Ã¥r, mors bosted og om det finnes opplysning om mors kroppsmasseindeks (KMI) fÃ¸r svangerskapet",,error,429 Client Error: Too Many Requests for url: https://statistikk-data.fhi.no/api/open/v1/mfr/Table/480/query
-mfr,481,,"F18a-2: FÃ¸dsler med opplysning om mors kroppsmasseindeks (KMI) fÃ¸r svangerskapet per Ã¥r, mors bosted og mors KMI fÃ¸r svangerskapet",,error,429 Client Error: Too Many Requests for url: https://statistikk-data.fhi.no/api/open/v1/mfr/Table/481/query
-mfr,482,,F18a-3: Gjennomsnittlig kroppsmasseindeks (KMI) for mor fÃ¸r svangerskapet per Ã¥r og mors bosted,,error,429 Client Error: Too Many Requests for url: https://statistikk-data.fhi.no/api/open/v1/mfr/Table/482/query
-mfr,487,,P1a: FÃ¸dte per mÃ¥ned og mors bosted,,error,429 Client Error: Too Many Requests for url: https://statistikk-data.fhi.no/api/open/v1/mfr/Table/487/query
-mfr,490,,P3a: ForlÃ¸sningstype per mÃ¥ned og mors bosted,,error,429 Client Error: Too Many Requests for url: https://statistikk-data.fhi.no/api/open/v1/mfr/Table/490/query
-mfr,491,,P1b: FÃ¸dte per mÃ¥ned og fÃ¸deinstitusjon,,error,429 Client Error: Too Many Requests for url: https://statistikk-data.fhi.no/api/open/v1/mfr/Table/491/query
-mfr,492,,"F10c-2: KeisersnittfÃ¸dsler per Ã¥r, mors bosted og fÃ¸dselsstart","F10c-2: KeisersnittfÃ¸dsler per Ã¥r, mors bosted og fÃ¸dselsstart",ok,
-mfr,493,,"Is7a: FÃ¸dsler ved institusjon per Ã¥r, fÃ¸deinstitusjon og om det finnes opplysninger om mors rÃ¸ykevaner",,error,429 Client Error: Too Many Requests for url: https://statistikk-data.fhi.no/api/open/v1/mfr/Table/493/query
-mfr,494,,"Is7b: FÃ¸dsler ved institusjon med opplysning om mors rÃ¸ykevaner i 1. trimester per Ã¥r, fÃ¸deinstitusjon og mors rÃ¸ykevaner i 1. trimester","Is7b: FÃ¸dsler ved institusjon med opplysning om mors rÃ¸ykevaner i 1. trimester per Ã¥r, fÃ¸deinstitusjon og mors rÃ¸ykevaner i 1. trimester",ok,
-mfr,495,,"Is7c: FÃ¸dsler ved institusjon med opplysning om mors rÃ¸ykevaner i siste trimester per Ã¥r, fÃ¸deinstitusjon og mors rÃ¸ykevaner i siste trimester",,error,429 Client Error: Too Many Requests for url: https://statistikk-data.fhi.no/api/open/v1/mfr/Table/495/query
-mfr,496,,"Is8: FÃ¸dsler ved institusjon per Ã¥r, fÃ¸deinstitusjon og om det finnes opplysninger om mors kroppsmasseindeks (KMI)",,error,429 Client Error: Too Many Requests for url: https://statistikk-data.fhi.no/api/open/v1/mfr/Table/496/query
-mfr,497,,"Is9a: FÃ¸dte per Ã¥r, fÃ¸dehelseregion, mors fÃ¸deland og perinatal/neonatal levestatus",,error,429 Client Error: Too Many Requests for url: https://statistikk-data.fhi.no/api/open/v1/mfr/Table/497/query
-mfr,498,,"Is9b: FÃ¸dsler per Ã¥r, fÃ¸dehelseregion, mors fÃ¸deland og forhold ved mor og svangerskap",,error,429 Client Error: Too Many Requests for url: https://statistikk-data.fhi.no/api/open/v1/mfr/Table/498/query
-mfr,499,,"Is10: FÃ¸dsler ved institusjon per Ã¥r, fÃ¸deinstitusjon, forlÃ¸sningstype og mors liggetid etter fÃ¸dsel",,error,429 Client Error: Too Many Requests for url: https://statistikk-data.fhi.no/api/open/v1/mfr/Table/499/query
-mfr,500,,P3b: ForlÃ¸sningstype per mÃ¥ned og fÃ¸deinstitusjon ,,error,429 Client Error: Too Many Requests for url: https://statistikk-data.fhi.no/api/open/v1/mfr/Table/500/query
-mfr,502,,P6a: Barnets tilstand ved fÃ¸dsel per mÃ¥ned og mors bosted,,error,429 Client Error: Too Many Requests for url: https://statistikk-data.fhi.no/api/open/v1/mfr/Table/502/query
-mfr,503,,P6b: Barnets tilstand ved fÃ¸dsel per mÃ¥ned og fÃ¸deinstitusjon,,error,429 Client Error: Too Many Requests for url: https://statistikk-data.fhi.no/api/open/v1/mfr/Table/503/query
-mfr,505,,P2a: FÃ¸dselsstart per mÃ¥ned og mors bosted,,error,429 Client Error: Too Many Requests for url: https://statistikk-data.fhi.no/api/open/v1/mfr/Table/505/query
-mfr,506,,P2b: FÃ¸dselsstart per mÃ¥ned og fÃ¸deinstitusjon,,error,429 Client Error: Too Many Requests for url: https://statistikk-data.fhi.no/api/open/v1/mfr/Table/506/query
-mfr,512,,P4a: Komplikasjoner under fÃ¸dselen per mÃ¥ned og mors bosted,,error,429 Client Error: Too Many Requests for url: https://statistikk-data.fhi.no/api/open/v1/mfr/Table/512/query
-mfr,513,,P4b: Komplikasjoner under fÃ¸dselen per mÃ¥ned og fÃ¸deinstitusjon,,error,429 Client Error: Too Many Requests for url: https://statistikk-data.fhi.no/api/open/v1/mfr/Table/513/query
-mfr,514,,P5a: Vaginalt fÃ¸dte: Inngrep og tiltak under fÃ¸dselen per mÃ¥ned og mors bosted,,error,429 Client Error: Too Many Requests for url: https://statistikk-data.fhi.no/api/open/v1/mfr/Table/514/query
-mfr,515,,P5b: Vaginalt fÃ¸dte: Inngrep og tiltak under fÃ¸dselen per mÃ¥ned og fÃ¸deinstitusjon,,error,429 Client Error: Too Many Requests for url: https://statistikk-data.fhi.no/api/open/v1/mfr/Table/515/query
-mfr,584,,R1: Keisersnitt per Robsongruppe og fÃ¸deinstitusjon,R1: Keisersnitt per Robsongruppe og fÃ¸deinstitusjon,ok,
-mfr,590,,R2: Tang eller vakuumekstraksjon per Robsongruppe og fÃ¸deinstitusjon,R2: Tang eller vakuumekstraksjon per Robsongruppe og fÃ¸deinstitusjon,ok,
-mfr,591,,R3: Tang per Robsongruppe og fÃ¸deinstitusjon,,error,429 Client Error: Too Many Requests for url: https://statistikk-data.fhi.no/api/open/v1/mfr/Table/591/query
-mfr,592,,R4: Vakuumekstraksjon per Robsongruppe og fÃ¸deinstitusjon,,error,429 Client Error: Too Many Requests for url: https://statistikk-data.fhi.no/api/open/v1/mfr/Table/592/query
-mfr,593,,R5: Episiotomi per Robsongruppe og fÃ¸deinstitusjon,R5: Episiotomi per Robsongruppe og fÃ¸deinstitusjon,ok,
-mfr,594,,R6: BlÃ¸dning under/etter fÃ¸dsel per Robsongruppe og fÃ¸deinstitusjon,R6: BlÃ¸dning under/etter fÃ¸dsel per Robsongruppe og fÃ¸deinstitusjon,ok,
-mfr,595,,R7: Lav apgar score per Robsongruppe og fÃ¸deinstitusjon,,error,429 Client Error: Too Many Requests for url: https://statistikk-data.fhi.no/api/open/v1/mfr/Table/595/query
-mfr,596,,R8: Overflyttet barneavdeling per Robsongruppe og fÃ¸deinstitusjon,,error,429 Client Error: Too Many Requests for url: https://statistikk-data.fhi.no/api/open/v1/mfr/Table/596/query
-msis,724,,RESPIaggr Influensa antall og andel,,error,429 Client Error: Too Many Requests for url: https://statistikk-data.fhi.no/api/open/v1/msis/Table/724/query
-msis,726,,RESPIaggr Influensa subtyper,,error,429 Client Error: Too Many Requests for url: https://statistikk-data.fhi.no/api/open/v1/msis/Table/726/query
-msis,729,,RESPIaggr RSV antall og andel,,error,429 Client Error: Too Many Requests for url: https://statistikk-data.fhi.no/api/open/v1/msis/Table/729/query
-msis,730,,RESPIaggr RSV sesongsammenligning,,error,429 Client Error: Too Many Requests for url: https://statistikk-data.fhi.no/api/open/v1/msis/Table/730/query
-msis,731,,RESPIaggr SARS-CoV-2 antall og andel,,error,429 Client Error: Too Many Requests for url: https://statistikk-data.fhi.no/api/open/v1/msis/Table/731/query
-msis,732,,RESPIaggr SARS-CoV-2 sesongsammenligning,,error,429 Client Error: Too Many Requests for url: https://statistikk-data.fhi.no/api/open/v1/msis/Table/732/query
-msis,733,,Oversikt luftveisagens,,error,429 Client Error: Too Many Requests for url: https://statistikk-data.fhi.no/api/open/v1/msis/Table/733/query
-msis,749,,RESPIaggr Influensa sesongsammenligning,,error,429 Client Error: Too Many Requests for url: https://statistikk-data.fhi.no/api/open/v1/msis/Table/749/query
-ngs,272,,VOI,VOI,ok,
-ngs,273,,VUM,VUM,ok,
-ngs,275,,varianter_per_mnd,varianter_per_mnd,ok,
-ngs,665,,HCV_per_Ã¥r,HCV_per_Ã¥r,ok,
-nokkel,171,,Befolkningsframskriving,Befolkningsframskriving,ok,
-nokkel,175,,Antall innvandrere og norskfÃ¸dte med innvandrerforeldre,Antall innvandrere og norskfÃ¸dte med innvandrerforeldre,ok,
-nokkel,181,,UtdanningsnivÃ¥,UtdanningsnivÃ¥,ok,
-nokkel,185,,Befolkningsvekst,Befolkningsvekst,ok,
-nokkel,186,,Eierstatus,Eierstatus,ok,
-nokkel,187,,Personer som bor alene,Personer som bor alene,ok,
-nokkel,188,,Trangboddhet,Trangboddhet,ok,
-nokkel,332,,Alkohol_Ungdata_KH,Alkohol_Ungdata_KH,ok,
-nokkel,334,,Antibiotikaresepter,Antibiotikaresepter,ok,
-nokkel,335,,Barn av sosialhjelpsmottakere,Barn av sosialhjelpsmottakere,ok,
-nokkel,336,,Barnehagekvalitet_bemanning,Barnehagekvalitet_bemanning,ok,
-nokkel,337,,Barnevern_tiltak,Barnevern_tiltak,ok,
-nokkel,338,,Befolkningssammensetning_antall_andel,Befolkningssammensetning_antall_andel,ok,
-nokkel,339,,Depressive symptomer_Ungdata_KH,Depressive symptomer_Ungdata_KH,ok,
-nokkel,341,,Drikkevannsforsyning,Drikkevannsforsyning,ok,
-nokkel,342,,DÃ¸dsÃ¥rsaker,DÃ¸dsÃ¥rsaker,ok,
-nokkel,343,,DÃ¸dsÃ¥rsaker-nÃ¸kkeltall-1990-ettÃ¥rig,DÃ¸dsÃ¥rsaker-nÃ¸kkeltall-1990-ettÃ¥rig,ok,
-nokkel,344,,Selvmord femÃ¥rig,Selvmord femÃ¥rig,ok,
-nokkel,345,,"Trafikkulykker, femÃ¥rige tall","Trafikkulykker, femÃ¥rige tall",ok,
-nokkel,346,,Barn av enslige forsÃ¸rgere_3aarigLFKB,Barn av enslige forsÃ¸rgere_3aarigLFKB,ok,
-nokkel,348,,Ensomhet_Ungdata_KH,Ensomhet_Ungdata_KH,ok,
-nokkel,349,,Fornoyd_helsa_Ungdata_KH,Fornoyd_helsa_Ungdata_KH,ok,
-nokkel,350,,Svomming_2aarigLFK,Svomming_2aarigLFK,ok,
-nokkel,351,,Svomming_1aarigLF,Svomming_1aarigLF,ok,
-nokkel,352,,Trening_sesjon1_2aarigLFK,Trening_sesjon1_2aarigLFK,ok,
-nokkel,353,,Trening_sesjon1_1aarigLF,Trening_sesjon1_1aarigLF,ok,
-nokkel,354,,FORTROLIGVENN_Ungdata_KH,FORTROLIGVENN_Ungdata_KH,ok,
-nokkel,355,,Fremtidsoptimisme_Ungdata_KH,Fremtidsoptimisme_Ungdata_KH,ok,
-nokkel,356,,Fritidsorg_deltak_ungdata,Fritidsorg_deltak_ungdata,ok,
-nokkel,357,,Fysisk_inakt_Ungdata_KH,Fysisk_inakt_Ungdata_KH,ok,
-nokkel,358,,Gjeld,Gjeld,ok,
-nokkel,359,,Gjennomforing i videregÃ¥ende skole_innvand_3,Gjennomforing i videregÃ¥ende skole_innvand_3,ok,
-nokkel,360,,Gjennomforing i videregÃ¥ende skole_utdann_3,Gjennomforing i videregÃ¥ende skole_utdann_3,ok,
-nokkel,361,,Grunnskolepoeng_INNVKAT,Grunnskolepoeng_INNVKAT,ok,
-nokkel,362,,Grunnskolepoeng_UTDANN,Grunnskolepoeng_UTDANN,ok,
-nokkel,363,,Hasjbruk_Ungdata_KH,Hasjbruk_Ungdata_KH,ok,
-nokkel,364,,Hjerte- og karregisteret_3aarigLFKB,Hjerte- og karregisteret_3aarigLFKB,ok,
-nokkel,365,,Hjerte- og karregisteret_1aarigLHF,Hjerte- og karregisteret_1aarigLHF,ok,
-nokkel,366,,Inntektsulikhet_NH_LF,Inntektsulikhet_NH_LF,ok,
-nokkel,367,,"Overvekt, kvinner, MFR","Overvekt, kvinner, MFR",ok,
-nokkel,368,,"Kreft, nye tilfeller_10aarigLFKB","Kreft, nye tilfeller_10aarigLFKB",ok,
-nokkel,369,,KPR_3,KPR_3,ok,
-nokkel,370,,KPR_1,KPR_1,ok,
-nokkel,371,,Leseferdighet_UTDANN_1,Leseferdighet_UTDANN_1,ok,
-nokkel,372,,Leseferdighet_INNVKAT_3,Leseferdighet_INNVKAT_3,ok,
-nokkel,373,,Livskvalitet_Ungdata_KH,Livskvalitet_Ungdata_KH,ok,
-nokkel,374,,NÃ¦rmiljÃ¸_Ungdata_KH,NÃ¦rmiljÃ¸_Ungdata_KH,ok,
-nokkel,375,,Treffsteder for unge_Ungdata_KH,Treffsteder for unge_Ungdata_KH,ok,
-nokkel,376,,"Luftkvalitet,PWC","Luftkvalitet,PWC",ok,
-nokkel,377,,"Mobbing, 7. og 10. klasse, 3-Ã¥rige tall","Mobbing, 7. og 10. klasse, 3-Ã¥rige tall",ok,
-nokkel,378,,"Mobbing, 7. og 10. klasse ettÃ¥rig","Mobbing, 7. og 10. klasse ettÃ¥rig",ok,
-nokkel,379,,NEET,NEET,ok,
-nokkel,380,,Regelbrudd_Ungdata_KH,Regelbrudd_Ungdata_KH,ok,
-nokkel,381,,"Regneferdighet, 5. og 8. klasse_STARTAAR_2022_LFKB","Regneferdighet, 5. og 8. klasse_STARTAAR_2022_LFKB",ok,
-nokkel,385,,Legemidler til behandling av type-2 diabetes_3aarigLFK,Legemidler til behandling av type-2 diabetes_3aarigLFK,ok,
-nokkel,387,,"Overvekt, verneplikt (LF)","Overvekt, verneplikt (LF)",ok,
-nokkel,388,,Overvekt sesjon1,Overvekt sesjon1,ok,
-nokkel,389,,Skjermtid_Ungdata_KH,Skjermtid_Ungdata_KH,ok,
-nokkel,390,,Smertestillende_ungdata,Smertestillende_ungdata,ok,
-nokkel,391,,SÃ¸vnproblemer_Ungdata_KH,SÃ¸vnproblemer_Ungdata_KH,ok,
-nokkel,392,,StÃ¸nad_livsopphold,StÃ¸nad_livsopphold,ok,
-nokkel,393,,RÃ¸yking_MFR,RÃ¸yking_MFR,ok,
-nokkel,394,,Vaksinasjonsdekning_1aar-FELLES,Vaksinasjonsdekning_1aar-FELLES,ok,
-nokkel,395,,Vaksinasjonsdekning_5aar,Vaksinasjonsdekning_5aar,ok,
-nokkel,396,,Vaks_dekning_Influensa,Vaks_dekning_Influensa,ok,
-nokkel,397,,"Trivsel, 7. og 10. klasse_aarlige tall","Trivsel, 7. og 10. klasse_aarlige tall",ok,
-nokkel,398,,"Trivsel, 7. og 10. klasse_3-Ã¥rige tall","Trivsel, 7. og 10. klasse_3-Ã¥rige tall",ok,
-nokkel,399,,Trygghet_ungdata,Trygghet_ungdata,ok,
-nokkel,400,,UfÃ¸retrygdede,UfÃ¸retrygdede,ok,
-nokkel,401,,Valgdeltakelse,Valgdeltakelse,ok,
-nokkel,403,,Vedvarende_lavinntekt_kommunegrense,Vedvarende_lavinntekt_kommunegrense,ok,
-nokkel,507,,Forv_levealder_TOT_og_utdn_7aarigLF,Forv_levealder_TOT_og_utdn_7aarigLF,ok,
-nokkel,508,,Forventet levealder etter utdn_15aarigLFKB,Forventet levealder etter utdn_15aarigLFKB,ok,
-nokkel,509,,Forventet levealder_Ã¥rligetall_ettÃ¥rALDER_UTD,Forventet levealder_Ã¥rligetall_ettÃ¥rALDER_UTD,ok,
-nokkel,510,,Utdanningsforskjeller i forventet levealder_15aarigLFKB,Utdanningsforskjeller i forventet levealder_15aarigLFKB,ok,
-nokkel,511,,Utdanningsforskjeller i forventet levealder_7aarigLF,Utdanningsforskjeller i forventet levealder_7aarigLF,ok,
-nokkel,583,,Vedvarende lavinntekt INNVKAT,Vedvarende lavinntekt INNVKAT,ok,
-nokkel,600,,"Kollektivtilbud, ungdom","Kollektivtilbud, ungdom",ok,
-nokkel,601,,Mediebruk_DataTVspill_Ungdata_KH,Mediebruk_DataTVspill_Ungdata_KH,ok,
-nokkel,602,,Mediebruk_SOME_Ungdata_KH,Mediebruk_SOME_Ungdata_KH,ok,
-nokkel,606,,Tannhelse_DMFT=0_MED_DEKNING,Tannhelse_DMFT=0_MED_DEKNING,ok,
-nokkel,607,,Venner_inne_Ungdata,Venner_inne_Ungdata,ok,
-nokkel,608,,Venner_ute_Ungdata,Venner_ute_Ungdata,ok,
-nokkel,614,,UfÃ¸retrygdede_ettÃ¥rig,UfÃ¸retrygdede_ettÃ¥rig,ok,
-nokkel,619,,"Kreft, nye tilfeller_ettÃ¥rig_LFKB","Kreft, nye tilfeller_ettÃ¥rig_LFKB",ok,
-nokkel,623,, Gjennomforing_VGO_utdann_1, Gjennomforing_VGO_utdann_1,ok,
-nokkel,631,,ROYK_RUS_1,ROYK_RUS_1,ok,
-nokkel,641,,Regneferd_INNVKAT_3,Regneferd_INNVKAT_3,ok,
-nokkel,650,,INNVAND_INNVKAT_Unge,INNVAND_INNVKAT_Unge,ok,
-nokkel,660,,"Forventet levealder totalt og etter utdanning, 25-Ã¥rig","Forventet levealder totalt og etter utdanning, 25-Ã¥rig",ok,
-nokkel,664,,Sosialhjelpsmottakere,Sosialhjelpsmottakere,ok,
-nokkel,667,,Mediebruk_underhold_ungdata,Mediebruk_underhold_ungdata,ok,
-nokkel,670,,Leseferdighet_utdann_3,Leseferdighet_utdann_3,ok,
-nokkel,671,,Leseferdighet_innvkat_1,Leseferdighet_innvkat_1,ok,
-nokkel,672,,Regneferd_UTDANN_1,Regneferd_UTDANN_1,ok,
-nokkel,677,,Gjennomforing i videregÃ¥ende skole_innvand_1,Gjennomforing i videregÃ¥ende skole_innvand_1,ok,
-nokkel,685,,Regneferd_UTDANN_3,Regneferd_UTDANN_3,ok,
-nokkel,688,,Forventede funksjonsfriske leveÃ¥r_7,Forventede funksjonsfriske leveÃ¥r_7,ok,
-nokkel,689,,Regneferd_INNVKAT_1,Regneferd_INNVKAT_1,ok,
-nokkel,699,,NPR_1,NPR_1,ok,
-nokkel,714,,NPR_3,NPR_3,ok,
-npr,464,,NPR PHBU nÃ¸kkeltall,,error,429 Client Error: Too Many Requests for url: https://statistikk-data.fhi.no/api/open/v1/npr/Table/464/query
-npr,517,,NPR SOM nÃ¸kkeltall ,,error,429 Client Error: Too Many Requests for url: https://statistikk-data.fhi.no/api/open/v1/npr/Table/517/query
-npr,518,,NPR PHV nÃ¸kkeltall ,,error,429 Client Error: Too Many Requests for url: https://statistikk-data.fhi.no/api/open/v1/npr/Table/518/query
-npr,520,,NPR TSB nÃ¸kkeltall,,error,429 Client Error: Too Many Requests for url: https://statistikk-data.fhi.no/api/open/v1/npr/Table/520/query
-npr,521,,NPR ALLETJEN 07 tilstandskoder VII (H00-H59) ,,error,429 Client Error: Too Many Requests for url: https://statistikk-data.fhi.no/api/open/v1/npr/Table/521/query
-npr,524,,NPR ALLETJEN 04 tilstandskoder IV (E00-E90) ,,error,429 Client Error: Too Many Requests for url: https://statistikk-data.fhi.no/api/open/v1/npr/Table/524/query
-npr,533,,NPR ALLETJEN 03 tilstandskoder III D50-D89,,error,429 Client Error: Too Many Requests for url: https://statistikk-data.fhi.no/api/open/v1/npr/Table/533/query
-npr,534,,NPR ALLETJEN 01 tilstandskoder I A00-B99,,error,429 Client Error: Too Many Requests for url: https://statistikk-data.fhi.no/api/open/v1/npr/Table/534/query
-npr,535,,NPR ALLETJEN 02 tilstandskoder II C00-D48,,error,429 Client Error: Too Many Requests for url: https://statistikk-data.fhi.no/api/open/v1/npr/Table/535/query
-npr,537,,NPR ALLETJEN 05 tilstandskoder V (F00-F99),,error,429 Client Error: Too Many Requests for url: https://statistikk-data.fhi.no/api/open/v1/npr/Table/537/query
-npr,538,, NPR ALLETJEN 06 tilstandskoder VI (G00-G99) ,,error,429 Client Error: Too Many Requests for url: https://statistikk-data.fhi.no/api/open/v1/npr/Table/538/query
-npr,539,,NPR ALLETJEN 08 tilstandskoder VIII (H60-H95),,error,429 Client Error: Too Many Requests for url: https://statistikk-data.fhi.no/api/open/v1/npr/Table/539/query
-npr,540,,NPR ALLETJEN 09 tilstandskoder IX (I00-I99),,error,429 Client Error: Too Many Requests for url: https://statistikk-data.fhi.no/api/open/v1/npr/Table/540/query
-npr,541,,NPR ALLETJEN 10 tilstandskoder X (J00-J99),,error,429 Client Error: Too Many Requests for url: https://statistikk-data.fhi.no/api/open/v1/npr/Table/541/query
-npr,542,,NPR ALLETJEN 11 tilstandskoder XI (K00-K93),,error,429 Client Error: Too Many Requests for url: https://statistikk-data.fhi.no/api/open/v1/npr/Table/542/query
-npr,543,,NPR ALLETJEN 12 tilstandskoder XII (L00-L99),,error,429 Client Error: Too Many Requests for url: https://statistikk-data.fhi.no/api/open/v1/npr/Table/543/query
-npr,544,,NPR ALLETJEN 13 tilstandskoder XIII (M00-M99),,error,429 Client Error: Too Many Requests for url: https://statistikk-data.fhi.no/api/open/v1/npr/Table/544/query
-npr,545,, NPR ALLETJEN 14 tilstandskoder XIV (N00-N99),,error,429 Client Error: Too Many Requests for url: https://statistikk-data.fhi.no/api/open/v1/npr/Table/545/query
-npr,546,,NPR ALLETJEN 15 tilstandskoder XV (O00-O99) ,,error,429 Client Error: Too Many Requests for url: https://statistikk-data.fhi.no/api/open/v1/npr/Table/546/query
-npr,547,,NPR ALLETJEN 16 tilstandskoder XVI (P00-P96),,error,429 Client Error: Too Many Requests for url: https://statistikk-data.fhi.no/api/open/v1/npr/Table/547/query
-npr,548,,NPR ALLETJEN 17 tilstandskoder XVII (Q00-Q99),,error,429 Client Error: Too Many Requests for url: https://statistikk-data.fhi.no/api/open/v1/npr/Table/548/query
-npr,549,,NPR ALLETJEN 18 tilstandskoder XVIII (R00-R99) ,,error,429 Client Error: Too Many Requests for url: https://statistikk-data.fhi.no/api/open/v1/npr/Table/549/query
-npr,550,,NPR ALLETJEN 19 tilstandskoder XIX (S00-T98),,error,429 Client Error: Too Many Requests for url: https://statistikk-data.fhi.no/api/open/v1/npr/Table/550/query
-npr,551,,NPR ALLETJEN 20 tilstandskoder XX (V0n-Y98) ,,error,429 Client Error: Too Many Requests for url: https://statistikk-data.fhi.no/api/open/v1/npr/Table/551/query
-npr,552,,NPR ALLETJEN 21 tilstandskoder XXI (Z00-Z99) ,,error,429 Client Error: Too Many Requests for url: https://statistikk-data.fhi.no/api/open/v1/npr/Table/552/query
-npr,553,,	 NPR ALLETJEN 22 tilstandskoder  XXII (U00-U85),,error,429 Client Error: Too Many Requests for url: https://statistikk-data.fhi.no/api/open/v1/npr/Table/553/query
-npr,555,,	 NPR ALLETJEN kap A Prosedyrekoder,,error,429 Client Error: Too Many Requests for url: https://statistikk-data.fhi.no/api/open/v1/npr/Table/555/query
-npr,556,,NPR ALLETJEN kap B Prosedyrekoder,,error,429 Client Error: Too Many Requests for url: https://statistikk-data.fhi.no/api/open/v1/npr/Table/556/query
-npr,557,,NPR ALLETJEN kap C Prosedyrekoder,,error,429 Client Error: Too Many Requests for url: https://statistikk-data.fhi.no/api/open/v1/npr/Table/557/query
-npr,558,,NPR ALLETJEN kap D Prosedyrekoder,,error,429 Client Error: Too Many Requests for url: https://statistikk-data.fhi.no/api/open/v1/npr/Table/558/query
-npr,559,,NPR ALLETJEN kap E Prosedyrekoder,,error,429 Client Error: Too Many Requests for url: https://statistikk-data.fhi.no/api/open/v1/npr/Table/559/query
-npr,560,,NPR ALLETJEN kap F Prosedyrekoder,,error,429 Client Error: Too Many Requests for url: https://statistikk-data.fhi.no/api/open/v1/npr/Table/560/query
-npr,561,,NPR ALLETJEN kap G Prosedyrekoder,,error,429 Client Error: Too Many Requests for url: https://statistikk-data.fhi.no/api/open/v1/npr/Table/561/query
-npr,562,,	 NPR ALLETJEN kap H Prosedyrekoder,,error,429 Client Error: Too Many Requests for url: https://statistikk-data.fhi.no/api/open/v1/npr/Table/562/query
-npr,563,,NPR ALLETJEN kap I Prosedyrekoder,,error,429 Client Error: Too Many Requests for url: https://statistikk-data.fhi.no/api/open/v1/npr/Table/563/query
-npr,564,,NPR ALLETJEN kap J Prosedyrekoder,,error,429 Client Error: Too Many Requests for url: https://statistikk-data.fhi.no/api/open/v1/npr/Table/564/query
-npr,566,,NPR ALLETJEN kap K Prosedyrekoder,,error,429 Client Error: Too Many Requests for url: https://statistikk-data.fhi.no/api/open/v1/npr/Table/566/query
-npr,567,,NPR ALLETJEN kap L Prosedyrekoder,,error,429 Client Error: Too Many Requests for url: https://statistikk-data.fhi.no/api/open/v1/npr/Table/567/query
-npr,568,,NPR ALLETJEN kap M Prosedyrekoder,,error,429 Client Error: Too Many Requests for url: https://statistikk-data.fhi.no/api/open/v1/npr/Table/568/query
-npr,569,,NPR ALLETJEN kap N Prosedyrekoder,,error,429 Client Error: Too Many Requests for url: https://statistikk-data.fhi.no/api/open/v1/npr/Table/569/query
-npr,571,,NPR ALLETJEN kap O Prosedyrekoder,,error,429 Client Error: Too Many Requests for url: https://statistikk-data.fhi.no/api/open/v1/npr/Table/571/query
-npr,572,,	 NPR ALLETJEN kap P Prosedyrekoder,,error,429 Client Error: Too Many Requests for url: https://statistikk-data.fhi.no/api/open/v1/npr/Table/572/query
-npr,573,,	 NPR ALLETJEN kap Q Prosedyrekoder,,error,429 Client Error: Too Many Requests for url: https://statistikk-data.fhi.no/api/open/v1/npr/Table/573/query
-npr,574,,	 NPR ALLETJEN kap R Prosedyrekoder,,error,429 Client Error: Too Many Requests for url: https://statistikk-data.fhi.no/api/open/v1/npr/Table/574/query
-npr,575,,	 NPR ALLETJEN kap S Prosedyrekoder,,error,429 Client Error: Too Many Requests for url: https://statistikk-data.fhi.no/api/open/v1/npr/Table/575/query
-npr,576,,	 NPR ALLETJEN kap T Prosedyrekoder,,error,429 Client Error: Too Many Requests for url: https://statistikk-data.fhi.no/api/open/v1/npr/Table/576/query
-npr,577,,NPR ALLETJEN kap W Prosedyrekoder,,error,429 Client Error: Too Many Requests for url: https://statistikk-data.fhi.no/api/open/v1/npr/Table/577/query
-npr,578,,NPR ALLETJEN kap Y Prosedyrekoder,,error,429 Client Error: Too Many Requests for url: https://statistikk-data.fhi.no/api/open/v1/npr/Table/578/query
-npr,579,,NPR ALLETJEN kap Z Prosedyrekoder,,error,429 Client Error: Too Many Requests for url: https://statistikk-data.fhi.no/api/open/v1/npr/Table/579/query
-npr,636,,NPR alkohol og rus-tilstandsgrupper,,error,429 Client Error: Too Many Requests for url: https://statistikk-data.fhi.no/api/open/v1/npr/Table/636/query
-npr,637,,NPR alkohol og rus-alder og kjÃ¸nn,,error,429 Client Error: Too Many Requests for url: https://statistikk-data.fhi.no/api/open/v1/npr/Table/637/query
-npr,638,,NPR alkohol og rus-tjenesteomrÃ¥der,,error,429 Client Error: Too Many Requests for url: https://statistikk-data.fhi.no/api/open/v1/npr/Table/638/query
-sysvak,324,,SYSVAK influensavaksinasjon 24/25,,error,429 Client Error: Too Many Requests for url: https://statistikk-data.fhi.no/api/open/v1/sysvak/Table/324/query
-sysvak,484,,SYSVAK koronavaksinasjon 24/25,,error,429 Client Error: Too Many Requests for url: https://statistikk-data.fhi.no/api/open/v1/sysvak/Table/484/query
-sysvak,648,,SYSVAK bvp,,error,429 Client Error: Too Many Requests for url: https://statistikk-data.fhi.no/api/open/v1/sysvak/Table/648/query
-sysvak,716,,SYSVAK influensavaksinasjon 25/26,,error,429 Client Error: Too Many Requests for url: https://statistikk-data.fhi.no/api/open/v1/sysvak/Table/716/query
-sysvak,717,,SYSVAK koronavaksinasjon 25/26,,error,429 Client Error: Too Many Requests for url: https://statistikk-data.fhi.no/api/open/v1/sysvak/Table/717/query
-sysvak,750,,SYSVAK covid-19 Ã¥rlig 75+,,error,429 Client Error: Too Many Requests for url: https://statistikk-data.fhi.no/api/open/v1/sysvak/Table/750/query
-sysvak,751,,SYSVAK covid-19 Ã¥rlig 65+,,error,429 Client Error: Too Many Requests for url: https://statistikk-data.fhi.no/api/open/v1/sysvak/Table/751/query
-sysvak,753,,SYSVAK influensa Ã¥rlig 65+,,error,429 Client Error: Too Many Requests for url: https://statistikk-data.fhi.no/api/open/v1/sysvak/Table/753/query
+source_id;tableId;name;title;label
+abr;253;;A5: Nemndbehandla svangerskapsavbrot fordelt på bustadsfylke;
+abr;260;;A7: Nemndbehandla svangerskapsavbrot fordelt på vedtaksgrunnlag og svangerskapslengde;
+abr;261;;A8: Nemndbehandla begjæringar om svangerskapsavbrot fordelt på type nemnd, vedtak og utførtstatus;
+abr;262;;A10: Nemndbehandla begjæringar om svangerskapsavbrot med vedtak fordelt på vedtak og svangerskapslengde;
+abr;263;;A11: Begjæringar om svangerskapsavbrot fordelt på institusjon og utførtstatus  ;
+abr;264;;A9: Nemndbehandla begjæringar om svangerskapsavbrot fordelt på vedtak og svangerskapslengde;
+abr;280;;A1: Svangerskapsavbrot fordelt på type begjæring og utførtstatus;
+abr;283;;A2: Svangerskapsavbrot fordelt på bustadsfylke og alder;
+abr;285;;A3: Svangerskapsavbrot fordelt på alder og type begjæring;
+abr;286;;A4: Svangerskapsavbrot fordelt på metode, type begjæring og svangerskapslengde;
+abr;287;;A6: Nemndbehandla svangerskapsavbrot fordelt på vedtaksgrunnlag;
+daar;268;;D3a_flagg;
+daar;269;;D5b_hjertekar;
+daar;270;;D10b_selvmord;
+daar;277;;D8b_ulykker;
+daar;290;;D13_obduksjoner;
+daar;310;;D10a_selvmord;
+daar;312;;D5a_hjertekar;
+daar;314;;D8a_ulykker;
+daar;325;;D7a_narkotika_antall;
+daar;327;;D7_alkohol_antall;
+daar;329;;D6a_kreft;
+daar;330;;D6b_kreft;
+daar;642;;D3b_ny;
+daar;643;;D1_ny;
+daar;644;;D2_ny;
+daar;645;;D4_ny;
+daar;647;;D12_ny;
+daar;742;;D11_rater;
+daar;746;;D7b_narkotika_rater;
+daar;747;;D7d_alkohol_rater;
+daar;754;;D5c_hjertekar_rater;
+daar;755;;D6c_kreft_rater;
+daar;756;;D8c_ulykker_rater;
+gs;657;;Grossistbasert legemiddelstatistikk 1999-2024;
+hkr;410;;Total forekomst: Utvalgte diagnoser, antall;
+hkr;462;;Total forekomst: Utvalgte diagnoser, rater;
+hkr;668;;Insidens (nye pasienter): Utvalgte diagnoser, antall;
+hkr;669;;Insidens (nye pasienter): Utvalgte diagnoser, rater;
+hkr;676;;Utvalgte prosedyrer, antall pasienter;
+kpr;522;;KPR LEGEVAKT alkohol og rus - kjønn;
+kpr;523;;KPR LEGEVAKT alkohol og rus - alder;
+kpr;634;;KPR HOM. Antall brukere per tjeneste;
+lmr;615;;Per ATC-kode, 2004-2024. [Oppdatert 12.03.2025] ;
+lmr;616;;Legemiddelgruppe - ADHD-midler. 2004-2024. [Oppdatert 12.03.2025] ;
+lmr;617;;Legemiddelgruppe - Hormontilskudd. 2004 - 2024. [Oppdatert 12.03.2025] ;
+lmr;618;;Legemiddelgruppe - Prevensjonsmidler. 2004 - 2024. [Oppdatert 12.03.2025] ;
+lmr;620;;Legemiddelgruppe – Potensmidler. 2004-2024. [Oppdatert 12.03.2025] ;
+lmr;621;;Legemiddelgruppe - Vektreduserende . 2004 - 2024. [Oppdatert 12.03.2025] ;
+lmr;622;;Legemiddelgruppe - Øvrige legemiddelgrupper. 2004 - 2024. [Oppdatert 12.03.2025] ;
+mfr;411;;F0: Fødte og fødsler per år og måned;F0: Fødte og fødsler per år og måned
+mfr;412;;F1a: Fødte per år, mors bosted og kjønn;
+mfr;413;;F1b: Fødsler per år, mors bosted og enkelt-/flerfødsel;F1b: Fødsler per år, mors bosted og enkelt-/flerfødsel
+mfr;414;;F2b-5: Fødte iht. MFR per år, mors bosted og perinatal levestatus;
+mfr;415;;F2b-6: Fødte iht. Euro-Peristat (f.o.m. 22 uker) per år og perinatal levestatus ;F2b-6: Fødte iht. Euro-Peristat (f.o.m. 22 uker) per år og perinatal levestatus 
+mfr;416;;F2b-7: Fødte iht. WHO (f.o.m. 500 g) per år og perinatal levestatus ;F2b-7: Fødte iht. WHO (f.o.m. 500 g) per år og perinatal levestatus 
+mfr;417;;F2b-8: Fødte iht. WHO (f.o.m. 1000 g) per år og perinatal levestatus;F2b-8: Fødte iht. WHO (f.o.m. 1000 g) per år og perinatal levestatus
+mfr;418;;F2c: Levendefødte per år, mors bosted og levestatus i spedbarnsperioden;F2c: Levendefødte per år, mors bosted og levestatus i spedbarnsperioden
+mfr;420;;F3a: Fødsler per år, mors bosted og mors alder;F3a: Fødsler per år, mors bosted og mors alder
+mfr;421;;F3b: Mors gjennomsnittsalder per år, mors bosted og tidligere fødte;F3b: Mors gjennomsnittsalder per år, mors bosted og tidligere fødte
+mfr;422;;F3c: Fødsler per år, mors bosted og fars alder;F3c: Fødsler per år, mors bosted og fars alder
+mfr;423;;F3d: Fars gjennomsnittsalder per år og mors bosted;F3d: Fars gjennomsnittsalder per år og mors bosted
+mfr;424;;F4a: Fødsler per år, mors bosted og tidligere fødte;F4a: Fødsler per år, mors bosted og tidligere fødte
+mfr;425;;F4b: Fødsler per år, mors bosted og mors sivilstatus;F4b: Fødsler per år, mors bosted og mors sivilstatus
+mfr;426;;F5a: Fødte med fødselsvekt per år, mors bosted og fødselsvekt;F5a: Fødte med fødselsvekt per år, mors bosted og fødselsvekt
+mfr;427;;F5b: Gjennomsnittlig fødselsvekt per år og mors bosted;F5b: Gjennomsnittlig fødselsvekt per år og mors bosted
+mfr;428;;Is1: Fødsler per år, fødeinstitusjon, fødestedtype og enkelt-/flerfødsel;
+mfr;429;;Is2: Fødte ved institusjon per år, fødeinstitusjon og levestatus ved fødsel;
+mfr;430;;F6a: Fødsler med svangerskapsvarighet per år, mors bosted og svangerskapsvarighet;F6a: Fødsler med svangerskapsvarighet per år, mors bosted og svangerskapsvarighet
+mfr;431;;F6b: Gjennomsnittlig svangerskapsvarighet per år og mors bosted;F6b: Gjennomsnittlig svangerskapsvarighet per år og mors bosted
+mfr;432;;F7a: Fødsler per år, mors bosted og sykdom hos mor før svangerskapet;
+mfr;433;;F7c: Fødsler per år, mors bosted og hypertensive tilstander hos mor i svangerskapet;
+mfr;434;;F7d: Fødsler per år, mors bosted og diabetes hos mor;
+mfr;435;;F8a: Fødsler per år, mors bosted og fødselsstart;F8a: Fødsler per år, mors bosted og fødselsstart
+mfr;436;;F8b: Induserte fødsler per år, mors bosted og induksjonsmetode;F8b: Induserte fødsler per år, mors bosted og induksjonsmetode
+mfr;437;;F9a: Fødsler per år, mors bosted og komplikasjoner under fødselen;F9a: Fødsler per år, mors bosted og komplikasjoner under fødselen
+mfr;438;;F9b: Fødte per år, mors bosted og leie ved fødsel;F9b: Fødte per år, mors bosted og leie ved fødsel
+mfr;440;;F10a: Vaginalt fødte per år, mors bosted og inngrep og tiltak under fødselen;F10a: Vaginalt fødte per år, mors bosted og inngrep og tiltak under fødselen
+mfr;441;;F10b: Fødte i seteleie per år, mors bosted og inngrep og tiltak under fødselen;F10b: Fødte i seteleie per år, mors bosted og inngrep og tiltak under fødselen
+mfr;442;;F10c-1: Fødsler per år, mors bosted og forløsningstype;F10c-1: Fødsler per år, mors bosted og forløsningstype
+mfr;443;;F10c-3: Keisersnittfødsler per år, mors bosted og keisersnittype;F10c-3: Keisersnittfødsler per år, mors bosted og keisersnittype
+mfr;444;;F10d: Fødsler per år, mors bosted, forløsningstype og anestesi/analgesi brukt under fødselen;F10d: Fødsler per år, mors bosted, forløsningstype og anestesi/analgesi brukt under fødselen
+mfr;445;;Is3a: Fødsler ved institusjon per år, fødeinstitusjon og sykdom hos mor i svangerskapet;Is3a: Fødsler ved institusjon per år, fødeinstitusjon og sykdom hos mor i svangerskapet
+mfr;446;;Is3b: Fødsler ved institusjon per år, fødeinstitusjon og komplikasjoner under fødselen;
+mfr;447;;Is3c: Fødsler ved institusjon per år, fødeinstitusjon og fødselsstart;
+mfr;448;;Is3d: Fødsler ved institusjon per år, fødeinstitusjon og anestesi/analgesi brukt under fødselen;
+mfr;449;;Is4a-1: Vaginalt fødte ved institusjon per år, fødeinstitusjon og inngrep og tiltak under fødselen;
+mfr;450;;Is4a-2: Fødsler ved institusjon per år, fødeinstitusjon og forløsningstype;
+mfr;451;;F11: Fødte per år, mors bosted og fødestedtype;F11: Fødte per år, mors bosted og fødestedtype
+mfr;452;;F12a: Fødte per år, mors bosted og neonatale tilstander;
+mfr;453;;F12b: Fødte per år, mors bosted og behandling av barnet;
+mfr;454;;F13: Fødsler per år, mors bosted og spesielle forhold ved fostervann;F13: Fødsler per år, mors bosted og spesielle forhold ved fostervann
+mfr;455;;M1: Fødte og aborterte per år, dødstidspunkt og medfødte misdannelser;
+mfr;456;;A1: Fødte etter assistert befruktning i Norge per år, institusjon og enkelt-/flerfødt;
+mfr;457;;A2: Fødte etter assistert befruktning i Norge per år, metode og enkelt-/flerfødt;
+mfr;458;;Is5a: Vaginale fødsler ved institusjon per år, fødeinstitusjon, inngrep og tiltak under fødselen og sphincterruptur (grad 3-4);
+mfr;459;;Is6: Fødte ved institusjon per år, fødeinstitusjon og barnets tilstand ved fødsel;
+mfr;468;;F16a-2: Fødsler med opplysning om mors røykevaner i 1. trimester per år, mors bosted og mors røykevaner i 1. trimester;F16a-2: Fødsler med opplysning om mors røykevaner i 1. trimester per år, mors bosted og mors røykevaner i 1. trimester
+mfr;469;;F16a-3: Fødsler med opplysning om mors røykevaner i siste trimester per år, mors bosted og mors røykevaner i siste trimester;F16a-3: Fødsler med opplysning om mors røykevaner i siste trimester per år, mors bosted og mors røykevaner i siste trimester
+mfr;470;;F16b-2: Fødsler med opplysning om mors røykevaner i 1. trimester per år, mors alder og mors røykevaner i 1. trimester;
+mfr;471;;F16b-3: Fødsler med opplysning om mors røykevaner i siste trimester per år, mors alder og mors røykevaner i siste trimester;
+mfr;472;;F16a-1: Fødsler per år, mors bosted og om det finnes opplysninger om mors røykevaner;F16a-1: Fødsler per år, mors bosted og om det finnes opplysninger om mors røykevaner
+mfr;473;;F16b-1: Fødsler per år, mors alder og om det finnes opplysninger om mors røykevaner;F16b-1: Fødsler per år, mors alder og om det finnes opplysninger om mors røykevaner
+mfr;474;;F16e-1: Elektronisk (f.o.m. versjon 1.2) meldte fødsler per år, mors alder og om det finnes opplysninger om mors snusvaner;
+mfr;475;;F16e-2: Fødsler med opplysning om mors snusvaner i 1. trimester per år, mors alder og mors snusvaner i 1. trimester;
+mfr;476;;F16e-3: Fødsler med opplysning om mors snusvaner i siste trimester per år, mors alder og mors snusvaner i siste trimester;
+mfr;477;;F17a: Fødsler per år, mors bosted og mors bruk av kosttilskudd;
+mfr;478;;F17b: Fødsler per år, mors alder og mors bruk av folsyre før svangerskapet;
+mfr;479;;F17c: Fødsler per år, mors alder og mors bruk av folsyre i svangerskapet;
+mfr;480;;F18a-1: Fødsler per år, mors bosted og om det finnes opplysning om mors kroppsmasseindeks (KMI) før svangerskapet;
+mfr;481;;F18a-2: Fødsler med opplysning om mors kroppsmasseindeks (KMI) før svangerskapet per år, mors bosted og mors KMI før svangerskapet;
+mfr;482;;F18a-3: Gjennomsnittlig kroppsmasseindeks (KMI) for mor før svangerskapet per år og mors bosted;
+mfr;487;;P1a: Fødte per måned og mors bosted;
+mfr;490;;P3a: Forløsningstype per måned og mors bosted;
+mfr;491;;P1b: Fødte per måned og fødeinstitusjon;
+mfr;492;;F10c-2: Keisersnittfødsler per år, mors bosted og fødselsstart;F10c-2: Keisersnittfødsler per år, mors bosted og fødselsstart
+mfr;493;;Is7a: Fødsler ved institusjon per år, fødeinstitusjon og om det finnes opplysninger om mors røykevaner;
+mfr;494;;Is7b: Fødsler ved institusjon med opplysning om mors røykevaner i 1. trimester per år, fødeinstitusjon og mors røykevaner i 1. trimester;Is7b: Fødsler ved institusjon med opplysning om mors røykevaner i 1. trimester per år, fødeinstitusjon og mors røykevaner i 1. trimester
+mfr;495;;Is7c: Fødsler ved institusjon med opplysning om mors røykevaner i siste trimester per år, fødeinstitusjon og mors røykevaner i siste trimester;
+mfr;496;;Is8: Fødsler ved institusjon per år, fødeinstitusjon og om det finnes opplysninger om mors kroppsmasseindeks (KMI);
+mfr;497;;Is9a: Fødte per år, fødehelseregion, mors fødeland og perinatal/neonatal levestatus;
+mfr;498;;Is9b: Fødsler per år, fødehelseregion, mors fødeland og forhold ved mor og svangerskap;
+mfr;499;;Is10: Fødsler ved institusjon per år, fødeinstitusjon, forløsningstype og mors liggetid etter fødsel;
+mfr;500;;P3b: Forløsningstype per måned og fødeinstitusjon ;
+mfr;502;;P6a: Barnets tilstand ved fødsel per måned og mors bosted;
+mfr;503;;P6b: Barnets tilstand ved fødsel per måned og fødeinstitusjon;
+mfr;505;;P2a: Fødselsstart per måned og mors bosted;
+mfr;506;;P2b: Fødselsstart per måned og fødeinstitusjon;
+mfr;512;;P4a: Komplikasjoner under fødselen per måned og mors bosted;
+mfr;513;;P4b: Komplikasjoner under fødselen per måned og fødeinstitusjon;
+mfr;514;;P5a: Vaginalt fødte: Inngrep og tiltak under fødselen per måned og mors bosted;
+mfr;515;;P5b: Vaginalt fødte: Inngrep og tiltak under fødselen per måned og fødeinstitusjon;
+mfr;584;;R1: Keisersnitt per Robsongruppe og fødeinstitusjon;R1: Keisersnitt per Robsongruppe og fødeinstitusjon
+mfr;590;;R2: Tang eller vakuumekstraksjon per Robsongruppe og fødeinstitusjon;R2: Tang eller vakuumekstraksjon per Robsongruppe og fødeinstitusjon
+mfr;591;;R3: Tang per Robsongruppe og fødeinstitusjon;
+mfr;592;;R4: Vakuumekstraksjon per Robsongruppe og fødeinstitusjon;
+mfr;593;;R5: Episiotomi per Robsongruppe og fødeinstitusjon;R5: Episiotomi per Robsongruppe og fødeinstitusjon
+mfr;594;;R6: Blødning under/etter fødsel per Robsongruppe og fødeinstitusjon;R6: Blødning under/etter fødsel per Robsongruppe og fødeinstitusjon
+mfr;595;;R7: Lav apgar score per Robsongruppe og fødeinstitusjon;
+mfr;596;;R8: Overflyttet barneavdeling per Robsongruppe og fødeinstitusjon;
+msis;724;;RESPIaggr Influensa antall og andel;
+msis;726;;RESPIaggr Influensa subtyper;
+msis;729;;RESPIaggr RSV antall og andel;
+msis;730;;RESPIaggr RSV sesongsammenligning;
+msis;731;;RESPIaggr SARS-CoV-2 antall og andel;
+msis;732;;RESPIaggr SARS-CoV-2 sesongsammenligning;
+msis;733;;Oversikt luftveisagens;
+msis;749;;RESPIaggr Influensa sesongsammenligning;
+ngs;272;;VOI;VOI
+ngs;273;;VUM;VUM
+ngs;275;;varianter_per_mnd;varianter_per_mnd
+ngs;665;;HCV_per_år;HCV_per_år
+nokkel;171;;Befolkningsframskriving;Befolkningsframskriving
+nokkel;175;;Antall innvandrere og norskfødte med innvandrerforeldre;Antall innvandrere og norskfødte med innvandrerforeldre
+nokkel;181;;Utdanningsnivå;Utdanningsnivå
+nokkel;185;;Befolkningsvekst;Befolkningsvekst
+nokkel;186;;Eierstatus;Eierstatus
+nokkel;187;;Personer som bor alene;Personer som bor alene
+nokkel;188;;Trangboddhet;Trangboddhet
+nokkel;332;;Alkohol_Ungdata_KH;Alkohol_Ungdata_KH
+nokkel;334;;Antibiotikaresepter;Antibiotikaresepter
+nokkel;335;;Barn av sosialhjelpsmottakere;Barn av sosialhjelpsmottakere
+nokkel;336;;Barnehagekvalitet_bemanning;Barnehagekvalitet_bemanning
+nokkel;337;;Barnevern_tiltak;Barnevern_tiltak
+nokkel;338;;Befolkningssammensetning_antall_andel;Befolkningssammensetning_antall_andel
+nokkel;339;;Depressive symptomer_Ungdata_KH;Depressive symptomer_Ungdata_KH
+nokkel;341;;Drikkevannsforsyning;Drikkevannsforsyning
+nokkel;342;;Dødsårsaker;Dødsårsaker
+nokkel;343;;Dødsårsaker-nøkkeltall-1990-ettårig;Dødsårsaker-nøkkeltall-1990-ettårig
+nokkel;344;;Selvmord femårig;Selvmord femårig
+nokkel;345;;Trafikkulykker, femårige tall;Trafikkulykker, femårige tall
+nokkel;346;;Barn av enslige forsørgere_3aarigLFKB;Barn av enslige forsørgere_3aarigLFKB
+nokkel;348;;Ensomhet_Ungdata_KH;Ensomhet_Ungdata_KH
+nokkel;349;;Fornoyd_helsa_Ungdata_KH;Fornoyd_helsa_Ungdata_KH
+nokkel;350;;Svomming_2aarigLFK;Svomming_2aarigLFK
+nokkel;351;;Svomming_1aarigLF;Svomming_1aarigLF
+nokkel;352;;Trening_sesjon1_2aarigLFK;Trening_sesjon1_2aarigLFK
+nokkel;353;;Trening_sesjon1_1aarigLF;Trening_sesjon1_1aarigLF
+nokkel;354;;FORTROLIGVENN_Ungdata_KH;FORTROLIGVENN_Ungdata_KH
+nokkel;355;;Fremtidsoptimisme_Ungdata_KH;Fremtidsoptimisme_Ungdata_KH
+nokkel;356;;Fritidsorg_deltak_ungdata;Fritidsorg_deltak_ungdata
+nokkel;357;;Fysisk_inakt_Ungdata_KH;Fysisk_inakt_Ungdata_KH
+nokkel;358;;Gjeld;Gjeld
+nokkel;359;;Gjennomforing i videregående skole_innvand_3;Gjennomforing i videregående skole_innvand_3
+nokkel;360;;Gjennomforing i videregående skole_utdann_3;Gjennomforing i videregående skole_utdann_3
+nokkel;361;;Grunnskolepoeng_INNVKAT;Grunnskolepoeng_INNVKAT
+nokkel;362;;Grunnskolepoeng_UTDANN;Grunnskolepoeng_UTDANN
+nokkel;363;;Hasjbruk_Ungdata_KH;Hasjbruk_Ungdata_KH
+nokkel;364;;Hjerte- og karregisteret_3aarigLFKB;Hjerte- og karregisteret_3aarigLFKB
+nokkel;365;;Hjerte- og karregisteret_1aarigLHF;Hjerte- og karregisteret_1aarigLHF
+nokkel;366;;Inntektsulikhet_NH_LF;Inntektsulikhet_NH_LF
+nokkel;367;;Overvekt, kvinner, MFR;Overvekt, kvinner, MFR
+nokkel;368;;Kreft, nye tilfeller_10aarigLFKB;Kreft, nye tilfeller_10aarigLFKB
+nokkel;369;;KPR_3;KPR_3
+nokkel;370;;KPR_1;KPR_1
+nokkel;371;;Leseferdighet_UTDANN_1;Leseferdighet_UTDANN_1
+nokkel;372;;Leseferdighet_INNVKAT_3;Leseferdighet_INNVKAT_3
+nokkel;373;;Livskvalitet_Ungdata_KH;Livskvalitet_Ungdata_KH
+nokkel;374;;Nærmiljø_Ungdata_KH;Nærmiljø_Ungdata_KH
+nokkel;375;;Treffsteder for unge_Ungdata_KH;Treffsteder for unge_Ungdata_KH
+nokkel;376;;Luftkvalitet,PWC;Luftkvalitet,PWC
+nokkel;377;;Mobbing, 7. og 10. klasse, 3-årige tall;Mobbing, 7. og 10. klasse, 3-årige tall
+nokkel;378;;Mobbing, 7. og 10. klasse ettårig;Mobbing, 7. og 10. klasse ettårig
+nokkel;379;;NEET;NEET
+nokkel;380;;Regelbrudd_Ungdata_KH;Regelbrudd_Ungdata_KH
+nokkel;381;;Regneferdighet, 5. og 8. klasse_STARTAAR_2022_LFKB;Regneferdighet, 5. og 8. klasse_STARTAAR_2022_LFKB
+nokkel;385;;Legemidler til behandling av type-2 diabetes_3aarigLFK;Legemidler til behandling av type-2 diabetes_3aarigLFK
+nokkel;387;;Overvekt, verneplikt (LF);Overvekt, verneplikt (LF)
+nokkel;388;;Overvekt sesjon1;Overvekt sesjon1
+nokkel;389;;Skjermtid_Ungdata_KH;Skjermtid_Ungdata_KH
+nokkel;390;;Smertestillende_ungdata;Smertestillende_ungdata
+nokkel;391;;Søvnproblemer_Ungdata_KH;Søvnproblemer_Ungdata_KH
+nokkel;392;;Stønad_livsopphold;Stønad_livsopphold
+nokkel;393;;Røyking_MFR;Røyking_MFR
+nokkel;394;;Vaksinasjonsdekning_1aar-FELLES;Vaksinasjonsdekning_1aar-FELLES
+nokkel;395;;Vaksinasjonsdekning_5aar;Vaksinasjonsdekning_5aar
+nokkel;396;;Vaks_dekning_Influensa;Vaks_dekning_Influensa
+nokkel;397;;Trivsel, 7. og 10. klasse_aarlige tall;Trivsel, 7. og 10. klasse_aarlige tall
+nokkel;398;;Trivsel, 7. og 10. klasse_3-årige tall;Trivsel, 7. og 10. klasse_3-årige tall
+nokkel;399;;Trygghet_ungdata;Trygghet_ungdata
+nokkel;400;;Uføretrygdede;Uføretrygdede
+nokkel;401;;Valgdeltakelse;Valgdeltakelse
+nokkel;403;;Vedvarende_lavinntekt_kommunegrense;Vedvarende_lavinntekt_kommunegrense
+nokkel;507;;Forv_levealder_TOT_og_utdn_7aarigLF;Forv_levealder_TOT_og_utdn_7aarigLF
+nokkel;508;;Forventet levealder etter utdn_15aarigLFKB;Forventet levealder etter utdn_15aarigLFKB
+nokkel;509;;Forventet levealder_årligetall_ettårALDER_UTD;Forventet levealder_årligetall_ettårALDER_UTD
+nokkel;510;;Utdanningsforskjeller i forventet levealder_15aarigLFKB;Utdanningsforskjeller i forventet levealder_15aarigLFKB
+nokkel;511;;Utdanningsforskjeller i forventet levealder_7aarigLF;Utdanningsforskjeller i forventet levealder_7aarigLF
+nokkel;583;;Vedvarende lavinntekt INNVKAT;Vedvarende lavinntekt INNVKAT
+nokkel;600;;Kollektivtilbud, ungdom;Kollektivtilbud, ungdom
+nokkel;601;;Mediebruk_DataTVspill_Ungdata_KH;Mediebruk_DataTVspill_Ungdata_KH
+nokkel;602;;Mediebruk_SOME_Ungdata_KH;Mediebruk_SOME_Ungdata_KH
+nokkel;606;;Tannhelse_DMFT=0_MED_DEKNING;Tannhelse_DMFT=0_MED_DEKNING
+nokkel;607;;Venner_inne_Ungdata;Venner_inne_Ungdata
+nokkel;608;;Venner_ute_Ungdata;Venner_ute_Ungdata
+nokkel;614;;Uføretrygdede_ettårig;Uføretrygdede_ettårig
+nokkel;619;;Kreft, nye tilfeller_ettårig_LFKB;Kreft, nye tilfeller_ettårig_LFKB
+nokkel;623;; Gjennomforing_VGO_utdann_1; Gjennomforing_VGO_utdann_1
+nokkel;631;;ROYK_RUS_1;ROYK_RUS_1
+nokkel;641;;Regneferd_INNVKAT_3;Regneferd_INNVKAT_3
+nokkel;650;;INNVAND_INNVKAT_Unge;INNVAND_INNVKAT_Unge
+nokkel;660;;Forventet levealder totalt og etter utdanning, 25-årig;Forventet levealder totalt og etter utdanning, 25-årig
+nokkel;664;;Sosialhjelpsmottakere;Sosialhjelpsmottakere
+nokkel;667;;Mediebruk_underhold_ungdata;Mediebruk_underhold_ungdata
+nokkel;670;;Leseferdighet_utdann_3;Leseferdighet_utdann_3
+nokkel;671;;Leseferdighet_innvkat_1;Leseferdighet_innvkat_1
+nokkel;672;;Regneferd_UTDANN_1;Regneferd_UTDANN_1
+nokkel;677;;Gjennomforing i videregående skole_innvand_1;Gjennomforing i videregående skole_innvand_1
+nokkel;685;;Regneferd_UTDANN_3;Regneferd_UTDANN_3
+nokkel;688;;Forventede funksjonsfriske leveår_7;Forventede funksjonsfriske leveår_7
+nokkel;689;;Regneferd_INNVKAT_1;Regneferd_INNVKAT_1
+nokkel;699;;NPR_1;NPR_1
+nokkel;714;;NPR_3;NPR_3
+npr;464;;NPR PHBU nøkkeltall;
+npr;517;;NPR SOM nøkkeltall ;
+npr;518;;NPR PHV nøkkeltall ;
+npr;520;;NPR TSB nøkkeltall;
+npr;521;;NPR ALLETJEN 07 tilstandskoder VII (H00-H59) ;
+npr;524;;NPR ALLETJEN 04 tilstandskoder IV (E00-E90) ;
+npr;533;;NPR ALLETJEN 03 tilstandskoder III D50-D89;
+npr;534;;NPR ALLETJEN 01 tilstandskoder I A00-B99;
+npr;535;;NPR ALLETJEN 02 tilstandskoder II C00-D48;
+npr;537;;NPR ALLETJEN 05 tilstandskoder V (F00-F99);
+npr;538;; NPR ALLETJEN 06 tilstandskoder VI (G00-G99) ;
+npr;539;;NPR ALLETJEN 08 tilstandskoder VIII (H60-H95);
+npr;540;;NPR ALLETJEN 09 tilstandskoder IX (I00-I99);
+npr;541;;NPR ALLETJEN 10 tilstandskoder X (J00-J99);
+npr;542;;NPR ALLETJEN 11 tilstandskoder XI (K00-K93);
+npr;543;;NPR ALLETJEN 12 tilstandskoder XII (L00-L99);
+npr;544;;NPR ALLETJEN 13 tilstandskoder XIII (M00-M99);
+npr;545;; NPR ALLETJEN 14 tilstandskoder XIV (N00-N99);
+npr;546;;NPR ALLETJEN 15 tilstandskoder XV (O00-O99) ;
+npr;547;;NPR ALLETJEN 16 tilstandskoder XVI (P00-P96);
+npr;548;;NPR ALLETJEN 17 tilstandskoder XVII (Q00-Q99);
+npr;549;;NPR ALLETJEN 18 tilstandskoder XVIII (R00-R99) ;
+npr;550;;NPR ALLETJEN 19 tilstandskoder XIX (S00-T98);
+npr;551;;NPR ALLETJEN 20 tilstandskoder XX (V0n-Y98) ;
+npr;552;;NPR ALLETJEN 21 tilstandskoder XXI (Z00-Z99) ;
+npr;553;;"	 NPR ALLETJEN 22 tilstandskoder  XXII (U00-U85)";
+npr;555;;"	 NPR ALLETJEN kap A Prosedyrekoder";
+npr;556;;NPR ALLETJEN kap B Prosedyrekoder;
+npr;557;;NPR ALLETJEN kap C Prosedyrekoder;
+npr;558;;NPR ALLETJEN kap D Prosedyrekoder;
+npr;559;;NPR ALLETJEN kap E Prosedyrekoder;
+npr;560;;NPR ALLETJEN kap F Prosedyrekoder;
+npr;561;;NPR ALLETJEN kap G Prosedyrekoder;
+npr;562;;"	 NPR ALLETJEN kap H Prosedyrekoder";
+npr;563;;NPR ALLETJEN kap I Prosedyrekoder;
+npr;564;;NPR ALLETJEN kap J Prosedyrekoder;
+npr;566;;NPR ALLETJEN kap K Prosedyrekoder;
+npr;567;;NPR ALLETJEN kap L Prosedyrekoder;
+npr;568;;NPR ALLETJEN kap M Prosedyrekoder;
+npr;569;;NPR ALLETJEN kap N Prosedyrekoder;
+npr;571;;NPR ALLETJEN kap O Prosedyrekoder;
+npr;572;;"	 NPR ALLETJEN kap P Prosedyrekoder";
+npr;573;;"	 NPR ALLETJEN kap Q Prosedyrekoder";
+npr;574;;"	 NPR ALLETJEN kap R Prosedyrekoder";
+npr;575;;"	 NPR ALLETJEN kap S Prosedyrekoder";
+npr;576;;"	 NPR ALLETJEN kap T Prosedyrekoder";
+npr;577;;NPR ALLETJEN kap W Prosedyrekoder;
+npr;578;;NPR ALLETJEN kap Y Prosedyrekoder;
+npr;579;;NPR ALLETJEN kap Z Prosedyrekoder;
+npr;636;;NPR alkohol og rus-tilstandsgrupper;
+npr;637;;NPR alkohol og rus-alder og kjønn;
+npr;638;;NPR alkohol og rus-tjenesteområder;
+sysvak;324;;SYSVAK influensavaksinasjon 24/25;
+sysvak;484;;SYSVAK koronavaksinasjon 24/25;
+sysvak;648;;SYSVAK bvp;
+sysvak;716;;SYSVAK influensavaksinasjon 25/26;
+sysvak;717;;SYSVAK koronavaksinasjon 25/26;
+sysvak;750;;SYSVAK covid-19 årlig 75+;
+sysvak;751;;SYSVAK covid-19 årlig 65+;
+sysvak;753;;SYSVAK influensa årlig 65+;
