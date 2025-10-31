@@ -870,6 +870,17 @@
                     }
                 }
 
+                async function fetchMetadataOnly(sourceId, tableId) {
+                    try {
+                        const response = await fetch(API_BASE + '/' + sourceId + '/Table/' + tableId + '/metadata');
+                        if (!response.ok) throw new Error('Kunne ikke hente metadata');
+                        const data = await response.json();
+                        setTableMetadata(data);
+                    } catch (err) {
+                        console.log('Kunne ikke hente metadata:', err.message);
+                    }
+                }
+
                 function closeMetadataModal() {
                     setShowMetadataModal(false);
                     setTableMetadata(null);
@@ -951,9 +962,14 @@
                                         const isRelatedMaterial = paragraph.header === 'Relatert materiale';
                                         const content = isRelatedMaterial ? parseRelatedMaterialLinks(paragraph.content) : paragraph.content;
                                         
+                                        // Fjern HTML tags (p, li, ul, ol) fra innholdet
+                                        const cleanedContent = typeof content === 'string' 
+                                            ? content.replace(/<\/?(?:p|li|ul|ol)\s*\/?>/gi, '')
+                                            : content;
+                                        
                                         return h('div', { key: idx, style: { marginBottom: '1.5rem' }},
                                             h('h3', { style: { margin: 0, fontSize: '1rem', fontWeight: 600, color: '#1f2937', marginBottom: '0.5rem' } }, paragraph.header),
-                                            h('div', { style: { color: '#4b5563', whiteSpace: 'pre-wrap', wordBreak: 'break-word', lineHeight: 1.6 } }, content)
+                                            h('div', { style: { color: '#4b5563', whiteSpace: 'pre-wrap', wordBreak: 'break-word', lineHeight: 1.6 } }, cleanedContent)
                                         );
                                     })
                                 )
@@ -981,7 +997,9 @@
                     setFinalQuery(null);
                     setPreviewData(null);
                     setTableSearch('');
+                    setShowMetadataModal(false);
                     fetchDimensions(selectedSource.id, table.tableId);
+                    fetchMetadataOnly(selectedSource.id, table.tableId);
                     setStep(3);
                 }
 
@@ -1384,7 +1402,31 @@
 
                 // Render dimension configuration (step 3) - simplified version
                 function renderDimensionConfiguration() {
+                    // Hent første setning fra beskrivelse
+                    let firstSentence = '';
+                    if (tableMetadata && tableMetadata.paragraphs && Array.isArray(tableMetadata.paragraphs)) {
+                        for (let i = 0; i < tableMetadata.paragraphs.length; i++) {
+                            if (tableMetadata.paragraphs[i].header !== 'Geografi') {
+                                let text = tableMetadata.paragraphs[i].content;
+                                if (typeof text === 'string') {
+                                    // Fjern HTML tags først
+                                    text = text.replace(/<\/?(?:p|li|ul|ol)\s*\/?>/gi, '');
+                                    // Hent første setning - se etter punkt/utropstegn/spørsmålstegn fulgt av mellomrom + stor bokstav, eller på slutten
+                                    const match = text.match(/^[^!?]*?\.(?=\s[A-Z]|$)|^[^!?]*?[!?]/);
+                                    if (match) {
+                                        firstSentence = match[0].trim();
+                                        break;
+                                    }
+                                }
+                            }
+                        }
+                    }
+
                     return h('div', { className: 'space-y-4' },
+                        selectedTable && h('div', { className: 'mb-6 pb-4 border-b border-gray-200' },
+                            h('h1', { style: { fontSize: '1.875rem', fontWeight: 700, color: '#111827', marginBottom: '0.5rem' } }, getTableLabel(selectedTable)),
+                            firstSentence && h('p', { style: { fontSize: '1rem', color: '#4b5563', lineHeight: 1.6 } }, firstSentence)
+                        ),
                         h('div', { className: 'card' },
                             h('div', { className: 'mb-4' },
                                 h('h2', { className: 'flex items-center gap-2 mb-2' },
@@ -1783,7 +1825,31 @@
                     const powerQueryCode = generatePowerQueryCode();
                     const displayCode = outputFormat === 'powerquery' ? powerQueryCode : queryString;
                     
+                    // Hent første setning fra beskrivelse (samme som i renderDimensionConfiguration)
+                    let firstSentence = '';
+                    if (tableMetadata && tableMetadata.paragraphs && Array.isArray(tableMetadata.paragraphs)) {
+                        for (let i = 0; i < tableMetadata.paragraphs.length; i++) {
+                            if (tableMetadata.paragraphs[i].header !== 'Geografi') {
+                                let text = tableMetadata.paragraphs[i].content;
+                                if (typeof text === 'string') {
+                                    // Fjern HTML tags først
+                                    text = text.replace(/<\/?(?:p|li|ul|ol)\s*\/?>/gi, '');
+                                    // Hent første setning - se etter punkt/utropstegn/spørsmålstegn fulgt av mellomrom + stor bokstav, eller på slutten
+                                    const match = text.match(/^[^!?]*?\.(?=\s[A-Z]|$)|^[^!?]*?[!?]/);
+                                    if (match) {
+                                        firstSentence = match[0].trim();
+                                        break;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    
                     return h('div', { className: 'space-y-4' },
+                        selectedTable && h('div', { className: 'mb-6 pb-4 border-b border-gray-200' },
+                            h('h1', { style: { fontSize: '1.875rem', fontWeight: 700, color: '#111827', marginBottom: '0.5rem' } }, getTableLabel(selectedTable)),
+                            firstSentence && h('p', { style: { fontSize: '1rem', color: '#4b5563', lineHeight: 1.6 } }, firstSentence)
+                        ),
                         h('div', { className: 'card' },
                             h('div', { className: 'mb-4' },
                                 h('h2', { className: 'flex items-center gap-2 mb-2' },
