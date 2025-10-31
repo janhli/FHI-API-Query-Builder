@@ -1,15 +1,15 @@
 source_id;tableId;name;title;label
-abr;253;;A5: Nemndbehandla svangerskapsavbrot fordelt på bustadsfylke;
-abr;260;;A7: Nemndbehandla svangerskapsavbrot fordelt på vedtaksgrunnlag og svangerskapslengde;
-abr;261;;A8: Nemndbehandla begjæringar om svangerskapsavbrot fordelt på type nemnd, vedtak og utførtstatus;
-abr;262;;A10: Nemndbehandla begjæringar om svangerskapsavbrot med vedtak fordelt på vedtak og svangerskapslengde;
-abr;263;;A11: Begjæringar om svangerskapsavbrot fordelt på institusjon og utførtstatus  ;
-abr;264;;A9: Nemndbehandla begjæringar om svangerskapsavbrot fordelt på vedtak og svangerskapslengde;
-abr;280;;A1: Svangerskapsavbrot fordelt på type begjæring og utførtstatus;
-abr;283;;A2: Svangerskapsavbrot fordelt på bustadsfylke og alder;
-abr;285;;A3: Svangerskapsavbrot fordelt på alder og type begjæring;
-abr;286;;A4: Svangerskapsavbrot fordelt på metode, type begjæring og svangerskapslengde;
-abr;287;;A6: Nemndbehandla svangerskapsavbrot fordelt på vedtaksgrunnlag;
+abr;253;;A5: Nemndbehandla svangerskapsavbrot fordelt pÃ¥ bustadsfylke;
+abr;260;;A7: Nemndbehandla svangerskapsavbrot fordelt pÃ¥ vedtaksgrunnlag og svangerskapslengde;
+abr;261;;A8: Nemndbehandla begjÃ¦ringar om svangerskapsavbrot fordelt pÃ¥ type nemnd, vedtak og utfÃ¸rtstatus;
+abr;262;;A10: Nemndbehandla begjÃ¦ringar om svangerskapsavbrot med vedtak fordelt pÃ¥ vedtak og svangerskapslengde;
+abr;263;;A11: BegjÃ¦ringar om svangerskapsavbrot fordelt pÃ¥ institusjon og utfÃ¸rtstatus  ;
+abr;264;;A9: Nemndbehandla begjÃ¦ringar om svangerskapsavbrot fordelt pÃ¥ vedtak og svangerskapslengde;
+abr;280;;A1: Svangerskapsavbrot fordelt pÃ¥ type begjÃ¦ring og utfÃ¸rtstatus;
+abr;283;;A2: Svangerskapsavbrot fordelt pÃ¥ bustadsfylke og alder;
+abr;285;;A3: Svangerskapsavbrot fordelt pÃ¥ alder og type begjÃ¦ring;
+abr;286;;A4: Svangerskapsavbrot fordelt pÃ¥ metode, type begjÃ¦ring og svangerskapslengde;
+abr;287;;A6: Nemndbehandla svangerskapsavbrot fordelt pÃ¥ vedtaksgrunnlag;
 daar;268;;D3a_flagg;
 daar;269;;D5b_hjertekar;
 daar;270;;D10b_selvmord;
@@ -39,106 +39,106 @@ hkr;462;;Total forekomst: Utvalgte diagnoser, rater;
 hkr;668;;Insidens (nye pasienter): Utvalgte diagnoser, antall;
 hkr;669;;Insidens (nye pasienter): Utvalgte diagnoser, rater;
 hkr;676;;Utvalgte prosedyrer, antall pasienter;
-kpr;522;;KPR LEGEVAKT alkohol og rus - kjønn;
+kpr;522;;KPR LEGEVAKT alkohol og rus - kjÃ¸nn;
 kpr;523;;KPR LEGEVAKT alkohol og rus - alder;
 kpr;634;;KPR HOM. Antall brukere per tjeneste;
 lmr;615;;Per ATC-kode, 2004-2024. [Oppdatert 12.03.2025] ;
 lmr;616;;Legemiddelgruppe - ADHD-midler. 2004-2024. [Oppdatert 12.03.2025] ;
 lmr;617;;Legemiddelgruppe - Hormontilskudd. 2004 - 2024. [Oppdatert 12.03.2025] ;
 lmr;618;;Legemiddelgruppe - Prevensjonsmidler. 2004 - 2024. [Oppdatert 12.03.2025] ;
-lmr;620;;Legemiddelgruppe – Potensmidler. 2004-2024. [Oppdatert 12.03.2025] ;
+lmr;620;;Legemiddelgruppe â€“ Potensmidler. 2004-2024. [Oppdatert 12.03.2025] ;
 lmr;621;;Legemiddelgruppe - Vektreduserende . 2004 - 2024. [Oppdatert 12.03.2025] ;
-lmr;622;;Legemiddelgruppe - Øvrige legemiddelgrupper. 2004 - 2024. [Oppdatert 12.03.2025] ;
-mfr;411;;F0: Fødte og fødsler per år og måned;F0: Fødte og fødsler per år og måned
-mfr;412;;F1a: Fødte per år, mors bosted og kjønn;
-mfr;413;;F1b: Fødsler per år, mors bosted og enkelt-/flerfødsel;F1b: Fødsler per år, mors bosted og enkelt-/flerfødsel
-mfr;414;;F2b-5: Fødte iht. MFR per år, mors bosted og perinatal levestatus;
-mfr;415;;F2b-6: Fødte iht. Euro-Peristat (f.o.m. 22 uker) per år og perinatal levestatus ;F2b-6: Fødte iht. Euro-Peristat (f.o.m. 22 uker) per år og perinatal levestatus 
-mfr;416;;F2b-7: Fødte iht. WHO (f.o.m. 500 g) per år og perinatal levestatus ;F2b-7: Fødte iht. WHO (f.o.m. 500 g) per år og perinatal levestatus 
-mfr;417;;F2b-8: Fødte iht. WHO (f.o.m. 1000 g) per år og perinatal levestatus;F2b-8: Fødte iht. WHO (f.o.m. 1000 g) per år og perinatal levestatus
-mfr;418;;F2c: Levendefødte per år, mors bosted og levestatus i spedbarnsperioden;F2c: Levendefødte per år, mors bosted og levestatus i spedbarnsperioden
-mfr;420;;F3a: Fødsler per år, mors bosted og mors alder;F3a: Fødsler per år, mors bosted og mors alder
-mfr;421;;F3b: Mors gjennomsnittsalder per år, mors bosted og tidligere fødte;F3b: Mors gjennomsnittsalder per år, mors bosted og tidligere fødte
-mfr;422;;F3c: Fødsler per år, mors bosted og fars alder;F3c: Fødsler per år, mors bosted og fars alder
-mfr;423;;F3d: Fars gjennomsnittsalder per år og mors bosted;F3d: Fars gjennomsnittsalder per år og mors bosted
-mfr;424;;F4a: Fødsler per år, mors bosted og tidligere fødte;F4a: Fødsler per år, mors bosted og tidligere fødte
-mfr;425;;F4b: Fødsler per år, mors bosted og mors sivilstatus;F4b: Fødsler per år, mors bosted og mors sivilstatus
-mfr;426;;F5a: Fødte med fødselsvekt per år, mors bosted og fødselsvekt;F5a: Fødte med fødselsvekt per år, mors bosted og fødselsvekt
-mfr;427;;F5b: Gjennomsnittlig fødselsvekt per år og mors bosted;F5b: Gjennomsnittlig fødselsvekt per år og mors bosted
-mfr;428;;Is1: Fødsler per år, fødeinstitusjon, fødestedtype og enkelt-/flerfødsel;
-mfr;429;;Is2: Fødte ved institusjon per år, fødeinstitusjon og levestatus ved fødsel;
-mfr;430;;F6a: Fødsler med svangerskapsvarighet per år, mors bosted og svangerskapsvarighet;F6a: Fødsler med svangerskapsvarighet per år, mors bosted og svangerskapsvarighet
-mfr;431;;F6b: Gjennomsnittlig svangerskapsvarighet per år og mors bosted;F6b: Gjennomsnittlig svangerskapsvarighet per år og mors bosted
-mfr;432;;F7a: Fødsler per år, mors bosted og sykdom hos mor før svangerskapet;
-mfr;433;;F7c: Fødsler per år, mors bosted og hypertensive tilstander hos mor i svangerskapet;
-mfr;434;;F7d: Fødsler per år, mors bosted og diabetes hos mor;
-mfr;435;;F8a: Fødsler per år, mors bosted og fødselsstart;F8a: Fødsler per år, mors bosted og fødselsstart
-mfr;436;;F8b: Induserte fødsler per år, mors bosted og induksjonsmetode;F8b: Induserte fødsler per år, mors bosted og induksjonsmetode
-mfr;437;;F9a: Fødsler per år, mors bosted og komplikasjoner under fødselen;F9a: Fødsler per år, mors bosted og komplikasjoner under fødselen
-mfr;438;;F9b: Fødte per år, mors bosted og leie ved fødsel;F9b: Fødte per år, mors bosted og leie ved fødsel
-mfr;440;;F10a: Vaginalt fødte per år, mors bosted og inngrep og tiltak under fødselen;F10a: Vaginalt fødte per år, mors bosted og inngrep og tiltak under fødselen
-mfr;441;;F10b: Fødte i seteleie per år, mors bosted og inngrep og tiltak under fødselen;F10b: Fødte i seteleie per år, mors bosted og inngrep og tiltak under fødselen
-mfr;442;;F10c-1: Fødsler per år, mors bosted og forløsningstype;F10c-1: Fødsler per år, mors bosted og forløsningstype
-mfr;443;;F10c-3: Keisersnittfødsler per år, mors bosted og keisersnittype;F10c-3: Keisersnittfødsler per år, mors bosted og keisersnittype
-mfr;444;;F10d: Fødsler per år, mors bosted, forløsningstype og anestesi/analgesi brukt under fødselen;F10d: Fødsler per år, mors bosted, forløsningstype og anestesi/analgesi brukt under fødselen
-mfr;445;;Is3a: Fødsler ved institusjon per år, fødeinstitusjon og sykdom hos mor i svangerskapet;Is3a: Fødsler ved institusjon per år, fødeinstitusjon og sykdom hos mor i svangerskapet
-mfr;446;;Is3b: Fødsler ved institusjon per år, fødeinstitusjon og komplikasjoner under fødselen;
-mfr;447;;Is3c: Fødsler ved institusjon per år, fødeinstitusjon og fødselsstart;
-mfr;448;;Is3d: Fødsler ved institusjon per år, fødeinstitusjon og anestesi/analgesi brukt under fødselen;
-mfr;449;;Is4a-1: Vaginalt fødte ved institusjon per år, fødeinstitusjon og inngrep og tiltak under fødselen;
-mfr;450;;Is4a-2: Fødsler ved institusjon per år, fødeinstitusjon og forløsningstype;
-mfr;451;;F11: Fødte per år, mors bosted og fødestedtype;F11: Fødte per år, mors bosted og fødestedtype
-mfr;452;;F12a: Fødte per år, mors bosted og neonatale tilstander;
-mfr;453;;F12b: Fødte per år, mors bosted og behandling av barnet;
-mfr;454;;F13: Fødsler per år, mors bosted og spesielle forhold ved fostervann;F13: Fødsler per år, mors bosted og spesielle forhold ved fostervann
-mfr;455;;M1: Fødte og aborterte per år, dødstidspunkt og medfødte misdannelser;
-mfr;456;;A1: Fødte etter assistert befruktning i Norge per år, institusjon og enkelt-/flerfødt;
-mfr;457;;A2: Fødte etter assistert befruktning i Norge per år, metode og enkelt-/flerfødt;
-mfr;458;;Is5a: Vaginale fødsler ved institusjon per år, fødeinstitusjon, inngrep og tiltak under fødselen og sphincterruptur (grad 3-4);
-mfr;459;;Is6: Fødte ved institusjon per år, fødeinstitusjon og barnets tilstand ved fødsel;
-mfr;468;;F16a-2: Fødsler med opplysning om mors røykevaner i 1. trimester per år, mors bosted og mors røykevaner i 1. trimester;F16a-2: Fødsler med opplysning om mors røykevaner i 1. trimester per år, mors bosted og mors røykevaner i 1. trimester
-mfr;469;;F16a-3: Fødsler med opplysning om mors røykevaner i siste trimester per år, mors bosted og mors røykevaner i siste trimester;F16a-3: Fødsler med opplysning om mors røykevaner i siste trimester per år, mors bosted og mors røykevaner i siste trimester
-mfr;470;;F16b-2: Fødsler med opplysning om mors røykevaner i 1. trimester per år, mors alder og mors røykevaner i 1. trimester;
-mfr;471;;F16b-3: Fødsler med opplysning om mors røykevaner i siste trimester per år, mors alder og mors røykevaner i siste trimester;
-mfr;472;;F16a-1: Fødsler per år, mors bosted og om det finnes opplysninger om mors røykevaner;F16a-1: Fødsler per år, mors bosted og om det finnes opplysninger om mors røykevaner
-mfr;473;;F16b-1: Fødsler per år, mors alder og om det finnes opplysninger om mors røykevaner;F16b-1: Fødsler per år, mors alder og om det finnes opplysninger om mors røykevaner
-mfr;474;;F16e-1: Elektronisk (f.o.m. versjon 1.2) meldte fødsler per år, mors alder og om det finnes opplysninger om mors snusvaner;
-mfr;475;;F16e-2: Fødsler med opplysning om mors snusvaner i 1. trimester per år, mors alder og mors snusvaner i 1. trimester;
-mfr;476;;F16e-3: Fødsler med opplysning om mors snusvaner i siste trimester per år, mors alder og mors snusvaner i siste trimester;
-mfr;477;;F17a: Fødsler per år, mors bosted og mors bruk av kosttilskudd;
-mfr;478;;F17b: Fødsler per år, mors alder og mors bruk av folsyre før svangerskapet;
-mfr;479;;F17c: Fødsler per år, mors alder og mors bruk av folsyre i svangerskapet;
-mfr;480;;F18a-1: Fødsler per år, mors bosted og om det finnes opplysning om mors kroppsmasseindeks (KMI) før svangerskapet;
-mfr;481;;F18a-2: Fødsler med opplysning om mors kroppsmasseindeks (KMI) før svangerskapet per år, mors bosted og mors KMI før svangerskapet;
-mfr;482;;F18a-3: Gjennomsnittlig kroppsmasseindeks (KMI) for mor før svangerskapet per år og mors bosted;
-mfr;487;;P1a: Fødte per måned og mors bosted;
-mfr;490;;P3a: Forløsningstype per måned og mors bosted;
-mfr;491;;P1b: Fødte per måned og fødeinstitusjon;
-mfr;492;;F10c-2: Keisersnittfødsler per år, mors bosted og fødselsstart;F10c-2: Keisersnittfødsler per år, mors bosted og fødselsstart
-mfr;493;;Is7a: Fødsler ved institusjon per år, fødeinstitusjon og om det finnes opplysninger om mors røykevaner;
-mfr;494;;Is7b: Fødsler ved institusjon med opplysning om mors røykevaner i 1. trimester per år, fødeinstitusjon og mors røykevaner i 1. trimester;Is7b: Fødsler ved institusjon med opplysning om mors røykevaner i 1. trimester per år, fødeinstitusjon og mors røykevaner i 1. trimester
-mfr;495;;Is7c: Fødsler ved institusjon med opplysning om mors røykevaner i siste trimester per år, fødeinstitusjon og mors røykevaner i siste trimester;
-mfr;496;;Is8: Fødsler ved institusjon per år, fødeinstitusjon og om det finnes opplysninger om mors kroppsmasseindeks (KMI);
-mfr;497;;Is9a: Fødte per år, fødehelseregion, mors fødeland og perinatal/neonatal levestatus;
-mfr;498;;Is9b: Fødsler per år, fødehelseregion, mors fødeland og forhold ved mor og svangerskap;
-mfr;499;;Is10: Fødsler ved institusjon per år, fødeinstitusjon, forløsningstype og mors liggetid etter fødsel;
-mfr;500;;P3b: Forløsningstype per måned og fødeinstitusjon ;
-mfr;502;;P6a: Barnets tilstand ved fødsel per måned og mors bosted;
-mfr;503;;P6b: Barnets tilstand ved fødsel per måned og fødeinstitusjon;
-mfr;505;;P2a: Fødselsstart per måned og mors bosted;
-mfr;506;;P2b: Fødselsstart per måned og fødeinstitusjon;
-mfr;512;;P4a: Komplikasjoner under fødselen per måned og mors bosted;
-mfr;513;;P4b: Komplikasjoner under fødselen per måned og fødeinstitusjon;
-mfr;514;;P5a: Vaginalt fødte: Inngrep og tiltak under fødselen per måned og mors bosted;
-mfr;515;;P5b: Vaginalt fødte: Inngrep og tiltak under fødselen per måned og fødeinstitusjon;
-mfr;584;;R1: Keisersnitt per Robsongruppe og fødeinstitusjon;R1: Keisersnitt per Robsongruppe og fødeinstitusjon
-mfr;590;;R2: Tang eller vakuumekstraksjon per Robsongruppe og fødeinstitusjon;R2: Tang eller vakuumekstraksjon per Robsongruppe og fødeinstitusjon
-mfr;591;;R3: Tang per Robsongruppe og fødeinstitusjon;
-mfr;592;;R4: Vakuumekstraksjon per Robsongruppe og fødeinstitusjon;
-mfr;593;;R5: Episiotomi per Robsongruppe og fødeinstitusjon;R5: Episiotomi per Robsongruppe og fødeinstitusjon
-mfr;594;;R6: Blødning under/etter fødsel per Robsongruppe og fødeinstitusjon;R6: Blødning under/etter fødsel per Robsongruppe og fødeinstitusjon
-mfr;595;;R7: Lav apgar score per Robsongruppe og fødeinstitusjon;
-mfr;596;;R8: Overflyttet barneavdeling per Robsongruppe og fødeinstitusjon;
+lmr;622;;Legemiddelgruppe - Ã˜vrige legemiddelgrupper. 2004 - 2024. [Oppdatert 12.03.2025] ;
+mfr;411;;F0: FÃ¸dte og fÃ¸dsler per Ã¥r og mÃ¥ned;F0: FÃ¸dte og fÃ¸dsler per Ã¥r og mÃ¥ned
+mfr;412;;F1a: FÃ¸dte per Ã¥r, mors bosted og kjÃ¸nn;
+mfr;413;;F1b: FÃ¸dsler per Ã¥r, mors bosted og enkelt-/flerfÃ¸dsel;F1b: FÃ¸dsler per Ã¥r, mors bosted og enkelt-/flerfÃ¸dsel
+mfr;414;;F2b-5: FÃ¸dte iht. MFR per Ã¥r, mors bosted og perinatal levestatus;
+mfr;415;;F2b-6: FÃ¸dte iht. Euro-Peristat (f.o.m. 22 uker) per Ã¥r og perinatal levestatus ;F2b-6: FÃ¸dte iht. Euro-Peristat (f.o.m. 22 uker) per Ã¥r og perinatal levestatus 
+mfr;416;;F2b-7: FÃ¸dte iht. WHO (f.o.m. 500 g) per Ã¥r og perinatal levestatus ;F2b-7: FÃ¸dte iht. WHO (f.o.m. 500 g) per Ã¥r og perinatal levestatus 
+mfr;417;;F2b-8: FÃ¸dte iht. WHO (f.o.m. 1000 g) per Ã¥r og perinatal levestatus;F2b-8: FÃ¸dte iht. WHO (f.o.m. 1000 g) per Ã¥r og perinatal levestatus
+mfr;418;;F2c: LevendefÃ¸dte per Ã¥r, mors bosted og levestatus i spedbarnsperioden;F2c: LevendefÃ¸dte per Ã¥r, mors bosted og levestatus i spedbarnsperioden
+mfr;420;;F3a: FÃ¸dsler per Ã¥r, mors bosted og mors alder;F3a: FÃ¸dsler per Ã¥r, mors bosted og mors alder
+mfr;421;;F3b: Mors gjennomsnittsalder per Ã¥r, mors bosted og tidligere fÃ¸dte;F3b: Mors gjennomsnittsalder per Ã¥r, mors bosted og tidligere fÃ¸dte
+mfr;422;;F3c: FÃ¸dsler per Ã¥r, mors bosted og fars alder;F3c: FÃ¸dsler per Ã¥r, mors bosted og fars alder
+mfr;423;;F3d: Fars gjennomsnittsalder per Ã¥r og mors bosted;F3d: Fars gjennomsnittsalder per Ã¥r og mors bosted
+mfr;424;;F4a: FÃ¸dsler per Ã¥r, mors bosted og tidligere fÃ¸dte;F4a: FÃ¸dsler per Ã¥r, mors bosted og tidligere fÃ¸dte
+mfr;425;;F4b: FÃ¸dsler per Ã¥r, mors bosted og mors sivilstatus;F4b: FÃ¸dsler per Ã¥r, mors bosted og mors sivilstatus
+mfr;426;;F5a: FÃ¸dte med fÃ¸dselsvekt per Ã¥r, mors bosted og fÃ¸dselsvekt;F5a: FÃ¸dte med fÃ¸dselsvekt per Ã¥r, mors bosted og fÃ¸dselsvekt
+mfr;427;;F5b: Gjennomsnittlig fÃ¸dselsvekt per Ã¥r og mors bosted;F5b: Gjennomsnittlig fÃ¸dselsvekt per Ã¥r og mors bosted
+mfr;428;;Is1: FÃ¸dsler per Ã¥r, fÃ¸deinstitusjon, fÃ¸destedtype og enkelt-/flerfÃ¸dsel;
+mfr;429;;Is2: FÃ¸dte ved institusjon per Ã¥r, fÃ¸deinstitusjon og levestatus ved fÃ¸dsel;
+mfr;430;;F6a: FÃ¸dsler med svangerskapsvarighet per Ã¥r, mors bosted og svangerskapsvarighet;F6a: FÃ¸dsler med svangerskapsvarighet per Ã¥r, mors bosted og svangerskapsvarighet
+mfr;431;;F6b: Gjennomsnittlig svangerskapsvarighet per Ã¥r og mors bosted;F6b: Gjennomsnittlig svangerskapsvarighet per Ã¥r og mors bosted
+mfr;432;;F7a: FÃ¸dsler per Ã¥r, mors bosted og sykdom hos mor fÃ¸r svangerskapet;
+mfr;433;;F7c: FÃ¸dsler per Ã¥r, mors bosted og hypertensive tilstander hos mor i svangerskapet;
+mfr;434;;F7d: FÃ¸dsler per Ã¥r, mors bosted og diabetes hos mor;
+mfr;435;;F8a: FÃ¸dsler per Ã¥r, mors bosted og fÃ¸dselsstart;F8a: FÃ¸dsler per Ã¥r, mors bosted og fÃ¸dselsstart
+mfr;436;;F8b: Induserte fÃ¸dsler per Ã¥r, mors bosted og induksjonsmetode;F8b: Induserte fÃ¸dsler per Ã¥r, mors bosted og induksjonsmetode
+mfr;437;;F9a: FÃ¸dsler per Ã¥r, mors bosted og komplikasjoner under fÃ¸dselen;F9a: FÃ¸dsler per Ã¥r, mors bosted og komplikasjoner under fÃ¸dselen
+mfr;438;;F9b: FÃ¸dte per Ã¥r, mors bosted og leie ved fÃ¸dsel;F9b: FÃ¸dte per Ã¥r, mors bosted og leie ved fÃ¸dsel
+mfr;440;;F10a: Vaginalt fÃ¸dte per Ã¥r, mors bosted og inngrep og tiltak under fÃ¸dselen;F10a: Vaginalt fÃ¸dte per Ã¥r, mors bosted og inngrep og tiltak under fÃ¸dselen
+mfr;441;;F10b: FÃ¸dte i seteleie per Ã¥r, mors bosted og inngrep og tiltak under fÃ¸dselen;F10b: FÃ¸dte i seteleie per Ã¥r, mors bosted og inngrep og tiltak under fÃ¸dselen
+mfr;442;;F10c-1: FÃ¸dsler per Ã¥r, mors bosted og forlÃ¸sningstype;F10c-1: FÃ¸dsler per Ã¥r, mors bosted og forlÃ¸sningstype
+mfr;443;;F10c-3: KeisersnittfÃ¸dsler per Ã¥r, mors bosted og keisersnittype;F10c-3: KeisersnittfÃ¸dsler per Ã¥r, mors bosted og keisersnittype
+mfr;444;;F10d: FÃ¸dsler per Ã¥r, mors bosted, forlÃ¸sningstype og anestesi/analgesi brukt under fÃ¸dselen;F10d: FÃ¸dsler per Ã¥r, mors bosted, forlÃ¸sningstype og anestesi/analgesi brukt under fÃ¸dselen
+mfr;445;;Is3a: FÃ¸dsler ved institusjon per Ã¥r, fÃ¸deinstitusjon og sykdom hos mor i svangerskapet;Is3a: FÃ¸dsler ved institusjon per Ã¥r, fÃ¸deinstitusjon og sykdom hos mor i svangerskapet
+mfr;446;;Is3b: FÃ¸dsler ved institusjon per Ã¥r, fÃ¸deinstitusjon og komplikasjoner under fÃ¸dselen;
+mfr;447;;Is3c: FÃ¸dsler ved institusjon per Ã¥r, fÃ¸deinstitusjon og fÃ¸dselsstart;
+mfr;448;;Is3d: FÃ¸dsler ved institusjon per Ã¥r, fÃ¸deinstitusjon og anestesi/analgesi brukt under fÃ¸dselen;
+mfr;449;;Is4a-1: Vaginalt fÃ¸dte ved institusjon per Ã¥r, fÃ¸deinstitusjon og inngrep og tiltak under fÃ¸dselen;
+mfr;450;;Is4a-2: FÃ¸dsler ved institusjon per Ã¥r, fÃ¸deinstitusjon og forlÃ¸sningstype;
+mfr;451;;F11: FÃ¸dte per Ã¥r, mors bosted og fÃ¸destedtype;F11: FÃ¸dte per Ã¥r, mors bosted og fÃ¸destedtype
+mfr;452;;F12a: FÃ¸dte per Ã¥r, mors bosted og neonatale tilstander;
+mfr;453;;F12b: FÃ¸dte per Ã¥r, mors bosted og behandling av barnet;
+mfr;454;;F13: FÃ¸dsler per Ã¥r, mors bosted og spesielle forhold ved fostervann;F13: FÃ¸dsler per Ã¥r, mors bosted og spesielle forhold ved fostervann
+mfr;455;;M1: FÃ¸dte og aborterte per Ã¥r, dÃ¸dstidspunkt og medfÃ¸dte misdannelser;
+mfr;456;;A1: FÃ¸dte etter assistert befruktning i Norge per Ã¥r, institusjon og enkelt-/flerfÃ¸dt;
+mfr;457;;A2: FÃ¸dte etter assistert befruktning i Norge per Ã¥r, metode og enkelt-/flerfÃ¸dt;
+mfr;458;;Is5a: Vaginale fÃ¸dsler ved institusjon per Ã¥r, fÃ¸deinstitusjon, inngrep og tiltak under fÃ¸dselen og sphincterruptur (grad 3-4);
+mfr;459;;Is6: FÃ¸dte ved institusjon per Ã¥r, fÃ¸deinstitusjon og barnets tilstand ved fÃ¸dsel;
+mfr;468;;F16a-2: FÃ¸dsler med opplysning om mors rÃ¸ykevaner i 1. trimester per Ã¥r, mors bosted og mors rÃ¸ykevaner i 1. trimester;F16a-2: FÃ¸dsler med opplysning om mors rÃ¸ykevaner i 1. trimester per Ã¥r, mors bosted og mors rÃ¸ykevaner i 1. trimester
+mfr;469;;F16a-3: FÃ¸dsler med opplysning om mors rÃ¸ykevaner i siste trimester per Ã¥r, mors bosted og mors rÃ¸ykevaner i siste trimester;F16a-3: FÃ¸dsler med opplysning om mors rÃ¸ykevaner i siste trimester per Ã¥r, mors bosted og mors rÃ¸ykevaner i siste trimester
+mfr;470;;F16b-2: FÃ¸dsler med opplysning om mors rÃ¸ykevaner i 1. trimester per Ã¥r, mors alder og mors rÃ¸ykevaner i 1. trimester;
+mfr;471;;F16b-3: FÃ¸dsler med opplysning om mors rÃ¸ykevaner i siste trimester per Ã¥r, mors alder og mors rÃ¸ykevaner i siste trimester;
+mfr;472;;F16a-1: FÃ¸dsler per Ã¥r, mors bosted og om det finnes opplysninger om mors rÃ¸ykevaner;F16a-1: FÃ¸dsler per Ã¥r, mors bosted og om det finnes opplysninger om mors rÃ¸ykevaner
+mfr;473;;F16b-1: FÃ¸dsler per Ã¥r, mors alder og om det finnes opplysninger om mors rÃ¸ykevaner;F16b-1: FÃ¸dsler per Ã¥r, mors alder og om det finnes opplysninger om mors rÃ¸ykevaner
+mfr;474;;F16e-1: Elektronisk (f.o.m. versjon 1.2) meldte fÃ¸dsler per Ã¥r, mors alder og om det finnes opplysninger om mors snusvaner;
+mfr;475;;F16e-2: FÃ¸dsler med opplysning om mors snusvaner i 1. trimester per Ã¥r, mors alder og mors snusvaner i 1. trimester;
+mfr;476;;F16e-3: FÃ¸dsler med opplysning om mors snusvaner i siste trimester per Ã¥r, mors alder og mors snusvaner i siste trimester;
+mfr;477;;F17a: FÃ¸dsler per Ã¥r, mors bosted og mors bruk av kosttilskudd;
+mfr;478;;F17b: FÃ¸dsler per Ã¥r, mors alder og mors bruk av folsyre fÃ¸r svangerskapet;
+mfr;479;;F17c: FÃ¸dsler per Ã¥r, mors alder og mors bruk av folsyre i svangerskapet;
+mfr;480;;F18a-1: FÃ¸dsler per Ã¥r, mors bosted og om det finnes opplysning om mors kroppsmasseindeks (KMI) fÃ¸r svangerskapet;
+mfr;481;;F18a-2: FÃ¸dsler med opplysning om mors kroppsmasseindeks (KMI) fÃ¸r svangerskapet per Ã¥r, mors bosted og mors KMI fÃ¸r svangerskapet;
+mfr;482;;F18a-3: Gjennomsnittlig kroppsmasseindeks (KMI) for mor fÃ¸r svangerskapet per Ã¥r og mors bosted;
+mfr;487;;P1a: FÃ¸dte per mÃ¥ned og mors bosted;
+mfr;490;;P3a: ForlÃ¸sningstype per mÃ¥ned og mors bosted;
+mfr;491;;P1b: FÃ¸dte per mÃ¥ned og fÃ¸deinstitusjon;
+mfr;492;;F10c-2: KeisersnittfÃ¸dsler per Ã¥r, mors bosted og fÃ¸dselsstart;F10c-2: KeisersnittfÃ¸dsler per Ã¥r, mors bosted og fÃ¸dselsstart
+mfr;493;;Is7a: FÃ¸dsler ved institusjon per Ã¥r, fÃ¸deinstitusjon og om det finnes opplysninger om mors rÃ¸ykevaner;
+mfr;494;;Is7b: FÃ¸dsler ved institusjon med opplysning om mors rÃ¸ykevaner i 1. trimester per Ã¥r, fÃ¸deinstitusjon og mors rÃ¸ykevaner i 1. trimester;Is7b: FÃ¸dsler ved institusjon med opplysning om mors rÃ¸ykevaner i 1. trimester per Ã¥r, fÃ¸deinstitusjon og mors rÃ¸ykevaner i 1. trimester
+mfr;495;;Is7c: FÃ¸dsler ved institusjon med opplysning om mors rÃ¸ykevaner i siste trimester per Ã¥r, fÃ¸deinstitusjon og mors rÃ¸ykevaner i siste trimester;
+mfr;496;;Is8: FÃ¸dsler ved institusjon per Ã¥r, fÃ¸deinstitusjon og om det finnes opplysninger om mors kroppsmasseindeks (KMI);
+mfr;497;;Is9a: FÃ¸dte per Ã¥r, fÃ¸dehelseregion, mors fÃ¸deland og perinatal/neonatal levestatus;
+mfr;498;;Is9b: FÃ¸dsler per Ã¥r, fÃ¸dehelseregion, mors fÃ¸deland og forhold ved mor og svangerskap;
+mfr;499;;Is10: FÃ¸dsler ved institusjon per Ã¥r, fÃ¸deinstitusjon, forlÃ¸sningstype og mors liggetid etter fÃ¸dsel;
+mfr;500;;P3b: ForlÃ¸sningstype per mÃ¥ned og fÃ¸deinstitusjon ;
+mfr;502;;P6a: Barnets tilstand ved fÃ¸dsel per mÃ¥ned og mors bosted;
+mfr;503;;P6b: Barnets tilstand ved fÃ¸dsel per mÃ¥ned og fÃ¸deinstitusjon;
+mfr;505;;P2a: FÃ¸dselsstart per mÃ¥ned og mors bosted;
+mfr;506;;P2b: FÃ¸dselsstart per mÃ¥ned og fÃ¸deinstitusjon;
+mfr;512;;P4a: Komplikasjoner under fÃ¸dselen per mÃ¥ned og mors bosted;
+mfr;513;;P4b: Komplikasjoner under fÃ¸dselen per mÃ¥ned og fÃ¸deinstitusjon;
+mfr;514;;P5a: Vaginalt fÃ¸dte: Inngrep og tiltak under fÃ¸dselen per mÃ¥ned og mors bosted;
+mfr;515;;P5b: Vaginalt fÃ¸dte: Inngrep og tiltak under fÃ¸dselen per mÃ¥ned og fÃ¸deinstitusjon;
+mfr;584;;R1: Keisersnitt per Robsongruppe og fÃ¸deinstitusjon;R1: Keisersnitt per Robsongruppe og fÃ¸deinstitusjon
+mfr;590;;R2: Tang eller vakuumekstraksjon per Robsongruppe og fÃ¸deinstitusjon;R2: Tang eller vakuumekstraksjon per Robsongruppe og fÃ¸deinstitusjon
+mfr;591;;R3: Tang per Robsongruppe og fÃ¸deinstitusjon;
+mfr;592;;R4: Vakuumekstraksjon per Robsongruppe og fÃ¸deinstitusjon;
+mfr;593;;R5: Episiotomi per Robsongruppe og fÃ¸deinstitusjon;R5: Episiotomi per Robsongruppe og fÃ¸deinstitusjon
+mfr;594;;R6: BlÃ¸dning under/etter fÃ¸dsel per Robsongruppe og fÃ¸deinstitusjon;R6: BlÃ¸dning under/etter fÃ¸dsel per Robsongruppe og fÃ¸deinstitusjon
+mfr;595;;R7: Lav apgar score per Robsongruppe og fÃ¸deinstitusjon;
+mfr;596;;R8: Overflyttet barneavdeling per Robsongruppe og fÃ¸deinstitusjon;
 msis;724;;RESPIaggr Influensa antall og andel;
 msis;726;;RESPIaggr Influensa subtyper;
 msis;729;;RESPIaggr RSV antall og andel;
@@ -150,10 +150,10 @@ msis;749;;RESPIaggr Influensa sesongsammenligning;
 ngs;272;;VOI;VOI
 ngs;273;;VUM;VUM
 ngs;275;;varianter_per_mnd;varianter_per_mnd
-ngs;665;;HCV_per_år;HCV_per_år
+ngs;665;;HCV_per_Ã¥r;HCV_per_Ã¥r
 nokkel;171;;Befolkningsframskriving;Befolkningsframskriving
-nokkel;175;;Antall innvandrere og norskfødte med innvandrerforeldre;Antall innvandrere og norskfødte med innvandrerforeldre
-nokkel;181;;Utdanningsnivå;Utdanningsnivå
+nokkel;175;;Antall innvandrere og norskfÃ¸dte med innvandrerforeldre;Antall innvandrere og norskfÃ¸dte med innvandrerforeldre
+nokkel;181;;UtdanningsnivÃ¥;UtdanningsnivÃ¥
 nokkel;185;;Befolkningsvekst;Befolkningsvekst
 nokkel;186;;Eierstatus;Eierstatus
 nokkel;187;;Personer som bor alene;Personer som bor alene
@@ -166,11 +166,11 @@ nokkel;337;;Barnevern_tiltak;Barnevern_tiltak
 nokkel;338;;Befolkningssammensetning_antall_andel;Befolkningssammensetning_antall_andel
 nokkel;339;;Depressive symptomer_Ungdata_KH;Depressive symptomer_Ungdata_KH
 nokkel;341;;Drikkevannsforsyning;Drikkevannsforsyning
-nokkel;342;;Dødsårsaker;Dødsårsaker
-nokkel;343;;Dødsårsaker-nøkkeltall-1990-ettårig;Dødsårsaker-nøkkeltall-1990-ettårig
-nokkel;344;;Selvmord femårig;Selvmord femårig
-nokkel;345;;Trafikkulykker, femårige tall;Trafikkulykker, femårige tall
-nokkel;346;;Barn av enslige forsørgere_3aarigLFKB;Barn av enslige forsørgere_3aarigLFKB
+nokkel;342;;DÃ¸dsÃ¥rsaker;DÃ¸dsÃ¥rsaker
+nokkel;343;;DÃ¸dsÃ¥rsaker-nÃ¸kkeltall-1990-ettÃ¥rig;DÃ¸dsÃ¥rsaker-nÃ¸kkeltall-1990-ettÃ¥rig
+nokkel;344;;Selvmord femÃ¥rig;Selvmord femÃ¥rig
+nokkel;345;;Trafikkulykker, femÃ¥rige tall;Trafikkulykker, femÃ¥rige tall
+nokkel;346;;Barn av enslige forsÃ¸rgere_3aarigLFKB;Barn av enslige forsÃ¸rgere_3aarigLFKB
 nokkel;348;;Ensomhet_Ungdata_KH;Ensomhet_Ungdata_KH
 nokkel;349;;Fornoyd_helsa_Ungdata_KH;Fornoyd_helsa_Ungdata_KH
 nokkel;350;;Svomming_2aarigLFK;Svomming_2aarigLFK
@@ -182,8 +182,8 @@ nokkel;355;;Fremtidsoptimisme_Ungdata_KH;Fremtidsoptimisme_Ungdata_KH
 nokkel;356;;Fritidsorg_deltak_ungdata;Fritidsorg_deltak_ungdata
 nokkel;357;;Fysisk_inakt_Ungdata_KH;Fysisk_inakt_Ungdata_KH
 nokkel;358;;Gjeld;Gjeld
-nokkel;359;;Gjennomforing i videregående skole_innvand_3;Gjennomforing i videregående skole_innvand_3
-nokkel;360;;Gjennomforing i videregående skole_utdann_3;Gjennomforing i videregående skole_utdann_3
+nokkel;359;;Gjennomforing i videregÃ¥ende skole_innvand_3;Gjennomforing i videregÃ¥ende skole_innvand_3
+nokkel;360;;Gjennomforing i videregÃ¥ende skole_utdann_3;Gjennomforing i videregÃ¥ende skole_utdann_3
 nokkel;361;;Grunnskolepoeng_INNVKAT;Grunnskolepoeng_INNVKAT
 nokkel;362;;Grunnskolepoeng_UTDANN;Grunnskolepoeng_UTDANN
 nokkel;363;;Hasjbruk_Ungdata_KH;Hasjbruk_Ungdata_KH
@@ -197,11 +197,11 @@ nokkel;370;;KPR_1;KPR_1
 nokkel;371;;Leseferdighet_UTDANN_1;Leseferdighet_UTDANN_1
 nokkel;372;;Leseferdighet_INNVKAT_3;Leseferdighet_INNVKAT_3
 nokkel;373;;Livskvalitet_Ungdata_KH;Livskvalitet_Ungdata_KH
-nokkel;374;;Nærmiljø_Ungdata_KH;Nærmiljø_Ungdata_KH
+nokkel;374;;NÃ¦rmiljÃ¸_Ungdata_KH;NÃ¦rmiljÃ¸_Ungdata_KH
 nokkel;375;;Treffsteder for unge_Ungdata_KH;Treffsteder for unge_Ungdata_KH
 nokkel;376;;Luftkvalitet,PWC;Luftkvalitet,PWC
-nokkel;377;;Mobbing, 7. og 10. klasse, 3-årige tall;Mobbing, 7. og 10. klasse, 3-årige tall
-nokkel;378;;Mobbing, 7. og 10. klasse ettårig;Mobbing, 7. og 10. klasse ettårig
+nokkel;377;;Mobbing, 7. og 10. klasse, 3-Ã¥rige tall;Mobbing, 7. og 10. klasse, 3-Ã¥rige tall
+nokkel;378;;Mobbing, 7. og 10. klasse ettÃ¥rig;Mobbing, 7. og 10. klasse ettÃ¥rig
 nokkel;379;;NEET;NEET
 nokkel;380;;Regelbrudd_Ungdata_KH;Regelbrudd_Ungdata_KH
 nokkel;381;;Regneferdighet, 5. og 8. klasse_STARTAAR_2022_LFKB;Regneferdighet, 5. og 8. klasse_STARTAAR_2022_LFKB
@@ -210,21 +210,21 @@ nokkel;387;;Overvekt, verneplikt (LF);Overvekt, verneplikt (LF)
 nokkel;388;;Overvekt sesjon1;Overvekt sesjon1
 nokkel;389;;Skjermtid_Ungdata_KH;Skjermtid_Ungdata_KH
 nokkel;390;;Smertestillende_ungdata;Smertestillende_ungdata
-nokkel;391;;Søvnproblemer_Ungdata_KH;Søvnproblemer_Ungdata_KH
-nokkel;392;;Stønad_livsopphold;Stønad_livsopphold
-nokkel;393;;Røyking_MFR;Røyking_MFR
+nokkel;391;;SÃ¸vnproblemer_Ungdata_KH;SÃ¸vnproblemer_Ungdata_KH
+nokkel;392;;StÃ¸nad_livsopphold;StÃ¸nad_livsopphold
+nokkel;393;;RÃ¸yking_MFR;RÃ¸yking_MFR
 nokkel;394;;Vaksinasjonsdekning_1aar-FELLES;Vaksinasjonsdekning_1aar-FELLES
 nokkel;395;;Vaksinasjonsdekning_5aar;Vaksinasjonsdekning_5aar
 nokkel;396;;Vaks_dekning_Influensa;Vaks_dekning_Influensa
 nokkel;397;;Trivsel, 7. og 10. klasse_aarlige tall;Trivsel, 7. og 10. klasse_aarlige tall
-nokkel;398;;Trivsel, 7. og 10. klasse_3-årige tall;Trivsel, 7. og 10. klasse_3-årige tall
+nokkel;398;;Trivsel, 7. og 10. klasse_3-Ã¥rige tall;Trivsel, 7. og 10. klasse_3-Ã¥rige tall
 nokkel;399;;Trygghet_ungdata;Trygghet_ungdata
-nokkel;400;;Uføretrygdede;Uføretrygdede
+nokkel;400;;UfÃ¸retrygdede;UfÃ¸retrygdede
 nokkel;401;;Valgdeltakelse;Valgdeltakelse
 nokkel;403;;Vedvarende_lavinntekt_kommunegrense;Vedvarende_lavinntekt_kommunegrense
 nokkel;507;;Forv_levealder_TOT_og_utdn_7aarigLF;Forv_levealder_TOT_og_utdn_7aarigLF
 nokkel;508;;Forventet levealder etter utdn_15aarigLFKB;Forventet levealder etter utdn_15aarigLFKB
-nokkel;509;;Forventet levealder_årligetall_ettårALDER_UTD;Forventet levealder_årligetall_ettårALDER_UTD
+nokkel;509;;Forventet levealder_Ã¥rligetall_ettÃ¥rALDER_UTD;Forventet levealder_Ã¥rligetall_ettÃ¥rALDER_UTD
 nokkel;510;;Utdanningsforskjeller i forventet levealder_15aarigLFKB;Utdanningsforskjeller i forventet levealder_15aarigLFKB
 nokkel;511;;Utdanningsforskjeller i forventet levealder_7aarigLF;Utdanningsforskjeller i forventet levealder_7aarigLF
 nokkel;583;;Vedvarende lavinntekt INNVKAT;Vedvarende lavinntekt INNVKAT
@@ -234,28 +234,28 @@ nokkel;602;;Mediebruk_SOME_Ungdata_KH;Mediebruk_SOME_Ungdata_KH
 nokkel;606;;Tannhelse_DMFT=0_MED_DEKNING;Tannhelse_DMFT=0_MED_DEKNING
 nokkel;607;;Venner_inne_Ungdata;Venner_inne_Ungdata
 nokkel;608;;Venner_ute_Ungdata;Venner_ute_Ungdata
-nokkel;614;;Uføretrygdede_ettårig;Uføretrygdede_ettårig
-nokkel;619;;Kreft, nye tilfeller_ettårig_LFKB;Kreft, nye tilfeller_ettårig_LFKB
+nokkel;614;;UfÃ¸retrygdede_ettÃ¥rig;UfÃ¸retrygdede_ettÃ¥rig
+nokkel;619;;Kreft, nye tilfeller_ettÃ¥rig_LFKB;Kreft, nye tilfeller_ettÃ¥rig_LFKB
 nokkel;623;; Gjennomforing_VGO_utdann_1; Gjennomforing_VGO_utdann_1
 nokkel;631;;ROYK_RUS_1;ROYK_RUS_1
 nokkel;641;;Regneferd_INNVKAT_3;Regneferd_INNVKAT_3
 nokkel;650;;INNVAND_INNVKAT_Unge;INNVAND_INNVKAT_Unge
-nokkel;660;;Forventet levealder totalt og etter utdanning, 25-årig;Forventet levealder totalt og etter utdanning, 25-årig
+nokkel;660;;Forventet levealder totalt og etter utdanning, 25-Ã¥rig;Forventet levealder totalt og etter utdanning, 25-Ã¥rig
 nokkel;664;;Sosialhjelpsmottakere;Sosialhjelpsmottakere
 nokkel;667;;Mediebruk_underhold_ungdata;Mediebruk_underhold_ungdata
 nokkel;670;;Leseferdighet_utdann_3;Leseferdighet_utdann_3
 nokkel;671;;Leseferdighet_innvkat_1;Leseferdighet_innvkat_1
 nokkel;672;;Regneferd_UTDANN_1;Regneferd_UTDANN_1
-nokkel;677;;Gjennomforing i videregående skole_innvand_1;Gjennomforing i videregående skole_innvand_1
+nokkel;677;;Gjennomforing i videregÃ¥ende skole_innvand_1;Gjennomforing i videregÃ¥ende skole_innvand_1
 nokkel;685;;Regneferd_UTDANN_3;Regneferd_UTDANN_3
-nokkel;688;;Forventede funksjonsfriske leveår_7;Forventede funksjonsfriske leveår_7
+nokkel;688;;Forventede funksjonsfriske leveÃ¥r_7;Forventede funksjonsfriske leveÃ¥r_7
 nokkel;689;;Regneferd_INNVKAT_1;Regneferd_INNVKAT_1
 nokkel;699;;NPR_1;NPR_1
 nokkel;714;;NPR_3;NPR_3
-npr;464;;NPR PHBU nøkkeltall;
-npr;517;;NPR SOM nøkkeltall ;
-npr;518;;NPR PHV nøkkeltall ;
-npr;520;;NPR TSB nøkkeltall;
+npr;464;;NPR PHBU nÃ¸kkeltall;
+npr;517;;NPR SOM nÃ¸kkeltall ;
+npr;518;;NPR PHV nÃ¸kkeltall ;
+npr;520;;NPR TSB nÃ¸kkeltall;
 npr;521;;NPR ALLETJEN 07 tilstandskoder VII (H00-H59) ;
 npr;524;;NPR ALLETJEN 04 tilstandskoder IV (E00-E90) ;
 npr;533;;NPR ALLETJEN 03 tilstandskoder III D50-D89;
@@ -277,8 +277,8 @@ npr;549;;NPR ALLETJEN 18 tilstandskoder XVIII (R00-R99) ;
 npr;550;;NPR ALLETJEN 19 tilstandskoder XIX (S00-T98);
 npr;551;;NPR ALLETJEN 20 tilstandskoder XX (V0n-Y98) ;
 npr;552;;NPR ALLETJEN 21 tilstandskoder XXI (Z00-Z99) ;
-npr;553;;"	 NPR ALLETJEN 22 tilstandskoder  XXII (U00-U85)";
-npr;555;;"	 NPR ALLETJEN kap A Prosedyrekoder";
+npr;553;;NPR ALLETJEN 22 tilstandskoder  XXII (U00-U85);
+npr;555;;NPR ALLETJEN kap A Prosedyrekoder;
 npr;556;;NPR ALLETJEN kap B Prosedyrekoder;
 npr;557;;NPR ALLETJEN kap C Prosedyrekoder;
 npr;558;;NPR ALLETJEN kap D Prosedyrekoder;
@@ -302,13 +302,14 @@ npr;577;;NPR ALLETJEN kap W Prosedyrekoder;
 npr;578;;NPR ALLETJEN kap Y Prosedyrekoder;
 npr;579;;NPR ALLETJEN kap Z Prosedyrekoder;
 npr;636;;NPR alkohol og rus-tilstandsgrupper;
-npr;637;;NPR alkohol og rus-alder og kjønn;
-npr;638;;NPR alkohol og rus-tjenesteområder;
+npr;637;;NPR alkohol og rus-alder og kjÃ¸nn;
+npr;638;;NPR alkohol og rus-tjenesteomrÃ¥der;
 sysvak;324;;SYSVAK influensavaksinasjon 24/25;
 sysvak;484;;SYSVAK koronavaksinasjon 24/25;
 sysvak;648;;SYSVAK bvp;
 sysvak;716;;SYSVAK influensavaksinasjon 25/26;
 sysvak;717;;SYSVAK koronavaksinasjon 25/26;
-sysvak;750;;SYSVAK covid-19 årlig 75+;
-sysvak;751;;SYSVAK covid-19 årlig 65+;
-sysvak;753;;SYSVAK influensa årlig 65+;
+sysvak;750;;SYSVAK covid-19 Ã¥rlig 75+;
+sysvak;751;;SYSVAK covid-19 Ã¥rlig 65+;
+sysvak;753;;SYSVAK influensa Ã¥rlig 65+;
+
