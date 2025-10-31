@@ -1,899 +1,2049 @@
 <!DOCTYPE html>
 <html lang="no">
 <head>
+    <!-- Updated: 2025-01-31 @ 19:45 UTC - Fixed pivot table display -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>FHI API Query Builder</title>
-    <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
-    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
-    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://unpkg.com/lucide@latest"></script>
+    <script crossorigin src="https://unpkg.com/react@18.2.0/umd/react.production.min.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18.2.0/umd/react-dom.production.min.js"></script>
     <style>
-        /* shadcn/ui compatible styles */
         * {
-            border-color: hsl(var(--border));
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
         }
-        :root {
-            --background: 0 0% 100%;
-            --foreground: 222.2 84% 4.9%;
-            --card: 0 0% 100%;
-            --card-foreground: 222.2 84% 4.9%;
-            --popover: 0 0% 100%;
-            --popover-foreground: 222.2 84% 4.9%;
-            --primary: 221.2 83.2% 53.3%;
-            --primary-foreground: 210 40% 98%;
-            --secondary: 210 40% 96.1%;
-            --secondary-foreground: 222.2 47.4% 11.2%;
-            --muted: 210 40% 96.1%;
-            --muted-foreground: 215.4 16.3% 46.9%;
-            --accent: 210 40% 96.1%;
-            --accent-foreground: 222.2 47.4% 11.2%;
-            --destructive: 0 84.2% 60.2%;
-            --destructive-foreground: 210 40% 98%;
-            --border: 214.3 31.8% 91.4%;
-            --input: 214.3 31.8% 91.4%;
-            --ring: 221.2 83.2% 53.3%;
-            --radius: 0.5rem;
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', sans-serif;
+            line-height: 1.5;
+            color: #1f2937;
         }
-        
+
+        .bg-gradient {
+            min-height: 100vh;
+            background: linear-gradient(135deg, #eff6ff 0%, #e0e7ff 100%);
+            padding: 2rem 1rem;
+        }
+
+        .container {
+            max-width: 72rem;
+            margin: 0 auto;
+        }
+
+        .text-center {
+            text-align: center;
+        }
+
+        .mb-2 { margin-bottom: 0.5rem; }
+        .mb-4 { margin-bottom: 1rem; }
+        .mb-6 { margin-bottom: 1.5rem; }
+        .mb-8 { margin-bottom: 2rem; }
+        .mt-1 { margin-top: 0.25rem; }
+        .mt-2 { margin-top: 0.5rem; }
+        .mt-4 { margin-top: 1rem; }
+        .mt-6 { margin-top: 1.5rem; }
+        .mr-1 { margin-right: 0.25rem; }
+        .ml-auto { margin-left: auto; }
+
+        .p-2 { padding: 0.5rem; }
+        .p-4 { padding: 1rem; }
+        .p-6 { padding: 1.5rem; }
+        .px-3 { padding-left: 0.75rem; padding-right: 0.75rem; }
+        .py-2 { padding-top: 0.5rem; padding-bottom: 0.5rem; }
+
+        h1 {
+            font-size: 2.25rem;
+            font-weight: 700;
+            color: #111827;
+        }
+
+        h2 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #111827;
+        }
+
+        h3 {
+            font-size: 1.125rem;
+            font-weight: 600;
+        }
+
+        .text-gray-600 { color: #4b5563; }
+        .text-gray-500 { color: #6b7280; }
+        .text-gray-400 { color: #9ca3af; }
+        .text-sm { font-size: 0.875rem; }
+        .text-xs { font-size: 0.75rem; }
+
+        .card {
+            background: white;
+            border-radius: 0.5rem;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .card-hover {
+            cursor: pointer;
+            transition: all 0.2s;
+            border: 2px solid #e5e7eb;
+        }
+
+        .card-hover:hover {
+            border-color: #3b82f6;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
         .btn {
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            border-radius: var(--radius);
+            gap: 0.5rem;
+            padding: 0.5rem 1rem;
+            border-radius: 0.375rem;
             font-size: 0.875rem;
             font-weight: 500;
-            transition: all 0.2s;
-            padding: 0.5rem 1rem;
             cursor: pointer;
-            border: 1px solid transparent;
+            border: none;
+            transition: all 0.2s;
         }
-        
+
+        .btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
         .btn-primary {
-            background-color: hsl(var(--primary));
-            color: hsl(var(--primary-foreground));
+            background: #3b82f6;
+            color: white;
         }
-        
-        .btn-primary:hover {
-            opacity: 0.9;
+
+        .btn-primary:hover:not(:disabled) {
+            background: #2563eb;
         }
-        
+
         .btn-outline {
-            border: 1px solid hsl(var(--border));
-            background-color: transparent;
+            background: transparent;
+            border: 1px solid #d1d5db;
+            color: #374151;
         }
-        
+
         .btn-outline:hover {
-            background-color: hsl(var(--accent));
+            background: #f3f4f6;
         }
-        
-        .btn-ghost {
-            background-color: transparent;
+
+        .btn-sm {
+            padding: 0.375rem 0.75rem;
+            font-size: 0.75rem;
         }
-        
-        .btn-ghost:hover {
-            background-color: hsl(var(--accent));
-        }
-        
-        .card {
-            border-radius: var(--radius);
-            border: 1px solid hsl(var(--border));
-            background-color: hsl(var(--card));
-            color: hsl(var(--card-foreground));
-        }
-        
-        .input {
-            flex: 1;
-            border-radius: var(--radius);
-            border: 1px solid hsl(var(--input));
-            background-color: transparent;
+
+        .input, .select {
+            width: 100%;
             padding: 0.5rem 0.75rem;
+            border: 1px solid #d1d5db;
+            border-radius: 0.375rem;
             font-size: 0.875rem;
         }
-        
-        .input:focus {
-            outline: 2px solid hsl(var(--ring));
+
+        .input:focus, .select:focus {
+            outline: 2px solid #3b82f6;
             outline-offset: 2px;
         }
-        
+
+        .checkbox, .radio {
+            width: 1rem;
+            height: 1rem;
+            cursor: pointer;
+        }
+
+        .label {
+            display: block;
+            font-size: 0.875rem;
+            font-weight: 500;
+            margin-bottom: 0.25rem;
+        }
+
         .badge {
             display: inline-flex;
             align-items: center;
-            border-radius: 9999px;
             padding: 0.25rem 0.625rem;
+            border-radius: 9999px;
             font-size: 0.75rem;
             font-weight: 600;
-            border: 1px solid transparent;
+            background: #f3f4f6;
+            color: #374151;
         }
-        
-        .badge-secondary {
-            background-color: hsl(var(--secondary));
-            color: hsl(var(--secondary-foreground));
-        }
-        
+
         .alert {
-            border-radius: var(--radius);
-            border: 1px solid hsl(var(--border));
             padding: 1rem;
+            border-radius: 0.375rem;
+            border: 1px solid #fecaca;
+            background: #fee2e2;
+            color: #991b1b;
         }
-        
-        .alert-destructive {
-            border-color: hsl(var(--destructive));
-            color: hsl(var(--destructive));
-            background-color: hsl(var(--destructive) / 0.1);
+
+        .grid-cols-3 {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
         }
-        
-        .select-trigger {
+
+        .flex {
+            display: flex;
+        }
+
+        .flex-col {
+            flex-direction: column;
+        }
+
+        .items-center {
+            align-items: center;
+        }
+
+        .justify-center {
+            justify-content: center;
+        }
+
+        .justify-between {
+            justify-content: space-between;
+        }
+
+        .gap-2 { gap: 0.5rem; }
+        .gap-4 { gap: 1rem; }
+
+        .space-y-1 > * + * { margin-top: 0.25rem; }
+        .space-y-2 > * + * { margin-top: 0.5rem; }
+        .space-y-4 > * + * { margin-top: 1rem; }
+
+        .overflow-y-auto {
+            overflow-y: auto;
+        }
+
+        .max-h-60 {
+            max-height: 15rem;
+        }
+
+        .max-h-96 {
+            max-height: 24rem;
+        }
+
+        .border {
+            border: 1px solid #e5e7eb;
+        }
+
+        .rounded {
+            border-radius: 0.375rem;
+        }
+
+        .rounded-full {
+            border-radius: 9999px;
+        }
+
+        .step-indicator {
             display: flex;
             align-items: center;
-            justify-content: space-between;
-            border-radius: var(--radius);
-            border: 1px solid hsl(var(--input));
-            background-color: transparent;
-            padding: 0.5rem 0.75rem;
-            font-size: 0.875rem;
-            cursor: pointer;
+            justify-content: center;
+            gap: 0.75rem;
+            margin-bottom: 1.5rem;
         }
-        
-        .tabs-list {
-            display: inline-flex;
+
+        .step-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.375rem;
+            cursor: pointer;
+            transition: opacity 0.2s;
+        }
+
+        .step-item:hover:not(.step-disabled) {
+            opacity: 0.8;
+        }
+
+        .step-disabled {
+            cursor: not-allowed;
+            opacity: 0.6;
+        }
+
+        .step-circle {
+            display: flex;
             align-items: center;
             justify-content: center;
-            border-radius: var(--radius);
-            background-color: hsl(var(--muted));
-            padding: 0.25rem;
+            width: 2rem;
+            height: 2rem;
+            border-radius: 9999px;
+            font-weight: 600;
+            font-size: 0.875rem;
         }
-        
-        .tabs-trigger {
-            padding: 0.375rem 0.75rem;
+
+        .step-label {
+            font-size: 0.75rem;
+            font-weight: 500;
+            text-align: center;
+        }
+
+        .step-active {
+            background: #3b82f6;
+            color: white;
+        }
+
+        .step-active .step-label {
+            color: #3b82f6;
+        }
+
+        .step-inactive {
+            background: #e5e7eb;
+            color: #6b7280;
+        }
+
+        .step-inactive .step-label {
+            color: #6b7280;
+        }
+
+        .code-block {
+            background: #1f2937;
+            color: #f3f4f6;
+            padding: 1rem;
+            border-radius: 0.5rem;
+            overflow-x: auto;
+            font-family: monospace;
+            font-size: 0.875rem;
+            white-space: pre;
+        }
+
+        .tabs {
+            display: flex;
+            background: #f3f4f6;
+            border-radius: 0.375rem;
+            padding: 0.25rem;
+            margin-bottom: 1rem;
+        }
+
+        .tab {
+            flex: 1;
+            padding: 0.5rem;
+            text-align: center;
+            border-radius: 0.25rem;
+            cursor: pointer;
             font-size: 0.875rem;
             font-weight: 500;
-            border-radius: calc(var(--radius) - 0.25rem);
+            transition: all 0.2s;
+        }
+
+        .tab-active {
+            background: white;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+
+        .tab:hover {
+            background: #e5e7eb;
+        }
+
+        .tab-active:hover {
+            background: white;
+        }
+
+        .icon {
+            width: 1.25rem;
+            height: 1.25rem;
+            stroke: currentColor;
+            fill: none;
+            stroke-width: 2;
+        }
+
+        .animate-spin {
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .font-semibold {
+            font-weight: 600;
+        }
+
+        .font-bold {
+            font-weight: 700;
+        }
+
+        .flex-1 {
+            flex: 1;
+        }
+
+        .w-full {
+            width: 100%;
+        }
+
+        .bg-blue-50 {
+            background: #eff6ff;
+        }
+
+        .border-blue-200 {
+            border-color: #bfdbfe;
+        }
+
+        .bg-green-50 {
+            background: #f0fdf4;
+        }
+
+        .border-green-200 {
+            border-color: #bbf7d0;
+        }
+
+        .geo-hierarchy {
+            padding-left: 0;
+        }
+
+        .geo-county {
+            margin-bottom: 0.5rem;
+        }
+
+        .geo-county-header {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.375rem 0.5rem;
+            background: #f9fafb;
+            border-radius: 0.25rem;
+            cursor: pointer;
+            font-weight: 500;
+            font-size: 0.875rem;
+            transition: background 0.2s;
+        }
+
+        .geo-county-header:hover {
+            background: #f3f4f6;
+        }
+
+        .geo-county-checkbox {
+            margin-right: 0.25rem;
+        }
+
+        .geo-chevron {
+            width: 1rem;
+            height: 1rem;
+            transition: transform 0.2s;
+        }
+
+        .geo-chevron.expanded {
+            transform: rotate(90deg);
+        }
+
+        .geo-municipality-list {
+            padding-left: 1.5rem;
+            margin-top: 0.25rem;
+            margin-bottom: 0.25rem;
+        }
+
+        .geo-municipality {
+            margin-bottom: 0.25rem;
+        }
+
+        .geo-municipality-header {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.25rem 0.5rem;
+            background: #fafbfc;
+            border-radius: 0.25rem;
+            cursor: pointer;
+            font-size: 0.813rem;
+            transition: background 0.2s;
+        }
+
+        .geo-municipality-header:hover {
+            background: #f3f4f6;
+        }
+
+        .geo-district-list {
+            padding-left: 1.5rem;
+            margin-top: 0.25rem;
+        }
+
+        .geo-district {
+            font-size: 0.813rem;
+            padding: 0.125rem 0.5rem;
+        }
+
+        .geo-indent {
+            padding-left: 0.5rem;
+        }
+
+        .geo-select-btn {
+            padding: 0.125rem 0.5rem;
+            font-size: 0.75rem;
+            background: transparent;
+            border: 1px solid #d1d5db;
+            color: #374151;
+            border-radius: 0.25rem;
             cursor: pointer;
             transition: all 0.2s;
         }
-        
-        .tabs-trigger:hover {
-            background-color: hsl(var(--background));
+
+        .geo-select-btn:hover {
+            background: #f3f4f6;
+            border-color: #9ca3af;
         }
-        
-        .tabs-trigger[data-state="active"] {
-            background-color: hsl(var(--background));
-            box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1);
-        }
-        
-        .checkbox {
-            width: 1rem;
-            height: 1rem;
-            border-radius: 0.25rem;
-            border: 1px solid hsl(var(--primary));
-            cursor: pointer;
-        }
-        
-        .radio {
-            width: 1rem;
-            height: 1rem;
-            border-radius: 9999px;
-            border: 1px solid hsl(var(--primary));
-            cursor: pointer;
+
+        @media (max-width: 768px) {
+            .grid-cols-3 {
+                grid-template-columns: 1fr;
+            }
+            
+            h1 {
+                font-size: 1.875rem;
+            }
         }
     </style>
 </head>
 <body>
     <div id="root"></div>
 
-    <script type="text/babel">
-        const { useState, useEffect } = React;
-        const { ChevronRight, Copy, Download, RefreshCw, CheckCircle2, Database, Filter, Eye } = lucide;
-
-        const API_BASE = 'https://statistikk-data.fhi.no/api/open/v1';
-
-        const FHIQueryBuilder = () => {
-          const [step, setStep] = useState(1);
-          const [sources, setSources] = useState([]);
-          const [selectedSource, setSelectedSource] = useState(null);
-          const [tables, setTables] = useState([]);
-          const [selectedTable, setSelectedTable] = useState(null);
-          const [dimensions, setDimensions] = useState([]);
-          const [queryConfig, setQueryConfig] = useState({});
-          const [finalQuery, setFinalQuery] = useState(null);
-          const [previewData, setPreviewData] = useState(null);
-          const [responseFormat, setResponseFormat] = useState('json-stat2');
-          const [maxRowCount, setMaxRowCount] = useState('');
-          const [loading, setLoading] = useState(false);
-          const [error, setError] = useState(null);
-          const [activeTab, setActiveTab] = useState({});
-
-          useEffect(() => {
-            fetchSources();
-          }, []);
-
-          const fetchSources = async () => {
-            setLoading(true);
-            setError(null);
-            try {
-              const response = await fetch(`${API_BASE}/Common/source`);
-              if (!response.ok) throw new Error('Kunne ikke hente kilder');
-              const data = await response.json();
-              setSources(data);
-            } catch (err) {
-              setError(err.message);
-            } finally {
-              setLoading(false);
-            }
-          };
-
-          const fetchTables = async (sourceId) => {
-            setLoading(true);
-            setError(null);
-            try {
-              const response = await fetch(`${API_BASE}/${sourceId}/table`);
-              if (!response.ok) throw new Error('Kunne ikke hente tabeller');
-              const data = await response.json();
-              setTables(data);
-            } catch (err) {
-              setError(err.message);
-            } finally {
-              setLoading(false);
-            }
-          };
-
-          const fetchDimensions = async (sourceId, tableId) => {
-            setLoading(true);
-            setError(null);
-            try {
-              const response = await fetch(`${API_BASE}/${sourceId}/Table/${tableId}/dimension`);
-              if (!response.ok) throw new Error('Kunne ikke hente dimensjoner');
-              const data = await response.json();
-              setDimensions(data);
-              
-              const initialConfig = {};
-              data.forEach(dim => {
-                initialConfig[dim.code] = {
-                  filter: 'all',
-                  values: ['*'],
-                  selectedCategories: []
-                };
-              });
-              setQueryConfig(initialConfig);
-            } catch (err) {
-              setError(err.message);
-            } finally {
-              setLoading(false);
-            }
-          };
-
-          const selectSource = (source) => {
-            setSelectedSource(source);
-            setSelectedTable(null);
-            setDimensions([]);
-            setQueryConfig({});
-            setFinalQuery(null);
-            setPreviewData(null);
-            fetchTables(source.id);
-            setStep(2);
-          };
-
-          const selectTable = (table) => {
-            setSelectedTable(table);
-            setDimensions([]);
-            setQueryConfig({});
-            setFinalQuery(null);
-            setPreviewData(null);
-            fetchDimensions(selectedSource.id, table.tableId);
-            setStep(3);
-          };
-
-          const updateDimensionConfig = (dimCode, updates) => {
-            setQueryConfig(prev => ({
-              ...prev,
-              [dimCode]: { ...prev[dimCode], ...updates }
-            }));
-          };
-
-          const getGeographyGroups = (dimension) => {
-            if (dimension.code !== 'GEO') return null;
+    <script>
+        (function() {
+            'use strict';
             
-            const categories = dimension.category.index;
-            const labels = dimension.category.label;
-            
-            const municipalities = [];
-            const counties = [];
-            const districts = [];
-            const others = [];
-            
-            categories.forEach(code => {
-              if (code.length === 6) {
-                districts.push({ code, label: labels[code] });
-              } else if (code.length === 2) {
-                counties.push({ code, label: labels[code] });
-              } else if (code.length === 4) {
-                municipalities.push({ code, label: labels[code] });
-              } else {
-                others.push({ code, label: labels[code] });
-              }
-            });
-            
-            return { municipalities, counties, districts, others };
-          };
+            const { useState, useEffect, createElement: h } = React;
+            const API_BASE = 'https://statistikk-data.fhi.no/api/open/v1';
 
-          const buildFinalQuery = () => {
-            const query = {
-              dimensions: dimensions.map(dim => {
-                const config = queryConfig[dim.code];
-                
-                if (config.filter === 'item') {
-                  return {
-                    code: dim.code,
-                    filter: 'item',
-                    values: config.selectedCategories
-                  };
-                } else if (config.filter === 'top') {
-                  return {
-                    code: dim.code,
-                    filter: 'top',
-                    values: [config.topCount || '5']
-                  };
-                } else {
-                  return {
-                    code: dim.code,
-                    filter: 'all',
-                    values: config.values
-                  };
-                }
-              }),
-              response: {
-                format: responseFormat
-              }
+            // Icon components as SVG
+            const Icons = {
+                ChevronRight: () => h('svg', { className: 'icon', viewBox: '0 0 24 24' },
+                    h('polyline', { points: '9 18 15 12 9 6' })
+                ),
+                CheckCircle: () => h('svg', { className: 'icon', viewBox: '0 0 24 24' },
+                    h('path', { d: 'M22 11.08V12a10 10 0 1 1-5.93-9.14' }),
+                    h('polyline', { points: '22 4 12 14.01 9 11.01' })
+                ),
+                Copy: () => h('svg', { className: 'icon', viewBox: '0 0 24 24' },
+                    h('rect', { x: '9', y: '9', width: '13', height: '13', rx: '2', ry: '2' }),
+                    h('path', { d: 'M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1' })
+                ),
+                Download: () => h('svg', { className: 'icon', viewBox: '0 0 24 24' },
+                    h('path', { d: 'M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4' }),
+                    h('polyline', { points: '7 10 12 15 17 10' }),
+                    h('line', { x1: '12', y1: '15', x2: '12', y2: '3' })
+                ),
+                RefreshCw: () => h('svg', { className: 'icon', viewBox: '0 0 24 24' },
+                    h('polyline', { points: '23 4 23 10 17 10' }),
+                    h('polyline', { points: '1 20 1 14 7 14' }),
+                    h('path', { d: 'M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15' })
+                ),
+                Database: () => h('svg', { className: 'icon', viewBox: '0 0 24 24' },
+                    h('ellipse', { cx: '12', cy: '5', rx: '9', ry: '3' }),
+                    h('path', { d: 'M21 12c0 1.66-4 3-9 3s-9-1.34-9-3' }),
+                    h('path', { d: 'M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5' })
+                ),
+                Filter: () => h('svg', { className: 'icon', viewBox: '0 0 24 24' },
+                    h('polygon', { points: '22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3' })
+                ),
+                Eye: () => h('svg', { className: 'icon', viewBox: '0 0 24 24' },
+                    h('path', { d: 'M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z' }),
+                    h('circle', { cx: '12', cy: '12', r: '3' })
+                ),
+                ChevronRight: () => h('svg', { className: 'icon', viewBox: '0 0 24 24' },
+                    h('polyline', { points: '9 18 15 12 9 6' })
+                )
             };
-            
-            if (maxRowCount && maxRowCount !== '') {
-              query.response.maxRowCount = parseInt(maxRowCount);
-            }
-            
-            setFinalQuery(query);
-            setStep(4);
-          };
 
-          const fetchPreview = async () => {
-            if (!finalQuery) return;
-            
-            setLoading(true);
-            setError(null);
-            try {
-              const response = await fetch(
-                `${API_BASE}/${selectedSource.id}/Table/${selectedTable.tableId}/data`,
-                {
-                  method: 'POST',
-                  headers: { 'Content-Type': 'application/json' },
-                  body: JSON.stringify(finalQuery)
+            function FHIQueryBuilder() {
+                const [step, setStep] = useState(1);
+                const [sources, setSources] = useState([]);
+                const [selectedSource, setSelectedSource] = useState(null);
+                const [tables, setTables] = useState([]);
+                const [selectedTable, setSelectedTable] = useState(null);
+                const [dimensions, setDimensions] = useState([]);
+                const [queryConfig, setQueryConfig] = useState({});
+                const [finalQuery, setFinalQuery] = useState(null);
+                const [previewData, setPreviewData] = useState(null);
+                const [responseFormat, setResponseFormat] = useState('json-stat2');
+                const [maxRowCount, setMaxRowCount] = useState('');
+                const [loading, setLoading] = useState(false);
+                const [error, setError] = useState(null);
+                const [activeTab, setActiveTab] = useState({});
+                const [globalSearch, setGlobalSearch] = useState('');
+                const [allTables, setAllTables] = useState([]);
+                const [outputFormat, setOutputFormat] = useState('json');
+                const [geoSearch, setGeoSearch] = useState('');
+                const [expandedCounties, setExpandedCounties] = useState({});
+                const [expandedMunicipalities, setExpandedMunicipalities] = useState({});
+
+                useEffect(() => {
+                    fetchSources();
+                }, []);
+
+                async function fetchSources() {
+                    setLoading(true);
+                    setError(null);
+                    try {
+                        const response = await fetch(API_BASE + '/Common/source');
+                        if (!response.ok) throw new Error('Kunne ikke hente kilder');
+                        const data = await response.json();
+                        setSources(data);
+                        
+                        // Fetch all tables for search
+                        const promises = data.map(async function(source) {
+                            try {
+                                const resp = await fetch(API_BASE + '/' + source.id + '/table');
+                                if (resp.ok) {
+                                    const tables = await resp.json();
+                                    return tables.map(function(table) {
+                                        return Object.assign({}, table, { sourceId: source.id, sourceName: source.name });
+                                    });
+                                }
+                            } catch (e) {
+                                return [];
+                            }
+                            return [];
+                        });
+                        const results = await Promise.all(promises);
+                        const flatTables = results.reduce(function(acc, tables) { return acc.concat(tables); }, []);
+                        setAllTables(flatTables);
+                    } catch (err) {
+                        setError(err.message);
+                    } finally {
+                        setLoading(false);
+                    }
                 }
-              );
-              
-              if (!response.ok) {
-                const errorData = await response.json();
-                throw new Error(errorData.message || 'Kunne ikke hente data');
-              }
-              
-              const data = await response.json();
-              setPreviewData(data);
-            } catch (err) {
-              setError(err.message);
-            } finally {
-              setLoading(false);
-            }
-          };
 
-          const copyToClipboard = (text) => {
-            navigator.clipboard.writeText(text);
-            alert('Kopiert til utklippstavle!');
-          };
+                async function fetchTables(sourceId) {
+                    setLoading(true);
+                    setError(null);
+                    try {
+                        const response = await fetch(API_BASE + '/' + sourceId + '/table');
+                        if (!response.ok) throw new Error('Kunne ikke hente tabeller');
+                        const data = await response.json();
+                        setTables(data);
+                    } catch (err) {
+                        setError(err.message);
+                    } finally {
+                        setLoading(false);
+                    }
+                }
 
-          const Icon = ({ icon, className = "w-5 h-5" }) => {
-            return React.createElement(icon, { className, size: 20 });
-          };
-
-          return (
-            <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 p-4 md:p-8">
-              <div className="max-w-6xl mx-auto">
-                <div className="text-center mb-8">
-                  <h1 className="text-4xl font-bold text-gray-900 mb-2">
-                    FHI API Query Builder
-                  </h1>
-                  <p className="text-gray-600">
-                    Bygg spørringer mot FHIs åpne statistikk-API
-                  </p>
-                </div>
-
-                <div className="flex items-center justify-center gap-2 mb-8">
-                  {[1, 2, 3, 4].map((num) => (
-                    <React.Fragment key={num}>
-                      <div className={`flex items-center justify-center w-10 h-10 rounded-full ${
-                        step >= num ? 'bg-blue-600 text-white' : 'bg-gray-200 text-gray-600'
-                      }`}>
-                        {step > num ? <Icon icon={CheckCircle2} className="w-5 h-5" /> : num}
-                      </div>
-                      {num < 4 && <Icon icon={ChevronRight} className="w-5 h-5 text-gray-400" />}
-                    </React.Fragment>
-                  ))}
-                </div>
-
-                <div className="bg-white rounded-lg shadow-lg p-6">
-                  {step === 1 && (
-                    <div className="card p-6">
-                      <div className="mb-4">
-                        <h2 className="text-2xl font-bold flex items-center gap-2">
-                          <Icon icon={Database} />
-                          Velg datakilde
-                        </h2>
-                        <p className="text-gray-600 mt-1">
-                          Velg hvilken kilde du vil hente data fra
-                        </p>
-                      </div>
-                      {loading && <p className="text-gray-500">Laster kilder...</p>}
-                      {error && (
-                        <div className="alert alert-destructive mb-4">
-                          {error}
-                        </div>
-                      )}
-                      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-                        {sources.map((source) => (
-                          <div
-                            key={source.id}
-                            className="card p-4 cursor-pointer hover:border-blue-500 transition-colors"
-                            onClick={() => selectSource(source)}
-                          >
-                            <h3 className="text-lg font-semibold">{source.name}</h3>
-                            <p className="text-sm text-gray-600">ID: {source.id}</p>
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-                  )}
-
-                  {step === 2 && (
-                    <div className="card p-6">
-                      <div className="mb-4">
-                        <h2 className="text-2xl font-bold">Velg tabell fra {selectedSource?.name}</h2>
-                        <p className="text-gray-600 mt-1">
-                          Velg hvilken tabell du vil bygge en spørring for
-                        </p>
-                      </div>
-                      {loading && <p className="text-gray-500">Laster tabeller...</p>}
-                      {error && (
-                        <div className="alert alert-destructive mb-4">
-                          {error}
-                        </div>
-                      )}
-                      <div className="space-y-2 max-h-96 overflow-y-auto mb-4">
-                        {tables.map((table) => (
-                          <div
-                            key={table.tableId}
-                            className="card p-4 cursor-pointer hover:border-blue-500 transition-colors"
-                            onClick={() => selectTable(table)}
-                          >
-                            <h3 className="font-semibold">{table.name}</h3>
-                            <p className="text-sm text-gray-600">Tabell ID: {table.tableId}</p>
-                            {table.updated && (
-                              <p className="text-xs text-gray-500 mt-1">
-                                Oppdatert: {new Date(table.updated).toLocaleDateString('nb-NO')}
-                              </p>
-                            )}
-                          </div>
-                        ))}
-                      </div>
-                      <button className="btn btn-outline" onClick={() => setStep(1)}>
-                        Tilbake til kilder
-                      </button>
-                    </div>
-                  )}
-
-                  {step === 3 && (
-                    <div className="space-y-4">
-                      <div className="card p-6">
-                        <div className="mb-4">
-                          <h2 className="text-2xl font-bold flex items-center gap-2">
-                            <Icon icon={Filter} />
-                            Konfigurer dimensjoner
-                          </h2>
-                          <p className="text-gray-600 mt-1">
-                            Velg verdier for hver dimensjon i tabellen
-                          </p>
-                        </div>
-                        <div className="space-y-4 mb-4">
-                          <div>
-                            <label className="block text-sm font-medium mb-1">Response format</label>
-                            <select
-                              className="select-trigger w-full"
-                              value={responseFormat}
-                              onChange={(e) => setResponseFormat(e.target.value)}
-                            >
-                              <option value="json-stat2">JSON-stat2 (anbefalt)</option>
-                              <option value="csv2">CSV med labels</option>
-                              <option value="csv3">CSV med koder</option>
-                            </select>
-                          </div>
-                          <div>
-                            <label className="block text-sm font-medium mb-1">Max antall rader (blank = ubegrenset)</label>
-                            <input
-                              type="number"
-                              className="input w-full"
-                              value={maxRowCount}
-                              onChange={(e) => setMaxRowCount(e.target.value)}
-                              placeholder="La stå tom for ubegrenset"
-                            />
-                          </div>
-                        </div>
-                      </div>
-
-                      {dimensions.map(dimension => {
-                        const config = queryConfig[dimension.code] || { filter: 'all', values: ['*'], selectedCategories: [] };
-                        const isTimeVariable = dimension.code === 'AAR' || dimension.label?.toLowerCase().includes('år');
-                        const isGeography = dimension.code === 'GEO';
-                        const dimTabKey = `tab-${dimension.code}`;
-                        const currentTab = activeTab[dimTabKey] || 'all';
+                // Helper function to flatten hierarchical categories
+                function flattenCategories(categories) {
+                    const result = { index: [], label: {} };
+                    
+                    function traverse(items) {
+                        if (!items || !Array.isArray(items)) return;
                         
-                        return (
-                          <div key={dimension.code} className="card p-6">
-                            <h3 className="text-lg font-bold mb-1">{dimension.label || dimension.code}</h3>
-                            <p className="text-sm text-gray-600 mb-4">
-                              Dimensjon: {dimension.code} ({dimension.category.index.length} kategorier)
-                            </p>
+                        items.forEach(function(item) {
+                            if (item.value && item.label) {
+                                result.index.push(item.value);
+                                result.label[item.value] = item.label;
+                            }
+                            if (item.children) {
+                                traverse(item.children);
+                            }
+                        });
+                    }
+                    
+                    traverse(categories);
+                    return result;
+                }
+
+                async function fetchDimensions(sourceId, tableId) {
+                    setLoading(true);
+                    setError(null);
+                    try {
+                        const response = await fetch(API_BASE + '/' + sourceId + '/Table/' + tableId + '/dimension');
+                        if (!response.ok) throw new Error('Kunne ikke hente dimensjoner');
+                        const data = await response.json();
+                        
+                        // API returnerer et objekt med dimensions property
+                        let dimensionsArray = data;
+                        
+                        // Hvis data er et objekt med dimensions property, hent den
+                        if (data && typeof data === 'object' && !Array.isArray(data) && data.dimensions) {
+                            dimensionsArray = data.dimensions;
+                        }
+                        
+                        // Sjekk at vi har et array
+                        if (!Array.isArray(dimensionsArray)) {
+                            console.error('Uventet data format:', data);
+                            throw new Error('Kunne ikke finne dimensions i API-responsen');
+                        }
+                        
+                        // Konverter hierarkiske kategorier til flat struktur
+                        dimensionsArray = dimensionsArray.map(function(dim) {
+                            // Hvis dimensjonen bruker 'categories' (hierarkisk), konverter til 'category' (flat)
+                            if (dim.categories && !dim.category) {
+                                dim.category = flattenCategories(dim.categories);
+                            }
+                            return dim;
+                        });
+                        
+                        setDimensions(dimensionsArray);
+                        
+                        const initialConfig = {};
+                        dimensionsArray.forEach(function(dim) {
+                            initialConfig[dim.code] = {
+                                filter: 'all',
+                                values: ['*'],
+                                selectedCategories: []
+                            };
+                        });
+                        setQueryConfig(initialConfig);
+                    } catch (err) {
+                        setError(err.message);
+                        setDimensions([]);
+                    } finally {
+                        setLoading(false);
+                    }
+                }
+
+                function selectSource(source) {
+                    setSelectedSource(source);
+                    setSelectedTable(null);
+                    setDimensions([]);
+                    setQueryConfig({});
+                    setFinalQuery(null);
+                    setPreviewData(null);
+                    fetchTables(source.id);
+                    setStep(2);
+                }
+
+                function selectTable(table) {
+                    setSelectedTable(table);
+                    setDimensions([]);
+                    setQueryConfig({});
+                    setFinalQuery(null);
+                    setPreviewData(null);
+                    fetchDimensions(selectedSource.id, table.tableId);
+                    setStep(3);
+                }
+
+                function updateDimensionConfig(dimCode, updates) {
+                    setQueryConfig(function(prev) {
+                        const newConfig = {};
+                        for (var key in prev) {
+                            newConfig[key] = prev[key];
+                        }
+                        newConfig[dimCode] = Object.assign({}, prev[dimCode], updates);
+                        return newConfig;
+                    });
+                }
+
+                function getGeographyGroups(dimension) {
+                    if (dimension.code !== 'GEO') return null;
+                    if (!dimension.category || !dimension.category.index) return null;
+                    
+                    const categories = dimension.category.index;
+                    const labels = dimension.category.label;
+                    const municipalities = [], counties = [], districts = [], others = [];
+                    
+                    categories.forEach(function(code) {
+                        const item = { code: code, label: labels[code] };
+                        if (code.length === 6) {
+                            districts.push(item);
+                        } else if (code.length === 2) {
+                            counties.push(item);
+                        } else if (code.length === 4) {
+                            municipalities.push(item);
+                        } else {
+                            others.push(item);
+                        }
+                    });
+                    
+                    // Build hierarchy
+                    const hierarchy = {};
+                    counties.forEach(function(county) {
+                        hierarchy[county.code] = {
+                            municipalities: municipalities.filter(function(m) { 
+                                return m.code.startsWith(county.code);
+                            }),
+                            districts: {}
+                        };
+                    });
+                    
+                    // Add districts to municipalities
+                    municipalities.forEach(function(mun) {
+                        const countyCode = mun.code.substring(0, 2);
+                        if (hierarchy[countyCode]) {
+                            hierarchy[countyCode].districts[mun.code] = districts.filter(function(d) {
+                                return d.code.startsWith(mun.code);
+                            });
+                        }
+                    });
+                    
+                    return { 
+                        municipalities: municipalities, 
+                        counties: counties, 
+                        districts: districts, 
+                        others: others,
+                        hierarchy: hierarchy
+                    };
+                }
+
+                function findMetricDimension(previewData) {
+                    // Finn måltall-dimensjon mer fleksibelt
+                    const dimNames = previewData.id;
+                    let metricDimId = null;
+                    
+                    // Metode 1: Sjekk role = 'metric'
+                    for (let i = 0; i < dimNames.length; i++) {
+                        const dimId = dimNames[i];
+                        if (previewData.dimension[dimId].role === 'metric') {
+                            metricDimId = dimId;
+                            break;
+                        }
+                    }
+                    
+                    // Metode 2: Sjekk for ContentsCode
+                    if (!metricDimId && dimNames.indexOf('ContentsCode') !== -1) {
+                        metricDimId = 'ContentsCode';
+                    }
+                    
+                    // Metode 3: Sjekk label (måltall, contents, variabel)
+                    if (!metricDimId) {
+                        for (let i = 0; i < dimNames.length; i++) {
+                            const dimId = dimNames[i];
+                            const label = (previewData.dimension[dimId].label || '').toLowerCase();
+                            if (label.includes('måltall') || label.includes('contents') || label.includes('variabel')) {
+                                metricDimId = dimId;
+                                break;
+                            }
+                        }
+                    }
+                    
+                    return metricDimId;
+                }
+
+                function buildFinalQuery() {
+                    const query = {
+                        dimensions: dimensions.map(function(dim) {
+                            const config = queryConfig[dim.code];
                             
-                            <div className="space-y-4">
-                              <div>
-                                <label className="block text-sm font-medium mb-2">Filtertype</label>
-                                <div className="space-y-2">
-                                  <label className="flex items-center gap-2">
-                                    <input
-                                      type="radio"
-                                      className="radio"
-                                      checked={config.filter === 'item'}
-                                      onChange={() => updateDimensionConfig(dimension.code, { filter: 'item' })}
-                                    />
-                                    <span className="text-sm">Velg spesifikke verdier</span>
-                                  </label>
-                                  {isTimeVariable && (
-                                    <label className="flex items-center gap-2">
-                                      <input
-                                        type="radio"
-                                        className="radio"
-                                        checked={config.filter === 'top'}
-                                        onChange={() => updateDimensionConfig(dimension.code, { filter: 'top' })}
-                                      />
-                                      <span className="text-sm">Siste X år</span>
-                                    </label>
-                                  )}
-                                  <label className="flex items-center gap-2">
-                                    <input
-                                      type="radio"
-                                      className="radio"
-                                      checked={config.filter === 'all'}
-                                      onChange={() => updateDimensionConfig(dimension.code, { filter: 'all' })}
-                                    />
-                                    <span className="text-sm">Alle (med wildcard)</span>
-                                  </label>
-                                </div>
-                              </div>
+                            if (config.filter === 'item') {
+                                return {
+                                    code: dim.code,
+                                    filter: 'item',
+                                    values: config.selectedCategories
+                                };
+                            } else if (config.filter === 'top') {
+                                return {
+                                    code: dim.code,
+                                    filter: 'top',
+                                    values: [config.topCount || '5']
+                                };
+                            } else {
+                                return {
+                                    code: dim.code,
+                                    filter: 'all',
+                                    values: config.values
+                                };
+                            }
+                        }),
+                        response: {
+                            format: responseFormat
+                        }
+                    };
+                    
+                    if (maxRowCount && maxRowCount !== '') {
+                        query.response.maxRowCount = parseInt(maxRowCount);
+                    }
+                    
+                    setFinalQuery(query);
+                    setStep(4);
+                }
 
-                              {config.filter === 'item' && (
-                                <div className="space-y-2">
-                                  <label className="block text-sm font-medium">Velg verdier</label>
-                                  {isGeography ? (
-                                    <div>
-                                      <div className="tabs-list mb-4">
-                                        {['all', 'counties', 'municipalities', 'districts'].map(tab => (
-                                          <button
-                                            key={tab}
-                                            className="tabs-trigger"
-                                            data-state={currentTab === tab ? 'active' : 'inactive'}
-                                            onClick={() => setActiveTab({...activeTab, [dimTabKey]: tab})}
-                                          >
-                                            {tab === 'all' ? 'Alle' : tab === 'counties' ? 'Fylker' : tab === 'municipalities' ? 'Kommuner' : 'Bydeler'}
-                                          </button>
-                                        ))}
-                                      </div>
-                                      
-                                      {currentTab === 'all' && (
-                                        <div className="space-y-2">
-                                          <button
-                                            className="btn btn-outline btn-sm"
-                                            onClick={() => {
-                                              const allCats = dimension.category.index;
-                                              updateDimensionConfig(dimension.code, { 
-                                                selectedCategories: config.selectedCategories.length === allCats.length ? [] : allCats 
-                                              });
-                                            }}
-                                          >
-                                            {config.selectedCategories.length === dimension.category.index.length ? 'Fjern alle' : 'Velg alle'}
-                                          </button>
-                                          <div className="text-sm text-gray-600">
-                                            {config.selectedCategories.length} av {dimension.category.index.length} valgt
-                                          </div>
-                                        </div>
-                                      )}
-                                      
-                                      {currentTab === 'counties' && (() => {
-                                        const groups = getGeographyGroups(dimension);
-                                        return (
-                                          <div className="max-h-60 overflow-y-auto border rounded p-2 space-y-2">
-                                            {groups.counties.map(county => (
-                                              <div key={county.code} className="space-y-1">
-                                                <label className="flex items-center gap-2 font-semibold">
-                                                  <input
-                                                    type="checkbox"
-                                                    className="checkbox"
-                                                    checked={config.selectedCategories.includes(county.code)}
-                                                    onChange={(e) => {
-                                                      const updated = e.target.checked
-                                                        ? [...config.selectedCategories, county.code]
-                                                        : config.selectedCategories.filter(c => c !== county.code);
-                                                      updateDimensionConfig(dimension.code, { selectedCategories: updated });
-                                                    }}
-                                                  />
-                                                  <span className="text-sm">{county.label} ({county.code})</span>
-                                                </label>
-                                              </div>
-                                            ))}
-                                          </div>
-                                        );
-                                      })()}
-                                      
-                                      {currentTab === 'municipalities' && (() => {
-                                        const groups = getGeographyGroups(dimension);
-                                        return (
-                                          <div className="max-h-60 overflow-y-auto border rounded p-2 space-y-1">
-                                            {groups.municipalities.map(mun => (
-                                              <label key={mun.code} className="flex items-center gap-2">
-                                                <input
-                                                  type="checkbox"
-                                                  className="checkbox"
-                                                  checked={config.selectedCategories.includes(mun.code)}
-                                                  onChange={(e) => {
-                                                    const updated = e.target.checked
-                                                      ? [...config.selectedCategories, mun.code]
-                                                      : config.selectedCategories.filter(c => c !== mun.code);
-                                                    updateDimensionConfig(dimension.code, { selectedCategories: updated });
-                                                  }}
-                                                />
-                                                <span className="text-sm">{mun.label} ({mun.code})</span>
-                                              </label>
-                                            ))}
-                                          </div>
-                                        );
-                                      })()}
-                                      
-                                      {currentTab === 'districts' && (() => {
-                                        const groups = getGeographyGroups(dimension);
-                                        return groups.districts.length > 0 ? (
-                                          <div className="max-h-60 overflow-y-auto border rounded p-2 space-y-1">
-                                            {groups.districts.map(dist => (
-                                              <label key={dist.code} className="flex items-center gap-2">
-                                                <input
-                                                  type="checkbox"
-                                                  className="checkbox"
-                                                  checked={config.selectedCategories.includes(dist.code)}
-                                                  onChange={(e) => {
-                                                    const updated = e.target.checked
-                                                      ? [...config.selectedCategories, dist.code]
-                                                      : config.selectedCategories.filter(c => c !== dist.code);
-                                                    updateDimensionConfig(dimension.code, { selectedCategories: updated });
-                                                  }}
-                                                />
-                                                <span className="text-sm">{dist.label} ({dist.code})</span>
-                                              </label>
-                                            ))}
-                                          </div>
-                                        ) : (
-                                          <p className="text-gray-500">Ingen bydeler i denne tabellen</p>
-                                        );
-                                      })()}
-                                    </div>
-                                  ) : (
-                                    <>
-                                      <div className="max-h-60 overflow-y-auto border rounded p-2 space-y-1">
-                                        {dimension.category.index.map(cat => (
-                                          <label key={cat} className="flex items-center gap-2">
-                                            <input
-                                              type="checkbox"
-                                              className="checkbox"
-                                              checked={config.selectedCategories.includes(cat)}
-                                              onChange={(e) => {
-                                                const updated = e.target.checked
-                                                  ? [...config.selectedCategories, cat]
-                                                  : config.selectedCategories.filter(c => c !== cat);
-                                                updateDimensionConfig(dimension.code, { selectedCategories: updated });
-                                              }}
-                                            />
-                                            <span className="text-sm">{dimension.category.label[cat]} ({cat})</span>
-                                          </label>
-                                        ))}
-                                      </div>
-                                      <button
-                                        className="btn btn-outline btn-sm"
-                                        onClick={() => {
-                                          const allCats = dimension.category.index;
-                                          updateDimensionConfig(dimension.code, { 
-                                            selectedCategories: config.selectedCategories.length === allCats.length ? [] : allCats 
-                                          });
-                                        }}
-                                      >
-                                        {config.selectedCategories.length === dimension.category.index.length ? 'Fjern alle' : 'Velg alle'}
-                                      </button>
-                                    </>
-                                  )}
-                                </div>
-                              )}
-
-                              {config.filter === 'top' && (
-                                <div>
-                                  <label className="block text-sm font-medium mb-1">Antall</label>
-                                  <input
-                                    type="number"
-                                    min="1"
-                                    className="input w-full"
-                                    value={config.topCount || '5'}
-                                    onChange={(e) => updateDimensionConfig(dimension.code, { topCount: e.target.value })}
-                                  />
-                                </div>
-                              )}
-
-                              {config.filter === 'all' && (
-                                <div>
-                                  <label className="block text-sm font-medium mb-1">Wildcard-verdier (kommaseparert)</label>
-                                  <input
-                                    className="input w-full"
-                                    value={config.values.join(', ')}
-                                    onChange={(e) => {
-                                      const values = e.target.value.split(',').map(v => v.trim()).filter(v => v);
-                                      updateDimensionConfig(dimension.code, { values: values.length > 0 ? values : ['*'] });
-                                    }}
-                                    placeholder="*, 03*, 30*"
-                                  />
-                                  <p className="text-xs text-gray-500 mt-1">
-                                    Bruk * for å matche alle, eller f.eks. "03*" for å matche alle som starter med 03
-                                  </p>
-                                </div>
-                              )}
-
-                              <div className="flex items-center gap-2 text-sm text-gray-600">
-                                <span className="badge badge-secondary">
-                                  {config.selectedCategories.length > 0 
-                                    ? `${config.selectedCategories.length} valgt`
-                                    : config.filter === 'all' 
-                                      ? `Alle (${dimension.category.index.length})`
-                                      : config.filter === 'top'
-                                        ? `Topp ${config.topCount || 5}`
-                                        : 'Ingen valgt'}
-                                </span>
-                              </div>
-                            </div>
-                          </div>
+                async function fetchPreview() {
+                    if (!finalQuery) return;
+                    
+                    setLoading(true);
+                    setError(null);
+                    try {
+                        const response = await fetch(
+                            API_BASE + '/' + selectedSource.id + '/Table/' + selectedTable.tableId + '/data',
+                            {
+                                method: 'POST',
+                                headers: { 'Content-Type': 'application/json' },
+                                body: JSON.stringify(finalQuery)
+                            }
                         );
-                      })}
-
-                      <div className="flex gap-2">
-                        <button className="btn btn-outline" onClick={() => setStep(2)}>
-                          Tilbake til tabeller
-                        </button>
-                        <button className="btn btn-primary flex-1" onClick={buildFinalQuery}>
-                          Generer spørring
-                        </button>
-                      </div>
-                    </div>
-                  )}
-
-                  {step === 4 && (
-                    <div className="space-y-4">
-                      <div className="card p-6">
-                        <div className="mb-4">
-                          <h2 className="text-2xl font-bold flex items-center gap-2">
-                            <Icon icon={Eye} />
-                            Din ferdig spørring
-                          </h2>
-                          <p className="text-gray-600 mt-1">
-                            Denne spørringen kan brukes mot FHI API
-                          </p>
-                        </div>
                         
-                        <div className="bg-gray-900 text-gray-100 p-4 rounded-lg overflow-x-auto mb-4">
-                          <pre className="text-sm">{JSON.stringify(finalQuery, null, 2)}</pre>
-                        </div>
+                        if (!response.ok) {
+                            const errorData = await response.json();
+                            throw new Error(errorData.message || 'Kunne ikke hente data');
+                        }
                         
-                        <div className="flex gap-2 mb-4">
-                          <button
-                            className="btn btn-outline flex items-center gap-2"
-                            onClick={() => copyToClipboard(JSON.stringify(finalQuery, null, 2))}
-                          >
-                            <Icon icon={Copy} className="w-4 h-4" />
-                            Kopier spørring
-                          </button>
-                          <button
-                            className="btn btn-primary flex items-center gap-2"
-                            onClick={fetchPreview}
-                            disabled={loading}
-                          >
-                            {loading ? (
-                              <Icon icon={RefreshCw} className="w-4 h-4 animate-spin" />
-                            ) : (
-                              <Icon icon={Download} className="w-4 h-4" />
-                            )}
-                            Hent preview av data
-                          </button>
-                        </div>
+                        const data = await response.json();
+                        setPreviewData(data);
+                    } catch (err) {
+                        setError(err.message);
+                    } finally {
+                        setLoading(false);
+                    }
+                }
 
-                        <div className="text-sm text-gray-600 p-4 bg-blue-50 rounded border border-blue-200">
-                          <p className="font-semibold mb-2">API endpoint:</p>
-                          <code className="text-xs">
-                            POST {API_BASE}/{selectedSource?.id}/Table/{selectedTable?.tableId}/data
-                          </code>
-                        </div>
-                      </div>
+                function copyToClipboard(text) {
+                    navigator.clipboard.writeText(text);
+                    alert('Kopiert til utklippstavle!');
+                }
 
-                      {error && (
-                        <div className="alert alert-destructive">
-                          {error}
-                        </div>
-                      )}
+                function generatePowerQueryCode() {
+                    if (!finalQuery || !selectedSource || !selectedTable) return '';
+                    
+                    const url = API_BASE + '/' + selectedSource.id + '/Table/' + selectedTable.tableId + '/data';
+                    const jsonFormatted = JSON.stringify(finalQuery, null, 12).split('\n').join('\n        ');
+                    const jsonEscaped = jsonFormatted.replace(/"/g, '""');
+                    
+                    const powerQueryCode = 'let\n' +
+                        '    url="' + url + '",\n' +
+                        '    jsonBody= "' + jsonEscaped + '",\n' +
+                        '    \n' +
+                        '    WebCall = Web.Contents(url, [Headers=[#"Content-Type"="application/json"], Content=Text.ToBinary(jsonBody)]),\n' +
+                        '    \n' +
+                        '    LinesFromBinary = Lines.FromBinary(WebCall),\n' +
+                        '    ConvertToTable = Table.FromList(LinesFromBinary, Splitter.SplitTextByDelimiter(";"), null, null, ExtraValues.Error),\n' +
+                        '    #"Promoted Headers" = Table.PromoteHeaders(ConvertToTable, [PromoteAllScalars=true])\n' +
+                        'in\n' +
+                        '    #"Promoted Headers"';
+                    
+                    return powerQueryCode;
+                }
 
-                      {previewData && (
-                        <div className="card p-6">
-                          <h3 className="text-xl font-bold mb-2">Forhåndsvisning av data</h3>
-                          <p className="text-gray-600 mb-4">
-                            {responseFormat === 'json-stat2' 
-                              ? `${previewData.value?.length || 0} verdier returnert`
-                              : 'Data hentet'}
-                          </p>
-                          
-                          {responseFormat === 'json-stat2' && previewData.dimension && (
-                            <div className="mb-4">
-                              <span className="font-semibold text-sm">Dimensjoner: </span>
-                              {previewData.id?.map(dimId => (
-                                <span key={dimId} className="badge badge-secondary mr-1">
-                                  {previewData.dimension[dimId]?.label || dimId}
-                                </span>
-                              ))}
-                            </div>
-                          )}
-                          
-                          <div className="bg-gray-900 text-gray-100 p-4 rounded-lg overflow-x-auto max-h-96">
-                            <pre className="text-xs">{JSON.stringify(previewData, null, 2)}</pre>
-                          </div>
-                        </div>
-                      )}
+                // Render step indicator
+                function renderStepIndicator() {
+                    const steps = [
+                        { num: 1, label: 'Kilde' },
+                        { num: 2, label: 'Tabeller' },
+                        { num: 3, label: 'Variabler' },
+                        { num: 4, label: 'Spørring' }
+                    ];
+                    
+                    return h('div', { className: 'step-indicator' },
+                        steps.map(function(stepItem, idx) {
+                            const isActive = step >= stepItem.num;
+                            const isClickable = stepItem.num < step || (stepItem.num === 2 && selectedSource) || (stepItem.num === 3 && selectedTable) || stepItem.num === step;
+                            
+                            return h(React.Fragment, { key: stepItem.num },
+                                h('div', {
+                                    className: 'step-item ' + (!isClickable ? 'step-disabled' : ''),
+                                    onClick: isClickable ? function() {
+                                        if (stepItem.num === 1) setStep(1);
+                                        else if (stepItem.num === 2 && selectedSource) setStep(2);
+                                        else if (stepItem.num === 3 && selectedTable) setStep(3);
+                                        else if (stepItem.num === 4 && finalQuery) setStep(4);
+                                    } : undefined
+                                },
+                                    h('div', { className: 'step-circle ' + (isActive ? 'step-active' : 'step-inactive') },
+                                        step > stepItem.num ? h(Icons.CheckCircle) : stepItem.num
+                                    ),
+                                    h('div', { className: 'step-label ' + (isActive ? 'step-active' : 'step-inactive') },
+                                        stepItem.label
+                                    )
+                                ),
+                                idx < steps.length - 1 && h('span', { className: 'text-gray-400', style: { marginTop: '-1rem' } }, h(Icons.ChevronRight))
+                            );
+                        })
+                    );
+                }
 
-                      <div className="flex gap-2">
-                        <button className="btn btn-outline" onClick={() => setStep(3)}>
-                          Tilbake til konfigurasjon
-                        </button>
-                        <button className="btn btn-outline" onClick={() => {
-                          setStep(1);
-                          setSelectedSource(null);
-                          setSelectedTable(null);
-                          setDimensions([]);
-                          setQueryConfig({});
-                          setFinalQuery(null);
-                          setPreviewData(null);
-                        }}>
-                          Start på nytt
-                        </button>
-                      </div>
-                    </div>
-                  )}
-                </div>
+                // Render source selection (step 1)
+                function renderSourceSelection() {
+                    const filteredTables = globalSearch.trim() !== '' 
+                        ? allTables.filter(function(table) {
+                            const searchLower = globalSearch.toLowerCase();
+                            return (table.title && table.title.toLowerCase().includes(searchLower)) ||
+                                   (table.name && table.name.toLowerCase().includes(searchLower)) ||
+                                   (table.tableId && table.tableId.toString().includes(searchLower));
+                        })
+                        : [];
+                    
+                    return h('div', { className: 'card' },
+                        h('div', { className: 'mb-4' },
+                            h('h2', { className: 'flex items-center gap-2 mb-2' },
+                                h(Icons.Database),
+                                'Velg datakilde'
+                            ),
+                            h('p', { className: 'text-gray-600' }, 'Velg en kilde nedenfor, eller søk direkte etter en tabell')
+                        ),
+                        h('div', { className: 'mb-4' },
+                            h('input', {
+                                type: 'text',
+                                className: 'input',
+                                placeholder: 'Søk etter tabell på tvers av alle kilder...',
+                                value: globalSearch,
+                                onChange: function(e) { setGlobalSearch(e.target.value); }
+                            })
+                        ),
+                        globalSearch.trim() !== '' ? h('div', { className: 'mb-4' },
+                            h('h3', { className: 'font-semibold mb-2' }, 
+                                'Søkeresultater (' + filteredTables.length + ' tabeller)'
+                            ),
+                            filteredTables.length === 0 
+                                ? h('p', { className: 'text-gray-500 text-sm' }, 'Ingen tabeller funnet')
+                                : h('div', { className: 'space-y-2 max-h-96 overflow-y-auto' },
+                                    filteredTables.slice(0, 50).map(function(table) {
+                                        return h('div', {
+                                            key: table.sourceId + '-' + table.tableId,
+                                            className: 'card card-hover',
+                                            onClick: function() {
+                                                const source = sources.find(function(s) { return s.id === table.sourceId; });
+                                                if (source) {
+                                                    setSelectedSource(source);
+                                                    setSelectedTable(table);
+                                                    setDimensions([]);
+                                                    setQueryConfig({});
+                                                    setFinalQuery(null);
+                                                    setPreviewData(null);
+                                                    fetchDimensions(source.id, table.tableId);
+                                                    setGlobalSearch('');
+                                                    setStep(3);
+                                                }
+                                            }
+                                        },
+                                            h('h3', { className: 'font-semibold' }, (table.title || table.name) + ' (' + table.tableId + ')'),
+                                            h('p', { className: 'text-xs text-gray-500' }, 'Kilde: ' + table.sourceName),
+                                            table.modifiedAt && h('p', { className: 'text-xs text-gray-500 mt-1' },
+                                                'Oppdatert: ' + new Date(table.modifiedAt).toISOString().split('T')[0]
+                                            )
+                                        );
+                                    }),
+                                    filteredTables.length > 50 && h('p', { className: 'text-xs text-gray-500 text-center mt-2' },
+                                        'Viser 50 av ' + filteredTables.length + ' resultater. Presiser søket for å se flere.'
+                                    )
+                                )
+                        ) : null,
+                        globalSearch.trim() === '' ? (
+                            h('div', null,
+                                loading && h('p', { className: 'text-gray-500' }, 'Laster kilder...'),
+                                error && h('div', { className: 'alert mb-4' }, error),
+                                h('div', { className: 'grid-cols-3' },
+                                    sources.map(function(source) {
+                                        return h('div', {
+                                            key: source.id,
+                                            className: 'card card-hover',
+                                            onClick: function() { selectSource(source); }
+                                        },
+                                            h('h3', null, source.title || source.name),
+                                            source.description && h('p', { className: 'text-sm text-gray-600 mt-1' }, source.description),
+                                            source.publishedBy && h('p', { className: 'text-xs text-gray-500 mt-2' }, 'Utgiver: ' + source.publishedBy),
+                                            source.aboutUrl && h('a', {
+                                                href: source.aboutUrl,
+                                                className: 'text-xs text-blue-600 mt-1 inline-block',
+                                                target: '_blank',
+                                                rel: 'noopener noreferrer',
+                                                onClick: function(e) { e.stopPropagation(); }
+                                            }, 'Les mer →')
+                                        );
+                                    })
+                                )
+                            )
+                        ) : null
+                    );
+                }
 
-                <div className="mt-6 text-center text-sm text-gray-600">
-                  <p>
-                    Data fra <a href="https://statistikk-data.fhi.no" className="text-blue-600 hover:underline" target="_blank" rel="noopener noreferrer">FHI Statistikk</a>
-                  </p>
-                </div>
-              </div>
-            </div>
-          );
-        };
+                // Render table selection (step 2)
+                function renderTableSelection() {
+                    return h('div', { className: 'card' },
+                        h('div', { className: 'mb-4' },
+                            h('h2', { className: 'mb-2' }, 'Velg tabell fra ' + (selectedSource ? selectedSource.name : '')),
+                            h('p', { className: 'text-gray-600' }, 'Velg hvilken tabell du vil bygge en spørring for')
+                        ),
+                        loading && h('p', { className: 'text-gray-500' }, 'Laster tabeller...'),
+                        error && h('div', { className: 'alert mb-4' }, error),
+                        h('div', { className: 'space-y-2 max-h-96 overflow-y-auto mb-4' },
+                            tables.map(function(table) {
+                                return h('div', {
+                                    key: table.tableId,
+                                    className: 'card card-hover',
+                                    onClick: function() { selectTable(table); }
+                                },
+                                    h('h3', { className: 'font-semibold' }, (table.title || table.name) + ' (' + table.tableId + ')'),
+                                    table.modifiedAt && h('p', { className: 'text-xs text-gray-500 mt-1' },
+                                        'Oppdatert: ' + new Date(table.modifiedAt).toISOString().split('T')[0]
+                                    )
+                                );
+                            })
+                        ),
+                        h('button', {
+                            className: 'btn btn-outline',
+                            onClick: function() { setStep(1); }
+                        }, 'Tilbake til kilder')
+                    );
+                }
 
-        ReactDOM.render(<FHIQueryBuilder />, document.getElementById('root'));
+                // Render dimension configuration (step 3) - simplified version
+                function renderDimensionConfiguration() {
+                    return h('div', { className: 'space-y-4' },
+                        h('div', { className: 'card' },
+                            h('div', { className: 'mb-4' },
+                                h('h2', { className: 'flex items-center gap-2 mb-2' },
+                                    h(Icons.Filter),
+                                    'Konfigurer dimensjoner'
+                                ),
+                                h('p', { className: 'text-gray-600' }, 'Velg verdier for hver dimensjon i tabellen')
+                            ),
+                            loading && h('p', { className: 'text-gray-500 mb-4' }, 'Laster dimensjoner...'),
+                            error && h('div', { className: 'alert mb-4' }, error),
+                            h('div', { className: 'space-y-4 mb-4' },
+                                h('div', null,
+                                    h('label', { className: 'label' }, 'Response format'),
+                                    h('select', {
+                                        className: 'select',
+                                        value: responseFormat,
+                                        onChange: function(e) { setResponseFormat(e.target.value); }
+                                    },
+                                        h('option', { value: 'json-stat2' }, 'JSON-stat2 (anbefalt)'),
+                                        h('option', { value: 'csv2' }, 'CSV med labels'),
+                                        h('option', { value: 'csv3' }, 'CSV med koder')
+                                    )
+                                ),
+                                h('div', null,
+                                    h('label', { className: 'label' }, 'Max antall rader (blank = ubegrenset)'),
+                                    h('input', {
+                                        type: 'number',
+                                        className: 'input',
+                                        value: maxRowCount,
+                                        onChange: function(e) { setMaxRowCount(e.target.value); },
+                                        placeholder: 'La stå tom for ubegrenset'
+                                    })
+                                )
+                            )
+                        ),
+                        (!loading && dimensions && Array.isArray(dimensions)) && dimensions.map(function(dimension) {
+                            const config = queryConfig[dimension.code] || { filter: 'all', values: ['*'], selectedCategories: [] };
+                            const isTimeVariable = dimension.code === 'AAR' || (dimension.label && dimension.label.toLowerCase().includes('år'));
+                            
+                            // Sjekk at dimension har category og index
+                            if (!dimension.category || !dimension.category.index) {
+                                console.error('Dimension mangler category eller index:', dimension);
+                                return h('div', { key: dimension.code, className: 'card' },
+                                    h('div', { className: 'alert' },
+                                        'Dimensjon ' + (dimension.label || dimension.code) + ' har ikke riktig struktur'
+                                    )
+                                );
+                            }
+                            
+                            return h('div', { key: dimension.code, className: 'card' },
+                                h('h3', { className: 'font-bold mb-1' }, dimension.label || dimension.code),
+                                h('p', { className: 'text-sm text-gray-600 mb-4' },
+                                    'Dimensjon: ' + dimension.code + ' (' + dimension.category.index.length + ' kategorier)'
+                                ),
+                                h('div', { className: 'space-y-4' },
+                                    h('div', null,
+                                        h('label', { className: 'label' }, 'Filtertype'),
+                                        h('div', { className: 'space-y-2 mt-2' },
+                                            h('label', { className: 'flex items-center gap-2' },
+                                                h('input', {
+                                                    type: 'radio',
+                                                    className: 'radio',
+                                                    checked: config.filter === 'item',
+                                                    onChange: function() { updateDimensionConfig(dimension.code, { filter: 'item' }); }
+                                                }),
+                                                h('span', { className: 'text-sm' }, 'Velg spesifikke verdier')
+                                            ),
+                                            isTimeVariable && h('label', { className: 'flex items-center gap-2' },
+                                                h('input', {
+                                                    type: 'radio',
+                                                    className: 'radio',
+                                                    checked: config.filter === 'top',
+                                                    onChange: function() { updateDimensionConfig(dimension.code, { filter: 'top' }); }
+                                                }),
+                                                h('span', { className: 'text-sm' }, 'Siste X år')
+                                            ),
+                                            h('label', { className: 'flex items-center gap-2' },
+                                                h('input', {
+                                                    type: 'radio',
+                                                    className: 'radio',
+                                                    checked: config.filter === 'all',
+                                                    onChange: function() { updateDimensionConfig(dimension.code, { filter: 'all' }); }
+                                                }),
+                                                h('span', { className: 'text-sm' }, 'Alle (med wildcard)')
+                                            )
+                                        )
+                                    ),
+                                    config.filter === 'item' && h('div', { className: 'space-y-2' },
+                                        h('label', { className: 'label' }, 'Velg verdier'),
+                                        dimension.code === 'GEO' && h('input', {
+                                            type: 'text',
+                                            className: 'input mb-2',
+                                            placeholder: 'Søk etter fylke, kommune eller bydel...',
+                                            value: geoSearch,
+                                            onChange: function(e) { setGeoSearch(e.target.value); }
+                                        }),
+                                        h('div', { className: 'max-h-60 overflow-y-auto border rounded p-2 space-y-1' },
+                                            (function() {
+                                                const geoGroups = getGeographyGroups(dimension);
+                                                
+                                                if (dimension.code === 'GEO' && geoGroups && geoGroups.hierarchy) {
+                                                    const hierarchy = geoGroups.hierarchy;
+                                                    
+                                                    // Filter counties based on search
+                                                    const filteredCounties = geoGroups.counties.filter(function(county) {
+                                                        if (geoSearch.trim() === '') return true;
+                                                        const searchLower = geoSearch.toLowerCase();
+                                                        
+                                                        // Check if county matches
+                                                        if (county.label.toLowerCase().includes(searchLower) || 
+                                                            county.code.toLowerCase().includes(searchLower)) {
+                                                            return true;
+                                                        }
+                                                        
+                                                        // Check if any municipality in county matches
+                                                        const countyMunicipalities = hierarchy[county.code] ? hierarchy[county.code].municipalities : [];
+                                                        return countyMunicipalities.some(function(mun) {
+                                                            return mun.label.toLowerCase().includes(searchLower) || 
+                                                                   mun.code.toLowerCase().includes(searchLower);
+                                                        });
+                                                    });
+                                                    
+                                                    return h('div', { className: 'geo-hierarchy space-y-1' },
+                                                        geoGroups.others.length > 0 && geoGroups.others.map(function(other) {
+                                                            return h('label', { key: other.code, className: 'flex items-center gap-2' },
+                                                                h('input', {
+                                                                    type: 'checkbox',
+                                                                    className: 'checkbox',
+                                                                    checked: config.selectedCategories.includes(other.code),
+                                                                    onChange: function(e) {
+                                                                        const updated = e.target.checked
+                                                                            ? config.selectedCategories.concat([other.code])
+                                                                            : config.selectedCategories.filter(function(c) { return c !== other.code; });
+                                                                        updateDimensionConfig(dimension.code, { selectedCategories: updated });
+                                                                    }
+                                                                }),
+                                                                h('span', { className: 'text-sm' }, other.label + ' (' + other.code + ')')
+                                                            );
+                                                        }),
+                                                        filteredCounties.map(function(county) {
+                                                            const isExpanded = expandedCounties[county.code];
+                                                            const countyMunicipalities = hierarchy[county.code] ? hierarchy[county.code].municipalities : [];
+                                                            const countyDistricts = hierarchy[county.code] ? hierarchy[county.code].districts : {};
+                                                            
+                                                            const allMunicipalitiesAndDistricts = countyMunicipalities.map(function(m) { return m.code; }).concat(
+                                                                geoGroups.districts.filter(function(d) { return d.code.startsWith(county.code); }).map(function(d) { return d.code; })
+                                                            );
+                                                            
+                                                            const countySelected = config.selectedCategories.includes(county.code);
+                                                            const allMunsAndDistsSelected = allMunicipalitiesAndDistricts.length > 0 && 
+                                                                allMunicipalitiesAndDistricts.every(function(code) { return config.selectedCategories.includes(code); });
+                                                            
+                                                            return h('div', { key: county.code, className: 'geo-county' },
+                                                                h('div', { className: 'geo-county-header' },
+                                                                    h('input', {
+                                                                        type: 'checkbox',
+                                                                        className: 'checkbox geo-county-checkbox',
+                                                                        checked: countySelected,
+                                                                        onChange: function(e) {
+                                                                            const updated = e.target.checked
+                                                                                ? config.selectedCategories.concat([county.code])
+                                                                                : config.selectedCategories.filter(function(c) { return c !== county.code; });
+                                                                            updateDimensionConfig(dimension.code, { selectedCategories: updated });
+                                                                        }
+                                                                    }),
+                                                                    h('svg', {
+                                                                        className: 'geo-chevron' + (isExpanded ? ' expanded' : ''),
+                                                                        viewBox: '0 0 24 24',
+                                                                        onClick: function() {
+                                                                            const newExpanded = {};
+                                                                            for (var key in expandedCounties) {
+                                                                                newExpanded[key] = expandedCounties[key];
+                                                                            }
+                                                                            newExpanded[county.code] = !isExpanded;
+                                                                            setExpandedCounties(newExpanded);
+                                                                        }
+                                                                    },
+                                                                        h('polyline', { points: '9 18 15 12 9 6', fill: 'none', stroke: 'currentColor', strokeWidth: '2' })
+                                                                    ),
+                                                                    h('span', { className: 'flex-1', style: { cursor: 'pointer' }, onClick: function() {
+                                                                        const newExpanded = {};
+                                                                        for (var key in expandedCounties) {
+                                                                            newExpanded[key] = expandedCounties[key];
+                                                                        }
+                                                                        newExpanded[county.code] = !isExpanded;
+                                                                        setExpandedCounties(newExpanded);
+                                                                    } }, county.label + ' (' + county.code + ')'),
+                                                                    countyMunicipalities.length > 0 && h('button', {
+                                                                        className: 'geo-select-btn',
+                                                                        onClick: function(e) {
+                                                                            e.stopPropagation();
+                                                                            const updated = allMunsAndDistsSelected
+                                                                                ? config.selectedCategories.filter(function(c) { 
+                                                                                    return !allMunicipalitiesAndDistricts.includes(c); 
+                                                                                })
+                                                                                : config.selectedCategories.filter(function(c) { 
+                                                                                    return !allMunicipalitiesAndDistricts.includes(c); 
+                                                                                }).concat(allMunicipalitiesAndDistricts);
+                                                                            updateDimensionConfig(dimension.code, { selectedCategories: updated });
+                                                                        }
+                                                                    }, allMunsAndDistsSelected ? 'Fjern alle kommuner' : 'Velg alle kommuner')
+                                                                ),
+                                                                isExpanded && countyMunicipalities.length > 0 && h('div', { className: 'geo-municipality-list' },
+                                                                    countyMunicipalities.map(function(mun) {
+                                                                        const munExpanded = expandedMunicipalities[mun.code];
+                                                                        const munDistricts = countyDistricts[mun.code] || [];
+                                                                        const munSelected = config.selectedCategories.includes(mun.code);
+                                                                        const allDistsSelected = munDistricts.length > 0 && munDistricts.every(function(d) { 
+                                                                            return config.selectedCategories.includes(d.code); 
+                                                                        });
+                                                                        
+                                                                        return h('div', { key: mun.code, className: 'geo-municipality' },
+                                                                            h('div', { className: 'geo-municipality-header' },
+                                                                                h('input', {
+                                                                                    type: 'checkbox',
+                                                                                    className: 'checkbox',
+                                                                                    checked: munSelected,
+                                                                                    onChange: function(e) {
+                                                                                        const updated = e.target.checked
+                                                                                            ? config.selectedCategories.concat([mun.code])
+                                                                                            : config.selectedCategories.filter(function(c) { return c !== mun.code; });
+                                                                                        updateDimensionConfig(dimension.code, { selectedCategories: updated });
+                                                                                    }
+                                                                                }),
+                                                                                munDistricts.length > 0 && h('svg', {
+                                                                                    className: 'geo-chevron' + (munExpanded ? ' expanded' : ''),
+                                                                                    viewBox: '0 0 24 24',
+                                                                                    onClick: function() {
+                                                                                        const newExpanded = {};
+                                                                                        for (var key in expandedMunicipalities) {
+                                                                                            newExpanded[key] = expandedMunicipalities[key];
+                                                                                        }
+                                                                                        newExpanded[mun.code] = !munExpanded;
+                                                                                        setExpandedMunicipalities(newExpanded);
+                                                                                    }
+                                                                                },
+                                                                                    h('polyline', { points: '9 18 15 12 9 6', fill: 'none', stroke: 'currentColor', strokeWidth: '2' })
+                                                                                ),
+                                                                                h('span', { 
+                                                                                    className: 'flex-1',
+                                                                                    style: { cursor: munDistricts.length > 0 ? 'pointer' : 'default' },
+                                                                                    onClick: munDistricts.length > 0 ? function() {
+                                                                                        const newExpanded = {};
+                                                                                        for (var key in expandedMunicipalities) {
+                                                                                            newExpanded[key] = expandedMunicipalities[key];
+                                                                                        }
+                                                                                        newExpanded[mun.code] = !munExpanded;
+                                                                                        setExpandedMunicipalities(newExpanded);
+                                                                                    } : null
+                                                                                }, mun.label + ' (' + mun.code + ')'),
+                                                                                munDistricts.length > 0 && h('button', {
+                                                                                    className: 'geo-select-btn',
+                                                                                    onClick: function(e) {
+                                                                                        e.stopPropagation();
+                                                                                        const districtCodes = munDistricts.map(function(d) { return d.code; });
+                                                                                        const updated = allDistsSelected
+                                                                                            ? config.selectedCategories.filter(function(c) { 
+                                                                                                return !districtCodes.includes(c); 
+                                                                                            })
+                                                                                            : config.selectedCategories.filter(function(c) { 
+                                                                                                return !districtCodes.includes(c); 
+                                                                                            }).concat(districtCodes);
+                                                                                        updateDimensionConfig(dimension.code, { selectedCategories: updated });
+                                                                                    }
+                                                                                }, allDistsSelected ? 'Fjern alle bydeler' : 'Velg alle bydeler')
+                                                                            ),
+                                                                            munExpanded && munDistricts.length > 0 && h('div', { className: 'geo-district-list' },
+                                                                                munDistricts.map(function(dist) {
+                                                                                    return h('label', { key: dist.code, className: 'flex items-center gap-2 geo-district' },
+                                                                                        h('input', {
+                                                                                            type: 'checkbox',
+                                                                                            className: 'checkbox',
+                                                                                            checked: config.selectedCategories.includes(dist.code),
+                                                                                            onChange: function(e) {
+                                                                                                const updated = e.target.checked
+                                                                                                    ? config.selectedCategories.concat([dist.code])
+                                                                                                    : config.selectedCategories.filter(function(c) { return c !== dist.code; });
+                                                                                                updateDimensionConfig(dimension.code, { selectedCategories: updated });
+                                                                                            }
+                                                                                        }),
+                                                                                        h('span', { className: 'text-sm' }, dist.label + ' (' + dist.code + ')')
+                                                                                    );
+                                                                                })
+                                                                            )
+                                                                        );
+                                                                    })
+                                                                )
+                                                            );
+                                                        })
+                                                    );
+                                                }
+                                                
+                                                // Fallback for non-GEO dimensions or when no hierarchy
+                                                return dimension.category.index.filter(function(cat) {
+                                                    if (dimension.code !== 'GEO' || geoSearch.trim() === '') return true;
+                                                    const searchLower = geoSearch.toLowerCase();
+                                                    const label = dimension.category.label[cat] || '';
+                                                    return label.toLowerCase().includes(searchLower) || cat.toLowerCase().includes(searchLower);
+                                                }).map(function(cat) {
+                                                    return h('label', { key: cat, className: 'flex items-center gap-2' },
+                                                        h('input', {
+                                                            type: 'checkbox',
+                                                            className: 'checkbox',
+                                                            checked: config.selectedCategories.includes(cat),
+                                                            onChange: function(e) {
+                                                                const updated = e.target.checked
+                                                                    ? config.selectedCategories.concat([cat])
+                                                                    : config.selectedCategories.filter(function(c) { return c !== cat; });
+                                                                updateDimensionConfig(dimension.code, { selectedCategories: updated });
+                                                            }
+                                                        }),
+                                                        h('span', { className: 'text-sm' },
+                                                            dimension.category.label[cat] + ' (' + cat + ')'
+                                                        )
+                                                    );
+                                                });
+                                            })()
+                                        ),
+                                        h('button', {
+                                            className: 'btn btn-outline btn-sm',
+                                            onClick: function() {
+                                                const allCats = dimension.category.index;
+                                                updateDimensionConfig(dimension.code, { 
+                                                    selectedCategories: config.selectedCategories.length === allCats.length ? [] : allCats 
+                                                });
+                                            }
+                                        }, config.selectedCategories.length === dimension.category.index.length ? 'Fjern alle' : 'Velg alle')
+                                    ),
+                                    config.filter === 'top' && h('div', null,
+                                        h('label', { className: 'label' }, 'Antall'),
+                                        h('input', {
+                                            type: 'number',
+                                            min: '1',
+                                            className: 'input',
+                                            value: config.topCount || '5',
+                                            onChange: function(e) { updateDimensionConfig(dimension.code, { topCount: e.target.value }); }
+                                        })
+                                    ),
+                                    config.filter === 'all' && h('div', null,
+                                        h('label', { className: 'label' }, 'Wildcard-verdier (kommaseparert)'),
+                                        h('input', {
+                                            className: 'input',
+                                            value: config.values.join(', '),
+                                            onChange: function(e) {
+                                                const values = e.target.value.split(',').map(function(v) { return v.trim(); }).filter(function(v) { return v; });
+                                                updateDimensionConfig(dimension.code, { values: values.length > 0 ? values : ['*'] });
+                                            },
+                                            placeholder: '*, 03*, 30*'
+                                        }),
+                                        h('p', { className: 'text-xs text-gray-500 mt-1' },
+                                            'Bruk * for å matche alle, eller f.eks. "03*" for å matche alle som starter med 03'
+                                        )
+                                    ),
+                                    h('div', { className: 'flex items-center gap-2 text-sm text-gray-600' },
+                                        h('span', { className: 'badge' },
+                                            config.selectedCategories.length > 0 
+                                                ? config.selectedCategories.length + ' valgt'
+                                                : config.filter === 'all' 
+                                                    ? 'Alle (' + dimension.category.index.length + ')'
+                                                    : config.filter === 'top'
+                                                        ? 'Topp ' + (config.topCount || 5)
+                                                        : 'Ingen valgt'
+                                        )
+                                    )
+                                )
+                            );
+                        }),
+                        h('div', { className: 'flex gap-2' },
+                            h('button', {
+                                className: 'btn btn-outline',
+                                onClick: function() { setStep(2); }
+                            }, 'Tilbake til tabeller'),
+                            h('button', {
+                                className: 'btn btn-primary flex-1',
+                                onClick: buildFinalQuery
+                            }, 'Generer spørring')
+                        )
+                    );
+                }
+
+                // Render query result (step 4)
+                function renderQueryResult() {
+                    const queryString = JSON.stringify(finalQuery, null, 2);
+                    const powerQueryCode = generatePowerQueryCode();
+                    const displayCode = outputFormat === 'powerquery' ? powerQueryCode : queryString;
+                    
+                    return h('div', { className: 'space-y-4' },
+                        h('div', { className: 'card' },
+                            h('div', { className: 'mb-4' },
+                                h('h2', { className: 'flex items-center gap-2 mb-2' },
+                                    h(Icons.Eye),
+                                    'Din ferdig spørring'
+                                ),
+                                h('p', { className: 'text-gray-600' }, 'Denne spørringen kan brukes mot FHI API')
+                            ),
+                            h('div', { className: 'mb-4' },
+                                h('label', { className: 'label mb-2' }, 'Velg format:'),
+                                h('div', { className: 'flex gap-4' },
+                                    h('label', { className: 'flex items-center gap-2' },
+                                        h('input', {
+                                            type: 'radio',
+                                            className: 'radio',
+                                            checked: outputFormat === 'json',
+                                            onChange: function() { setOutputFormat('json'); }
+                                        }),
+                                        h('span', { className: 'text-sm' }, 'JSON (for API)')
+                                    ),
+                                    h('label', { className: 'flex items-center gap-2' },
+                                        h('input', {
+                                            type: 'radio',
+                                            className: 'radio',
+                                            checked: outputFormat === 'powerquery',
+                                            onChange: function() { setOutputFormat('powerquery'); }
+                                        }),
+                                        h('span', { className: 'text-sm' }, 'Power Query (for Power BI/Excel)')
+                                    )
+                                )
+                            ),
+                            h('div', { className: 'code-block mb-4' }, displayCode),
+                            h('div', { className: 'flex gap-2 mb-4' },
+                                h('button', {
+                                    className: 'btn btn-outline flex items-center gap-2',
+                                    onClick: function() { copyToClipboard(displayCode); }
+                                },
+                                    h(Icons.Copy),
+                                    outputFormat === 'powerquery' ? 'Kopier Power Query' : 'Kopier spørring'
+                                ),
+                                outputFormat === 'json' && h('button', {
+                                    className: 'btn btn-primary flex items-center gap-2',
+                                    onClick: fetchPreview,
+                                    disabled: loading
+                                },
+                                    loading ? h('span', { className: 'animate-spin' }, h(Icons.RefreshCw)) : h(Icons.Download),
+                                    'Hent preview av data'
+                                )
+                            ),
+                            h('div', { className: 'text-sm text-gray-600 p-4 bg-blue-50 rounded border border-blue-200' },
+                                h('p', { className: 'font-semibold mb-2' }, 'API endpoint:'),
+                                h('code', { className: 'text-xs' },
+                                    'POST ' + API_BASE + '/' + (selectedSource ? selectedSource.id : '') + '/Table/' + (selectedTable ? selectedTable.tableId : '') + '/data'
+                                )
+                            ),
+                            outputFormat === 'powerquery' && h('div', { className: 'text-sm text-gray-600 p-4 bg-green-50 rounded border border-green-200 mt-4' },
+                                h('p', { className: 'font-semibold mb-2 text-xs' }, '💡 Bruk i Power BI/Excel:'),
+                                h('ol', { className: 'text-xs', style: { paddingLeft: '1.25rem', listStyleType: 'decimal' } },
+                                    h('li', null, 'Åpne Power Query Editor'),
+                                    h('li', null, 'Velg "Blank Query" eller "Tom spørring"'),
+                                    h('li', null, 'Gå til Advanced Editor'),
+                                    h('li', null, 'Lim inn koden'),
+                                    h('li', null, 'Klikk Done/Ferdig')
+                                ),
+                                h('p', { className: 'text-xs mt-2', style: { fontStyle: 'italic' } },
+                                    'Merk: Power Query fungerer kun med CSV-format (csv2 eller csv3).'
+                                )
+                            )
+                        ),
+                        error && h('div', { className: 'alert' }, error),
+                        previewData && h('div', { className: 'card' },
+                            h('h3', { className: 'font-bold mb-2' }, 'Forhåndsvisning av data'),
+                            h('p', { className: 'text-gray-600 mb-4' },
+                                responseFormat === 'json-stat2' 
+                                    ? (previewData.value ? previewData.value.length : 0) + ' verdier returnert'
+                                    : 'Data hentet'
+                            ),
+                            responseFormat === 'json-stat2' && previewData.dimension && previewData.value && (function() {
+                                const metricDimId = findMetricDimension(previewData);
+                                if (metricDimId) {
+                                    const dimNames = previewData.id;
+                                    const otherDimNames = dimNames.filter(function(id) { return id !== metricDimId; });
+                                    const contentsCategories = previewData.dimension[metricDimId].category.index;
+                                    
+                                    // Beregn forventet antall rader
+                                    let expectedRows = 1;
+                                    otherDimNames.forEach(function(id) {
+                                        expectedRows *= previewData.dimension[id].category.index.length;
+                                    });
+                                    
+                                    return h('div', { className: 'text-sm mb-2' },
+                                        h('p', { className: 'text-green-600' },
+                                            '✓ Måltall (' + metricDimId + ') pivotert: ' + contentsCategories.length + ' måltall vises som kolonner'
+                                        ),
+                                        h('p', { className: 'text-gray-600' },
+                                            'Forventet antall rader: ' + expectedRows + ' (' + 
+                                            otherDimNames.map(function(id) {
+                                                return previewData.dimension[id].label + '=' + previewData.dimension[id].category.index.length;
+                                            }).join(' × ') + ')'
+                                        )
+                                    );
+                                } else {
+                                    return h('p', { className: 'text-sm text-amber-600 mb-2' },
+                                        'ℹ️ Ingen måltall-dimensjon funnet - alle dimensjoner vises som rader'
+                                    );
+                                }
+                            })(),
+                            h('button', {
+                                className: 'btn btn-outline mb-4',
+                                onClick: function() {
+                                    // Konverter data til CSV
+                                    let csvContent = '';
+                                    
+                                    if (responseFormat === 'json-stat2' && previewData.dimension && previewData.value) {
+                                        const dimNames = previewData.id;
+                                        
+                                        // Finn måltall-dimensjon dynamisk
+                                        const metricDimId = findMetricDimension(previewData);
+                                        const contentsCodeIndex = metricDimId ? dimNames.indexOf(metricDimId) : -1;
+                                        
+                                        if (contentsCodeIndex !== -1) {
+                                            // Pivot måltall til kolonner
+                                            const contentsDim = previewData.dimension[metricDimId];
+                                            const contentsCategories = contentsDim.category.index;
+                                            
+                                            // Andre dimensjoner (uten måltall-dimensjonen)
+                                            const otherDimNames = dimNames.filter(function(id) { return id !== metricDimId; });
+                                            
+                                            // Header: andre dimensjoner + måltall som kolonner
+                                            csvContent = otherDimNames.map(function(id) { 
+                                                return previewData.dimension[id].label; 
+                                            }).concat(contentsCategories.map(function(code) {
+                                                return contentsDim.category.label[code];
+                                            })).join(',') + '\n';
+                                            
+                                            // Beregn størrelse for hver dimensjon
+                                            const sizes = dimNames.map(function(id) {
+                                                return previewData.dimension[id].category.index.length;
+                                            });
+                                            
+                                            // Grupper data etter andre dimensjoner
+                                            const dataMap = {};
+                                            
+                                            for (let i = 0; i < previewData.value.length; i++) {
+                                                // Beregn multi-dimensjonale indekser (siste dimensjon varierer raskest)
+                                                const indices = [];
+                                                let tempI = i;
+                                                for (let j = dimNames.length - 1; j >= 0; j--) {
+                                                    indices[j] = tempI % sizes[j];
+                                                    tempI = Math.floor(tempI / sizes[j]);
+                                                }
+                                                
+                                                // Bygg nøkkel uten måltall-dimensjonen
+                                                const keyParts = [];
+                                                otherDimNames.forEach(function(id) {
+                                                    const dimIndex = dimNames.indexOf(id);
+                                                    const catIndex = previewData.dimension[id].category.index[indices[dimIndex]];
+                                                    keyParts.push(catIndex);
+                                                });
+                                                const key = keyParts.join('|');
+                                                
+                                                // Hent måltall verdi
+                                                const contentsIndex = indices[contentsCodeIndex];
+                                                const contentsCode = contentsCategories[contentsIndex];
+                                                
+                                                if (!dataMap[key]) {
+                                                    dataMap[key] = { dims: keyParts, values: {} };
+                                                }
+                                                dataMap[key].values[contentsCode] = previewData.value[i];
+                                            }
+                                            
+                                            // Skriv rader
+                                            Object.keys(dataMap).forEach(function(key) {
+                                                const row = dataMap[key];
+                                                const cells = row.dims.map(function(catCode, idx) {
+                                                    const dimId = otherDimNames[idx];
+                                                    const label = previewData.dimension[dimId].category.label[catCode];
+                                                    return '"' + label + '"';
+                                                });
+                                                
+                                                // Legg til verdier for hvert måltall
+                                                contentsCategories.forEach(function(code) {
+                                                    cells.push(row.values[code] !== undefined ? row.values[code] : '');
+                                                });
+                                                
+                                                csvContent += cells.join(',') + '\n';
+                                            });
+                                        } else {
+                                            // Ingen ContentsCode - bruk original logikk
+                                            const dimensions = dimNames.map(function(id) {
+                                                return {
+                                                    id: id,
+                                                    label: previewData.dimension[id].label,
+                                                    categories: previewData.dimension[id].category.label
+                                                };
+                                            });
+                                            
+                                            csvContent = dimNames.map(function(id) { 
+                                                return previewData.dimension[id].label; 
+                                            }).join(',') + ',Verdi\n';
+                                            
+                                            const sizes = dimNames.map(function(id) {
+                                                return previewData.dimension[id].category.index.length;
+                                            });
+                                            
+                                            for (let i = 0; i < previewData.value.length; i++) {
+                                                // Beregn multi-dimensjonale indekser (siste dimensjon varierer raskest)
+                                                const indices = [];
+                                                let tempI = i;
+                                                for (let j = dimNames.length - 1; j >= 0; j--) {
+                                                    indices[j] = tempI % sizes[j];
+                                                    tempI = Math.floor(tempI / sizes[j]);
+                                                }
+                                                
+                                                const row = dimNames.map(function(id, idx) {
+                                                    const catIndex = previewData.dimension[id].category.index[indices[idx]];
+                                                    const label = previewData.dimension[id].category.label[catIndex];
+                                                    return '"' + label + '"';
+                                                }).join(',') + ',' + previewData.value[i];
+                                                
+                                                csvContent += row + '\n';
+                                            }
+                                        }
+                                    } else {
+                                        csvContent = JSON.stringify(previewData, null, 2);
+                                    }
+                                    
+                                    // Last ned CSV
+                                    const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+                                    const link = document.createElement('a');
+                                    const url = URL.createObjectURL(blob);
+                                    link.setAttribute('href', url);
+                                    link.setAttribute('download', 'fhi_data.csv');
+                                    link.style.visibility = 'hidden';
+                                    document.body.appendChild(link);
+                                    link.click();
+                                    document.body.removeChild(link);
+                                }
+                            }, 
+                                h(Icons.Download),
+                                ' Last ned som CSV'
+                            ),
+                            h('div', { className: 'overflow-x-auto max-h-96 overflow-y-auto border rounded' },
+                                (function() {
+                                    if (responseFormat === 'json-stat2' && previewData.dimension && previewData.value) {
+                                        const dimNames = previewData.id;
+                                        
+                                        // Finn måltall-dimensjon dynamisk
+                                        const metricDimId = findMetricDimension(previewData);
+                                        const contentsCodeIndex = metricDimId ? dimNames.indexOf(metricDimId) : -1;
+                                        
+                                        if (contentsCodeIndex !== -1) {
+                                            // Pivot måltall til kolonner
+                                            const contentsDim = previewData.dimension[metricDimId];
+                                            const contentsCategories = contentsDim.category.index;
+                                            
+                                            // Andre dimensjoner (uten måltall-dimensjonen)
+                                            const otherDimNames = dimNames.filter(function(id) { return id !== metricDimId; });
+                                            const otherDimensions = otherDimNames.map(function(id) {
+                                                return {
+                                                    id: id,
+                                                    label: previewData.dimension[id].label,
+                                                    categories: previewData.dimension[id].category.label
+                                                };
+                                            });
+                                            
+                                            // Beregn størrelse for hver dimensjon
+                                            const sizes = dimNames.map(function(id) {
+                                                return previewData.dimension[id].category.index.length;
+                                            });
+                                            
+                                            // Grupper data etter andre dimensjoner
+                                            const dataMap = {};
+                                            
+                                            for (let i = 0; i < previewData.value.length; i++) {
+                                                // Beregn multi-dimensjonale indekser (siste dimensjon varierer raskest)
+                                                const indices = [];
+                                                let tempI = i;
+                                                for (let j = dimNames.length - 1; j >= 0; j--) {
+                                                    indices[j] = tempI % sizes[j];
+                                                    tempI = Math.floor(tempI / sizes[j]);
+                                                }
+                                                
+                                                // Bygg nøkkel uten måltall-dimensjonen
+                                                const keyParts = [];
+                                                otherDimNames.forEach(function(id) {
+                                                    const dimIndex = dimNames.indexOf(id);
+                                                    const catIndex = previewData.dimension[id].category.index[indices[dimIndex]];
+                                                    keyParts.push(catIndex);
+                                                });
+                                                const key = keyParts.join('|');
+                                                
+                                                // Hent måltall verdi
+                                                const contentsIndex = indices[contentsCodeIndex];
+                                                const contentsCode = contentsCategories[contentsIndex];
+                                                
+                                                if (!dataMap[key]) {
+                                                    dataMap[key] = { dims: keyParts, values: {} };
+                                                }
+                                                dataMap[key].values[contentsCode] = previewData.value[i];
+                                            }
+                                            
+                                            // Bruk Object.keys for å få alle unike rader
+                                            const rowKeys = Object.keys(dataMap);
+                                            
+                                            const maxRows = 100;
+                                            const rowsToShow = Math.min(rowKeys.length, maxRows);
+                                            
+                                            return h('table', { style: { width: '100%', borderCollapse: 'collapse' } },
+                                                h('thead', { style: { background: '#f3f4f6' } },
+                                                    h('tr', null,
+                                                        otherDimensions.map(function(dim) {
+                                                            return h('th', { 
+                                                                key: dim.id,
+                                                                style: { 
+                                                                    padding: '0.5rem', 
+                                                                    textAlign: 'left', 
+                                                                    borderBottom: '2px solid #d1d5db',
+                                                                    fontSize: '0.875rem',
+                                                                    fontWeight: '600'
+                                                                } 
+                                                            }, dim.label);
+                                                        }).concat(
+                                                            contentsCategories.map(function(code) {
+                                                                return h('th', { 
+                                                                    key: code,
+                                                                    style: { 
+                                                                        padding: '0.5rem', 
+                                                                        textAlign: 'right', 
+                                                                        borderBottom: '2px solid #d1d5db',
+                                                                        fontSize: '0.875rem',
+                                                                        fontWeight: '600'
+                                                                    } 
+                                                                }, contentsDim.category.label[code]);
+                                                            })
+                                                        )
+                                                    )
+                                                ),
+                                                h('tbody', null,
+                                                    (function() {
+                                                        const rows = [];
+                                                        for (let i = 0; i < rowsToShow; i++) {
+                                                            const key = rowKeys[i];
+                                                            const rowData = dataMap[key];
+                                                            
+                                                            rows.push(
+                                                                h('tr', { 
+                                                                    key: i,
+                                                                    style: { background: i % 2 === 0 ? 'white' : '#f9fafb' }
+                                                                },
+                                                                    rowData.dims.map(function(catCode, idx) {
+                                                                        const dimId = otherDimNames[idx];
+                                                                        const label = previewData.dimension[dimId].category.label[catCode];
+                                                                        return h('td', { 
+                                                                            key: dimId,
+                                                                            style: { 
+                                                                                padding: '0.5rem', 
+                                                                                borderBottom: '1px solid #e5e7eb',
+                                                                                fontSize: '0.875rem'
+                                                                            } 
+                                                                        }, label);
+                                                                    }).concat(
+                                                                        contentsCategories.map(function(code) {
+                                                                            return h('td', { 
+                                                                                key: code,
+                                                                                style: { 
+                                                                                    padding: '0.5rem', 
+                                                                                    textAlign: 'right', 
+                                                                                    borderBottom: '1px solid #e5e7eb',
+                                                                                    fontSize: '0.875rem',
+                                                                                    fontWeight: '500'
+                                                                                } 
+                                                                            }, rowData.values[code] !== undefined ? rowData.values[code] : '-');
+                                                                        })
+                                                                    )
+                                                                )
+                                                            );
+                                                        }
+                                                        if (rowKeys.length > maxRows) {
+                                                            rows.push(
+                                                                h('tr', null,
+                                                                    h('td', {
+                                                                        colSpan: otherDimensions.length + contentsCategories.length,
+                                                                        style: {
+                                                                            padding: '1rem',
+                                                                            textAlign: 'center',
+                                                                            fontStyle: 'italic',
+                                                                            color: '#6b7280',
+                                                                            fontSize: '0.875rem'
+                                                                        }
+                                                                    }, '... viser første ' + maxRows + ' av ' + rowKeys.length + ' rader. Last ned CSV for alle data.')
+                                                                )
+                                                            );
+                                                        } else if (rowKeys.length > 0) {
+                                                            rows.push(
+                                                                h('tr', null,
+                                                                    h('td', {
+                                                                        colSpan: otherDimensions.length + contentsCategories.length,
+                                                                        style: {
+                                                                            padding: '0.5rem',
+                                                                            textAlign: 'center',
+                                                                            fontStyle: 'italic',
+                                                                            color: '#9ca3af',
+                                                                            fontSize: '0.75rem',
+                                                                            borderBottom: '1px solid #e5e7eb'
+                                                                        }
+                                                                    }, 'Viser ' + rowKeys.length + ' rad' + (rowKeys.length !== 1 ? 'er' : '') + ' totalt (' + previewData.value.length + ' verdier, ' + contentsCategories.length + ' måltall)')
+                                                                )
+                                                            );
+                                                        }
+                                                        return rows;
+                                                    })()
+                                                )
+                                            );
+                                        } else {
+                                            // Ingen ContentsCode - bruk original logikk
+                                            const dimensions = dimNames.map(function(id) {
+                                                return {
+                                                    id: id,
+                                                    label: previewData.dimension[id].label,
+                                                    categories: previewData.dimension[id].category.label
+                                                };
+                                            });
+                                            
+                                            const sizes = dimNames.map(function(id) {
+                                                return previewData.dimension[id].category.index.length;
+                                            });
+                                            
+                                            const maxRows = 100;
+                                            const rowsToShow = Math.min(previewData.value.length, maxRows);
+                                            
+                                            return h('table', { style: { width: '100%', borderCollapse: 'collapse' } },
+                                                h('thead', { style: { background: '#f3f4f6' } },
+                                                    h('tr', null,
+                                                        dimensions.map(function(dim) {
+                                                            return h('th', { 
+                                                                style: { 
+                                                                    padding: '0.5rem', 
+                                                                    textAlign: 'left', 
+                                                                    borderBottom: '2px solid #d1d5db',
+                                                                    fontSize: '0.875rem',
+                                                                    fontWeight: '600'
+                                                                } 
+                                                            }, dim.label);
+                                                        }).concat([
+                                                            h('th', { 
+                                                                style: { 
+                                                                    padding: '0.5rem', 
+                                                                    textAlign: 'right', 
+                                                                    borderBottom: '2px solid #d1d5db',
+                                                                    fontSize: '0.875rem',
+                                                                    fontWeight: '600'
+                                                                } 
+                                                            }, 'Verdi')
+                                                        ])
+                                                    )
+                                                ),
+                                                h('tbody', null,
+                                                    (function() {
+                                                        const rows = [];
+                                                        for (let i = 0; i < rowsToShow; i++) {
+                                                            // Beregn multi-dimensjonale indekser (siste dimensjon varierer raskest)
+                                                            const indices = [];
+                                                            let tempI = i;
+                                                            for (let j = dimNames.length - 1; j >= 0; j--) {
+                                                                indices[j] = tempI % sizes[j];
+                                                                tempI = Math.floor(tempI / sizes[j]);
+                                                            }
+                                                            
+                                                            rows.push(
+                                                                h('tr', { 
+                                                                    key: i,
+                                                                    style: { background: i % 2 === 0 ? 'white' : '#f9fafb' }
+                                                                },
+                                                                    dimNames.map(function(id, idx) {
+                                                                        const catIndex = previewData.dimension[id].category.index[indices[idx]];
+                                                                        const label = previewData.dimension[id].category.label[catIndex];
+                                                                        return h('td', { 
+                                                                            style: { 
+                                                                                padding: '0.5rem', 
+                                                                                borderBottom: '1px solid #e5e7eb',
+                                                                                fontSize: '0.875rem'
+                                                                            } 
+                                                                        }, label);
+                                                                    }).concat([
+                                                                        h('td', { 
+                                                                            style: { 
+                                                                                padding: '0.5rem', 
+                                                                                textAlign: 'right', 
+                                                                                borderBottom: '1px solid #e5e7eb',
+                                                                                fontSize: '0.875rem',
+                                                                                fontWeight: '500'
+                                                                            } 
+                                                                        }, previewData.value[i])
+                                                                    ])
+                                                                )
+                                                            );
+                                                        }
+                                                        if (previewData.value.length > maxRows) {
+                                                            rows.push(
+                                                                h('tr', null,
+                                                                    h('td', {
+                                                                        colSpan: dimensions.length + 1,
+                                                                        style: {
+                                                                            padding: '1rem',
+                                                                            textAlign: 'center',
+                                                                            fontStyle: 'italic',
+                                                                            color: '#6b7280',
+                                                                            fontSize: '0.875rem'
+                                                                        }
+                                                                    }, '... viser første ' + maxRows + ' av ' + previewData.value.length + ' rader. Last ned CSV for alle data.')
+                                                                )
+                                                            );
+                                                        }
+                                                        return rows;
+                                                    })()
+                                                )
+                                            );
+                                        }
+                                    } else {
+                                        return h('div', { className: 'p-4 text-sm text-gray-600' },
+                                            'Kan ikke vise tabell for dette dataformatet. Last ned som CSV.'
+                                        );
+                                    }
+                                })()
+                            )
+                        ),
+                        h('div', { className: 'flex gap-2' },
+                            h('button', {
+                                className: 'btn btn-outline',
+                                onClick: function() { setStep(3); }
+                            }, 'Tilbake til konfigurasjon'),
+                            h('button', {
+                                className: 'btn btn-outline',
+                                onClick: function() {
+                                    setStep(1);
+                                    setSelectedSource(null);
+                                    setSelectedTable(null);
+                                    setDimensions([]);
+                                    setQueryConfig({});
+                                    setFinalQuery(null);
+                                    setPreviewData(null);
+                                }
+                            }, 'Start på nytt')
+                        )
+                    );
+                }
+
+                // Main render
+                return h('div', { className: 'bg-gradient' },
+                    h('div', { className: 'container' },
+                        h('div', { className: 'text-center mb-8' },
+                            h('h1', { className: 'mb-2' }, 'FHI API Query Builder'),
+                            h('p', { className: 'text-gray-600' }, 'Bygg spørringer mot FHIs åpne statistikk-API')
+                        ),
+                        renderStepIndicator(),
+                        h('div', { className: 'card' },
+                            step === 1 && renderSourceSelection(),
+                            step === 2 && renderTableSelection(),
+                            step === 3 && renderDimensionConfiguration(),
+                            step === 4 && renderQueryResult()
+                        ),
+                        h('div', { className: 'mt-6 text-center text-sm text-gray-600' },
+                            h('p', null,
+                                'Data fra ',
+                                h('a', {
+                                    href: 'https://statistikk-data.fhi.no',
+                                    className: 'text-blue-600',
+                                    target: '_blank',
+                                    rel: 'noopener noreferrer'
+                                }, 'FHI Statistikk')
+                            )
+                        )
+                    )
+                );
+            }
+
+            // Render when DOM is ready
+            if (document.readyState === 'loading') {
+                document.addEventListener('DOMContentLoaded', function() {
+                    ReactDOM.render(h(FHIQueryBuilder), document.getElementById('root'));
+                });
+            } else {
+                ReactDOM.render(h(FHIQueryBuilder), document.getElementById('root'));
+            }
+        })();
     </script>
 </body>
 </html>
