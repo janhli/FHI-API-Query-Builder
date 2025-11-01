@@ -84,6 +84,53 @@
             margin-bottom: 0.75rem;
         }
 
+        .dimensions-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+
+        .dimension-card {
+            background: white;
+            border-radius: 0.5rem;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            padding: 0.5rem 0.75rem;
+            margin-bottom: 0;
+        }
+
+        .dimension-card h3 {
+            font-size: 0.975rem;
+            font-weight: 600;
+            margin-bottom: 0.15rem;
+        }
+
+        .dimension-card p {
+            font-size: 0.75rem;
+            margin-bottom: 0.35rem;
+        }
+
+        .dimension-card .space-y-2 > * + * { margin-top: 0.3rem; }
+        .dimension-card .space-y-4 > * + * { margin-top: 0.3rem; }
+
+        .dimension-card .label {
+            font-size: 0.8rem;
+            margin-bottom: 0.15rem;
+        }
+
+        .dimension-card .input {
+            font-size: 0.8rem;
+        }
+
+        .dimension-card .max-h-60 {
+            max-height: 12rem;
+        }
+
+        @media (max-width: 768px) {
+            .dimensions-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
         .card-hover {
             cursor: pointer;
             transition: all 0.2s;
@@ -93,6 +140,11 @@
         .card-hover:hover {
             border-color: #3b82f6;
             box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        .card-hover:focus {
+            outline: 3px solid #3b82f6;
+            outline-offset: 2px;
         }
 
         .btn {
@@ -112,6 +164,11 @@
         .btn:disabled {
             opacity: 0.5;
             cursor: not-allowed;
+        }
+
+        .btn:focus {
+            outline: 3px solid #3b82f6;
+            outline-offset: 2px;
         }
 
         .btn-primary {
@@ -146,12 +203,19 @@
             display: flex;
             align-items: center;
             justify-content: center;
+            min-width: 44px;
+            min-height: 44px;
         }
 
         .btn-icon:hover {
             background: #f3f4f6;
             border-color: #9ca3af;
             color: #374151;
+        }
+
+        .btn-icon:focus {
+            outline: 3px solid #3b82f6;
+            outline-offset: 2px;
         }
 
         .input, .select {
@@ -232,6 +296,9 @@
         .space-y-2 > * + * { margin-top: 0.5rem; }
         .space-y-3 > * + * { margin-top: 0.75rem; }
         .space-y-4 > * + * { margin-top: 0.5rem; }
+
+        .dimension-card .space-y-2 > * + * { margin-top: 0.3rem; }
+        .dimension-card .space-y-4 > * + * { margin-top: 0.3rem; }
 
         .overflow-y-auto {
             overflow-y: auto;
@@ -430,6 +497,14 @@
             stroke-width: 2;
         }
 
+        .source-icon {
+            stroke: #374151;
+            stroke-width: 1.5;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+            fill: none;
+        }
+
         .animate-spin {
             animation: spin 1s linear infinite;
         }
@@ -566,6 +641,28 @@
             border-color: #9ca3af;
         }
 
+        .geo-select-btn:focus {
+            outline: 3px solid #3b82f6;
+            outline-offset: 2px;
+        }
+
+        /* Skip link for tastaturnavigasjon */
+        .skip-link {
+            position: absolute;
+            top: -40px;
+            left: 0;
+            background: #111827;
+            color: white;
+            padding: 8px 16px;
+            text-decoration: none;
+            z-index: 100;
+            font-weight: 500;
+        }
+
+        .skip-link:focus {
+            top: 0;
+        }
+
         @media (max-width: 768px) {
             .grid-cols-3 {
                 grid-template-columns: 1fr;
@@ -624,8 +721,152 @@
                 ),
                 ChevronRight: () => h('svg', { className: 'icon', viewBox: '0 0 24 24' },
                     h('polyline', { points: '9 18 15 12 9 6' })
+                ),
+                // Source icons
+                BarChart: () => h('svg', { className: 'icon', viewBox: '0 0 24 24' },
+                    h('line', { x1: '12', y1: '2', x2: '12', y2: '22' }),
+                    h('line', { x1: '2', y1: '22', x2: '22', y2: '22' }),
+                    h('rect', { x: '2', y: '16', width: '3', height: '6' }),
+                    h('rect', { x: '10', y: '10', width: '3', height: '12' }),
+                    h('rect', { x: '18', y: '6', width: '3', height: '16' })
+                ),
+                Building: () => h('svg', { className: 'icon', viewBox: '0 0 24 24' },
+                    h('rect', { x: '3', y: '2', width: '18', height: '20', rx: '2' }),
+                    h('line', { x1: '9', y1: '2', x2: '9', y2: '22' }),
+                    h('line', { x1: '15', y1: '2', x2: '15', y2: '22' }),
+                    h('line', { x1: '3', y1: '8', x2: '21', y2: '8' }),
+                    h('line', { x1: '3', y1: '14', x2: '21', y2: '14' }),
+                    h('rect', { x: '5', y: '4', width: '2', height: '2' }),
+                    h('rect', { x: '11', y: '4', width: '2', height: '2' }),
+                    h('rect', { x: '17', y: '4', width: '2', height: '2' })
+                ),
+                Heart: () => h('svg', { className: 'icon', viewBox: '0 0 24 24' },
+                    h('path', { d: 'M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z' })
+                ),
+                TrendingUp: () => h('svg', { className: 'icon', viewBox: '0 0 24 24' },
+                    h('polyline', { points: '23 6 13.5 15.5 8.5 10.5 1 18' }),
+                    h('polyline', { points: '17 6 23 6 23 12' })
                 )
             };
+
+            // Function to get icon for a source
+            function getSourceIcon(source) {
+                const sourceTitle = (source.title || source.name || '').toLowerCase();
+                
+                if (sourceTitle.includes('folkehelsestatistikk')) {
+                    // Bar chart for statistics
+                    return h('svg', { className: 'source-icon', viewBox: '0 0 24 24', width: '32', height: '32', style: { marginRight: '1rem' } },
+                        h('line', { x1: '12', y1: '2', x2: '12', y2: '22' }),
+                        h('line', { x1: '2', y1: '22', x2: '22', y2: '22' }),
+                        h('rect', { x: '2', y: '16', width: '3', height: '6' }),
+                        h('rect', { x: '10', y: '10', width: '3', height: '12' }),
+                        h('rect', { x: '18', y: '6', width: '3', height: '16' })
+                    );
+                } else if (sourceTitle.includes('genomovervåk')) {
+                    // DNA helix for genomics
+                    return h('svg', { className: 'source-icon', viewBox: '0 0 24 24', width: '32', height: '32', style: { marginRight: '1rem' } },
+                        h('path', { d: 'M9 3c0 1.5 1 3 2 4.5', strokeLinecap: 'round' }),
+                        h('path', { d: 'M15 3c0 1.5-1 3-2 4.5', strokeLinecap: 'round' }),
+                        h('path', { d: 'M9 7.5c0 1.5 1 3 2 4.5', strokeLinecap: 'round' }),
+                        h('path', { d: 'M15 7.5c0 1.5-1 3-2 4.5', strokeLinecap: 'round' }),
+                        h('path', { d: 'M9 12c0 1.5 1 3 2 4.5', strokeLinecap: 'round' }),
+                        h('path', { d: 'M15 12c0 1.5-1 3-2 4.5', strokeLinecap: 'round' }),
+                        h('path', { d: 'M9 16.5c0 1.5 1 3 2 4.5', strokeLinecap: 'round' }),
+                        h('path', { d: 'M15 16.5c0 1.5-1 3-2 4.5', strokeLinecap: 'round' }),
+                        h('circle', { cx: '9', cy: '4', r: '1.5' }),
+                        h('circle', { cx: '15', cy: '4', r: '1.5' }),
+                        h('circle', { cx: '11', cy: '8', r: '1' }),
+                        h('circle', { cx: '13', cy: '8', r: '1' }),
+                        h('circle', { cx: '10', cy: '12', r: '1' }),
+                        h('circle', { cx: '14', cy: '12', r: '1' }),
+                        h('circle', { cx: '9', cy: '20', r: '1.5' }),
+                        h('circle', { cx: '15', cy: '20', r: '1.5' })
+                    );
+                } else if (sourceTitle.includes('fødselsregister')) {
+                    // Baby icon for birth register
+                    return h('svg', { className: 'source-icon', viewBox: '0 0 24 24', width: '32', height: '32', style: { marginRight: '1rem' } },
+                        h('circle', { cx: '12', cy: '8', r: '3' }),
+                        h('path', { d: 'M12 11c3 0 7 1 7 5v3H5v-3c0-4 4-5 7-5z' }),
+                        h('path', { d: 'M5.5 17a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v2H5.5v-2z' })
+                    );
+                } else if (sourceTitle.includes('abortregisteret')) {
+                    // Pregnancy icon for abortion register
+                    return h('svg', { className: 'source-icon', viewBox: '0 0 24 24', width: '32', height: '32', style: { marginRight: '1rem' } },
+                        h('circle', { cx: '12', cy: '6', r: '4' }),
+                        h('path', { d: 'M12 10c-4 0-7 2-7 6v2h14v-2c0-4-3-6-7-6z' }),
+                        h('ellipse', { cx: '12', cy: '20', rx: '3', ry: '2' })
+                    );
+                } else if (sourceTitle.includes('vaksin')) {
+                    // Syringe icon for vaccination
+                    return h('svg', { className: 'source-icon', viewBox: '0 0 24 24', width: '32', height: '32', style: { marginRight: '1rem' } },
+                        h('path', { d: 'M3 15c2 0 4-2 4-4s-2-4-4-4-4 2-4 4 2 4 4 4z' }),
+                        h('path', { d: 'M7 13l10-10' }),
+                        h('path', { d: 'M21 5l-8 8' }),
+                        h('rect', { x: '13', y: '3', width: '2', height: '8', transform: 'rotate(45 14 7)' })
+                    );
+                } else if (sourceTitle.includes('dødsårsakregisteret')) {
+                    // Document icon for death causes register
+                    return h('svg', { className: 'source-icon', viewBox: '0 0 24 24', width: '32', height: '32', style: { marginRight: '1rem' } },
+                        h('path', { d: 'M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z' }),
+                        h('polyline', { points: '14 2 14 8 20 8' }),
+                        h('line', { x1: '12', y1: '13', x2: '12', y2: '17' }),
+                        h('line', { x1: '10', y1: '15', x2: '14', y2: '15' })
+                    );
+                } else if (sourceTitle.includes('msis') || sourceTitle.includes('smittsomme')) {
+                    // Alert icon for infectious diseases
+                    return h('svg', { className: 'source-icon', viewBox: '0 0 24 24', width: '32', height: '32', style: { marginRight: '1rem' } },
+                        h('circle', { cx: '12', cy: '13', r: '8' }),
+                        h('line', { x1: '12', y1: '9', x2: '12', y2: '13' }),
+                        h('line', { x1: '12', y1: '17', x2: '12', y2: '17' }),
+                        h('path', { d: 'M5 13h14' })
+                    );
+                } else if (sourceTitle.includes('legemiddel')) {
+                    // Pill/medicine icon
+                    return h('svg', { className: 'source-icon', viewBox: '0 0 24 24', width: '32', height: '32', style: { marginRight: '1rem' } },
+                        h('ellipse', { cx: '10', cy: '12', rx: '4', ry: '6' }),
+                        h('ellipse', { cx: '14', cy: '12', rx: '4', ry: '6' }),
+                        h('line', { x1: '10', y1: '6', x2: '10', y2: '18' }),
+                        h('line', { x1: '14', y1: '6', x2: '14', y2: '18' })
+                    );
+                } else if (sourceTitle.includes('grossist')) {
+                    // Box/shipment icon
+                    return h('svg', { className: 'source-icon', viewBox: '0 0 24 24', width: '32', height: '32', style: { marginRight: '1rem' } },
+                        h('rect', { x: '3', y: '6', width: '18', height: '12', rx: '2' }),
+                        h('line', { x1: '3', y1: '10', x2: '21', y2: '10' }),
+                        h('line', { x1: '12', y1: '6', x2: '12', y2: '18' }),
+                        h('polyline', { points: '7 6 3 3 3 6' })
+                    );
+                } else if (sourceTitle.includes('pasientregister')) {
+                    // Hospital/health icon
+                    return h('svg', { className: 'source-icon', viewBox: '0 0 24 24', width: '32', height: '32', style: { marginRight: '1rem' } },
+                        h('rect', { x: '3', y: '2', width: '18', height: '20', rx: '2' }),
+                        h('line', { x1: '9', y1: '2', x2: '9', y2: '22' }),
+                        h('line', { x1: '15', y1: '2', x2: '15', y2: '22' }),
+                        h('line', { x1: '3', y1: '8', x2: '21', y2: '8' }),
+                        h('line', { x1: '3', y1: '14', x2: '21', y2: '14' })
+                    );
+                } else if (sourceTitle.includes('kommunalt')) {
+                    // People/community icon
+                    return h('svg', { className: 'source-icon', viewBox: '0 0 24 24', width: '32', height: '32', style: { marginRight: '1rem' } },
+                        h('circle', { cx: '9', cy: '6', r: '3' }),
+                        h('circle', { cx: '18', cy: '8', r: '3' }),
+                        h('path', { d: 'M9 9c-3 0-5 2-5 5v4h14v-4c0-3-2-5-5-5z' }),
+                        h('path', { d: 'M18 11c-2 0-3 1-3 3v3h8v-3c0-2-1-3-3-3z' })
+                    );
+                } else if (sourceTitle.includes('hjerte') || sourceTitle.includes('kar')) {
+                    // Heart icon for cardiovascular
+                    return h('svg', { className: 'source-icon', viewBox: '0 0 24 24', width: '32', height: '32', style: { marginRight: '1rem' } },
+                        h('path', { d: 'M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z' })
+                    );
+                } else {
+                    // Default database icon
+                    return h('svg', { className: 'source-icon', viewBox: '0 0 24 24', width: '32', height: '32', style: { marginRight: '1rem' } },
+                        h('ellipse', { cx: '12', cy: '5', rx: '9', ry: '3' }),
+                        h('path', { d: 'M21 12c0 1.66-4 3-9 3s-9-1.34-9-3' }),
+                        h('path', { d: 'M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5' })
+                    );
+                }
+            }
 
             function FHIQueryBuilder() {
                 const [step, setStep] = useState(1);
@@ -657,6 +898,19 @@
                     fetchSources();
                     fetchTableLabels();
                 }, []);
+
+                // Lukk modal med Esc-tasten
+                useEffect(() => {
+                    function handleEscKey(e) {
+                        if (e.key === 'Escape' && showMetadataModal) {
+                            closeMetadataModal();
+                        }
+                    }
+                    document.addEventListener('keydown', handleEscKey);
+                    return function() {
+                        document.removeEventListener('keydown', handleEscKey);
+                    };
+                }, [showMetadataModal]);
 
                 async function fetchSources() {
                     setLoading(true);
@@ -911,32 +1165,41 @@
                         });
                     }
 
-                    return h('div', { style: {
-                        position: 'fixed',
-                        top: 0,
-                        left: 0,
-                        right: 0,
-                        bottom: 0,
-                        backgroundColor: 'rgba(0,0,0,0.5)',
-                        display: 'flex',
-                        alignItems: 'center',
-                        justifyContent: 'center',
-                        zIndex: 1000
-                    }},
-                        h('div', { style: {
-                            backgroundColor: 'white',
-                            borderRadius: '0.5rem',
-                            padding: '1.5rem',
-                            maxWidth: '700px',
-                            width: '90%',
-                            maxHeight: '85vh',
-                            overflowY: 'auto',
-                            boxShadow: '0 20px 25px rgba(0,0,0,0.15)'
-                        }},
+                    return h('div', { 
+                        style: {
+                            position: 'fixed',
+                            top: 0,
+                            left: 0,
+                            right: 0,
+                            bottom: 0,
+                            backgroundColor: 'rgba(0,0,0,0.5)',
+                            display: 'flex',
+                            alignItems: 'center',
+                            justifyContent: 'center',
+                            zIndex: 1000
+                        },
+                        role: 'presentation'
+                    },
+                        h('div', { 
+                            style: {
+                                backgroundColor: 'white',
+                                borderRadius: '0.5rem',
+                                padding: '1.5rem',
+                                maxWidth: '700px',
+                                width: '90%',
+                                maxHeight: '85vh',
+                                overflowY: 'auto',
+                                boxShadow: '0 20px 25px rgba(0,0,0,0.15)'
+                            },
+                            role: 'alertdialog',
+                            'aria-modal': 'true',
+                            'aria-labelledby': 'modal-title'
+                        },
                             h('div', { style: { display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.5rem', paddingBottom: '1rem', borderBottom: '1px solid #e5e7eb' }},
-                                h('h2', { style: { margin: 0, fontSize: '1.5rem', fontWeight: 700 } }, 'Tabell informasjon'),
+                                h('h2', { id: 'modal-title', style: { margin: 0, fontSize: '1.5rem', fontWeight: 700 } }, 'Tabell informasjon'),
                                 h('button', {
                                     onClick: closeMetadataModal,
+                                    'aria-label': 'Lukk tabell informasjon',
                                     style: {
                                         background: 'none',
                                         border: 'none',
@@ -1143,12 +1406,15 @@
                     setLoading(true);
                     setError(null);
                     try {
+                        // Alltid hent JSON-data for preview, uavhengig av output-format
+                        const previewQuery = Object.assign({}, finalQuery, { responseFormat: 'json-stat2' });
+                        
                         const response = await fetch(
                             API_BASE + '/' + selectedSource.id + '/Table/' + selectedTable.tableId + '/data',
                             {
                                 method: 'POST',
                                 headers: { 'Content-Type': 'application/json' },
-                                body: JSON.stringify(finalQuery)
+                                body: JSON.stringify(previewQuery)
                             }
                         );
                         
@@ -1157,14 +1423,7 @@
                             throw new Error(errorData.message || 'Kunne ikke hente data');
                         }
                         
-                        // Håndter CSV og JSON-responseformat
-                        let data;
-                        if (responseFormat === 'csv' || responseFormat === 'csv2' || responseFormat === 'csv3') {
-                            const csvText = await response.text();
-                            data = { csvText: csvText };
-                        } else {
-                            data = await response.json();
-                        }
+                        const data = await response.json();
                         setPreviewData(data);
                     } catch (err) {
                         setError(err.message);
@@ -1325,7 +1584,7 @@
                         globalSearch.trim() === '' ? (
                             h('div', null,
                                 loading && h('p', { className: 'text-gray-500' }, 'Laster kilder...'),
-                                error && h('div', { className: 'alert mb-4' }, error),
+                                error && h('div', { className: 'alert mb-4', role: 'alert' }, error),
                                 h('div', { className: 'grid-cols-3' },
                                     sources.map(function(source) {
                                         return h('div', {
@@ -1333,16 +1592,21 @@
                                             className: 'card card-hover',
                                             onClick: function() { selectSource(source); }
                                         },
-                                            h('h3', null, source.title || source.name),
-                                            source.description && h('p', { className: 'text-sm text-gray-600 mt-1' }, source.description),
-                                            source.publishedBy && h('p', { className: 'text-xs text-gray-500 mt-2' }, 'Utgiver: ' + source.publishedBy),
-                                            source.aboutUrl && h('a', {
-                                                href: source.aboutUrl,
-                                                className: 'text-xs text-blue-600 mt-1 inline-block',
-                                                target: '_blank',
-                                                rel: 'noopener noreferrer',
-                                                onClick: function(e) { e.stopPropagation(); }
-                                            }, 'Les mer →')
+                                            h('div', { className: 'flex items-start gap-0' },
+                                                getSourceIcon(source),
+                                                h('div', { style: { flex: 1 } },
+                                                    h('h3', null, source.title || source.name),
+                                                    source.description && h('p', { className: 'text-sm text-gray-600 mt-1' }, source.description),
+                                                    source.publishedBy && h('p', { className: 'text-xs text-gray-500 mt-2' }, 'Utgiver: ' + source.publishedBy),
+                                                    source.aboutUrl && h('a', {
+                                                        href: source.aboutUrl,
+                                                        className: 'text-xs text-blue-600 mt-1 inline-block',
+                                                        target: '_blank',
+                                                        rel: 'noopener noreferrer',
+                                                        onClick: function(e) { e.stopPropagation(); }
+                                                    }, 'Les mer →')
+                                                )
+                                            )
                                         );
                                     })
                                 )
@@ -1375,7 +1639,7 @@
                             onChange: function(e) { setTableSearch(e.target.value); }
                         }),
                         loading && h('p', { className: 'text-gray-500 text-sm' }, 'Laster tabeller...'),
-                        error && h('div', { className: 'alert mb-2 text-sm' }, error),
+                        error && h('div', { className: 'alert mb-2 text-sm', role: 'alert' }, error),
                         h('div', { className: 'space-y-1 max-h-96 overflow-y-auto mb-3' },
                             filteredTables.map(function(table) {
                                 return h('div', {
@@ -1436,6 +1700,7 @@
                                         className: 'btn btn-icon',
                                         onClick: function() { fetchMetadata(selectedSource.id, selectedTable.tableId); },
                                         title: 'Se tabell informasjon',
+                                        'aria-label': 'Se tabell informasjon',
                                         style: { marginLeft: 'auto', padding: '0.5rem 0.75rem', display: 'flex', alignItems: 'center', gap: '0.5rem', height: 'auto', minWidth: 'auto' }
                                     },
                                         h('svg', { viewBox: '0 0 24 24', width: '18', height: '18', fill: 'none', stroke: 'currentColor', strokeWidth: '2' },
@@ -1448,50 +1713,73 @@
                                 h('p', { className: 'text-gray-600' }, 'Velg verdier for hver dimensjon i tabellen')
                             ),
                             loading && h('p', { className: 'text-gray-500 mb-4' }, 'Laster dimensjoner...'),
-                            error && h('div', { className: 'alert mb-4' }, error),
-                            h('div', { className: 'space-y-4 mb-4' },
-                                h('div', null,
+                            error && h('div', { className: 'alert mb-4', role: 'alert' }, error),
+                            h('div', { className: 'flex gap-6 mb-4 items-start' },
+                                h('div', { style: { flex: 1 } },
                                     h('label', { className: 'label' }, 'Response format'),
-                                    h('select', {
-                                        className: 'select',
-                                        value: responseFormat,
-                                        onChange: function(e) { setResponseFormat(e.target.value); }
-                                    },
-                                        h('option', { value: 'json-stat2' }, 'JSON-stat2 (anbefalt)'),
-                                        h('option', { value: 'csv2' }, 'CSV med labels'),
-                                        h('option', { value: 'csv3' }, 'CSV med koder')
+                                    h('div', { className: 'flex gap-4 mt-2' },
+                                        h('label', { className: 'flex items-center gap-2' },
+                                            h('input', {
+                                                type: 'radio',
+                                                className: 'radio',
+                                                checked: responseFormat === 'json-stat2',
+                                                onChange: function() { setResponseFormat('json-stat2'); }
+                                            }),
+                                            h('span', { className: 'text-sm' }, 'JSON-stat2')
+                                        ),
+                                        h('label', { className: 'flex items-center gap-2' },
+                                            h('input', {
+                                                type: 'radio',
+                                                className: 'radio',
+                                                checked: responseFormat === 'csv2',
+                                                onChange: function() { setResponseFormat('csv2'); }
+                                            }),
+                                            h('span', { className: 'text-sm' }, 'CSV med labels')
+                                        ),
+                                        h('label', { className: 'flex items-center gap-2' },
+                                            h('input', {
+                                                type: 'radio',
+                                                className: 'radio',
+                                                checked: responseFormat === 'csv3',
+                                                onChange: function() { setResponseFormat('csv3'); }
+                                            }),
+                                            h('span', { className: 'text-sm' }, 'CSV med koder')
+                                        )
                                     )
                                 ),
-                                h('div', null,
-                                    h('label', { className: 'label' }, 'Max antall rader (blank = ubegrenset)'),
+                                h('div', { style: { width: '200px' } },
+                                    h('label', { className: 'label' }, 'Max antall rader'),
                                     h('input', {
                                         type: 'number',
                                         className: 'input',
                                         value: maxRowCount,
                                         onChange: function(e) { setMaxRowCount(e.target.value); },
-                                        placeholder: 'La stå tom for ubegrenset'
+                                        placeholder: 'Ubegrenset'
                                     })
                                 )
                             )
                         ),
-                        (!loading && dimensions && Array.isArray(dimensions)) && dimensions.map(function(dimension) {
+                        (!loading && dimensions && Array.isArray(dimensions)) && h('div', { className: 'dimensions-grid' },
+                            dimensions.map(function(dimension) {
                             const config = queryConfig[dimension.code] || { filter: 'all', values: ['*'], selectedCategories: [] };
                             const isTimeVariable = dimension.code === 'AAR' || (dimension.label && dimension.label.toLowerCase().includes('år'));
                             
                             // Sjekk at dimension har category og index
                             if (!dimension.category || !dimension.category.index) {
                                 console.error('Dimension mangler category eller index:', dimension);
-                                return h('div', { key: dimension.code, className: 'card' },
+                                return h('div', { key: dimension.code, className: 'dimension-card' },
                                     h('div', { className: 'alert' },
                                         'Dimensjon ' + (dimension.label || dimension.code) + ' har ikke riktig struktur'
                                     )
                                 );
                             }
                             
-                            return h('div', { key: dimension.code, className: 'card' },
-                                h('h3', { className: 'font-bold mb-1' }, dimension.label || dimension.code),
-                                h('p', { className: 'text-sm text-gray-600 mb-4' },
-                                    'Dimensjon: ' + dimension.code + ' (' + dimension.category.index.length + ' kategorier)'
+                            return h('div', { key: dimension.code, className: 'dimension-card' },
+                                h('div', { className: 'flex items-center justify-between gap-2 mb-2' },
+                                    h('h3', { className: 'font-bold' }, dimension.label || dimension.code),
+                                    h('p', { className: 'text-xs text-gray-600' },
+                                        'Dimensjon: ' + dimension.code + ' (' + dimension.category.index.length + ' kategorier)'
+                                    )
                                 ),
                                 h('div', { className: 'space-y-4' },
                                     h('div', null,
@@ -1504,7 +1792,7 @@
                                                     checked: config.filter === 'item',
                                                     onChange: function() { updateDimensionConfig(dimension.code, { filter: 'item' }); }
                                                 }),
-                                                h('span', { className: 'text-sm' }, 'Velg spesifikke verdier')
+                                                h('span', { className: 'text-xs' }, 'Velg spesifikke verdier')
                                             ),
                                             isTimeVariable && h('label', { className: 'flex items-center gap-2' },
                                                 h('input', {
@@ -1513,7 +1801,7 @@
                                                     checked: config.filter === 'top',
                                                     onChange: function() { updateDimensionConfig(dimension.code, { filter: 'top' }); }
                                                 }),
-                                                h('span', { className: 'text-sm' }, 'Siste X år')
+                                                h('span', { className: 'text-xs' }, 'Siste X år')
                                             ),
                                             h('label', { className: 'flex items-center gap-2' },
                                                 h('input', {
@@ -1522,7 +1810,7 @@
                                                     checked: config.filter === 'all',
                                                     onChange: function() { updateDimensionConfig(dimension.code, { filter: 'all' }); }
                                                 }),
-                                                h('span', { className: 'text-sm' }, 'Alle (med wildcard)')
+                                                h('span', { className: 'text-xs' }, 'Alle (med wildcard)')
                                             )
                                         )
                                     ),
@@ -1806,6 +2094,7 @@
                                 )
                             );
                         }),
+                        ),
                         h('div', { className: 'flex gap-2' },
                             h('button', {
                                 className: 'btn btn-outline',
@@ -1859,6 +2148,33 @@
                                 h('p', { className: 'text-gray-600' }, 'Denne spørringen kan brukes mot FHI API')
                             ),
                             h('div', { className: 'mb-4' },
+                                h('div', { className: 'flex gap-2 mb-4' },
+                                    h('button', {
+                                        className: 'btn btn-outline flex items-center gap-2',
+                                        onClick: function() { copyToClipboard(displayCode); },
+                                        'aria-label': outputFormat === 'powerquery' ? 'Kopier Power Query' : 'Kopier spørring'
+                                    },
+                                        h(Icons.Copy),
+                                        outputFormat === 'powerquery' ? 'Kopier Power Query' : 'Kopier spørring'
+                                    ),
+                                    h('button', {
+                                        className: 'btn btn-primary flex items-center gap-2',
+                                        onClick: fetchPreview,
+                                        disabled: loading,
+                                        'aria-label': 'Hent preview av data'
+                                    },
+                                        loading ? h('span', { className: 'animate-spin' }, h(Icons.RefreshCw)) : h(Icons.Download),
+                                        'Hent preview av data'
+                                    )
+                                ),
+                                h('div', { className: 'text-sm text-gray-600 p-4 bg-blue-50 rounded border border-blue-200' },
+                                    h('p', { className: 'font-semibold mb-2' }, 'API endpoint:'),
+                                    h('code', { className: 'text-xs' },
+                                        'POST ' + API_BASE + '/' + (selectedSource ? selectedSource.id : '') + '/Table/' + (selectedTable ? selectedTable.tableId : '') + '/data'
+                                    )
+                                )
+                            ),
+                            h('div', { className: 'mb-4' },
                                 h('label', { className: 'label mb-2' }, 'Velg format:'),
                                 h('div', { className: 'flex gap-4' },
                                     h('label', { className: 'flex items-center gap-2' },
@@ -1882,29 +2198,6 @@
                                 )
                             ),
                             h('div', { className: 'code-block mb-4' }, displayCode),
-                            h('div', { className: 'flex gap-2 mb-4' },
-                                h('button', {
-                                    className: 'btn btn-outline flex items-center gap-2',
-                                    onClick: function() { copyToClipboard(displayCode); }
-                                },
-                                    h(Icons.Copy),
-                                    outputFormat === 'powerquery' ? 'Kopier Power Query' : 'Kopier spørring'
-                                ),
-                                outputFormat === 'json' && h('button', {
-                                    className: 'btn btn-primary flex items-center gap-2',
-                                    onClick: fetchPreview,
-                                    disabled: loading
-                                },
-                                    loading ? h('span', { className: 'animate-spin' }, h(Icons.RefreshCw)) : h(Icons.Download),
-                                    'Hent preview av data'
-                                )
-                            ),
-                            h('div', { className: 'text-sm text-gray-600 p-4 bg-blue-50 rounded border border-blue-200' },
-                                h('p', { className: 'font-semibold mb-2' }, 'API endpoint:'),
-                                h('code', { className: 'text-xs' },
-                                    'POST ' + API_BASE + '/' + (selectedSource ? selectedSource.id : '') + '/Table/' + (selectedTable ? selectedTable.tableId : '') + '/data'
-                                )
-                            ),
                             outputFormat === 'powerquery' && h('div', { className: 'text-sm text-gray-600 p-4 bg-green-50 rounded border border-green-200 mt-4' },
                                 h('p', { className: 'font-semibold mb-2 text-xs' }, '💡 Bruk i Power BI/Excel:'),
                                 h('ol', { className: 'text-xs', style: { paddingLeft: '1.25rem', listStyleType: 'decimal' } },
@@ -1919,7 +2212,7 @@
                                 )
                             )
                         ),
-                        error && h('div', { className: 'alert' }, error),
+                        error && h('div', { className: 'alert', role: 'alert' }, error),
                         previewData && h('div', { className: 'card' },
                             h('h3', { className: 'font-bold mb-2' }, 'Forhåndsvisning av data'),
                             h('p', { className: 'text-gray-600 mb-4' },
@@ -1964,6 +2257,7 @@
                             ),
                             h('button', {
                                 className: 'btn btn-outline mb-4',
+                                'aria-label': 'Last ned data som CSV-fil',
                                 onClick: function() {
                                     // Konverter data til CSV
                                     let csvContent = '';
@@ -2487,8 +2781,9 @@
 
                 // Main render
                 return h('div', { className: 'bg-gradient' },
+                    h('a', { href: '#main-content', className: 'skip-link' }, 'Gå til hovedinnhold'),
                     renderMetadataModal(),
-                    h('div', { className: 'container' },
+                    h('div', { className: 'container', id: 'main-content' },
                         h('div', { className: 'text-center mb-8' },
                             h('h1', { className: 'mb-2' }, 'FHI API Query Builder (BETA)'),
                             h('p', { className: 'text-gray-600' }, 'Bygg spørringer mot FHIs åpne statistikk-API. '),
