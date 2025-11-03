@@ -76,6 +76,17 @@
         .text-sm { font-size: 0.875rem; }
         .text-xs { font-size: 0.75rem; }
 
+        .font-bold { font-weight: 700; }
+        .font-semibold { font-weight: 600; }
+        .text-lg { font-size: 1rem; }
+        .text-xs { font-size: 0.75rem; }
+        .label-emphasis { font-weight: 600; font-size: 0.85rem; color: #1f2937; }
+        .heading-modal { font-size: 1.5rem; font-weight: 700; }
+        .heading-section { font-size: 1.875rem; font-weight: 700; }
+        .table-header { font-size: 0.875rem; font-weight: 600; }
+        .table-value { font-size: 0.875rem; font-weight: 500; }
+        .table-cell { font-size: 0.875rem; }
+
         .card {
             background: white;
             border-radius: 0.5rem;
@@ -579,6 +590,9 @@
             width: 1rem;
             height: 1rem;
             transition: transform 0.2s;
+            margin-right: 0.5rem;
+            flex-shrink: 0;
+            cursor: pointer;
         }
 
         .geo-chevron.expanded {
@@ -749,7 +763,110 @@
                 )
             };
 
-            // Function to get icon for a source
+            // Function to parse HTML and convert to React elements
+            function parseHTML(htmlString) {
+                if (typeof htmlString !== 'string') return htmlString;
+                
+                const result = [];
+                let lastIndex = 0;
+                
+                // Regular expression to match HTML tags
+                const tagRegex = /<\/?(\w+)((?:\s+[\w:]+(?:\s*=\s*(?:"[^"]*"|'[^']*'|[^\s>]+))?)*)\s*\/?>/g;
+                let match;
+                const stack = [];
+                
+                while ((match = tagRegex.exec(htmlString)) !== null) {
+                    // Add text before the tag
+                    if (match.index > lastIndex) {
+                        const text = htmlString.substring(lastIndex, match.index);
+                        if (stack.length === 0) {
+                            result.push(text);
+                        } else {
+                            stack[stack.length - 1].children.push(text);
+                        }
+                    }
+                    
+                    const tagName = match[1].toLowerCase();
+                    const isClosing = match[0].startsWith('</');
+                    
+                    if (isClosing) {
+                        if (stack.length > 0 && stack[stack.length - 1].tag === tagName) {
+                            const element = stack.pop();
+                            if (stack.length === 0) {
+                                result.push(element);
+                            } else {
+                                stack[stack.length - 1].children.push(element);
+                            }
+                        }
+                    } else {
+                        const element = {
+                            tag: tagName,
+                            children: [],
+                            self: match[0].endsWith('/')
+                        };
+                        
+                        if (element.self || ['br', 'hr'].includes(tagName)) {
+                            if (stack.length === 0) {
+                                result.push(element);
+                            } else {
+                                stack[stack.length - 1].children.push(element);
+                            }
+                        } else {
+                            stack.push(element);
+                        }
+                    }
+                    
+                    lastIndex = tagRegex.lastIndex;
+                }
+                
+                // Add remaining text
+                if (lastIndex < htmlString.length) {
+                    const text = htmlString.substring(lastIndex);
+                    if (stack.length === 0) {
+                        result.push(text);
+                    } else {
+                        stack[stack.length - 1].children.push(text);
+                    }
+                }
+                
+                // Convert to React elements
+                function renderElement(el, idx) {
+                    if (typeof el === 'string') {
+                        return el;
+                    }
+                    
+                    if (!el.tag) {
+                        return el;
+                    }
+                    
+                    const children = el.children.map((child, i) => renderElement(child, i));
+                    
+                    switch (el.tag) {
+                        case 'strong':
+                        case 'b':
+                            return h('strong', { key: idx, className: 'font-bold' }, children);
+                        case 'em':
+                        case 'i':
+                            return h('em', { key: idx, style: { fontStyle: 'italic' } }, children);
+                        case 'p':
+                            return h('p', { key: idx, style: { marginBottom: '0.5rem' } }, children);
+                        case 'ul':
+                            return h('ul', { key: idx, style: { marginLeft: '1.5rem', marginBottom: '0.5rem', listStyleType: 'disc' } }, children);
+                        case 'ol':
+                            return h('ol', { key: idx, style: { marginLeft: '1.5rem', marginBottom: '0.5rem', listStyleType: 'decimal' } }, children);
+                        case 'li':
+                            return h('li', { key: idx, style: { marginBottom: '0.25rem' } }, children);
+                        case 'br':
+                            return h('br', { key: idx });
+                        case 'hr':
+                            return h('hr', { key: idx, style: { margin: '0.5rem 0', border: 'none', borderTop: '1px solid #e5e7eb' } });
+                        default:
+                            return h('div', { key: idx }, children);
+                    }
+                }
+                
+                return result.map((el, idx) => renderElement(el, idx));
+            }
             function getSourceIcon(source) {
                 const sourceTitle = (source.title || source.name || '').toLowerCase();
                 
@@ -893,6 +1010,8 @@
                 const [showMetadataModal, setShowMetadataModal] = useState(false);
                 const [expandedMunicipalities, setExpandedMunicipalities] = useState({});
                 const [tableLabels, setTableLabels] = useState({});
+                const [expandedCategories, setExpandedCategories] = useState({});
+                const [geoMappingUrl, setGeoMappingUrl] = useState('https://github.com/janhli/FHI-API-Query-Builder/raw/b1305dec721c7bc669c4fa7560ffdbbf25cceb2a/geo_mapping.csv');
 
                 useEffect(() => {
                     fetchSources();
@@ -948,11 +1067,19 @@
 
                 async function fetchTableLabels() {
                     try {
-                        // Hent fra GitHub raw content (samme repo som appen)
-                        const csvUrl = 'https://raw.githubusercontent.com/janhli/FHI-API-Query-Builder/main/fhi_table_label_mapping.csv';
-                        const response = await fetch(csvUrl);
-                        if (!response.ok) throw new Error('Kunne ikke hente tabell-labels fra GitHub (status: ' + response.status + ')');
-                        const csvText = await response.text();
+                        // Hent fra GitHub API - returnerer JSON med base64-kodet innhold
+                        const apiUrl = 'https://api.github.com/repos/janhli/FHI-API-Query-Builder/contents/fhi_table_label_mapping.csv?ref=main';
+                        const response = await fetch(apiUrl);
+                        if (!response.ok) throw new Error('Kunne ikke hente tabell-labels fra GitHub API (status: ' + response.status + ')');
+                        const jsonData = await response.json();
+                        
+                        // Dekod base64-innholdet med UTF-8 support
+                        const binaryString = atob(jsonData.content);
+                        const bytes = new Uint8Array(binaryString.length);
+                        for (let i = 0; i < binaryString.length; i++) {
+                            bytes[i] = binaryString.charCodeAt(i);
+                        }
+                        const csvText = new TextDecoder('utf-8').decode(bytes);
                         
                         const labelMap = parseTableLabelsCSV(csvText);
                         setTableLabels(labelMap);
@@ -965,7 +1092,47 @@
                     const lines = text.split('\n');
                     const result = {};
                     
-                    // Hopp over header (linje 0)
+                    if (lines.length < 2) {
+                        console.error('CSV-filen er tom eller har ingen data-linjer');
+                        return result;
+                    }
+                    
+                    // Parse header-linjen først
+                    const headerLine = lines[0].trim();
+                    const separator = ',';
+                    
+                    console.log('Header-linje:', headerLine);
+                    
+                    // Parse header-celler
+                    const headerCells = [];
+                    let current = '';
+                    let inQuotes = false;
+                    
+                    for (let j = 0; j < headerLine.length; j++) {
+                        const char = headerLine[j];
+                        const nextChar = headerLine[j + 1];
+                        
+                        if (char === '"') {
+                            if (inQuotes && nextChar === '"') {
+                                current += '"';
+                                j++;
+                            } else {
+                                inQuotes = !inQuotes;
+                            }
+                        } else if (char === separator && !inQuotes) {
+                            headerCells.push(current.trim().replace(/^"|"$/g, ''));
+                            current = '';
+                        } else {
+                            current += char;
+                        }
+                    }
+                    if (current) {
+                        headerCells.push(current.trim().replace(/^"|"$/g, ''));
+                    }
+                    
+                    console.log('Header-celler:', headerCells);
+                    
+                    // Parse data-linjer (hopp over header)
                     for (let i = 1; i < lines.length; i++) {
                         const line = lines[i].trim();
                         if (!line) continue;
@@ -981,15 +1148,12 @@
                             
                             if (char === '"') {
                                 if (inQuotes && nextChar === '"') {
-                                    // Escapet anførselstegn
                                     current += '"';
                                     j++;
                                 } else {
-                                    // Start/slutt på sitert felt
                                     inQuotes = !inQuotes;
                                 }
-                            } else if (char === ',' && !inQuotes) {
-                                // Feltskille
+                            } else if (char === separator && !inQuotes) {
                                 cells.push(current.trim().replace(/^"|"$/g, ''));
                                 current = '';
                             } else {
@@ -1002,14 +1166,22 @@
                             cells.push(current.trim().replace(/^"|"$/g, ''));
                         }
                         
-                        // Struktur: source_id, tableId, name, title, label
-                        // 0=source_id, 1=tableId, 2=name, 3=title, 4=label
-                        if (cells.length >= 5 && cells[1]) {
+                        // Kolonner: 0=source_id, 1=tableId, 2=title, 3=label, 4=category
+                        // Hent tableId fra kolonne 2 (indeks 1), label fra kolonne 4 (indeks 3) og category fra kolonne 5 (indeks 4)
+                        if (cells.length > 3 && cells[1]) {
                             const tableId = cells[1];
-                            const label = cells[4];
-                            if (label) {
-                                result[tableId] = label;
-                                console.log('Label for tableId ' + tableId + ':', label);
+                            const label = cells[3];  // ← label-kolonnen (indeks 3, kolonne 4)
+                            const category = cells[4] || '';  // ← category-kolonnen (indeks 4, kolonne 5)
+                            
+                            if (tableId && label) {
+                                // Lagre som objekt med både label og category
+                                result[tableId] = {
+                                    label: label,
+                                    category: category
+                                };
+                                if (i <= 3) {  // Logg første 3 linjer
+                                    console.log('Rad ' + i + ' - tableId: ' + tableId + ', label: ' + label + ', category: ' + category);
+                                }
                             }
                         }
                     }
@@ -1020,9 +1192,19 @@
 
                 function getTableLabel(table) {
                     if (tableLabels && tableLabels[table.tableId]) {
-                        return tableLabels[table.tableId];
+                        const labelData = tableLabels[table.tableId];
+                        // Hvis det er et objekt, hent label-feltet. Ellers (bakoverkompatibilitet) bruk det som string
+                        return typeof labelData === 'object' ? labelData.label : labelData;
                     }
-                    return table.title || table.name;
+                    return table.label || table.title || table.name;
+                }
+                
+                function getTableCategory(table) {
+                    if (tableLabels && tableLabels[table.tableId]) {
+                        const labelData = tableLabels[table.tableId];
+                        return typeof labelData === 'object' ? labelData.category : '';
+                    }
+                    return '';
                 }
 
                 async function fetchTables(sourceId) {
@@ -1196,7 +1378,7 @@
                             'aria-labelledby': 'modal-title'
                         },
                             h('div', { style: { display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.5rem', paddingBottom: '1rem', borderBottom: '1px solid #e5e7eb' }},
-                                h('h2', { id: 'modal-title', style: { margin: 0, fontSize: '1.5rem', fontWeight: 700 } }, 'Tabell informasjon'),
+                                h('h2', { id: 'modal-title', style: { margin: 0 }, className: 'heading-modal' }, 'Tabell informasjon'),
                                 h('button', {
                                     onClick: closeMetadataModal,
                                     'aria-label': 'Lukk tabell informasjon',
@@ -1209,9 +1391,9 @@
                                     }
                                 }, '✕')
                             ),
-                            h('div', { style: { fontSize: '0.875rem', lineHeight: 1.8, color: '#374151' }},
+                            h('div', { style: { lineHeight: 1.8, color: '#374151' }, className: 'table-cell' },
                                 tableMetadata.name && h('div', { style: { marginBottom: '1.5rem' }},
-                                    h('strong', { style: { color: '#111827', fontSize: '1rem' } }, tableMetadata.name)
+                                    h('strong', { style: { color: '#111827' }, className: 'text-lg font-bold' }, tableMetadata.name)
                                 ),
                                 tableMetadata.isOfficialStatistics !== undefined && h('div', { style: { marginBottom: '1rem' }},
                                     h('strong', { style: { color: '#1f2937', display: 'block', marginBottom: '0.25rem' } }, 'Offisiell statistikk:'),
@@ -1223,16 +1405,11 @@
                                         if (paragraph.header === 'Geografi') return null;
                                         
                                         const isRelatedMaterial = paragraph.header === 'Relatert materiale';
-                                        const content = isRelatedMaterial ? parseRelatedMaterialLinks(paragraph.content) : paragraph.content;
-                                        
-                                        // Fjern HTML tags (p, li, ul, ol) fra innholdet
-                                        const cleanedContent = typeof content === 'string' 
-                                            ? content.replace(/<\/?(?:p|li|ul|ol)\s*\/?>/gi, '')
-                                            : content;
+                                        const content = isRelatedMaterial ? parseRelatedMaterialLinks(paragraph.content) : parseHTML(paragraph.content);
                                         
                                         return h('div', { key: idx, style: { marginBottom: '1.5rem' }},
-                                            h('h3', { style: { margin: 0, fontSize: '1rem', fontWeight: 600, color: '#1f2937', marginBottom: '0.5rem' } }, paragraph.header),
-                                            h('div', { style: { color: '#4b5563', whiteSpace: 'pre-wrap', wordBreak: 'break-word', lineHeight: 1.6 } }, cleanedContent)
+                                            h('h3', { style: { margin: 0, marginBottom: '0.5rem', color: '#1f2937' }, className: 'font-semibold' }, paragraph.header),
+                                            h('div', { style: { color: '#4b5563', whiteSpace: 'pre-wrap', wordBreak: 'break-word', lineHeight: 1.6 } }, content)
                                         );
                                     })
                                 )
@@ -1249,6 +1426,7 @@
                     setFinalQuery(null);
                     setPreviewData(null);
                     setTableSearch('');
+                    setExpandedCategories({});  // Reset expanded categories når kilde endres
                     fetchTables(source.id);
                     setStep(2);
                 }
@@ -1406,8 +1584,10 @@
                     setLoading(true);
                     setError(null);
                     try {
-                        // Alltid hent JSON-data for preview, uavhengig av output-format
-                        const previewQuery = Object.assign({}, finalQuery, { responseFormat: 'json-stat2' });
+                        // Bruk finalQuery som den er - den har allerede response.format satt
+                        const previewQuery = finalQuery;
+                        
+                        console.log('Preview query:', JSON.stringify(previewQuery, null, 2));
                         
                         const response = await fetch(
                             API_BASE + '/' + selectedSource.id + '/Table/' + selectedTable.tableId + '/data',
@@ -1419,14 +1599,93 @@
                         );
                         
                         if (!response.ok) {
-                            const errorData = await response.json();
-                            throw new Error(errorData.message || 'Kunne ikke hente data');
+                            try {
+                                const errorData = await response.json();
+                                console.log('API error response:', errorData);
+                                if (errorData.errors) {
+                                    const errorMessages = [];
+                                    for (const field in errorData.errors) {
+                                        errorMessages.push(field + ': ' + errorData.errors[field][0]);
+                                    }
+                                    throw new Error('Validationsfeil: ' + errorMessages.join(', '));
+                                }
+                                throw new Error(errorData.message || 'Kunne ikke hente data');
+                            } catch (parseError) {
+                                console.log('Parse error:', parseError);
+                                throw new Error('Kunne ikke hente preview: ' + response.statusText + ' - ' + parseError.message);
+                            }
                         }
                         
-                        const data = await response.json();
+                        const contentType = response.headers.get('content-type');
+                        let data;
+                        
+                        if (contentType && contentType.includes('application/json')) {
+                            data = await response.json();
+                        } else if (contentType && contentType.includes('text/csv')) {
+                            // Hvis API returnerer CSV i stedet for JSON, behandle som tekst
+                            const csvText = await response.text();
+                            data = { csvText: csvText };
+                        } else {
+                            data = await response.json();
+                        }
+                        
+                        // Prosesser data for å legge til geo-koder hvis CSV2 og mapping-URL er satt
+                        if (responseFormat === 'csv2' && geoMappingUrl && data.csvText) {
+                            try {
+                                // Hent geo-mapping
+                                const geoResponse = await fetch(geoMappingUrl);
+                                const geoText = await geoResponse.text();
+                                
+                                // Parse geo-mapping CSV
+                                const geoLines = geoText.trim().split('\n');
+                                if (geoLines.length > 1) {
+                                    const geoHeaders = geoLines[0].split(',');
+                                    const codeIndex = geoHeaders.findIndex(function(h) { return h.trim() === 'code'; });
+                                    const labelIndex = geoHeaders.findIndex(function(h) { return h.trim() === 'label'; });
+                                    
+                                    if (codeIndex !== -1 && labelIndex !== -1) {
+                                        const geoMap = {};
+                                        for (let i = 1; i < geoLines.length; i++) {
+                                            const cells = geoLines[i].split(',');
+                                            if (cells.length > Math.max(codeIndex, labelIndex)) {
+                                                const code = cells[codeIndex].trim();
+                                                const label = cells[labelIndex].trim();
+                                                geoMap[label] = code;
+                                            }
+                                        }
+                                        
+                                        // Legg til GeoCode-kolonne
+                                        const csvLines = data.csvText.split('\n');
+                                        const headers = csvLines[0].split(',');
+                                        const geoColIndex = headers.findIndex(function(h) { return h.trim() === 'Geografi'; });
+                                        
+                                        if (geoColIndex !== -1) {
+                                            headers.push('GeoCode');
+                                            const newLines = [headers.join(',')];
+                                            
+                                            for (let i = 1; i < csvLines.length; i++) {
+                                                if (csvLines[i].trim()) {
+                                                    const cells = csvLines[i].split(',');
+                                                    const geoLabel = cells[geoColIndex] ? cells[geoColIndex].trim() : '';
+                                                    const code = geoMap[geoLabel] || '';
+                                                    cells.push(code);
+                                                    newLines.push(cells.join(','));
+                                                }
+                                            }
+                                            
+                                            data.csvText = newLines.join('\n');
+                                        }
+                                    }
+                                }
+                            } catch (err) {
+                                console.warn('Kunne ikke legge til geo-koder:', err.message);
+                                // Fortsett uten geo-koder
+                            }
+                        }
+                        
                         setPreviewData(data);
                     } catch (err) {
-                        setError(err.message);
+                        setError(err.message || 'Feil ved henting av preview');
                     } finally {
                         setLoading(false);
                     }
@@ -1626,6 +1885,28 @@
                         })
                         : tables;
 
+                    // Gruppér tabeller etter category
+                    const groupedByCategory = {};
+                    filteredTables.forEach(function(table) {
+                        const category = getTableCategory(table) || 'Andre';
+                        if (!groupedByCategory[category]) {
+                            groupedByCategory[category] = [];
+                        }
+                        groupedByCategory[category].push(table);
+                    });
+                    
+                    // Sorter kategorier alfabetisk
+                    const sortedCategories = Object.keys(groupedByCategory).sort();
+                    
+                    // Toggle category expand/collapse
+                    const toggleCategory = function(category) {
+                        setExpandedCategories(function(prev) {
+                            return Object.assign({}, prev, {
+                                [category]: !prev[category]
+                            });
+                        });
+                    };
+
                     return h('div', { className: 'card' },
                         h('div', { className: 'mb-2' },
                             h('h2', { className: 'mb-1 text-lg' }, 'Velg tabell fra ' + (selectedSource ? selectedSource.title || selectedSource.name : '')),
@@ -1638,22 +1919,61 @@
                             value: tableSearch,
                             onChange: function(e) { setTableSearch(e.target.value); }
                         }),
-                        loading && h('p', { className: 'text-gray-500 text-sm' }, 'Laster tabeller...'),
+                        loading && h('p', { className: 'text-gray-500 text-sm mb-2' }, 'Laster tabeller...'),
                         error && h('div', { className: 'alert mb-2 text-sm', role: 'alert' }, error),
-                        h('div', { className: 'space-y-1 max-h-96 overflow-y-auto mb-3' },
-                            filteredTables.map(function(table) {
-                                return h('div', {
-                                    key: table.tableId,
-                                    className: 'bg-white border border-gray-200 rounded px-2 py-1 hover:border-blue-400 hover:bg-blue-50 cursor-pointer transition-colors text-sm',
-                                    onClick: function() { selectTable(table); }
-                                },
-                                    h('div', { className: 'font-semibold text-sm' }, getTableLabel(table) + ' (' + table.tableId + ')'),
-                                    table.modifiedAt && h('p', { className: 'text-xs text-gray-500' },
-                                        'Oppdatert: ' + new Date(table.modifiedAt).toISOString().split('T')[0]
-                                    )
-                                );
-                            })
+                        
+                        // Moderne meny
+                        h('div', { style: { 
+                            overflowY: 'auto',
+                            marginBottom: '0.5rem',
+                            border: '1px solid #e5e7eb',
+                            borderRadius: '0.5rem',
+                            backgroundColor: '#ffffff'
+                        }},
+                            h('div', null,
+                                sortedCategories.map(function(category, idx) {
+                                    const tablesInCategory = groupedByCategory[category];
+                                    const isExpanded = expandedCategories[category] !== false;
+                                    
+                                    return h('div', { key: category },
+                                        // KATEGORI-HEADER (lik geo-county)
+                                        h('div', { className: 'geo-county' },
+                                            h('button', {
+                                                onClick: function() { toggleCategory(category); },
+                                                className: 'geo-county-header',
+                                                style: { width: '100%', justifyContent: 'flex-start' }
+                                            },
+                                                h('svg', {
+                                                    className: 'geo-chevron' + (isExpanded ? ' expanded' : ''),
+                                                    viewBox: '0 0 24 24',
+                                                    onClick: function(e) {
+                                                        e.stopPropagation();
+                                                        toggleCategory(category);
+                                                    }
+                                                },
+                                                    h('polyline', { points: '9 18 15 12 9 6', fill: 'none', stroke: 'currentColor', strokeWidth: '2' })
+                                                ),
+                                                h('span', null, category)
+                                            )
+                                        ),
+                                        
+                                        // TABELLER (lik geo-municipality-list)
+                                        isExpanded && h('div', { className: 'geo-municipality-list' },
+                                            tablesInCategory.map(function(table) {
+                                                return h('div', { key: table.tableId, className: 'geo-municipality' },
+                                                    h('div', { className: 'geo-municipality-header', onClick: function() { selectTable(table); }, style: { cursor: 'pointer' } },
+                                                        h('span', { className: 'flex-1' }, getTableLabel(table)),
+                                                        table.modifiedAt && h('span', { className: 'text-xs', style: { color: '#9ca3af', marginLeft: '0.5rem', marginRight: '0.5rem' } }, 'Oppdatert: ' + table.modifiedAt.split('T')[0]),
+                                                        h('span', { className: 'text-xs', style: { color: '#9ca3af' } }, table.tableId)
+                                                    )
+                                                );
+                                            })
+                                        )
+                                    );
+                                })
+                            )
                         ),
+                        
                         filteredTables.length === 0 && tableSearch.trim() !== '' && h('p', { className: 'text-gray-500 text-sm text-center mb-2' },
                             'Ingen tabeller funnet'
                         ),
@@ -1673,12 +1993,10 @@
                             if (tableMetadata.paragraphs[i].header !== 'Geografi') {
                                 let text = tableMetadata.paragraphs[i].content;
                                 if (typeof text === 'string') {
-                                    // Fjern HTML tags først
-                                    text = text.replace(/<\/?(?:p|li|ul|ol)\s*\/?>/gi, '');
                                     // Hent første setning - se etter punkt/utropstegn/spørsmålstegn fulgt av mellomrom + stor bokstav, eller på slutten
                                     const match = text.match(/^[^!?]*?\.(?=\s[A-Z]|$)|^[^!?]*?[!?]/);
                                     if (match) {
-                                        firstSentence = match[0].trim();
+                                        firstSentence = parseHTML(match[0].trim());
                                         break;
                                     }
                                 }
@@ -1688,8 +2006,8 @@
 
                     return h('div', { className: 'space-y-4' },
                         selectedTable && h('div', { className: 'mb-6 pb-4 border-b border-gray-200' },
-                            h('h1', { style: { fontSize: '1.875rem', fontWeight: 700, color: '#111827', marginBottom: '0.5rem' } }, getTableLabel(selectedTable)),
-                            firstSentence && h('p', { style: { fontSize: '1rem', color: '#4b5563', lineHeight: 1.6 } }, firstSentence)
+                            h('h1', { style: { color: '#111827', marginBottom: '0.5rem' }, className: 'heading-section' }, getTableLabel(selectedTable)),
+                            firstSentence && h('p', { style: { color: '#4b5563', lineHeight: 1.6 }, className: 'text-lg' }, firstSentence)
                         ),
                         h('div', { className: 'card' },
                             h('div', { className: 'mb-4' },
@@ -1707,7 +2025,7 @@
                                             h('circle', { cx: '12', cy: '12', r: '10' }),
                                             h('text', { x: '12', y: '16', textAnchor: 'middle', fontSize: '12', fill: 'currentColor' }, 'i')
                                         ),
-                                        h('span', { style: { fontSize: '0.875rem', color: '#374151' } }, 'Informasjon om tabellen')
+                                        h('span', { style: { className: 'table-cell', color: '#374151' } }, 'Informasjon om tabellen')
                                     )
                                 ),
                                 h('p', { className: 'text-gray-600' }, 'Velg verdier for hver dimensjon i tabellen')
@@ -1881,17 +2199,6 @@
                                                             
                                                             return h('div', { key: county.code, className: 'geo-county' },
                                                                 h('div', { className: 'geo-county-header' },
-                                                                    h('input', {
-                                                                        type: 'checkbox',
-                                                                        className: 'checkbox geo-county-checkbox',
-                                                                        checked: countySelected,
-                                                                        onChange: function(e) {
-                                                                            const updated = e.target.checked
-                                                                                ? config.selectedCategories.concat([county.code])
-                                                                                : config.selectedCategories.filter(function(c) { return c !== county.code; });
-                                                                            updateDimensionConfig(dimension.code, { selectedCategories: updated });
-                                                                        }
-                                                                    }),
                                                                     h('svg', {
                                                                         className: 'geo-chevron' + (isExpanded ? ' expanded' : ''),
                                                                         viewBox: '0 0 24 24',
@@ -1906,6 +2213,17 @@
                                                                     },
                                                                         h('polyline', { points: '9 18 15 12 9 6', fill: 'none', stroke: 'currentColor', strokeWidth: '2' })
                                                                     ),
+                                                                    h('input', {
+                                                                        type: 'checkbox',
+                                                                        className: 'checkbox geo-county-checkbox',
+                                                                        checked: countySelected,
+                                                                        onChange: function(e) {
+                                                                            const updated = e.target.checked
+                                                                                ? config.selectedCategories.concat([county.code])
+                                                                                : config.selectedCategories.filter(function(c) { return c !== county.code; });
+                                                                            updateDimensionConfig(dimension.code, { selectedCategories: updated });
+                                                                        }
+                                                                    }),
                                                                     h('span', { className: 'flex-1', style: { cursor: 'pointer' }, onClick: function() {
                                                                         const newExpanded = {};
                                                                         for (var key in expandedCounties) {
@@ -2121,12 +2439,10 @@
                             if (tableMetadata.paragraphs[i].header !== 'Geografi') {
                                 let text = tableMetadata.paragraphs[i].content;
                                 if (typeof text === 'string') {
-                                    // Fjern HTML tags først
-                                    text = text.replace(/<\/?(?:p|li|ul|ol)\s*\/?>/gi, '');
                                     // Hent første setning - se etter punkt/utropstegn/spørsmålstegn fulgt av mellomrom + stor bokstav, eller på slutten
                                     const match = text.match(/^[^!?]*?\.(?=\s[A-Z]|$)|^[^!?]*?[!?]/);
                                     if (match) {
-                                        firstSentence = match[0].trim();
+                                        firstSentence = parseHTML(match[0].trim());
                                         break;
                                     }
                                 }
@@ -2136,8 +2452,8 @@
                     
                     return h('div', { className: 'space-y-4' },
                         selectedTable && h('div', { className: 'mb-6 pb-4 border-b border-gray-200' },
-                            h('h1', { style: { fontSize: '1.875rem', fontWeight: 700, color: '#111827', marginBottom: '0.5rem' } }, getTableLabel(selectedTable)),
-                            firstSentence && h('p', { style: { fontSize: '1rem', color: '#4b5563', lineHeight: 1.6 } }, firstSentence)
+                            h('h1', { style: { color: '#111827', marginBottom: '0.5rem' }, className: 'heading-section' }, getTableLabel(selectedTable)),
+                            firstSentence && h('p', { style: { color: '#4b5563', lineHeight: 1.6 }, className: 'text-lg' }, firstSentence)
                         ),
                         h('div', { className: 'card' },
                             h('div', { className: 'mb-4' },
@@ -2161,16 +2477,10 @@
                                         className: 'btn btn-primary flex items-center gap-2',
                                         onClick: fetchPreview,
                                         disabled: loading,
-                                        'aria-label': 'Hent preview av data'
+                                        'aria-label': 'Hent forhåndsvisning av data'
                                     },
                                         loading ? h('span', { className: 'animate-spin' }, h(Icons.RefreshCw)) : h(Icons.Download),
-                                        'Hent preview av data'
-                                    )
-                                ),
-                                h('div', { className: 'text-sm text-gray-600 p-4 bg-blue-50 rounded border border-blue-200' },
-                                    h('p', { className: 'font-semibold mb-2' }, 'API endpoint:'),
-                                    h('code', { className: 'text-xs' },
-                                        'POST ' + API_BASE + '/' + (selectedSource ? selectedSource.id : '') + '/Table/' + (selectedTable ? selectedTable.tableId : '') + '/data'
+                                        'Hent forhåndsvisning av data'
                                     )
                                 )
                             ),
@@ -2198,6 +2508,73 @@
                                 )
                             ),
                             h('div', { className: 'code-block mb-4' }, displayCode),
+                            h('div', { className: 'text-sm text-gray-600 p-4 bg-blue-50 rounded border border-blue-200' },
+                                h('p', { className: 'font-semibold mb-4' }, '🔗 API & Mapping URLs:'),
+                                
+                                // API endpoint
+                                h('div', { className: 'mb-4' },
+                                    h('p', { className: 'text-xs font-semibold text-gray-700 block mb-1' }, 'API endpoint:'),
+                                    h('div', { className: 'flex gap-2' },
+                                        h('code', { 
+                                            className: 'text-xs bg-white p-2 rounded flex-1 overflow-auto',
+                                            style: { whiteSpace: 'nowrap' }
+                                        },
+                                            'POST ' + API_BASE + '/' + (selectedSource ? selectedSource.id : '') + '/Table/' + (selectedTable ? selectedTable.tableId : '') + '/data'
+                                        ),
+                                        h('button', {
+                                            className: 'btn btn-outline p-2',
+                                            style: { minWidth: 'auto' },
+                                            onClick: function() { copyToClipboard('POST ' + API_BASE + '/' + (selectedSource ? selectedSource.id : '') + '/Table/' + (selectedTable ? selectedTable.tableId : '') + '/data'); },
+                                            title: 'Kopier API endpoint'
+                                        },
+                                            h(Icons.Copy)
+                                        )
+                                    )
+                                ),
+                                
+                                // Dimension API URL (dynamisk basert på valgt tabell)
+                                h('div', { className: 'mb-4' },
+                                    h('p', { className: 'text-xs font-semibold text-gray-700 block mb-1' }, 'Dimension API URL:'),
+                                    h('div', { className: 'flex gap-2' },
+                                        h('code', { 
+                                            className: 'text-xs bg-white p-2 rounded flex-1 overflow-auto',
+                                            style: { whiteSpace: 'nowrap' }
+                                        },
+                                            API_BASE + '/' + (selectedSource ? selectedSource.id : '{source}') + '/Table/' + (selectedTable ? selectedTable.tableId : '{tableId}') + '/dimension'
+                                        ),
+                                        h('button', {
+                                            className: 'btn btn-outline p-2',
+                                            style: { minWidth: 'auto' },
+                                            onClick: function() { copyToClipboard(API_BASE + '/' + (selectedSource ? selectedSource.id : '') + '/Table/' + (selectedTable ? selectedTable.tableId : '') + '/dimension'); },
+                                            title: 'Kopier Dimension API URL',
+                                            disabled: !selectedSource || !selectedTable
+                                        },
+                                            h(Icons.Copy)
+                                        )
+                                    )
+                                ),
+                                
+                                // Geo-Mapping CSV URL
+                                h('div', null,
+                                    h('p', { className: 'text-xs font-semibold text-gray-700 block mb-1' }, 'Geo-Mapping CSV URL:'),
+                                    h('div', { className: 'flex gap-2' },
+                                        h('code', { 
+                                            className: 'text-xs bg-white p-2 rounded flex-1 overflow-auto',
+                                            style: { whiteSpace: 'nowrap' }
+                                        },
+                                            geoMappingUrl
+                                        ),
+                                        h('button', {
+                                            className: 'btn btn-outline p-2',
+                                            style: { minWidth: 'auto' },
+                                            onClick: function() { copyToClipboard(geoMappingUrl); },
+                                            title: 'Kopier Geo-Mapping CSV URL'
+                                        },
+                                            h(Icons.Copy)
+                                        )
+                                    )
+                                )
+                            ),
                             outputFormat === 'powerquery' && h('div', { className: 'text-sm text-gray-600 p-4 bg-green-50 rounded border border-green-200 mt-4' },
                                 h('p', { className: 'font-semibold mb-2 text-xs' }, '💡 Bruk i Power BI/Excel:'),
                                 h('ol', { className: 'text-xs', style: { paddingLeft: '1.25rem', listStyleType: 'decimal' } },
@@ -2424,8 +2801,7 @@
                                                                 padding: '0.5rem', 
                                                                 textAlign: 'left', 
                                                                 borderBottom: '2px solid #d1d5db',
-                                                                fontSize: '0.875rem',
-                                                                fontWeight: '600'
+                                                                className: 'table-header'
                                                             } 
                                                         }, header);
                                                     })
@@ -2549,8 +2925,7 @@
                                                                     padding: '0.5rem', 
                                                                     textAlign: 'left', 
                                                                     borderBottom: '2px solid #d1d5db',
-                                                                    fontSize: '0.875rem',
-                                                                    fontWeight: '600'
+                                                                    className: 'table-header'
                                                                 } 
                                                             }, dim.label);
                                                         }).concat(
@@ -2561,8 +2936,7 @@
                                                                         padding: '0.5rem', 
                                                                         textAlign: 'right', 
                                                                         borderBottom: '2px solid #d1d5db',
-                                                                        fontSize: '0.875rem',
-                                                                        fontWeight: '600'
+                                                                        className: 'table-header'
                                                                     } 
                                                                 }, contentsDim.category.label[code]);
                                                             })
@@ -2600,8 +2974,7 @@
                                                                                     padding: '0.5rem', 
                                                                                     textAlign: 'right', 
                                                                                     borderBottom: '1px solid #e5e7eb',
-                                                                                    fontSize: '0.875rem',
-                                                                                    fontWeight: '500'
+                                                                                    className: 'table-value'
                                                                                 } 
                                                                             }, rowData.values[code] !== undefined ? rowData.values[code] : '-');
                                                                         })
@@ -2634,7 +3007,7 @@
                                                                             textAlign: 'center',
                                                                             fontStyle: 'italic',
                                                                             color: '#9ca3af',
-                                                                            fontSize: '0.75rem',
+                                                                            className: 'text-xs',
                                                                             borderBottom: '1px solid #e5e7eb'
                                                                         }
                                                                     }, 'Viser ' + rowKeys.length + ' rad' + (rowKeys.length !== 1 ? 'er' : '') + ' totalt (' + previewData.value.length + ' verdier, ' + contentsCategories.length + ' måltall)')
@@ -2671,8 +3044,7 @@
                                                                     padding: '0.5rem', 
                                                                     textAlign: 'left', 
                                                                     borderBottom: '2px solid #d1d5db',
-                                                                    fontSize: '0.875rem',
-                                                                    fontWeight: '600'
+                                                                    className: 'table-header'
                                                                 } 
                                                             }, dim.label);
                                                         }).concat([
@@ -2681,8 +3053,7 @@
                                                                     padding: '0.5rem', 
                                                                     textAlign: 'right', 
                                                                     borderBottom: '2px solid #d1d5db',
-                                                                    fontSize: '0.875rem',
-                                                                    fontWeight: '600'
+                                                                    className: 'table-header'
                                                                 } 
                                                             }, 'Verdi')
                                                         ])
@@ -2721,8 +3092,7 @@
                                                                                 padding: '0.5rem', 
                                                                                 textAlign: 'right', 
                                                                                 borderBottom: '1px solid #e5e7eb',
-                                                                                fontSize: '0.875rem',
-                                                                                fontWeight: '500'
+                                                                                className: 'table-value'
                                                                             } 
                                                                         }, previewData.value[i])
                                                                     ])
