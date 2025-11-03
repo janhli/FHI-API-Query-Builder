@@ -7,689 +7,11 @@
     <title>FHI API Query Builder</title>
     <script crossorigin src="https://unpkg.com/react@18.2.0/umd/react.production.min.js"></script>
     <script crossorigin src="https://unpkg.com/react-dom@18.2.0/umd/react-dom.production.min.js"></script>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+    <!-- Moderne CSS Design System -->
+    <link rel="stylesheet" href="styles.css">
+    <meta name="description" content="FHI API Query Builder - Bygg spørringer mot FHIs åpne statistikk-API">
+    <meta name="theme-color" content="#3b82f6">
 
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', sans-serif;
-            line-height: 1.5;
-            color: #1f2937;
-        }
-
-        .bg-gradient {
-            min-height: 100vh;
-            background: linear-gradient(135deg, #eff6ff 0%, #e0e7ff 100%);
-            padding: 2rem 1rem;
-        }
-
-        .container {
-            max-width: 72rem;
-            margin: 0 auto;
-        }
-
-        .text-center {
-            text-align: center;
-        }
-
-        .mb-2 { margin-bottom: 0.25rem; }
-        .mb-4 { margin-bottom: 0.5rem; }
-        .mb-6 { margin-bottom: 1.5rem; }
-        .mb-8 { margin-bottom: 2rem; }
-        .mt-1 { margin-top: 0.25rem; }
-        .mt-2 { margin-top: 0.5rem; }
-        .mt-4 { margin-top: 1rem; }
-        .mt-6 { margin-top: 1.5rem; }
-        .mr-1 { margin-right: 0.25rem; }
-        .ml-auto { margin-left: auto; }
-
-        .p-2 { padding: 0.5rem; }
-        .p-4 { padding: 1rem; }
-        .p-6 { padding: 1.5rem; }
-        .px-3 { padding-left: 0.75rem; padding-right: 0.75rem; }
-        .py-2 { padding-top: 0.5rem; padding-bottom: 0.5rem; }
-
-        h1 {
-            font-size: 2.25rem;
-            font-weight: 700;
-            color: #111827;
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', sans-serif;
-        }
-
-        h2 {
-            font-size: 1.5rem;
-            font-weight: 700;
-            color: #111827;
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', sans-serif;
-        }
-
-        h3 {
-            font-size: 1.125rem;
-            font-weight: 600;
-            margin-bottom: 0.25rem;
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', sans-serif;
-        }
-
-        .text-gray-600 { color: #4b5563; }
-        .text-gray-500 { color: #6b7280; }
-        .text-gray-400 { color: #9ca3af; }
-        .text-sm { font-size: 0.875rem; }
-        .text-xs { font-size: 0.75rem; }
-
-        .font-bold { font-weight: 700; }
-        .font-semibold { font-weight: 600; }
-        .text-lg { font-size: 1rem; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', sans-serif; }
-        .text-xs { font-size: 0.75rem; }
-        .label-emphasis { font-weight: 600; font-size: 0.85rem; color: #1f2937; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', sans-serif; }
-        .heading-modal { font-size: 1.5rem; font-weight: 700; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', sans-serif; }
-        .heading-section { font-size: 1.875rem; font-weight: 700; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', sans-serif; }
-        .table-header { font-size: 0.875rem; font-weight: 600; }
-        .table-value { font-size: 0.875rem; font-weight: 500; }
-        .table-cell { font-size: 0.875rem; }
-
-        .card {
-            background: white;
-            border-radius: 0.5rem;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
-            padding: 0.75rem 1rem;
-            margin-bottom: 0.75rem;
-        }
-
-        .dimensions-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 1rem;
-        }
-
-        .dimension-card {
-            background: white;
-            border-radius: 0.5rem;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
-            padding: 0.5rem 0.75rem;
-            margin-bottom: 0;
-        }
-
-        .dimension-card h3 {
-            font-size: 0.975rem;
-            font-weight: 600;
-            margin-bottom: 0.15rem;
-        }
-
-        .dimension-card p {
-            font-size: 0.75rem;
-            margin-bottom: 0.35rem;
-        }
-
-        .dimension-card .space-y-2 > * + * { margin-top: 0.3rem; }
-        .dimension-card .space-y-4 > * + * { margin-top: 0.3rem; }
-
-        .dimension-card .label {
-            font-size: 0.8rem;
-            margin-bottom: 0.15rem;
-        }
-
-        .dimension-card .input {
-            font-size: 0.8rem;
-        }
-
-        .dimension-card .max-h-60 {
-            max-height: 12rem;
-        }
-
-        @media (max-width: 768px) {
-            .dimensions-grid {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        .card-hover {
-            cursor: pointer;
-            transition: all 0.2s;
-            border: 2px solid #e5e7eb;
-        }
-
-        .card-hover:hover {
-            border-color: #3b82f6;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-        }
-
-        .card-hover:focus {
-            outline: 3px solid #3b82f6;
-            outline-offset: 2px;
-        }
-
-        .btn {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            gap: 0.5rem;
-            padding: 0.5rem 1rem;
-            border-radius: 0.375rem;
-            font-size: 0.875rem;
-            font-weight: 500;
-            cursor: pointer;
-            border: none;
-            transition: all 0.2s;
-        }
-
-        .btn:disabled {
-            opacity: 0.5;
-            cursor: not-allowed;
-        }
-
-        .btn:focus {
-            outline: 3px solid #3b82f6;
-            outline-offset: 2px;
-        }
-
-        .btn-primary {
-            background: #3b82f6;
-            color: white;
-        }
-
-        .btn-primary:hover:not(:disabled) {
-            background: #2563eb;
-        }
-
-        .btn-outline {
-            background: transparent;
-            border: 1px solid #d1d5db;
-            color: #374151;
-        }
-
-        .btn-outline:hover {
-            background: #f3f4f6;
-        }
-
-        .btn-sm {
-            padding: 0.375rem 0.75rem;
-            font-size: 0.75rem;
-        }
-
-        .btn-icon {
-            padding: 0.375rem;
-            background: transparent;
-            border: 1px solid #d1d5db;
-            color: #6b7280;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            min-width: 44px;
-            min-height: 44px;
-        }
-
-        .btn-icon:hover {
-            background: #f3f4f6;
-            border-color: #9ca3af;
-            color: #374151;
-        }
-
-        .btn-icon:focus {
-            outline: 3px solid #3b82f6;
-            outline-offset: 2px;
-        }
-
-        .input, .select {
-            width: 100%;
-            padding: 0.5rem 0.75rem;
-            border: 1px solid #d1d5db;
-            border-radius: 0.375rem;
-            font-size: 0.875rem;
-        }
-
-        .input:focus, .select:focus {
-            outline: 2px solid #3b82f6;
-            outline-offset: 2px;
-        }
-
-        .checkbox, .radio {
-            width: 1rem;
-            height: 1rem;
-            cursor: pointer;
-        }
-
-        .label {
-            display: block;
-            font-size: 0.875rem;
-            font-weight: 500;
-            margin-bottom: 0.25rem;
-        }
-
-        .badge {
-            display: inline-flex;
-            align-items: center;
-            padding: 0.25rem 0.625rem;
-            border-radius: 9999px;
-            font-size: 0.75rem;
-            font-weight: 600;
-            background: #f3f4f6;
-            color: #374151;
-        }
-
-        .alert {
-            padding: 1rem;
-            border-radius: 0.375rem;
-            border: 1px solid #fecaca;
-            background: #fee2e2;
-            color: #991b1b;
-        }
-
-        .grid-cols-3 {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 1rem;
-        }
-
-        .flex {
-            display: flex;
-        }
-
-        .flex-col {
-            flex-direction: column;
-        }
-
-        .items-center {
-            align-items: center;
-        }
-
-        .justify-center {
-            justify-content: center;
-        }
-
-        .justify-between {
-            justify-content: space-between;
-        }
-
-        .gap-2 { gap: 0.5rem; }
-        .gap-4 { gap: 1rem; }
-
-        .space-y-1 > * + * { margin-top: 0.25rem; }
-        .space-y-2 > * + * { margin-top: 0.5rem; }
-        .space-y-3 > * + * { margin-top: 0.75rem; }
-        .space-y-4 > * + * { margin-top: 0.5rem; }
-
-        .dimension-card .space-y-2 > * + * { margin-top: 0.3rem; }
-        .dimension-card .space-y-4 > * + * { margin-top: 0.3rem; }
-
-        .overflow-y-auto {
-            overflow-y: auto;
-        }
-
-        .max-h-60 {
-            max-height: 24rem;
-        }
-
-        .max-h-96 {
-            max-height: 60vh;
-        }
-
-        .border {
-            border: 1px solid #e5e7eb;
-        }
-
-        .rounded {
-            border-radius: 0.375rem;
-        }
-
-        .rounded-full {
-            border-radius: 9999px;
-        }
-
-        .step-indicator {
-            display: flex;
-            align-items: flex-start;
-            justify-content: space-between;
-            gap: 0;
-            margin-bottom: 3rem;
-            position: relative;
-            padding: 0;
-        }
-
-        .step-indicator::before {
-            content: '';
-            position: absolute;
-            top: calc(1.5rem - 3px);
-            left: 0;
-            right: 0;
-            height: 6px;
-            background: #dbeafe;
-            z-index: 0;
-        }
-
-        .step-item {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 0.75rem;
-            cursor: pointer;
-            transition: all 0.2s ease;
-            flex: 1;
-            position: relative;
-            z-index: 10;
-        }
-
-        .step-item:hover:not(.step-disabled) .step-circle {
-            transform: scale(1.1);
-        }
-
-        .step-disabled {
-            cursor: not-allowed;
-            opacity: 0.6;
-            z-index: 10;
-        }
-
-        .step-circle {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 3rem;
-            height: 3rem;
-            border-radius: 50%;
-            font-weight: 700;
-            font-size: 1.1rem;
-            border: 3px solid transparent;
-            transition: all 0.2s ease;
-            flex-shrink: 0;
-            z-index: 10;
-            position: relative;
-        }
-
-        .step-label {
-            font-size: 0.95rem;
-            font-weight: 500;
-            text-align: center;
-            white-space: nowrap;
-            color: inherit;
-            background: none !important;
-        }
-
-        .step-active {
-            background: #3b82f6;
-            color: white;
-            border-color: #3b82f6;
-        }
-
-        .step-active .step-label {
-            color: #3b82f6;
-            font-weight: 700;
-            background: none !important;
-        }
-
-        .step-label.step-active {
-            background: none !important;
-            color: #3b82f6;
-            font-weight: 700;
-        }
-
-        .step-completed {
-            background: #3b82f6;
-            color: white;
-            border-color: #3b82f6;
-        }
-
-        .step-completed .step-label {
-            color: #3b82f6;
-            font-weight: 500;
-            background: none !important;
-        }
-
-        .step-label.step-completed {
-            background: none !important;
-            color: #3b82f6;
-            font-weight: 500;
-        }
-
-        .step-inactive {
-            background: #e0e7ff;
-            color: #6366f1;
-            border-color: #c7d2fe;
-        }
-
-        .step-inactive .step-label {
-            color: #4f46e5;
-            font-weight: 500;
-            background: none !important;
-        }
-
-        .step-label.step-inactive {
-            background: none !important;
-            color: #4f46e5;
-            font-weight: 500;
-        }
-
-        .code-block {
-            background: #1f2937;
-            color: #f3f4f6;
-            padding: 1rem;
-            border-radius: 0.5rem;
-            overflow-x: auto;
-            font-family: monospace;
-            font-size: 0.875rem;
-            white-space: pre;
-        }
-
-        .tabs {
-            display: flex;
-            background: #f3f4f6;
-            border-radius: 0.375rem;
-            padding: 0.25rem;
-            margin-bottom: 1rem;
-        }
-
-        .tab {
-            flex: 1;
-            padding: 0.5rem;
-            text-align: center;
-            border-radius: 0.25rem;
-            cursor: pointer;
-            font-size: 0.875rem;
-            font-weight: 500;
-            transition: all 0.2s;
-        }
-
-        .tab-active {
-            background: white;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
-        }
-
-        .tab:hover {
-            background: #e5e7eb;
-        }
-
-        .tab-active:hover {
-            background: white;
-        }
-
-        .icon {
-            width: 1.25rem;
-            height: 1.25rem;
-            stroke: currentColor;
-            fill: none;
-            stroke-width: 2;
-        }
-
-        .source-icon {
-            stroke: #374151;
-            stroke-width: 1.5;
-            stroke-linecap: round;
-            stroke-linejoin: round;
-            fill: none;
-        }
-
-        .animate-spin {
-            animation: spin 1s linear infinite;
-        }
-
-        @keyframes spin {
-            from { transform: rotate(0deg); }
-            to { transform: rotate(360deg); }
-        }
-
-        .font-semibold {
-            font-weight: 600;
-        }
-
-        .font-bold {
-            font-weight: 700;
-        }
-
-        .flex-1 {
-            flex: 1;
-        }
-
-        .w-full {
-            width: 100%;
-        }
-
-        .bg-blue-50 {
-            background: #eff6ff;
-        }
-
-        .border-blue-200 {
-            border-color: #bfdbfe;
-        }
-
-        .bg-green-50 {
-            background: #f0fdf4;
-        }
-
-        .border-green-200 {
-            border-color: #bbf7d0;
-        }
-
-        .geo-hierarchy {
-            padding-left: 0;
-        }
-
-        .geo-county {
-            margin-bottom: 0.5rem;
-        }
-
-        .geo-county-header {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            padding: 0.375rem 0.5rem;
-            background: #f9fafb;
-            border-radius: 0.25rem;
-            cursor: pointer;
-            font-weight: 500;
-            font-size: 0.875rem;
-            transition: background 0.2s;
-        }
-
-        .geo-county-header:hover {
-            background: #f3f4f6;
-        }
-
-        .geo-county-checkbox {
-            margin-right: 0.25rem;
-        }
-
-        .geo-chevron {
-            width: 1rem;
-            height: 1rem;
-            transition: transform 0.2s;
-            margin-right: 0.5rem;
-            flex-shrink: 0;
-            cursor: pointer;
-        }
-
-        .geo-chevron.expanded {
-            transform: rotate(90deg);
-        }
-
-        .geo-municipality-list {
-            padding-left: 1.5rem;
-            margin-top: 0.25rem;
-            margin-bottom: 0.25rem;
-        }
-
-        .geo-municipality {
-            margin-bottom: 0.25rem;
-        }
-
-        .geo-municipality-header {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            padding: 0.25rem 0.5rem;
-            background: #fafbfc;
-            border-radius: 0.25rem;
-            cursor: pointer;
-            font-size: 0.813rem;
-            transition: background 0.2s;
-        }
-
-        .geo-municipality-header:hover {
-            background: #f3f4f6;
-        }
-
-        .geo-district-list {
-            padding-left: 1.5rem;
-            margin-top: 0.25rem;
-        }
-
-        .geo-district {
-            font-size: 0.813rem;
-            padding: 0.125rem 0.5rem;
-        }
-
-        .geo-indent {
-            padding-left: 0.5rem;
-        }
-
-        .geo-select-btn {
-            padding: 0.125rem 0.5rem;
-            font-size: 0.75rem;
-            background: transparent;
-            border: 1px solid #d1d5db;
-            color: #374151;
-            border-radius: 0.25rem;
-            cursor: pointer;
-            transition: all 0.2s;
-        }
-
-        .geo-select-btn:hover {
-            background: #f3f4f6;
-            border-color: #9ca3af;
-        }
-
-        .geo-select-btn:focus {
-            outline: 3px solid #3b82f6;
-            outline-offset: 2px;
-        }
-
-        /* Skip link for tastaturnavigasjon */
-        .skip-link {
-            position: absolute;
-            top: -40px;
-            left: 0;
-            background: #111827;
-            color: white;
-            padding: 8px 16px;
-            text-decoration: none;
-            z-index: 100;
-            font-weight: 500;
-        }
-
-        .skip-link:focus {
-            top: 0;
-        }
-
-        @media (max-width: 768px) {
-            .grid-cols-3 {
-                grid-template-columns: 1fr;
-            }
-            
-            h1 {
-                font-size: 1.875rem;
-            }
-        }
-    </style>
 </head>
 <body>
     <div id="root"></div>
@@ -850,19 +172,19 @@
                             return h('strong', { key: idx, className: 'font-bold' }, children);
                         case 'em':
                         case 'i':
-                            return h('em', { key: idx, style: { fontStyle: 'italic' } }, children);
+                            return h('em', { key: idx, className: 'italic' } }, children);
                         case 'p':
-                            return h('p', { key: idx, style: { marginBottom: '0.5rem' } }, children);
+                            return h('p', { key: idx, className: 'mb-2' } }, children);
                         case 'ul':
-                            return h('ul', { key: idx, style: { marginLeft: '1.5rem', marginBottom: '0.5rem', listStyleType: 'disc' } }, children);
+                            return h('ul', { key: idx, className: 'ml-6', marginBottom: '0.5rem', listStyleType: 'disc' } }, children);
                         case 'ol':
-                            return h('ol', { key: idx, style: { marginLeft: '1.5rem', marginBottom: '0.5rem', listStyleType: 'decimal' } }, children);
+                            return h('ol', { key: idx, className: 'ml-6', marginBottom: '0.5rem', listStyleType: 'decimal' } }, children);
                         case 'li':
                             return h('li', { key: idx, style: { marginBottom: '0.25rem' } }, children);
                         case 'br':
                             return h('br', { key: idx });
                         case 'hr':
-                            return h('hr', { key: idx, style: { margin: '0.5rem 0', border: 'none', borderTop: '1px solid #e5e7eb' } });
+                            return h('hr', { key: idx, className: 'my-2', border: 'none', borderTop: '1px solid #e5e7eb' } });
                         default:
                             return h('div', { key: idx }, children);
                     }
@@ -875,7 +197,7 @@
                 
                 if (sourceTitle.includes('folkehelsestatistikk')) {
                     // Bar chart for statistics
-                    return h('svg', { className: 'source-icon', viewBox: '0 0 24 24', width: '32', height: '32', style: { marginRight: '1rem' } },
+                    return h('svg', { className: 'source-icon', viewBox: '0 0 24 24', width: '32', height: '32', className: 'mr-4' } },
                         h('line', { x1: '12', y1: '2', x2: '12', y2: '22' }),
                         h('line', { x1: '2', y1: '22', x2: '22', y2: '22' }),
                         h('rect', { x: '2', y: '16', width: '3', height: '6' }),
@@ -884,7 +206,7 @@
                     );
                 } else if (sourceTitle.includes('genomovervåk')) {
                     // DNA helix for genomics
-                    return h('svg', { className: 'source-icon', viewBox: '0 0 24 24', width: '32', height: '32', style: { marginRight: '1rem' } },
+                    return h('svg', { className: 'source-icon', viewBox: '0 0 24 24', width: '32', height: '32', className: 'mr-4' } },
                         h('path', { d: 'M9 3c0 1.5 1 3 2 4.5', strokeLinecap: 'round' }),
                         h('path', { d: 'M15 3c0 1.5-1 3-2 4.5', strokeLinecap: 'round' }),
                         h('path', { d: 'M9 7.5c0 1.5 1 3 2 4.5', strokeLinecap: 'round' }),
@@ -904,21 +226,21 @@
                     );
                 } else if (sourceTitle.includes('fødselsregister')) {
                     // Baby icon for birth register
-                    return h('svg', { className: 'source-icon', viewBox: '0 0 24 24', width: '32', height: '32', style: { marginRight: '1rem' } },
+                    return h('svg', { className: 'source-icon', viewBox: '0 0 24 24', width: '32', height: '32', className: 'mr-4' } },
                         h('circle', { cx: '12', cy: '8', r: '3' }),
                         h('path', { d: 'M12 11c3 0 7 1 7 5v3H5v-3c0-4 4-5 7-5z' }),
                         h('path', { d: 'M5.5 17a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v2H5.5v-2z' })
                     );
                 } else if (sourceTitle.includes('abortregisteret')) {
                     // Pregnancy icon for abortion register
-                    return h('svg', { className: 'source-icon', viewBox: '0 0 24 24', width: '32', height: '32', style: { marginRight: '1rem' } },
+                    return h('svg', { className: 'source-icon', viewBox: '0 0 24 24', width: '32', height: '32', className: 'mr-4' } },
                         h('circle', { cx: '12', cy: '6', r: '4' }),
                         h('path', { d: 'M12 10c-4 0-7 2-7 6v2h14v-2c0-4-3-6-7-6z' }),
                         h('ellipse', { cx: '12', cy: '20', rx: '3', ry: '2' })
                     );
                 } else if (sourceTitle.includes('vaksin')) {
                     // Syringe icon for vaccination
-                    return h('svg', { className: 'source-icon', viewBox: '0 0 24 24', width: '32', height: '32', style: { marginRight: '1rem' } },
+                    return h('svg', { className: 'source-icon', viewBox: '0 0 24 24', width: '32', height: '32', className: 'mr-4' } },
                         h('path', { d: 'M3 15c2 0 4-2 4-4s-2-4-4-4-4 2-4 4 2 4 4 4z' }),
                         h('path', { d: 'M7 13l10-10' }),
                         h('path', { d: 'M21 5l-8 8' }),
@@ -926,7 +248,7 @@
                     );
                 } else if (sourceTitle.includes('dødsårsakregisteret')) {
                     // Document icon for death causes register
-                    return h('svg', { className: 'source-icon', viewBox: '0 0 24 24', width: '32', height: '32', style: { marginRight: '1rem' } },
+                    return h('svg', { className: 'source-icon', viewBox: '0 0 24 24', width: '32', height: '32', className: 'mr-4' } },
                         h('path', { d: 'M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z' }),
                         h('polyline', { points: '14 2 14 8 20 8' }),
                         h('line', { x1: '12', y1: '13', x2: '12', y2: '17' }),
@@ -934,7 +256,7 @@
                     );
                 } else if (sourceTitle.includes('msis') || sourceTitle.includes('smittsomme')) {
                     // Alert icon for infectious diseases
-                    return h('svg', { className: 'source-icon', viewBox: '0 0 24 24', width: '32', height: '32', style: { marginRight: '1rem' } },
+                    return h('svg', { className: 'source-icon', viewBox: '0 0 24 24', width: '32', height: '32', className: 'mr-4' } },
                         h('circle', { cx: '12', cy: '13', r: '8' }),
                         h('line', { x1: '12', y1: '9', x2: '12', y2: '13' }),
                         h('line', { x1: '12', y1: '17', x2: '12', y2: '17' }),
@@ -942,7 +264,7 @@
                     );
                 } else if (sourceTitle.includes('legemiddel')) {
                     // Pill/medicine icon
-                    return h('svg', { className: 'source-icon', viewBox: '0 0 24 24', width: '32', height: '32', style: { marginRight: '1rem' } },
+                    return h('svg', { className: 'source-icon', viewBox: '0 0 24 24', width: '32', height: '32', className: 'mr-4' } },
                         h('ellipse', { cx: '10', cy: '12', rx: '4', ry: '6' }),
                         h('ellipse', { cx: '14', cy: '12', rx: '4', ry: '6' }),
                         h('line', { x1: '10', y1: '6', x2: '10', y2: '18' }),
@@ -950,7 +272,7 @@
                     );
                 } else if (sourceTitle.includes('grossist')) {
                     // Box/shipment icon
-                    return h('svg', { className: 'source-icon', viewBox: '0 0 24 24', width: '32', height: '32', style: { marginRight: '1rem' } },
+                    return h('svg', { className: 'source-icon', viewBox: '0 0 24 24', width: '32', height: '32', className: 'mr-4' } },
                         h('rect', { x: '3', y: '6', width: '18', height: '12', rx: '2' }),
                         h('line', { x1: '3', y1: '10', x2: '21', y2: '10' }),
                         h('line', { x1: '12', y1: '6', x2: '12', y2: '18' }),
@@ -958,7 +280,7 @@
                     );
                 } else if (sourceTitle.includes('pasientregister')) {
                     // Hospital/health icon
-                    return h('svg', { className: 'source-icon', viewBox: '0 0 24 24', width: '32', height: '32', style: { marginRight: '1rem' } },
+                    return h('svg', { className: 'source-icon', viewBox: '0 0 24 24', width: '32', height: '32', className: 'mr-4' } },
                         h('rect', { x: '3', y: '2', width: '18', height: '20', rx: '2' }),
                         h('line', { x1: '9', y1: '2', x2: '9', y2: '22' }),
                         h('line', { x1: '15', y1: '2', x2: '15', y2: '22' }),
@@ -967,7 +289,7 @@
                     );
                 } else if (sourceTitle.includes('kommunalt')) {
                     // People/community icon
-                    return h('svg', { className: 'source-icon', viewBox: '0 0 24 24', width: '32', height: '32', style: { marginRight: '1rem' } },
+                    return h('svg', { className: 'source-icon', viewBox: '0 0 24 24', width: '32', height: '32', className: 'mr-4' } },
                         h('circle', { cx: '9', cy: '6', r: '3' }),
                         h('circle', { cx: '18', cy: '8', r: '3' }),
                         h('path', { d: 'M9 9c-3 0-5 2-5 5v4h14v-4c0-3-2-5-5-5z' }),
@@ -975,12 +297,12 @@
                     );
                 } else if (sourceTitle.includes('hjerte') || sourceTitle.includes('kar')) {
                     // Heart icon for cardiovascular
-                    return h('svg', { className: 'source-icon', viewBox: '0 0 24 24', width: '32', height: '32', style: { marginRight: '1rem' } },
+                    return h('svg', { className: 'source-icon', viewBox: '0 0 24 24', width: '32', height: '32', className: 'mr-4' } },
                         h('path', { d: 'M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z' })
                     );
                 } else {
                     // Default database icon
-                    return h('svg', { className: 'source-icon', viewBox: '0 0 24 24', width: '32', height: '32', style: { marginRight: '1rem' } },
+                    return h('svg', { className: 'source-icon', viewBox: '0 0 24 24', width: '32', height: '32', className: 'mr-4' } },
                         h('ellipse', { cx: '12', cy: '5', rx: '9', ry: '3' }),
                         h('path', { d: 'M21 12c0 1.66-4 3-9 3s-9-1.34-9-3' }),
                         h('path', { d: 'M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5' })
@@ -1360,7 +682,7 @@
                             if (urlMatch) {
                                 const url = urlMatch[1];
                                 const linkText = line.replace(url, '').replace(/:\s*$/, '').trim();
-                                return h('div', { key: idx, style: { marginBottom: '0.5rem' }},
+                                return h('div', { key: idx, className: 'mb-2' }},
                                     h('a', {
                                         href: url,
                                         target: '_blank',
@@ -1369,7 +691,7 @@
                                     }, linkText || url)
                                 );
                             }
-                            return h('div', { key: idx, style: { marginBottom: '0.5rem' } }, line);
+                            return h('div', { key: idx, className: 'mb-2' } }, line);
                         });
                     }
 
@@ -1386,7 +708,17 @@
                             justifyContent: 'center',
                             zIndex: 1000
                         },
-                        role: 'presentation'
+                        role: 'presentation',
+                        onClick: function(e) {
+                            if (e.target === e.currentTarget) {
+                                closeMetadataModal();
+                            }
+                        },
+                        onKeyDown: function(e) {
+                            if (e.key === 'Escape') {
+                                closeMetadataModal();
+                            }
+                        }
                     },
                         h('div', { 
                             style: {
@@ -1403,7 +735,7 @@
                             'aria-modal': 'true',
                             'aria-labelledby': 'modal-title'
                         },
-                            h('div', { style: { display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.5rem', paddingBottom: '1rem', borderBottom: '1px solid #e5e7eb' }},
+                            h('div', { className: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.5rem', paddingBottom: '1rem', borderBottom: '1px solid #e5e7eb' }},
                                 h('h2', { id: 'modal-title', style: { margin: 0 }, className: 'heading-modal' }, 'Tabell informasjon'),
                                 h('button', {
                                     onClick: closeMetadataModal,
@@ -1587,7 +919,7 @@
                                 return {
                                     code: dim.code,
                                     filter: 'all',
-                                    values: config.values
+                                    values: config.values && config.values.length > 0 ? config.values : ['*']
                                 };
                             }
                         }),
@@ -1728,6 +1060,19 @@
                             return h(React.Fragment, { key: stepItem.num },
                                 h('div', {
                                     className: 'step-item ' + (!isClickable ? 'step-disabled' : ''),
+                                    role: 'button',
+                                    tabIndex: isClickable ? 0 : -1,
+                                    'aria-label': 'Steg ' + stepItem.num + ': ' + stepItem.label + (isCompleted ? ' (fullført)' : isActive ? ' (aktiv)' : ''),
+                                    'aria-current': isActive ? 'step' : undefined,
+                                    onKeyDown: isClickable ? function(e) {
+                                        if (e.key === 'Enter' || e.key === ' ') {
+                                            e.preventDefault();
+                                            if (stepItem.num === 1) setStep(1);
+                                            else if (stepItem.num === 2 && selectedSource) setStep(2);
+                                            else if (stepItem.num === 3 && selectedTable) setStep(3);
+                                            else if (stepItem.num === 4 && finalQuery) setStep(4);
+                                        }
+                                    } : undefined,
                                     onClick: isClickable ? function() {
                                         if (stepItem.num === 1) setStep(1);
                                         else if (stepItem.num === 2 && selectedSource) setStep(2);
@@ -1771,6 +1116,7 @@
                                 type: 'text',
                                 className: 'input',
                                 placeholder: 'Søk etter tabell på tvers av alle kilder...',
+                                'aria-label': 'Søk etter tabell på tvers av alle kilder',
                                 value: globalSearch,
                                 onChange: function(e) { setGlobalSearch(e.target.value); }
                             })
@@ -1815,8 +1161,8 @@
                         ) : null,
                         globalSearch.trim() === '' ? (
                             h('div', null,
-                                loading && h('p', { className: 'text-gray-500' }, 'Laster kilder...'),
-                                error && h('div', { className: 'alert mb-4', role: 'alert' }, error),
+                                loading && h('p', { className: 'text-gray-500', role: 'status', 'aria-live': 'polite' }, 'Laster kilder...'),
+                                error && h('div', { className: 'alert mb-4', role: 'alert', 'aria-live': 'assertive' }, error),
                                 h('div', { className: 'grid-cols-3' },
                                     sources.map(function(source) {
                                         return h('div', {
@@ -1889,11 +1235,12 @@
                             type: 'text',
                             className: 'input mb-2',
                             placeholder: 'Søk i tabeller...',
+                            'aria-label': 'Søk i tilgjengelige tabeller',
                             value: tableSearch,
                             onChange: function(e) { setTableSearch(e.target.value); }
                         }),
-                        loading && h('p', { className: 'text-gray-500 text-sm mb-2' }, 'Laster tabeller...'),
-                        error && h('div', { className: 'alert mb-2 text-sm', role: 'alert' }, error),
+                        loading && h('p', { className: 'text-gray-500 text-sm mb-2', role: 'status', 'aria-live': 'polite' }, 'Laster tabeller...'),
+                        error && h('div', { className: 'alert mb-2 text-sm', role: 'alert', 'aria-live': 'assertive' }, error),
                         
                         // Moderne meny
                         h('div', { style: { 
@@ -1984,8 +1331,8 @@
                                 ),
                                 h('p', { className: 'text-gray-600' }, 'Velg verdier for hver dimensjon i tabellen')
                             ),
-                            loading && h('p', { className: 'text-gray-500 mb-4' }, 'Laster dimensjoner...'),
-                            error && h('div', { className: 'alert mb-4', role: 'alert' }, error),
+                            loading && h('p', { className: 'text-gray-500 mb-4', role: 'status', 'aria-live': 'polite' }, 'Laster dimensjoner...'),
+                            error && h('div', { className: 'alert mb-4', role: 'alert', 'aria-live': 'assertive' }, error),
                             h('div', { className: 'flex gap-6 mb-4 items-start' },
                                 h('div', { style: { flex: 1 } },
                                     h('label', { className: 'label' }, 'Response format'),
@@ -1995,7 +1342,8 @@
                                                 type: 'radio',
                                                 className: 'radio',
                                                 checked: responseFormat === 'json-stat2',
-                                                onChange: function() { setResponseFormat('json-stat2'); }
+                                                onChange: function() { setResponseFormat('json-stat2'); },
+                                                'aria-label': 'Response format: JSON-stat2'
                                             }),
                                             h('span', { className: 'text-sm' }, 'JSON-stat2')
                                         ),
@@ -2004,7 +1352,8 @@
                                                 type: 'radio',
                                                 className: 'radio',
                                                 checked: responseFormat === 'csv2',
-                                                onChange: function() { setResponseFormat('csv2'); }
+                                                onChange: function() { setResponseFormat('csv2'); },
+                                                'aria-label': 'Response format: CSV med labels'
                                             }),
                                             h('span', { className: 'text-sm' }, 'CSV med labels')
                                         ),
@@ -2013,20 +1362,23 @@
                                                 type: 'radio',
                                                 className: 'radio',
                                                 checked: responseFormat === 'csv3',
-                                                onChange: function() { setResponseFormat('csv3'); }
+                                                onChange: function() { setResponseFormat('csv3'); },
+                                                'aria-label': 'Response format: CSV med koder'
                                             }),
                                             h('span', { className: 'text-sm' }, 'CSV med koder')
                                         )
                                     )
                                 ),
                                 h('div', { style: { width: '200px' } },
-                                    h('label', { className: 'label' }, 'Max antall rader'),
+                                    h('label', { className: 'label', htmlFor: 'max-row-count' }, 'Max antall rader'),
                                     h('input', {
+                                        id: 'max-row-count',
                                         type: 'number',
                                         className: 'input',
                                         value: maxRowCount,
                                         onChange: function(e) { setMaxRowCount(e.target.value); },
-                                        placeholder: 'Ubegrenset'
+                                        placeholder: 'Ubegrenset',
+                                        'aria-label': 'Maksimum antall rader som skal vises'
                                     })
                                 )
                             )
@@ -2080,7 +1432,7 @@
                                                     type: 'radio',
                                                     className: 'radio',
                                                     checked: config.filter === 'all',
-                                                    onChange: function() { updateDimensionConfig(dimension.code, { filter: 'all' }); }
+                                                    onChange: function() { updateDimensionConfig(dimension.code, { filter: 'all', values: ['*'] }); }
                                                 }),
                                                 h('span', { className: 'text-xs' }, 'Alle (med wildcard)')
                                             )
@@ -2092,6 +1444,7 @@
                                             type: 'text',
                                             className: 'input mb-2',
                                             placeholder: 'Søk etter fylke, kommune eller bydel...',
+                                            'aria-label': 'Søk etter geografisk område (fylke, kommune eller bydel)',
                                             value: geoSearch,
                                             onChange: function(e) { setGeoSearch(e.target.value); }
                                         }),
@@ -2121,23 +1474,37 @@
                                                         });
                                                     });
                                                     
-                                                    return h('div', { className: 'geo-hierarchy space-y-1' },
-                                                        geoGroups.others.length > 0 && geoGroups.others.map(function(other) {
-                                                            return h('label', { key: other.code, className: 'flex items-center gap-2' },
-                                                                h('input', {
-                                                                    type: 'checkbox',
-                                                                    className: 'checkbox',
-                                                                    checked: config.selectedCategories.includes(other.code),
-                                                                    onChange: function(e) {
-                                                                        const updated = e.target.checked
-                                                                            ? config.selectedCategories.concat([other.code])
-                                                                            : config.selectedCategories.filter(function(c) { return c !== other.code; });
-                                                                        updateDimensionConfig(dimension.code, { selectedCategories: updated });
-                                                                    }
-                                                                }),
-                                                                h('span', { className: 'text-sm' }, other.label + ' (' + other.code + ')')
+                                                    return h('div', { 
+                                                        className: 'geo-hierarchy space-y-1',
+                                                        role: 'tree',
+                                                        'aria-label': 'Geografisk hierarki - velg fylker, kommuner eller bydeler'
+                                                    },
+                                                        geoGroups.others.length > 0 && geoGroups.others.map(function(other, otherIdx) {
+                                                            return h('div', { 
+                                                                key: other.code, 
+                                                                role: 'treeitem',
+                                                                'aria-level': '1',
+                                                                'aria-posinset': otherIdx + 1,
+                                                                'aria-setsize': geoGroups.others.length + filteredCounties.length,
+                                                                className: 'flex items-center gap-2'
+                                                            },
+                                                                h('label', { className: 'flex items-center gap-2' },
+                                                                    h('input', {
+                                                                        type: 'checkbox',
+                                                                        className: 'checkbox',
+                                                                        checked: config.selectedCategories.includes(other.code),
+                                                                        onChange: function(e) {
+                                                                            const updated = e.target.checked
+                                                                                ? config.selectedCategories.concat([other.code])
+                                                                                : config.selectedCategories.filter(function(c) { return c !== other.code; });
+                                                                            updateDimensionConfig(dimension.code, { selectedCategories: updated });
+                                                                        }
+                                                                    }),
+                                                                    h('span', { className: 'text-sm' }, other.label + ' (' + other.code + ')')
+                                                                )
                                                             );
-                                                        }),
+                                                        })
+                                                        ,
                                                         filteredCounties.map(function(county) {
                                                             const isExpanded = expandedCounties[county.code];
                                                             const countyMunicipalities = hierarchy[county.code] ? hierarchy[county.code].municipalities : [];
@@ -2151,11 +1518,23 @@
                                                             const allMunsAndDistsSelected = allMunicipalitiesAndDistricts.length > 0 && 
                                                                 allMunicipalitiesAndDistricts.every(function(code) { return config.selectedCategories.includes(code); });
                                                             
-                                                            return h('div', { key: county.code, className: 'geo-county' },
+                                                            return h('div', { 
+                                                                key: county.code, 
+                                                                className: 'geo-county',
+                                                                role: 'treeitem',
+                                                                'aria-level': '1',
+                                                                'aria-posinset': geoGroups.others.length + filteredCounties.indexOf(county) + 1,
+                                                                'aria-setsize': geoGroups.others.length + filteredCounties.length,
+                                                                'aria-expanded': isExpanded
+                                                            },
                                                                 h('div', { className: 'geo-county-header' },
                                                                     h('svg', {
                                                                         className: 'geo-chevron' + (isExpanded ? ' expanded' : ''),
                                                                         viewBox: '0 0 24 24',
+                                                                        role: 'button',
+                                                                        tabIndex: 0,
+                                                                        'aria-label': 'Utvid/skjul ' + county.label,
+                                                                        'aria-expanded': isExpanded,
                                                                         onClick: function() {
                                                                             const newExpanded = {};
                                                                             for (var key in expandedCounties) {
@@ -2163,6 +1542,17 @@
                                                                             }
                                                                             newExpanded[county.code] = !isExpanded;
                                                                             setExpandedCounties(newExpanded);
+                                                                        },
+                                                                        onKeyDown: function(e) {
+                                                                            if (e.key === 'Enter' || e.key === ' ') {
+                                                                                e.preventDefault();
+                                                                                const newExpanded = {};
+                                                                                for (var key in expandedCounties) {
+                                                                                    newExpanded[key] = expandedCounties[key];
+                                                                                }
+                                                                                newExpanded[county.code] = !isExpanded;
+                                                                                setExpandedCounties(newExpanded);
+                                                                            }
                                                                         }
                                                                     },
                                                                         h('polyline', { points: '9 18 15 12 9 6', fill: 'none', stroke: 'currentColor', strokeWidth: '2' })
@@ -2171,6 +1561,7 @@
                                                                         type: 'checkbox',
                                                                         className: 'checkbox geo-county-checkbox',
                                                                         checked: countySelected,
+                                                                        'aria-label': 'Velg fylke: ' + county.label,
                                                                         onChange: function(e) {
                                                                             const updated = e.target.checked
                                                                                 ? config.selectedCategories.concat([county.code])
@@ -2210,7 +1601,15 @@
                                                                             return config.selectedCategories.includes(d.code); 
                                                                         });
                                                                         
-                                                                        return h('div', { key: mun.code, className: 'geo-municipality' },
+                                                                        return h('div', { 
+                                                            key: mun.code, 
+                                                            className: 'geo-municipality',
+                                                            role: 'treeitem',
+                                                            'aria-level': '2',
+                                                            'aria-posinset': countyMunicipalities.indexOf(mun) + 1,
+                                                            'aria-setsize': countyMunicipalities.length,
+                                                            'aria-expanded': munDistricts.length > 0 ? munExpanded : undefined
+                                                        },
                                                                             h('div', { className: 'geo-municipality-header' },
                                                                                 h('input', {
                                                                                     type: 'checkbox',
@@ -2226,6 +1625,10 @@
                                                                                 munDistricts.length > 0 && h('svg', {
                                                                                     className: 'geo-chevron' + (munExpanded ? ' expanded' : ''),
                                                                                     viewBox: '0 0 24 24',
+                                                                                    role: 'button',
+                                                                                    tabIndex: 0,
+                                                                                    'aria-label': 'Utvid/skjul bydeler for ' + mun.label,
+                                                                                    'aria-expanded': munExpanded,
                                                                                     onClick: function() {
                                                                                         const newExpanded = {};
                                                                                         for (var key in expandedMunicipalities) {
@@ -2233,6 +1636,17 @@
                                                                                         }
                                                                                         newExpanded[mun.code] = !munExpanded;
                                                                                         setExpandedMunicipalities(newExpanded);
+                                                                                    },
+                                                                                    onKeyDown: function(e) {
+                                                                                        if (e.key === 'Enter' || e.key === ' ') {
+                                                                                            e.preventDefault();
+                                                                                            const newExpanded = {};
+                                                                                            for (var key in expandedMunicipalities) {
+                                                                                                newExpanded[key] = expandedMunicipalities[key];
+                                                                                            }
+                                                                                            newExpanded[mun.code] = !munExpanded;
+                                                                                            setExpandedMunicipalities(newExpanded);
+                                                                                        }
                                                                                     }
                                                                                 },
                                                                                     h('polyline', { points: '9 18 15 12 9 6', fill: 'none', stroke: 'currentColor', strokeWidth: '2' })
@@ -2267,7 +1681,14 @@
                                                                             ),
                                                                             munExpanded && munDistricts.length > 0 && h('div', { className: 'geo-district-list' },
                                                                                 munDistricts.map(function(dist) {
-                                                                                    return h('label', { key: dist.code, className: 'flex items-center gap-2 geo-district' },
+                                                                                    return h('label', { 
+                                                                        key: dist.code, 
+                                                                        className: 'flex items-center gap-2 geo-district',
+                                                                        role: 'treeitem',
+                                                                        'aria-level': '3',
+                                                                        'aria-posinset': munDistricts.indexOf(dist) + 1,
+                                                                        'aria-setsize': munDistricts.length
+                                                                    },
                                                                                         h('input', {
                                                                                             type: 'checkbox',
                                                                                             className: 'checkbox',
@@ -2520,7 +1941,7 @@
                                     h('li', null, 'Lim inn koden'),
                                     h('li', null, 'Klikk Done/Ferdig')
                                 ),
-                                h('p', { className: 'text-xs mt-2', style: { fontStyle: 'italic' } },
+                                h('p', { className: 'text-xs mt-2', className: 'italic' } },
                                     'Merk: Power Query fungerer kun med CSV-format (csv2 eller csv3).'
                                 )
                             )
@@ -2780,8 +2201,8 @@
                                                     headers.map(function(header, idx) {
                                                         return h('th', { 
                                                             key: idx,
-                                                            style: { 
-                                                                padding: '0.5rem', 
+                                                            scope: 'col',
+                                                            className: 'p-2', 
                                                                 textAlign: 'left', 
                                                                 borderBottom: '2px solid #d1d5db'
                                                             } 
@@ -2801,8 +2222,7 @@
                                                                 dataRows[i].map(function(cell, idx) {
                                                                     return h('td', { 
                                                                         key: idx,
-                                                                        style: { 
-                                                                            padding: '0.5rem', 
+                                                                        className: 'p-2', 
                                                                             borderBottom: '1px solid #e5e7eb',
                                                                             fontSize: '0.875rem'
                                                                         } 
@@ -2816,8 +2236,7 @@
                                                             h('tr', null,
                                                                 h('td', {
                                                                     colSpan: headers.length,
-                                                                    style: {
-                                                                        padding: '1rem',
+                                                                    className: 'p-4',
                                                                         textAlign: 'center',
                                                                         fontStyle: 'italic',
                                                                         color: '#6b7280',
@@ -2901,8 +2320,8 @@
                                                 h('thead', { style: { background: '#f3f4f6' } },
                                                     h('tr', null,
                                                         [h('th', { 
-                                                            style: { 
-                                                                padding: '0.5rem', 
+                                                            scope: 'col',
+                                                            className: 'p-2', 
                                                                 textAlign: 'left', 
                                                                 borderBottom: '2px solid #d1d5db',
                                                                 fontWeight: '600',
@@ -2913,8 +2332,8 @@
                                                             otherDimensions.map(function(dim) {
                                                                 return h('th', { 
                                                                     key: dim.id,
-                                                                    style: { 
-                                                                        padding: '0.5rem', 
+                                                                    scope: 'col',
+                                                                    className: 'p-2', 
                                                                         textAlign: 'left', 
                                                                         borderBottom: '2px solid #d1d5db'
                                                                     } 
@@ -2924,8 +2343,8 @@
                                                             contentsCategories.map(function(code) {
                                                                 return h('th', { 
                                                                     key: code,
-                                                                    style: { 
-                                                                        padding: '0.5rem', 
+                                                                    scope: 'col',
+                                                                    className: 'p-2', 
                                                                         textAlign: 'right', 
                                                                         borderBottom: '2px solid #d1d5db'
                                                                     } 
@@ -2947,8 +2366,7 @@
                                                                     style: { background: i % 2 === 0 ? 'white' : '#f9fafb' }
                                                                 },
                                                                     [h('td', { 
-                                                                        style: { 
-                                                                            padding: '0.5rem', 
+                                                                        className: 'p-2', 
                                                                             borderBottom: '1px solid #e5e7eb',
                                                                             fontSize: '0.875rem',
                                                                             fontWeight: '600',
@@ -2967,8 +2385,7 @@
                                                                             const label = previewData.dimension[dimId].category.label[catCode];
                                                                             return h('td', { 
                                                                                 key: dimId,
-                                                                                style: { 
-                                                                                    padding: '0.5rem', 
+                                                                                className: 'p-2', 
                                                                                     borderBottom: '1px solid #e5e7eb',
                                                                                     fontSize: '0.875rem'
                                                                             } 
@@ -2978,8 +2395,7 @@
                                                                         contentsCategories.map(function(code) {
                                                                             return h('td', { 
                                                                                 key: code,
-                                                                                style: { 
-                                                                                    padding: '0.5rem', 
+                                                                                className: 'p-2', 
                                                                                     textAlign: 'right', 
                                                                                     borderBottom: '1px solid #e5e7eb',
                                                                                     fontSize: '0.875rem',
@@ -2997,8 +2413,7 @@
                                                                 h('tr', null,
                                                                     h('td', {
                                                                         colSpan: otherDimensions.length + contentsCategories.length + 1,
-                                                                        style: {
-                                                                            padding: '1rem',
+                                                                        className: 'p-4',
                                                                             textAlign: 'center',
                                                                             fontStyle: 'italic',
                                                                             color: '#6b7280',
@@ -3012,8 +2427,7 @@
                                                                 h('tr', null,
                                                                     h('td', {
                                                                         colSpan: otherDimensions.length + contentsCategories.length,
-                                                                        style: {
-                                                                            padding: '0.5rem',
+                                                                        className: 'p-2',
                                                                             textAlign: 'center',
                                                                             fontStyle: 'italic',
                                                                             color: '#9ca3af',
@@ -3049,8 +2463,8 @@
                                                 h('thead', { style: { background: '#f3f4f6' } },
                                                     h('tr', null,
                                                         [h('th', { 
-                                                            style: { 
-                                                                padding: '0.5rem', 
+                                                            scope: 'col',
+                                                            className: 'p-2', 
                                                                 textAlign: 'left', 
                                                                 borderBottom: '2px solid #d1d5db',
                                                                 fontWeight: '600',
@@ -3060,8 +2474,8 @@
                                                         ].concat(
                                                             dimensions.map(function(dim) {
                                                                 return h('th', { 
-                                                                    style: { 
-                                                                        padding: '0.5rem', 
+                                                                    scope: 'col',
+                                                                    className: 'p-2', 
                                                                         textAlign: 'left', 
                                                                         borderBottom: '2px solid #d1d5db'
                                                                     } 
@@ -3069,8 +2483,8 @@
                                                             })
                                                         ).concat([
                                                             h('th', { 
-                                                                style: { 
-                                                                    padding: '0.5rem', 
+                                                                scope: 'col',
+                                                                className: 'p-2', 
                                                                     textAlign: 'right', 
                                                                     borderBottom: '2px solid #d1d5db'
                                                                 } 
@@ -3096,8 +2510,7 @@
                                                                     style: { background: i % 2 === 0 ? 'white' : '#f9fafb' }
                                                                 },
                                                                     [h('td', { 
-                                                                        style: { 
-                                                                            padding: '0.5rem', 
+                                                                        className: 'p-2', 
                                                                             borderBottom: '1px solid #e5e7eb',
                                                                             fontSize: '0.875rem',
                                                                             fontWeight: '600',
@@ -3130,8 +2543,7 @@
                                                                             const catIndex = previewData.dimension[id].category.index[indices[idx]];
                                                                             const label = previewData.dimension[id].category.label[catIndex];
                                                                             return h('td', { 
-                                                                                style: { 
-                                                                                    padding: '0.5rem', 
+                                                                                className: 'p-2', 
                                                                                     borderBottom: '1px solid #e5e7eb',
                                                                                     fontSize: '0.875rem'
                                                                                 } 
@@ -3139,8 +2551,7 @@
                                                                         })
                                                                     ).concat([
                                                                         h('td', { 
-                                                                            style: { 
-                                                                                padding: '0.5rem', 
+                                                                            className: 'p-2', 
                                                                                 textAlign: 'right', 
                                                                                 borderBottom: '1px solid #e5e7eb',
                                                                                 fontSize: '0.875rem',
@@ -3157,8 +2568,7 @@
                                                                 h('tr', null,
                                                                     h('td', {
                                                                         colSpan: dimensions.length + 2,
-                                                                        style: {
-                                                                            padding: '1rem',
+                                                                        className: 'p-4',
                                                                             textAlign: 'center',
                                                                             fontStyle: 'italic',
                                                                             color: '#6b7280',
@@ -3206,7 +2616,7 @@
                 return h('div', { className: 'bg-gradient' },
                     h('a', { href: '#main-content', className: 'skip-link' }, 'Gå til hovedinnhold'),
                     renderMetadataModal(),
-                    h('div', { className: 'container', id: 'main-content' },
+                    h('div', { className: 'container', id: 'main-content', tabIndex: -1 },
                         h('div', { className: 'text-center mb-8' },
                             h('h1', { className: 'mb-2' }, 'FHI API Query Builder (BETA)'),
                             h('p', { className: 'text-gray-600' }, 'Bygg spørringer mot FHIs åpne statistikk-API. '),
