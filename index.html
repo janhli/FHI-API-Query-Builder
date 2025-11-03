@@ -56,18 +56,21 @@
             font-size: 2.25rem;
             font-weight: 700;
             color: #111827;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', sans-serif;
         }
 
         h2 {
             font-size: 1.5rem;
             font-weight: 700;
             color: #111827;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', sans-serif;
         }
 
         h3 {
             font-size: 1.125rem;
             font-weight: 600;
             margin-bottom: 0.25rem;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', sans-serif;
         }
 
         .text-gray-600 { color: #4b5563; }
@@ -78,11 +81,11 @@
 
         .font-bold { font-weight: 700; }
         .font-semibold { font-weight: 600; }
-        .text-lg { font-size: 1rem; }
+        .text-lg { font-size: 1rem; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', sans-serif; }
         .text-xs { font-size: 0.75rem; }
-        .label-emphasis { font-weight: 600; font-size: 0.85rem; color: #1f2937; }
-        .heading-modal { font-size: 1.5rem; font-weight: 700; }
-        .heading-section { font-size: 1.875rem; font-weight: 700; }
+        .label-emphasis { font-weight: 600; font-size: 0.85rem; color: #1f2937; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', sans-serif; }
+        .heading-modal { font-size: 1.5rem; font-weight: 700; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', sans-serif; }
+        .heading-section { font-size: 1.875rem; font-weight: 700; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', sans-serif; }
         .table-header { font-size: 0.875rem; font-weight: 600; }
         .table-value { font-size: 0.875rem; font-weight: 500; }
         .table-cell { font-size: 0.875rem; }
@@ -1007,6 +1010,7 @@
                 const [geoSearch, setGeoSearch] = useState('');
                 const [expandedCounties, setExpandedCounties] = useState({});
                 const [tableMetadata, setTableMetadata] = useState(null);
+                const [firstSentence, setFirstSentence] = useState('');
                 const [showMetadataModal, setShowMetadataModal] = useState(false);
                 const [expandedMunicipalities, setExpandedMunicipalities] = useState({});
                 const [tableLabels, setTableLabels] = useState({});
@@ -1031,6 +1035,28 @@
                     };
                 }, [showMetadataModal]);
 
+                // Ekstrrahér første setning når tableMetadata endres
+                useEffect(() => {
+                    let sentence = '';
+                    if (tableMetadata && tableMetadata.paragraphs && Array.isArray(tableMetadata.paragraphs)) {
+                        for (let i = 0; i < tableMetadata.paragraphs.length; i++) {
+                            if (tableMetadata.paragraphs[i].header !== 'Geografi') {
+                                let text = tableMetadata.paragraphs[i].content;
+                                if (typeof text === 'string') {
+                                    const match = text.match(/^[^!?]*?\.(?=\s[A-Z]|$)|^[^!?]*?[!?]/);
+                                    if (match) {
+                                        // Fjern HTML-tags
+                                        sentence = match[0].trim().replace(/<[^>]*>/g, '');
+                                        console.log('✓ Første setning satt:', sentence);
+                                        break;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    setFirstSentence(sentence);
+                }, [tableMetadata]);
+
                 async function fetchSources() {
                     setLoading(true);
                     setError(null);
@@ -1043,7 +1069,7 @@
                         // Fetch all tables for search
                         const promises = data.map(async function(source) {
                             try {
-                                const resp = await fetch(API_BASE + '/' + source.id + '/table');
+                                const resp = await fetch(API_BASE + '/' + source.id + '/Table');
                                 if (resp.ok) {
                                     const tables = await resp.json();
                                     return tables.map(function(table) {
@@ -1211,7 +1237,7 @@
                     setLoading(true);
                     setError(null);
                     try {
-                        const response = await fetch(API_BASE + '/' + sourceId + '/table');
+                        const response = await fetch(API_BASE + '/' + sourceId + '/Table');
                         if (!response.ok) throw new Error('Kunne ikke hente tabeller');
                         const data = await response.json();
                         setTables(data);
@@ -1311,15 +1337,15 @@
                         const response = await fetch(API_BASE + '/' + sourceId + '/Table/' + tableId + '/metadata');
                         if (!response.ok) throw new Error('Kunne ikke hente metadata');
                         const data = await response.json();
+                        console.log('✓ Metadata hentet:', data);
                         setTableMetadata(data);
                     } catch (err) {
-                        console.log('Kunne ikke hente metadata:', err.message);
+                        console.log('✗ Kunne ikke hente metadata:', err.message);
                     }
                 }
 
                 function closeMetadataModal() {
                     setShowMetadataModal(false);
-                    setTableMetadata(null);
                 }
 
                 function renderMetadataModal() {
@@ -1391,7 +1417,7 @@
                                     }
                                 }, '✕')
                             ),
-                            h('div', { style: { lineHeight: 1.8, color: '#374151' }, className: 'table-cell' },
+                            h('div', { style: { lineHeight: 1.8, color: '#374151' } },
                                 tableMetadata.name && h('div', { style: { marginBottom: '1.5rem' }},
                                     h('strong', { style: { color: '#111827' }, className: 'text-lg font-bold' }, tableMetadata.name)
                                 ),
@@ -1566,7 +1592,7 @@
                             }
                         }),
                         response: {
-                            format: responseFormat
+                            format: 'json-stat2'
                         }
                     };
                     
@@ -1627,60 +1653,6 @@
                             data = { csvText: csvText };
                         } else {
                             data = await response.json();
-                        }
-                        
-                        // Prosesser data for å legge til geo-koder hvis CSV2 og mapping-URL er satt
-                        if (responseFormat === 'csv2' && geoMappingUrl && data.csvText) {
-                            try {
-                                // Hent geo-mapping
-                                const geoResponse = await fetch(geoMappingUrl);
-                                const geoText = await geoResponse.text();
-                                
-                                // Parse geo-mapping CSV
-                                const geoLines = geoText.trim().split('\n');
-                                if (geoLines.length > 1) {
-                                    const geoHeaders = geoLines[0].split(',');
-                                    const codeIndex = geoHeaders.findIndex(function(h) { return h.trim() === 'code'; });
-                                    const labelIndex = geoHeaders.findIndex(function(h) { return h.trim() === 'label'; });
-                                    
-                                    if (codeIndex !== -1 && labelIndex !== -1) {
-                                        const geoMap = {};
-                                        for (let i = 1; i < geoLines.length; i++) {
-                                            const cells = geoLines[i].split(',');
-                                            if (cells.length > Math.max(codeIndex, labelIndex)) {
-                                                const code = cells[codeIndex].trim();
-                                                const label = cells[labelIndex].trim();
-                                                geoMap[label] = code;
-                                            }
-                                        }
-                                        
-                                        // Legg til GeoCode-kolonne
-                                        const csvLines = data.csvText.split('\n');
-                                        const headers = csvLines[0].split(',');
-                                        const geoColIndex = headers.findIndex(function(h) { return h.trim() === 'Geografi'; });
-                                        
-                                        if (geoColIndex !== -1) {
-                                            headers.push('GeoCode');
-                                            const newLines = [headers.join(',')];
-                                            
-                                            for (let i = 1; i < csvLines.length; i++) {
-                                                if (csvLines[i].trim()) {
-                                                    const cells = csvLines[i].split(',');
-                                                    const geoLabel = cells[geoColIndex] ? cells[geoColIndex].trim() : '';
-                                                    const code = geoMap[geoLabel] || '';
-                                                    cells.push(code);
-                                                    newLines.push(cells.join(','));
-                                                }
-                                            }
-                                            
-                                            data.csvText = newLines.join('\n');
-                                        }
-                                    }
-                                }
-                            } catch (err) {
-                                console.warn('Kunne ikke legge til geo-koder:', err.message);
-                                // Fortsett uten geo-koder
-                            }
                         }
                         
                         setPreviewData(data);
@@ -1777,7 +1749,7 @@
                 // Render source selection (step 1)
                 function renderSourceSelection() {
                     const filteredTables = globalSearch.trim() !== '' 
-                        ? allTables.filter(function(table) {
+                        ? tables.filter(function(table) {
                             const searchLower = globalSearch.toLowerCase();
                             return (table.title && table.title.toLowerCase().includes(searchLower)) ||
                                    (table.name && table.name.toLowerCase().includes(searchLower)) ||
@@ -1829,9 +1801,9 @@
                                             }
                                         },
                                             h('div', { className: 'font-semibold text-sm' }, getTableLabel(table) + ' (' + table.tableId + ')'),
-                                            h('p', { className: 'text-xs text-gray-500' }, 'Kilde: ' + table.sourceName),
+                                            h('p', { className: 'text-xs text-gray-500' }, 'Kilde: ' + table.sourceId),
                                             table.modifiedAt && h('p', { className: 'text-xs text-gray-500' },
-                                                'Oppdatert: ' + new Date(table.modifiedAt).toISOString().split('T')[0]
+                                                'Oppdatert: ' + new Date(table.modifiedAt).toISOString().split('T')[0] + '  [tableId: ' + table.tableId + ']'
                                             )
                                         );
                                     }),
@@ -1909,7 +1881,7 @@
 
                     return h('div', { className: 'card' },
                         h('div', { className: 'mb-2' },
-                            h('h2', { className: 'mb-1 text-lg' }, 'Velg tabell fra ' + (selectedSource ? selectedSource.title || selectedSource.name : '')),
+                            h('h2', { className: 'flex items-center gap-2 mb-2' }, 'Velg tabell fra ' + (selectedSource ? selectedSource.title || selectedSource.name : '')),
                             h('p', { className: 'text-gray-600 text-sm' }, 'Velg hvilken tabell du vil bygge en spørring for')
                         ),
                         h('input', {
@@ -1963,8 +1935,7 @@
                                                 return h('div', { key: table.tableId, className: 'geo-municipality' },
                                                     h('div', { className: 'geo-municipality-header', onClick: function() { selectTable(table); }, style: { cursor: 'pointer' } },
                                                         h('span', { className: 'flex-1' }, getTableLabel(table)),
-                                                        table.modifiedAt && h('span', { className: 'text-xs', style: { color: '#9ca3af', marginLeft: '0.5rem', marginRight: '0.5rem' } }, 'Oppdatert: ' + table.modifiedAt.split('T')[0]),
-                                                        h('span', { className: 'text-xs', style: { color: '#9ca3af' } }, table.tableId)
+                                                        table.modifiedAt && h('span', { className: 'text-xs', style: { color: '#9ca3af', marginLeft: '0.5rem' } }, 'Oppdatert: ' + table.modifiedAt.split('T')[0] + '  [tableId: ' + table.tableId + ']')
                                                     )
                                                 );
                                             })
@@ -1986,27 +1957,9 @@
 
                 // Render dimension configuration (step 3) - simplified version
                 function renderDimensionConfiguration() {
-                    // Hent første setning fra beskrivelse
-                    let firstSentence = '';
-                    if (tableMetadata && tableMetadata.paragraphs && Array.isArray(tableMetadata.paragraphs)) {
-                        for (let i = 0; i < tableMetadata.paragraphs.length; i++) {
-                            if (tableMetadata.paragraphs[i].header !== 'Geografi') {
-                                let text = tableMetadata.paragraphs[i].content;
-                                if (typeof text === 'string') {
-                                    // Hent første setning - se etter punkt/utropstegn/spørsmålstegn fulgt av mellomrom + stor bokstav, eller på slutten
-                                    const match = text.match(/^[^!?]*?\.(?=\s[A-Z]|$)|^[^!?]*?[!?]/);
-                                    if (match) {
-                                        firstSentence = parseHTML(match[0].trim());
-                                        break;
-                                    }
-                                }
-                            }
-                        }
-                    }
-
                     return h('div', { className: 'space-y-4' },
                         selectedTable && h('div', { className: 'mb-6 pb-4 border-b border-gray-200' },
-                            h('h1', { style: { color: '#111827', marginBottom: '0.5rem' }, className: 'heading-section' }, getTableLabel(selectedTable)),
+                            h('h2', { className: 'flex items-center gap-2 mb-2' }, getTableLabel(selectedTable)),
                             firstSentence && h('p', { style: { color: '#4b5563', lineHeight: 1.6 }, className: 'text-lg' }, firstSentence)
                         ),
                         h('div', { className: 'card' },
@@ -2025,7 +1978,7 @@
                                             h('circle', { cx: '12', cy: '12', r: '10' }),
                                             h('text', { x: '12', y: '16', textAnchor: 'middle', fontSize: '12', fill: 'currentColor' }, 'i')
                                         ),
-                                        h('span', { style: { className: 'table-cell', color: '#374151' } }, 'Informasjon om tabellen')
+                                        h('span', { style: { color: '#374151' }, className: 'table-cell' }, 'Informasjon om tabellen')
                                     )
                                 ),
                                 h('p', { className: 'text-gray-600' }, 'Velg verdier for hver dimensjon i tabellen')
@@ -2432,27 +2385,9 @@
                     const powerQueryCode = generatePowerQueryCode();
                     const displayCode = outputFormat === 'powerquery' ? powerQueryCode : queryString;
                     
-                    // Hent første setning fra beskrivelse (samme som i renderDimensionConfiguration)
-                    let firstSentence = '';
-                    if (tableMetadata && tableMetadata.paragraphs && Array.isArray(tableMetadata.paragraphs)) {
-                        for (let i = 0; i < tableMetadata.paragraphs.length; i++) {
-                            if (tableMetadata.paragraphs[i].header !== 'Geografi') {
-                                let text = tableMetadata.paragraphs[i].content;
-                                if (typeof text === 'string') {
-                                    // Hent første setning - se etter punkt/utropstegn/spørsmålstegn fulgt av mellomrom + stor bokstav, eller på slutten
-                                    const match = text.match(/^[^!?]*?\.(?=\s[A-Z]|$)|^[^!?]*?[!?]/);
-                                    if (match) {
-                                        firstSentence = parseHTML(match[0].trim());
-                                        break;
-                                    }
-                                }
-                            }
-                        }
-                    }
-                    
                     return h('div', { className: 'space-y-4' },
                         selectedTable && h('div', { className: 'mb-6 pb-4 border-b border-gray-200' },
-                            h('h1', { style: { color: '#111827', marginBottom: '0.5rem' }, className: 'heading-section' }, getTableLabel(selectedTable)),
+                            h('h2', { className: 'flex items-center gap-2 mb-2' }, getTableLabel(selectedTable)),
                             firstSentence && h('p', { style: { color: '#4b5563', lineHeight: 1.6 }, className: 'text-lg' }, firstSentence)
                         ),
                         h('div', { className: 'card' },
@@ -2639,12 +2574,23 @@
                                     // Konverter data til CSV
                                     let csvContent = '';
                                     
-                                    if (responseFormat === 'json-stat2' && previewData.dimension && previewData.value) {
+                                    if (previewData && previewData.dimension && previewData.value) {
                                         const dimNames = previewData.id;
                                         
                                         // Finn måltall-dimensjon dynamisk
                                         const metricDimId = findMetricDimension(previewData);
                                         const contentsCodeIndex = metricDimId ? dimNames.indexOf(metricDimId) : -1;
+                                        
+                                        // Finn GEO-dimensjonen - den er direkte 'GEO' i dimNames
+                                        const geoDimId = 'GEO';
+                                        const hasGeoDim = dimNames.includes(geoDimId) && previewData.dimension[geoDimId] !== undefined;
+                                        
+                                        console.log('DEBUG: dimNames =', dimNames);
+                                        console.log('DEBUG: geoDimId =', geoDimId);
+                                        console.log('DEBUG: hasGeoDim =', hasGeoDim);
+                                        console.log('DEBUG: GEO dimension exists:', previewData.dimension[geoDimId] ? 'YES' : 'NO');
+                                        console.log('DEBUG: metricDimId =', metricDimId);
+                                        console.log('DEBUG: contentsCodeIndex =', contentsCodeIndex);
                                         
                                         if (contentsCodeIndex !== -1) {
                                             // Pivot måltall til kolonner
@@ -2654,12 +2600,14 @@
                                             // Andre dimensjoner (uten måltall-dimensjonen)
                                             const otherDimNames = dimNames.filter(function(id) { return id !== metricDimId; });
                                             
-                                            // Header: andre dimensjoner + måltall som kolonner
-                                            csvContent = otherDimNames.map(function(id) { 
+                                            // Header: GeoCode først (hvis GEO exists) + andre dimensjoner + måltall som kolonner
+                                            csvContent = (hasGeoDim ? ['GeoCode'] : []).concat(otherDimNames.map(function(id) { 
                                                 return previewData.dimension[id].label; 
-                                            }).concat(contentsCategories.map(function(code) {
+                                            })).concat(contentsCategories.map(function(code) {
                                                 return contentsDim.category.label[code];
                                             })).join(',') + '\n';
+                                            
+                                            console.log('DEBUG: CSV Header =', csvContent.split('\n')[0]);
                                             
                                             // Beregn størrelse for hver dimensjon
                                             const sizes = dimNames.map(function(id) {
@@ -2692,18 +2640,46 @@
                                                 const contentsCode = contentsCategories[contentsIndex];
                                                 
                                                 if (!dataMap[key]) {
-                                                    dataMap[key] = { dims: keyParts, values: {} };
+                                                    dataMap[key] = { dims: keyParts, values: {}, geoCode: null };
                                                 }
                                                 dataMap[key].values[contentsCode] = previewData.value[i];
+                                                
+                                                // Lagre geo-code hvis GEO dimensjon finnes
+                                                if (hasGeoDim) {
+                                                    const geoIdx = dimNames.indexOf(geoDimId);
+                                                    const geoCatIndex = previewData.dimension[geoDimId].category.index[indices[geoIdx]];
+                                                    dataMap[key].geoCode = geoCatIndex;
+                                                    if (i === 0) {
+                                                        console.log('DEBUG: First row geo storage:');
+                                                        console.log('  geoIdx =', geoIdx);
+                                                        console.log('  indices[geoIdx] =', indices[geoIdx]);
+                                                        console.log('  category.index =', previewData.dimension[geoDimId].category.index);
+                                                        console.log('  geoCatIndex (stored as geoCode) =', geoCatIndex);
+                                                    }
+                                                }
                                             }
                                             
                                             // Skriv rader
+                                            let rowsWithGeo = 0;
+                                            let rowCount = 0;
                                             Object.keys(dataMap).forEach(function(key) {
                                                 const row = dataMap[key];
-                                                const cells = row.dims.map(function(catCode, idx) {
+                                                const cells = [];
+                                                
+                                                // Legg til GeoCode først hvis det finnes
+                                                if (hasGeoDim && row.geoCode !== null) {
+                                                    cells.push(row.geoCode);
+                                                    rowsWithGeo++;
+                                                    if (rowCount === 0) {
+                                                        console.log('DEBUG: First CSV row (with GeoCode first):', cells);
+                                                    }
+                                                }
+                                                
+                                                // Legg til resten av dimensjonene
+                                                row.dims.forEach(function(catCode, idx) {
                                                     const dimId = otherDimNames[idx];
                                                     const label = previewData.dimension[dimId].category.label[catCode];
-                                                    return '"' + label + '"';
+                                                    cells.push('"' + label + '"');
                                                 });
                                                 
                                                 // Legg til verdier for hvert måltall
@@ -2712,7 +2688,13 @@
                                                 });
                                                 
                                                 csvContent += cells.join(',') + '\n';
+                                                rowCount++;
                                             });
+                                            console.log('DEBUG: Written', Object.keys(dataMap).length, 'rows. Rows with GeoCode:', rowsWithGeo);
+                                            console.log('DEBUG: CSV first 2 lines:');
+                                            const csvLines = csvContent.split('\n');
+                                            console.log('  Header:', csvLines[0]);
+                                            console.log('  Row 1:', csvLines[1]);
                                         } else {
                                             // Ingen ContentsCode - bruk original logikk
                                             const dimensions = dimNames.map(function(id) {
@@ -2800,8 +2782,7 @@
                                                             style: { 
                                                                 padding: '0.5rem', 
                                                                 textAlign: 'left', 
-                                                                borderBottom: '2px solid #d1d5db',
-                                                                className: 'table-header'
+                                                                borderBottom: '2px solid #d1d5db'
                                                             } 
                                                         }, header);
                                                     })
@@ -2918,25 +2899,34 @@
                                             return h('table', { style: { width: '100%', borderCollapse: 'collapse' } },
                                                 h('thead', { style: { background: '#f3f4f6' } },
                                                     h('tr', null,
-                                                        otherDimensions.map(function(dim) {
-                                                            return h('th', { 
-                                                                key: dim.id,
-                                                                style: { 
-                                                                    padding: '0.5rem', 
-                                                                    textAlign: 'left', 
-                                                                    borderBottom: '2px solid #d1d5db',
-                                                                    className: 'table-header'
-                                                                } 
-                                                            }, dim.label);
-                                                        }).concat(
+                                                        [h('th', { 
+                                                            style: { 
+                                                                padding: '0.5rem', 
+                                                                textAlign: 'left', 
+                                                                borderBottom: '2px solid #d1d5db',
+                                                                fontWeight: '600',
+                                                                minWidth: '80px'
+                                                            } 
+                                                        }, 'GEO-kode')
+                                                        ].concat(
+                                                            otherDimensions.map(function(dim) {
+                                                                return h('th', { 
+                                                                    key: dim.id,
+                                                                    style: { 
+                                                                        padding: '0.5rem', 
+                                                                        textAlign: 'left', 
+                                                                        borderBottom: '2px solid #d1d5db'
+                                                                    } 
+                                                                }, dim.label);
+                                                            })
+                                                        ).concat(
                                                             contentsCategories.map(function(code) {
                                                                 return h('th', { 
                                                                     key: code,
                                                                     style: { 
                                                                         padding: '0.5rem', 
                                                                         textAlign: 'right', 
-                                                                        borderBottom: '2px solid #d1d5db',
-                                                                        className: 'table-header'
+                                                                        borderBottom: '2px solid #d1d5db'
                                                                     } 
                                                                 }, contentsDim.category.label[code]);
                                                             })
@@ -2955,18 +2945,35 @@
                                                                     key: i,
                                                                     style: { background: i % 2 === 0 ? 'white' : '#f9fafb' }
                                                                 },
-                                                                    rowData.dims.map(function(catCode, idx) {
-                                                                        const dimId = otherDimNames[idx];
-                                                                        const label = previewData.dimension[dimId].category.label[catCode];
-                                                                        return h('td', { 
-                                                                            key: dimId,
-                                                                            style: { 
-                                                                                padding: '0.5rem', 
-                                                                                borderBottom: '1px solid #e5e7eb',
-                                                                                fontSize: '0.875rem'
+                                                                    [h('td', { 
+                                                                        style: { 
+                                                                            padding: '0.5rem', 
+                                                                            borderBottom: '1px solid #e5e7eb',
+                                                                            fontSize: '0.875rem',
+                                                                            fontWeight: '600',
+                                                                            minWidth: '80px'
+                                                                        } 
+                                                                    }, (function() {
+                                                                        const geoIdx = otherDimNames.indexOf('GEO');
+                                                                        if (geoIdx >= 0 && rowData.dims[geoIdx]) {
+                                                                            return String(rowData.dims[geoIdx]);
+                                                                        }
+                                                                        return '-';
+                                                                    })())
+                                                                    ].concat(
+                                                                        rowData.dims.map(function(catCode, idx) {
+                                                                            const dimId = otherDimNames[idx];
+                                                                            const label = previewData.dimension[dimId].category.label[catCode];
+                                                                            return h('td', { 
+                                                                                key: dimId,
+                                                                                style: { 
+                                                                                    padding: '0.5rem', 
+                                                                                    borderBottom: '1px solid #e5e7eb',
+                                                                                    fontSize: '0.875rem'
                                                                             } 
                                                                         }, label);
-                                                                    }).concat(
+                                                                    })
+                                                                    ).concat(
                                                                         contentsCategories.map(function(code) {
                                                                             return h('td', { 
                                                                                 key: code,
@@ -2974,19 +2981,21 @@
                                                                                     padding: '0.5rem', 
                                                                                     textAlign: 'right', 
                                                                                     borderBottom: '1px solid #e5e7eb',
-                                                                                    className: 'table-value'
+                                                                                    fontSize: '0.875rem',
+                                                                                    fontFamily: "-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', sans-serif",
+                                                                                    fontWeight: '500'
                                                                                 } 
                                                                             }, rowData.values[code] !== undefined ? rowData.values[code] : '-');
                                                                         })
                                                                     )
-                                                                )
+                                                                    )
                                                             );
                                                         }
                                                         if (rowKeys.length > maxRows) {
                                                             rows.push(
                                                                 h('tr', null,
                                                                     h('td', {
-                                                                        colSpan: otherDimensions.length + contentsCategories.length,
+                                                                        colSpan: otherDimensions.length + contentsCategories.length + 1,
                                                                         style: {
                                                                             padding: '1rem',
                                                                             textAlign: 'center',
@@ -3038,22 +3047,31 @@
                                             return h('table', { style: { width: '100%', borderCollapse: 'collapse' } },
                                                 h('thead', { style: { background: '#f3f4f6' } },
                                                     h('tr', null,
-                                                        dimensions.map(function(dim) {
-                                                            return h('th', { 
-                                                                style: { 
-                                                                    padding: '0.5rem', 
-                                                                    textAlign: 'left', 
-                                                                    borderBottom: '2px solid #d1d5db',
-                                                                    className: 'table-header'
-                                                                } 
-                                                            }, dim.label);
-                                                        }).concat([
+                                                        [h('th', { 
+                                                            style: { 
+                                                                padding: '0.5rem', 
+                                                                textAlign: 'left', 
+                                                                borderBottom: '2px solid #d1d5db',
+                                                                fontWeight: '600',
+                                                                minWidth: '80px'
+                                                            } 
+                                                        }, 'GEO-kode')
+                                                        ].concat(
+                                                            dimensions.map(function(dim) {
+                                                                return h('th', { 
+                                                                    style: { 
+                                                                        padding: '0.5rem', 
+                                                                        textAlign: 'left', 
+                                                                        borderBottom: '2px solid #d1d5db'
+                                                                    } 
+                                                                }, dim.label);
+                                                            })
+                                                        ).concat([
                                                             h('th', { 
                                                                 style: { 
                                                                     padding: '0.5rem', 
                                                                     textAlign: 'right', 
-                                                                    borderBottom: '2px solid #d1d5db',
-                                                                    className: 'table-header'
+                                                                    borderBottom: '2px solid #d1d5db'
                                                                 } 
                                                             }, 'Verdi')
                                                         ])
@@ -3076,23 +3094,57 @@
                                                                     key: i,
                                                                     style: { background: i % 2 === 0 ? 'white' : '#f9fafb' }
                                                                 },
-                                                                    dimNames.map(function(id, idx) {
-                                                                        const catIndex = previewData.dimension[id].category.index[indices[idx]];
-                                                                        const label = previewData.dimension[id].category.label[catIndex];
-                                                                        return h('td', { 
-                                                                            style: { 
-                                                                                padding: '0.5rem', 
-                                                                                borderBottom: '1px solid #e5e7eb',
-                                                                                fontSize: '0.875rem'
-                                                                            } 
-                                                                        }, label);
-                                                                    }).concat([
+                                                                    [h('td', { 
+                                                                        style: { 
+                                                                            padding: '0.5rem', 
+                                                                            borderBottom: '1px solid #e5e7eb',
+                                                                            fontSize: '0.875rem',
+                                                                            fontWeight: '600',
+                                                                            minWidth: '80px'
+                                                                        } 
+                                                                    }, (function() {
+                                                                        // Finn GEO-dimensjonen og hent dens geocode
+                                                                        const geoIdx = dimNames.indexOf('GEO');
+                                                                        if (geoIdx >= 0 && previewData.dimension.GEO) {
+                                                                            const rowIndexInGEO = indices[geoIdx];
+                                                                            const geoIndex = previewData.dimension.GEO.category.index;
+                                                                            
+                                                                            // geoIndex could be array or object
+                                                                            if (Array.isArray(geoIndex)) {
+                                                                                // If array, the value at this position is the code
+                                                                                return String(geoIndex[rowIndexInGEO] || '-');
+                                                                            } else if (typeof geoIndex === 'object') {
+                                                                                // If object, find the key that maps to this index
+                                                                                for (let code in geoIndex) {
+                                                                                    if (geoIndex[code] === rowIndexInGEO) {
+                                                                                        return code;
+                                                                                    }
+                                                                                }
+                                                                            }
+                                                                        }
+                                                                        return '-';
+                                                                    })())
+                                                                    ].concat(
+                                                                        dimNames.map(function(id, idx) {
+                                                                            const catIndex = previewData.dimension[id].category.index[indices[idx]];
+                                                                            const label = previewData.dimension[id].category.label[catIndex];
+                                                                            return h('td', { 
+                                                                                style: { 
+                                                                                    padding: '0.5rem', 
+                                                                                    borderBottom: '1px solid #e5e7eb',
+                                                                                    fontSize: '0.875rem'
+                                                                                } 
+                                                                            }, label);
+                                                                        })
+                                                                    ).concat([
                                                                         h('td', { 
                                                                             style: { 
                                                                                 padding: '0.5rem', 
                                                                                 textAlign: 'right', 
                                                                                 borderBottom: '1px solid #e5e7eb',
-                                                                                className: 'table-value'
+                                                                                fontSize: '0.875rem',
+                                                                                fontFamily: "-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', sans-serif",
+                                                                                fontWeight: '500'
                                                                             } 
                                                                         }, previewData.value[i])
                                                                     ])
@@ -3103,7 +3155,7 @@
                                                             rows.push(
                                                                 h('tr', null,
                                                                     h('td', {
-                                                                        colSpan: dimensions.length + 1,
+                                                                        colSpan: dimensions.length + 2,
                                                                         style: {
                                                                             padding: '1rem',
                                                                             textAlign: 'center',
