@@ -157,7 +157,7 @@ nokkel,181,"Utdanningsnivå","Befolkning 16+ år etter høyeste fullførte utdan
 nokkel,185,"Befolkningsvekst","Endring i folkemengde per år (absolutt og/eller prosent)","Befolkning"
 nokkel,186,"Eierstatus","Andel husholdninger som eier bolig vs. leier","Bolig og husholdning"
 nokkel,187,"Personer som bor alene","Personer som bor alene","Befolkning"
-nokkel,188,"Trangboddhet","Andel personer som lever i trangbodde husholdninger (EU/SB-standarden)","Bolig og husholdning"
+nokkel,188,"Trangboddhet","Andel personer som lever i trangbodde husholdninger","Bolig og husholdning"
 nokkel,332,"Alkohol_Ungdata_KH","Andel ungdom som har drukket alkohol siste år (Ungdata)","Ungdata"
 nokkel,334,"Antibiotikaresepter","Antall antibiotikaresepter pr. 1000 innbyggere (NorPD)","Helse"
 nokkel,335,"Barn av sosialhjelpsmottakere","Andel barn som bor i husholdning med sosialhjelp","Levekår"
