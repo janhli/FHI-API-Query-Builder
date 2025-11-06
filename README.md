@@ -4,7 +4,7 @@ En interaktiv web-applikasjon som gjør det enkelt å bygge og kjøre spørringe
 
 ## Hva er det?
 
-FHI API Query Builder er et visuelt verktøy som lar deg utforske og hente data fra [Folkehelseinstituttets statistikk-API](https://statistikk-data.fhi.no) uten å måtte skrive API-kall manuelt. Appen har et brukervennlig grensesnitt hvor du velger data interaktivt, og får tilbake den JSON-spørringen du kan bruke i dine egne applikasjoner.
+FHI API Query Builder er et visuelt verktøy som lar deg utforske og hente data fra [Folkehelseinstituttets statistikk-API](https://www.fhi.no/ta/statistikkalender_og_statistikk/apen-api-og-statistikk/) uten å måtte skrive API-kall manuelt. Appen har et brukervennlig grensesnitt hvor du velger data interaktivt, og får tilbake den JSON-spørringen du kan bruke i dine egne applikasjoner.
 
 ## Brukstilfeller
 
