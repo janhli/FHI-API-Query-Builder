@@ -56,7 +56,7 @@ Denne appen bygger på [FHI Statistikk sin åpne API]([https://statistikk-data.f
 
 ### Ressurser
 
-- **API-dokumentasjon**: [(https://github.com/folkehelseinstituttet/Fhi.Statistikk.OpenAPI)](https://github.com/folkehelseinstituttet/Fhi.Statistikk.OpenAPI)
+- **API-dokumentasjon**: [https://github.com/folkehelseinstituttet/Fhi.Statistikk.OpenAPI](https://github.com/folkehelseinstituttet/Fhi.Statistikk.OpenAPI)
 - **Datatyper**: Statistikken inneholder data om blant annet nasjonale prøver, helsedata, skoledata og mer
 - **Oppdateringsfrekvens**: Varierer etter datakilde, typisk årlig eller oftere
 - **Dekningsområde**: Hele Norge, med detaljer på fylke, kommune og bydel-nivå
