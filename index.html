@@ -925,7 +925,7 @@
                             }
                         }),
                         response: {
-                            format: 'json-stat2'
+                            format: responseFormat
                         }
                     };
                     
@@ -1354,9 +1354,9 @@
                                                 className: 'radio',
                                                 checked: responseFormat === 'csv2',
                                                 onChange: function() { setResponseFormat('csv2'); },
-                                                'aria-label': 'Response format: CSV med labels'
+                                                'aria-label': 'Response format: CSV2 med labels'
                                             }),
-                                            h('span', { className: 'text-sm' }, 'CSV med labels')
+                                            h('span', { className: 'text-sm' }, 'CSV2 med labels')
                                         ),
                                         h('label', { className: 'flex items-center gap-2' },
                                             h('input', {
@@ -1364,9 +1364,9 @@
                                                 className: 'radio',
                                                 checked: responseFormat === 'csv3',
                                                 onChange: function() { setResponseFormat('csv3'); },
-                                                'aria-label': 'Response format: CSV med koder'
+                                                'aria-label': 'Response format: CSV3 med koder'
                                             }),
-                                            h('span', { className: 'text-sm' }, 'CSV med koder')
+                                            h('span', { className: 'text-sm' }, 'CSV3 med koder')
                                         )
                                     )
                                 ),
@@ -2163,7 +2163,17 @@
                                     const link = document.createElement('a');
                                     const url = URL.createObjectURL(blob);
                                     link.setAttribute('href', url);
-                                    link.setAttribute('download', 'fhi_data.csv');
+                                    
+                                    // Generer dynamisk filnavn: fhi_{source}_{tableId}_{YYYY-MM-DD}.csv
+                                    const today = new Date();
+                                    const year = today.getFullYear();
+                                    const month = String(today.getMonth() + 1).padStart(2, '0');
+                                    const day = String(today.getDate()).padStart(2, '0');
+                                    const dateStr = year + '-' + month + '-' + day;
+                                    const sourceId = selectedSource ? selectedSource.id : 'unknown';
+                                    const tableId = selectedTable ? selectedTable.tableId : 'unknown';
+                                    const filename = 'fhi_' + sourceId + '_' + tableId + '_' + dateStr + '.csv';
+                                    link.setAttribute('download', filename);
                                     link.style.visibility = 'hidden';
                                     document.body.appendChild(link);
                                     link.click();
