@@ -153,7 +153,7 @@ Utviklet av Akershus analyse, en del av Akershus fylkeskommune.
 
 ## Lisens
 Denne programvaren er utviklet av Jan Hiroshi Lintvedt / Akershus fylkeskommune og deles som åpen kildekode
-under [MIT-lisensen](.LICENSE). Dette innebærer at alle står fritt til å bruke, kopiere, endre og
+under [MIT-lisensen](./LICENSE). Dette innebærer at alle står fritt til å bruke, kopiere, endre og
 distribuere programvaren, så lenge opphavsretten og lisensvilkårene beholdes.
 
 Dataene fra FHI er tilgjengelig under [Norsk lisensfor offentlige data](https://data.norge.no/nlod/no/1.0).
