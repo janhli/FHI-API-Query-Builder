@@ -1,9 +1,8 @@
+![GitHub release (latest by date)](https://img.shields.io/github/v/release/janhli/FHI-API-Query-Builder?style=for-the-badge&color=007db9)
+
 # FHI API Query Builder
 
 En interaktiv web-applikasjon som gjør det enkelt å bygge og kjøre spørringer mot FHIs åpne statistikk-API.
-
-![GitHub release (latest by date)](https://img.shields.io/github/v/release/janhli/FHI-API-Query-Builder?style=for-the-badge&color=007db9)
-
 
 ## Hva er det?
 
