@@ -66,7 +66,7 @@ Denne appen bygger på [FHI Statistikk sin åpne API]([https://statistikk-data.f
 Appen bruker disse FHI API-endepunktene:
 
 - `/Common/source` - Henter liste over tilgjengelige kilder
-- `/{sourceId}/table` - Henter tabeller for en gitt kilde
+- `/{sourceId}/Table` - Henter tabeller for en gitt kilde
 - `/{sourceId}/Table/{tableId}/dimension` - Henter dimensjoner (variabler) for en tabell
 - `/{sourceId}/Table/{tableId}/metadata` - Henter detaljert informasjon om en tabell
 - `/{sourceId}/Table/{tableId}/data` - Henter faktiske data basert på spørring
