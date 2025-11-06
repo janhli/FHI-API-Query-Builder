@@ -52,11 +52,11 @@ Hvis du vil hente regneferdighets-data for alle 8. klassinger i Oslo kommune fra
 
 ## Om FHI Statistikk API
 
-Denne appen bygger på [FHI Statistikk sin åpne API](https://statistikk-data.fhi.no), som tilbyr fritt tilgjengelig norsk folkehelsestatistikk.
+Denne appen bygger på [FHI Statistikk sin åpne API]([https://statistikk-data.fhi.no](https://www.fhi.no/ta/statistikkalender_og_statistikk/apen-api-og-statistikk/)), som tilbyr fritt tilgjengelig norsk folkehelsestatistikk.
 
 ### Ressurser
 
-- **API-dokumentasjon**: https://statistikk-data.fhi.no
+- **API-dokumentasjon**: [(https://github.com/folkehelseinstituttet/Fhi.Statistikk.OpenAPI)](https://github.com/folkehelseinstituttet/Fhi.Statistikk.OpenAPI)
 - **Datatyper**: Statistikken inneholder data om blant annet nasjonale prøver, helsedata, skoledata og mer
 - **Oppdateringsfrekvens**: Varierer etter datakilde, typisk årlig eller oftere
 - **Dekningsområde**: Hele Norge, med detaljer på fylke, kommune og bydel-nivå
