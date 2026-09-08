@@ -630,25 +630,16 @@
                     }
                 }
 
-                async function fetchMetadata(sourceId, tableId) {
+                async function fetchMetadata(sourceId, tableId, options) {
+                    const openModal = Boolean(options && options.openModal);
                     try {
                         const response = await fetch(API_BASE + '/' + sourceId + '/Table/' + tableId + '/metadata');
                         if (!response.ok) throw new Error('Kunne ikke hente metadata');
                         const data = await response.json();
                         setTableMetadata(data);
-                        setShowMetadataModal(true);
+                        if (openModal) setShowMetadataModal(true);
                     } catch (err) {
-                        setError(err.message);
-                    }
-                }
-
-                async function fetchMetadataOnly(sourceId, tableId) {
-                    try {
-                        const response = await fetch(API_BASE + '/' + sourceId + '/Table/' + tableId + '/metadata');
-                        if (!response.ok) throw new Error('Kunne ikke hente metadata');
-                        const data = await response.json();
-                        setTableMetadata(data);
-                    } catch (err) {
+                        if (openModal) setError(err.message);
                     }
                 }
 
@@ -775,17 +766,23 @@
                     setStep(2);
                 }
 
-                function selectTable(table) {
+                function selectSourceAndTable(source, table) {
+                    setSelectedSource(source);
                     setSelectedTable(table);
                     setDimensions([]);
                     setQueryConfig({});
                     setFinalQuery(null);
                     setPreviewData(null);
                     setTableSearch('');
+                    setGlobalSearch('');
                     setShowMetadataModal(false);
-                    fetchDimensions(selectedSource.id, table.tableId);
-                    fetchMetadataOnly(selectedSource.id, table.tableId);
+                    fetchDimensions(source.id, table.tableId);
+                    fetchMetadata(source.id, table.tableId);
                     setStep(3);
+                }
+
+                function selectTable(table) {
+                    selectSourceAndTable(selectedSource, table);
                 }
 
                 function updateDimensionConfig(dimCode, updates) {
@@ -1116,17 +1113,7 @@
                                             className: 'bg-white border border-gray-200 rounded px-2 py-1 hover:border-blue-400 hover:bg-blue-50 cursor-pointer transition-colors text-sm',
                                             onClick: function() {
                                                 const source = sources.find(function(s) { return s.id === table.sourceId; });
-                                                if (source) {
-                                                    setSelectedSource(source);
-                                                    setSelectedTable(table);
-                                                    setDimensions([]);
-                                                    setQueryConfig({});
-                                                    setFinalQuery(null);
-                                                    setPreviewData(null);
-                                                    fetchDimensions(source.id, table.tableId);
-                                                    setGlobalSearch('');
-                                                    setStep(3);
-                                                }
+                                                if (source) selectSourceAndTable(source, table);
                                             }
                                         },
                                             h('div', { className: 'font-semibold text-sm' }, getTableLabel(table) + ' (' + table.tableId + ')'),
@@ -1299,7 +1286,7 @@
                                     'Konfigurer dimensjoner',
                                     h('button', {
                                         className: 'btn btn-icon',
-                                        onClick: function() { fetchMetadata(selectedSource.id, selectedTable.tableId); },
+                                        onClick: function() { fetchMetadata(selectedSource.id, selectedTable.tableId, { openModal: true }); },
                                         title: 'Se tabell informasjon',
                                         'aria-label': 'Se tabell informasjon',
                                         style: { marginLeft: 'auto', padding: '0.5rem 0.75rem', display: 'flex', alignItems: 'center', gap: '0.5rem', height: 'auto', minWidth: 'auto' }
