@@ -423,24 +423,13 @@
 
                 async function fetchTableLabels() {
                     try {
-                        // Hent fra GitHub API - returnerer JSON med base64-kodet innhold
-                        const apiUrl = 'https://api.github.com/repos/janhli/FHI-API-Query-Builder/contents/fhi_table_label_mapping.csv?ref=main';
-                        const response = await fetch(apiUrl);
-                        if (!response.ok) throw new Error('Kunne ikke hente tabell-labels fra GitHub API (status: ' + response.status + ')');
-                        const jsonData = await response.json();
-                        
-                        // Dekod base64-innholdet med UTF-8 support
-                        const binaryString = atob(jsonData.content);
-                        const bytes = new Uint8Array(binaryString.length);
-                        for (let i = 0; i < binaryString.length; i++) {
-                            bytes[i] = binaryString.charCodeAt(i);
-                        }
-                        const csvText = new TextDecoder('utf-8').decode(bytes);
-                        
+                        const response = await fetch('./fhi_table_label_mapping.csv');
+                        if (!response.ok) throw new Error('Kunne ikke hente tabell-labels (status: ' + response.status + ')');
+                        const csvText = await response.text();
                         const labelMap = parseTableLabelsCSV(csvText);
                         setTableLabels(labelMap);
                     } catch (err) {
-                        console.log('Kunne ikke hente tabell-labels fra GitHub:', err.message);
+                        console.error('Kunne ikke hente tabell-labels:', err.message);
                     }
                 }
 
