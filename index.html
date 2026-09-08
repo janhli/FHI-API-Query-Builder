@@ -2654,12 +2654,13 @@
             }
 
             // Render when DOM is ready
+            function mount() {
+                ReactDOM.createRoot(document.getElementById('root')).render(h(FHIQueryBuilder));
+            }
             if (document.readyState === 'loading') {
-                document.addEventListener('DOMContentLoaded', function() {
-                    ReactDOM.render(h(FHIQueryBuilder), document.getElementById('root'));
-                });
+                document.addEventListener('DOMContentLoaded', mount);
             } else {
-                ReactDOM.render(h(FHIQueryBuilder), document.getElementById('root'));
+                mount();
             }
         })();
     </script>
