@@ -331,7 +331,35 @@ function FHIQueryBuilder() {
                 )
             ),
             h('div', { className: 'mt-6 text-center text-sm text-gray-600' },
-                h('p', null, 'kontakt: ', h('a', { href: 'mailto:janli@afk.no', className: 'text-blue-600' }, 'janli@afk.no'))
+                h('p', null,
+                    'Data fra ',
+                    h('a', {
+                        href: 'https://statistikk-data.fhi.no',
+                        className: 'text-blue-600',
+                        target: '_blank',
+                        rel: 'noopener noreferrer'
+                    }, 'FHI Statistikk')
+                ),
+                h('p', { className: 'mt-4' },
+                    'Utarbeidet av ',
+                    h('a', {
+                        href: 'https://akershusanalyse.no/',
+                        className: 'text-blue-600',
+                        target: '_blank',
+                        rel: 'noopener noreferrer'
+                    }, 'Akershus analyse'),
+                    ', en del av ',
+                    h('a', {
+                        href: 'https://afk.no/',
+                        className: 'text-blue-600',
+                        target: '_blank',
+                        rel: 'noopener noreferrer'
+                    }, 'Akershus fylkeskommune')
+                ),
+                h('p', { className: 'mt-2' },
+                    'kontakt: ',
+                    h('a', { href: 'mailto:janli@afk.no', className: 'text-blue-600' }, 'janli@afk.no')
+                )
             )
         )
     );
