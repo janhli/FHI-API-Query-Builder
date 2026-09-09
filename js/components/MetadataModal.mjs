@@ -1,12 +1,21 @@
 import { parseHTML } from '../lib/html.mjs';
 
 const h = React.createElement;
+const { useEffect, useRef } = React;
 
 export function closeMetadataModal(setShowMetadataModal) {
     setShowMetadataModal(false);
 }
 
 export function renderMetadataModal(showMetadataModal, tableMetadata, closeModalFn) {
+    const closeButtonRef = useRef(null);
+
+    useEffect(() => {
+        if (showMetadataModal && closeButtonRef.current) {
+            closeButtonRef.current.focus();
+        }
+    }, [showMetadataModal]);
+
     if (!showMetadataModal || !tableMetadata) return null;
 
     function parseRelatedMaterialLinks(text) {
@@ -74,6 +83,7 @@ export function renderMetadataModal(showMetadataModal, tableMetadata, closeModal
             h('div', { style: { display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.5rem', paddingBottom: '1rem', borderBottom: '1px solid #e5e7eb' }},
                 h('h2', { id: 'modal-title', style: { margin: 0 }, className: 'heading-modal' }, 'Tabell informasjon'),
                 h('button', {
+                    ref: closeButtonRef,
                     onClick: closeModalFn,
                     'aria-label': 'Lukk tabell informasjon',
                     style: {

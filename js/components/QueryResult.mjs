@@ -87,7 +87,8 @@ export function renderQueryResult(
                             className: 'btn btn-outline p-2',
                             style: { minWidth: 'auto' },
                             onClick: function() { copyToClipboard('POST ' + API_BASE + '/' + (selectedSource ? selectedSource.id : '') + '/Table/' + (selectedTable ? selectedTable.tableId : '') + '/data'); },
-                            title: 'Kopier API endpoint'
+                            title: 'Kopier API endpoint',
+                            'aria-label': 'Kopier API endpoint'
                         },
                             h(Icons.Copy)
                         )
@@ -109,6 +110,7 @@ export function renderQueryResult(
                             style: { minWidth: 'auto' },
                             onClick: function() { copyToClipboard(API_BASE + '/' + (selectedSource ? selectedSource.id : '') + '/Table/' + (selectedTable ? selectedTable.tableId : '') + '/dimension'); },
                             title: 'Kopier Dimension API URL',
+                            'aria-label': 'Kopier Dimension API URL',
                             disabled: !selectedSource || !selectedTable
                         },
                             h(Icons.Copy)
@@ -130,7 +132,8 @@ export function renderQueryResult(
                             className: 'btn btn-outline p-2',
                             style: { minWidth: 'auto' },
                             onClick: function() { copyToClipboard(geoMappingUrl); },
-                            title: 'Kopier Geo-Mapping CSV URL'
+                            title: 'Kopier Geo-Mapping CSV URL',
+                            'aria-label': 'Kopier Geo-Mapping CSV URL'
                         },
                             h(Icons.Copy)
                         )
