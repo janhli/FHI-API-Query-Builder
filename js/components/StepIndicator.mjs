@@ -23,7 +23,7 @@ export function renderStepIndicator(step, selectedSource, selectedTable, finalQu
         steps.map(function(stepItem, idx) {
             const isCompleted = step > stepItem.num;
             const isActive = step === stepItem.num;
-            const isClickable = stepItem.num < step || (stepItem.num === 2 && selectedSource) || (stepItem.num === 3 && selectedTable) || stepItem.num === step;
+            const isClickable = stepItem.num < step || (stepItem.num === 2 && selectedSource) || (stepItem.num === 3 && selectedTable) || (stepItem.num === 4 && finalQuery) || stepItem.num === step;
 
             let circleClass = 'step-circle ';
             if (isCompleted) circleClass += 'step-completed';
