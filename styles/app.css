@@ -368,10 +368,13 @@
             content: '';
             position: absolute;
             top: calc(1.5rem - 3px);
-            left: 0;
-            right: 0;
+            /* 4 equal-width step-items; a circle sits centered in each, so the
+               first/last circle center is at half an item's width (100%/8) in
+               from the edge. */
+            left: 12.5%;
+            right: 12.5%;
             height: 6px;
-            background: var(--color-border);
+            background: var(--color-blue);
             z-index: 0;
         }
 
