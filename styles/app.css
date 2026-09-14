@@ -93,6 +93,7 @@
         .text-gray-600 { color: var(--color-text-light); }
         .text-gray-500 { color: var(--color-text-lighter); }
         .text-gray-400 { color: #6b7280; } /* Oppgradert for bedre kontrast (WCAG AA) */
+        .text-blue-600 { color: var(--color-blue); }
         .text-sm { font-size: 0.875rem; }
         .text-xs { font-size: 0.75rem; }
 
@@ -364,15 +365,36 @@
             padding: 0;
         }
 
+        /* 4 equal-width step-items; a circle sits centered in each, so the
+           first/last circle center is at half an item's width (100%/8) in
+           from the edge. Both the static track (::before) and the dynamic
+           progress fill (::after, see StepIndicator.mjs for --completed-width)
+           span the same 12.5%-87.5% range so they always line up with the
+           circles. */
         .step-indicator::before {
             content: '';
             position: absolute;
             top: calc(1.5rem - 3px);
-            left: 0;
-            right: 0;
+            left: 12.5%;
+            right: 12.5%;
             height: 6px;
             background: var(--color-border);
             z-index: 0;
+        }
+
+        .step-indicator::after {
+            content: '';
+            position: absolute;
+            top: calc(1.5rem - 3px);
+            left: 12.5%;
+            height: 6px;
+            background: var(--color-blue);
+            z-index: 1;
+            /* --completed-width runs 0%-100% over the full indicator; the
+               track only spans the middle 75% (12.5%-87.5%), so scale it
+               down to match. */
+            width: calc(var(--completed-width, 0%) * 0.75);
+            transition: width 0.3s ease;
         }
 
         .step-item {
