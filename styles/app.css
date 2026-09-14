@@ -1,19 +1,28 @@
 /* CSS Variables for consistent theming */
         :root {
             --font-system: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', sans-serif;
-            --color-primary-dark: #111827;
+            --color-bg: #F6F7F9;
+            --color-primary-dark: #14212E;
             --color-primary: #1f2937;
             --color-text-light: #4b5563;
             --color-text-lighter: #6b7280;
             --color-text-faint: #9ca3af;
-            --color-border: #e5e7eb;
-            --color-blue: #3b82f6;
-            --color-blue-dark: #2563eb;
+            --color-border: #D7DBE1;
+            --color-border-subtle: #E6E9ED;
+            --color-blue: #1B4B6B;
+            --color-blue-dark: #123650;
+            --color-blue-soft: #E9F0F4;
             --color-green: #10b981;
             --color-white: #ffffff;
-            --shadow-sm: 0 1px 3px rgba(0,0,0,0.1);
-            --shadow-md: 0 4px 6px rgba(0,0,0,0.1);
-            --radius: 0.5rem;
+            --shadow-sm: 0 1px 2px rgba(20,33,46,0.06);
+            --shadow-md: 0 2px 6px rgba(20,33,46,0.08);
+            --radius: 0.375rem;
+            --color-code-bg: #10202B;
+            --color-code-text: #C7D2DB;
+            --color-code-punctuation: #6E7F8D;
+            --color-code-key: #8FB8D9;
+            --color-code-string: #C9B380;
+            --color-code-literal: #8FBC94;
         }
 
         * {
@@ -30,7 +39,7 @@
 
         .bg-gradient {
             min-height: 100vh;
-            background: linear-gradient(135deg, #eff6ff 0%, #e0e7ff 100%);
+            background: var(--color-bg);
             padding: 2rem 1rem;
         }
 
@@ -100,7 +109,7 @@
         .card {
             background: var(--color-white);
             border-radius: var(--radius);
-            box-shadow: var(--shadow-sm);
+            border: 1px solid var(--color-border-subtle);
             padding: 0.75rem 1rem;
             margin-bottom: 0.75rem;
         }
@@ -114,7 +123,7 @@
         .dimension-card {
             background: var(--color-white);
             border-radius: var(--radius);
-            box-shadow: var(--shadow-sm);
+            border: 1px solid var(--color-border-subtle);
             padding: 0.5rem 0.75rem;
             margin-bottom: 0;
         }
@@ -154,17 +163,17 @@
 
         .card-hover {
             cursor: pointer;
-            transition: all 0.2s;
-            border: 2px solid var(--color-border);
+            transition: border-color 0.15s, background 0.15s;
+            border: 1px solid var(--color-border);
         }
 
         .card-hover:hover {
             border-color: var(--color-blue);
-            box-shadow: var(--shadow-md);
+            background: var(--color-blue-soft);
         }
 
         .card-hover:focus {
-            outline: 3px solid #3b82f6;
+            outline: 3px solid var(--color-blue);
             outline-offset: 2px;
         }
 
@@ -362,7 +371,7 @@
             left: 0;
             right: 0;
             height: 6px;
-            background: #dbeafe;
+            background: var(--color-border);
             z-index: 0;
         }
 
@@ -414,69 +423,76 @@
         }
 
         .step-active {
-            background: #3b82f6;
+            background: var(--color-blue);
             color: white;
-            border-color: #3b82f6;
+            border-color: var(--color-blue);
         }
 
         .step-active .step-label {
-            color: #3b82f6;
+            color: var(--color-blue);
             font-weight: 700;
             background: none !important;
         }
 
         .step-label.step-active {
             background: none !important;
-            color: #3b82f6;
+            color: var(--color-blue);
             font-weight: 700;
         }
 
         .step-completed {
-            background: #3b82f6;
+            background: var(--color-blue);
             color: white;
-            border-color: #3b82f6;
+            border-color: var(--color-blue);
         }
 
         .step-completed .step-label {
-            color: #3b82f6;
+            color: var(--color-blue);
             font-weight: 500;
             background: none !important;
         }
 
         .step-label.step-completed {
             background: none !important;
-            color: #3b82f6;
+            color: var(--color-blue);
             font-weight: 500;
         }
 
         .step-inactive {
-            background: #e0e7ff;
-            color: #6366f1;
-            border-color: #c7d2fe;
+            background: var(--color-white);
+            color: var(--color-text-lighter);
+            border-color: var(--color-border);
         }
 
         .step-inactive .step-label {
-            color: #4f46e5;
+            color: var(--color-text-lighter);
             font-weight: 500;
             background: none !important;
         }
 
         .step-label.step-inactive {
             background: none !important;
-            color: #4f46e5;
+            color: var(--color-text-lighter);
             font-weight: 500;
         }
 
         .code-block {
-            background: #1f2937;
-            color: #f3f4f6;
-            padding: 1rem;
-            border-radius: 0.5rem;
+            background: var(--color-code-bg);
+            color: var(--color-code-text);
+            padding: 1.25rem;
+            border-radius: var(--radius);
             overflow-x: auto;
-            font-family: monospace;
+            font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
             font-size: 0.875rem;
+            line-height: 1.6;
             white-space: pre;
         }
+
+        .json-key { color: var(--color-code-key); }
+        .json-string { color: var(--color-code-string); }
+        .json-number,
+        .json-boolean,
+        .json-null { color: var(--color-code-literal); }
 
         .tabs {
             display: flex;
@@ -552,19 +568,19 @@
         }
 
         .bg-blue-50 {
-            background: #eff6ff;
+            background: var(--color-blue-soft);
         }
 
         .border-blue-200 {
-            border-color: #bfdbfe;
+            border-color: var(--color-border);
         }
 
         .bg-green-50 {
-            background: #f0fdf4;
+            background: #EEF3EC;
         }
 
         .border-green-200 {
-            border-color: #bbf7d0;
+            border-color: #CBDBC6;
         }
 
         .geo-hierarchy {
@@ -676,7 +692,7 @@
         }
 
         .geo-select-btn:focus {
-            outline: 3px solid #3b82f6;
+            outline: 3px solid var(--color-blue);
             outline-offset: 2px;
         }
 

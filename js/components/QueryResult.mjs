@@ -1,4 +1,13 @@
+import { tokenizeJson } from '../lib/jsonHighlight.mjs';
+
 const h = React.createElement;
+
+function renderHighlightedJson(jsonString) {
+    return tokenizeJson(jsonString).map(function(token, idx) {
+        if (token.type === 'punctuation') return token.text;
+        return h('span', { key: idx, className: 'json-' + token.type }, token.text);
+    });
+}
 
 export function renderQueryResult(
     finalQuery, selectedSource, selectedTable, dimensions,
@@ -69,7 +78,9 @@ export function renderQueryResult(
                     )
                 )
             ),
-            h('div', { className: 'code-block mb-4' }, displayCode),
+            h('div', { className: 'code-block mb-4' },
+                outputFormat === 'json' ? renderHighlightedJson(displayCode) : displayCode
+            ),
             h('div', { className: 'text-sm text-gray-600 p-4 bg-blue-50 rounded border border-blue-200' },
                 h('p', { className: 'font-semibold mb-4' }, '🔗 API & Mapping URLs:'),
 
