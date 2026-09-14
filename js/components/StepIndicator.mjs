@@ -20,9 +20,6 @@ export function renderStepIndicator(step, selectedSource, selectedTable, finalQu
             '--completed-width': completedWidth + '%'
         }
     },
-        h('style', null,
-            '.step-indicator::after { content: ""; position: absolute; top: calc(1.5rem - 3px); left: calc(1.5rem); height: 6px; background: #3b82f6; z-index: 1; width: calc(var(--completed-width, 0%) - 1.5rem); transition: width 0.3s ease; }'
-        ),
         steps.map(function(stepItem, idx) {
             const isCompleted = step > stepItem.num;
             const isActive = step === stepItem.num;
