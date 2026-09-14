@@ -36,29 +36,26 @@ FHI API Query Builder er et visuelt verktøy som lar deg utforske og hente data 
    - **Filtertype**: Velg spesifikke verdier, alle verdier, eller for tidsvariabler - siste X år
    - **Geografi**: For geografiske data kan du velge alle kommuner, enkelt fylke, eller spesifikke kommune/bydel
    - **Tidsperiode**: For år-dimensjonen kan du velge enkeltår, eller siste X år
+   - **Response format**: Velg JSON-stat2, CSV2 med labels eller CSV3 med koder
    - Klikk på "Informasjon om tabellen" for detaljer om hva tabellen inneholder
 
-5. **Velg format og last ned/kopier** - I siste skjerm:
-   - Velg responseformat (JSON-stat2, CSV med labels, eller CSV med koder)
-   - Kopier JSON-spørringen direkte
-   - Se forhåndsvisning av data
-   - Last ned som CSV-fil
+5. **Kopier eller last ned** - I siste skjerm:
+   - Kopier JSON-spørringen, eller bytt til Power Query-fanen for innbyggingskode til Power BI/Excel
+   - Hent forhåndsvisning av data
+   - Last ned forhåndsvisningen som CSV-fil
 
 ### Eksempel
 
-Hvis du vil hente regneferdighets-data for alle 8. klassinger i Oslo kommune fra 2022-2024:
+Hvis du vil hente dødsfall av demens (inkl. Alzheimers sykdom) fordelt på alder:
 
-1. Velg "Regneferdighet, 5. og 8. klasse" som kilde
-2. Velg tabellen for regneferdighets-data
-3. Konfigurer:
-   - Klassetrinn: 8. trinn
-   - Geografi: Oslo (kommune)
-   - År: Siste 3 år
-4. Last ned som CSV eller kopier JSON-spørringen
+1. Velg "Dødsårsaksregisteret (DÅR)" som kilde
+2. Velg tabellen "Dødsfall av demens (inkl. Alzheimers sykdom) etter alder" under kategorien "Demens"
+3. Konfigurer dimensjonene (Dødsår, Alder, Dødsårsak, Måltall) - la stå på "Alle" for å ta med alt
+4. Kopier JSON-spørringen eller hent forhåndsvisning og last ned som CSV
 
 ## Om FHI Statistikk API
 
-Denne appen bygger på [FHI Statistikk sin åpne API]([https://statistikk-data.fhi.no](https://www.fhi.no/ta/statistikkalender_og_statistikk/apen-api-og-statistikk/)), som tilbyr fritt tilgjengelig norsk folkehelsestatistikk.
+Denne appen bygger på [FHI Statistikk sin åpne API](https://statistikk-data.fhi.no) ([om API-et](https://www.fhi.no/ta/statistikkalender_og_statistikk/apen-api-og-statistikk/)), som tilbyr fritt tilgjengelig norsk folkehelsestatistikk.
 
 ### Ressurser
 
@@ -95,7 +92,7 @@ Alt kjører i nettleseren din - ingen backend-server er nødvendig.
 
 - `index.html` — HTML-skall, laster `js/app.js` som ES-modul
 - `js/app.js` — hovedkomponent: state, effekter og sammensetning av skjermbildene
-- `js/lib/` — ren logikk (CSV-parsing, geografi-gruppering, spørringsbygging, Power Query-kodegenerering, sikker HTML-rendering) — hver fil har en tilhørende `*.test.mjs`
+- `js/lib/` — ren logikk (CSV-parsing, tabell-label-oppslag, geografi-gruppering, spørringsbygging, Power Query-kodegenerering, sikker HTML-rendering, JSON-syntax-highlighting) — hver fil har en tilhørende `*.test.mjs`
 - `js/components/` — ett skjermbilde/UI-element per fil
 
 ### Kjøre lokalt
@@ -129,10 +126,10 @@ Spørringer følger FHI APIets struktur:
 
 ```json
 {
-  "query": [
-    { "code": "YEAR", "selection": { "filter": "item", "values": ["2024"] } },
-    { "code": "REGION", "selection": { "filter": "item", "values": ["03", "0301"] } },
-    { "code": "MEASURE", "selection": { "filter": "all" } }
+  "dimensions": [
+    { "code": "AAR", "filter": "item", "values": ["2024"] },
+    { "code": "GEO", "filter": "item", "values": ["03", "0301"] },
+    { "code": "MEASURE_TYPE", "filter": "all", "values": ["*"] }
   ],
   "response": {
     "format": "json-stat2"
@@ -142,7 +139,7 @@ Spørringer følger FHI APIets struktur:
 
 ### Geo-gruppering
 
-For geografiske data (REGION-dimensjon) håndteres følgende nivåer:
+For geografiske data (GEO-dimensjon) håndteres følgende nivåer:
 
 - **2 sifre** - Fylker
 - **4 sifre** - Kommuner
@@ -194,4 +191,4 @@ Dataene fra FHI er tilgjengelig under [Norsk lisensfor offentlige data](https://
 
 ## Versjon
 
-BETA - Appen er under utvikling. Tilbakemeldinger og forbedringer er velkommen!
+Gjeldende versjon vises i badgen øverst i denne filen og på [GitHub Releases](https://github.com/janhli/FHI-API-Query-Builder/releases). Appen er under aktiv utvikling - tilbakemeldinger og forbedringer er velkommen!
