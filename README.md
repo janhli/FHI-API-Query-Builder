@@ -77,6 +77,8 @@ Appen bruker disse FHI API-endepunktene:
 - `/{sourceId}/Table/{tableId}/metadata` - Henter detaljert informasjon om en tabell
 - `/{sourceId}/Table/{tableId}/data` - Henter faktiske data basert på spørring
 
+**Merk:** Tabell-labels og geo-mapping-data hentes og lenkes same-origin fra repoet i stedet for via GitHub API, noe som gir bedre pålitelighet og ytelse.
+
 ## Teknisk informasjon
 
 ### Arkitektur
@@ -88,6 +90,32 @@ Appen er en single-page application (SPA) bygget med:
 - **HTML/CSS** - For grunnleggende struktur og styling
 
 Alt kjører i nettleseren din - ingen backend-server er nødvendig.
+
+### Filstruktur
+
+- `index.html` — HTML-skall, laster `js/app.js` som ES-modul
+- `js/app.js` — hovedkomponent: state, effekter og sammensetning av skjermbildene
+- `js/lib/` — ren logikk (CSV-parsing, geografi-gruppering, spørringsbygging, Power Query-kodegenerering, sikker HTML-rendering) — hver fil har en tilhørende `*.test.mjs`
+- `js/components/` — ett skjermbilde/UI-element per fil
+
+### Kjøre lokalt
+
+Appen bruker native ES-moduler og må serveres over http(s), ikke åpnes direkte som `file://`:
+
+```bash
+python -m http.server 8000
+# eller: npx serve
+```
+
+Åpne deretter `http://localhost:8000`.
+
+### Kjøre tester
+
+Ingen `npm install` nødvendig — testene bruker Node sin innebygde testrunner (krever Node 18+):
+
+```bash
+node --test js
+```
 
 ### Hvilke formater støttes?
 
