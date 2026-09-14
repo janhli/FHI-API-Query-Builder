@@ -66,7 +66,11 @@ function FHIQueryBuilder() {
                     if (typeof text === 'string') {
                         const match = text.match(/^[^!?]*?\.(?=\s[A-Z]|$)|^[^!?]*?[!?]/);
                         if (match) {
-                            sentence = match[0].trim().replace(/<[^>]*>/g, '');
+                            sentence = match[0]
+                                .replace(/<\/(p|div|li|h[1-6]|br)\s*>/gi, ' ')
+                                .replace(/<[^>]*>/g, '')
+                                .replace(/\s+/g, ' ')
+                                .trim();
                             break;
                         }
                     }
