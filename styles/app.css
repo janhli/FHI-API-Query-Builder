@@ -93,6 +93,7 @@
         .text-gray-600 { color: var(--color-text-light); }
         .text-gray-500 { color: var(--color-text-lighter); }
         .text-gray-400 { color: #6b7280; } /* Oppgradert for bedre kontrast (WCAG AA) */
+        .text-blue-600 { color: var(--color-blue); }
         .text-sm { font-size: 0.875rem; }
         .text-xs { font-size: 0.75rem; }
 
